@@ -1,5 +1,5 @@
 
 ingresses:
-  - "https://bidrag-reisekostnader-ui.intern.nav.no"
+  - "https://bidrag-reisekostnad-ui.intern.nav.no"
 env:
-  - BIDRAG_REISEKOSTNADER_API_URL: "https://bidrag-reisekostnad-api.intern.nav.no"
+  BIDRAG_REISEKOSTNADER_API_URL: "https://bidrag-reisekostnad-api.intern.nav.no"

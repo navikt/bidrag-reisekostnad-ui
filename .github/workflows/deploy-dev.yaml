@@ -2,6 +2,7 @@ name: "Build and deploy dev"
 on:
   push:
     branches:
+      - "**"
       - "!main"
 env:
   "IMAGE": "ghcr.io/${{ github.repository }}:${{ github.sha }}"
@@ -36,7 +37,7 @@ jobs:
       - name: "Deploy to DEV"
         uses: "nais/deploy/actions/deploy@v1"
         env:
-          "APIKEY": "${{ secrets.NAIS_DEPLOY_APIKEY }}"
-          "CLUSTER": "dev-gcp"
-          "RESOURCE": ".nais/nais.yaml"
-          "VARS": ".nais/dev.yaml"
+          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
+          CLUSTER: "dev-gcp"
+          RESOURCE: ".nais/nais.yaml"
+          VARS: ".nais/dev.yaml"

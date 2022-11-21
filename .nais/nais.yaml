@@ -37,3 +37,5 @@ spec:
     - name: {{@key}}
       value: "{{this}}"
   {{/each}}
+    - name: NPM_CONFIG_CACHE
+      value: /tmp
