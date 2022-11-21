@@ -1,21 +1,34 @@
-## Bidrag-template-ui
-Template applikasjon for Bidrag UI mikrofrontend app
-<br/>
-Dette er bare en mikrofrontend og har derfor ingen autentisering og innlogging av bruker. Det håndteres av [bidrag-ui](https://github.com/navikt/bidrag-ui) hvor token eksponeres av `/token` endepunktet.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Module federation og mikrofrontends
-Applikasjonen benytter seg av noe som heter [module federation](https://webpack.js.org/concepts/module-federation/). Det er et konsept for å lage mikrofrontends.
+## Getting Started
 
-Hver linje under [webpack config](webpack.common.config.js) -> `ModuleFederationPlugin` -> `exposes` vil bygges som en separat applikasjon. 
-Dette kan da brukes av feks `bidrag-ui` eller annen applikasjon (kalt `host`) til å hente og rendre applikasjonen som React komponent selv om koden ligger annen sted (`remote`).
+First, run the development server:
 
-Parameteren `shared` i `ModuleFederationPlugin` forteller `module federation` hvilken avhengigheter som er delt mellom `host` og `remote` slik at den ikke henter samme kode flere ganger.
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-## Deployment
-Ved deployment så publiseres bygget til `gcp` cloud storage under bucket navn `bidrag-ui-static-files-dev` i dev og `bidrag-ui-static-files-prod` i prod. 
-Applikasjonen [bidrag-ui-static-files](https://github.com/navikt/bidrag-ui-static-files) er et proxy app som henter og cacher bygg filene som er publisert til cloud storage
-`Bidrag-ui` er konfigurert med module-federation til å hente mikrofrontend bygg filene fra denne applikasjonen og dermed rendre mikrofrontendene fra `remote` kilde.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Kjøre lokalt
-Du kan starte applikasjonen lokalt ved å kjøre `yarn install` og deretter `yarn dev`. Dette vil eksponere applikasjonen på url `http://localhost:5173`.
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

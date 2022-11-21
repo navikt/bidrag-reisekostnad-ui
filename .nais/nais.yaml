@@ -1,0 +1,39 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: bidrag-reisekostnad-ui
+  namespace: "bidrag"
+  labels:
+    "team": "bidrag"
+spec:
+  image: {{image}}
+  liveness:
+    path: "/api/isalive"
+    port: 8080
+    initialDelay: 20
+    timeout: 60
+  readiness:
+    path: "/api/isalive"
+    port: 8080
+    initialDelay: 20
+    timeout: 60
+  replicas:
+    min: 2
+    max: 2
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  ingresses:
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
+  env:
+  {{#each env}}
+    - name: {{@key}}
+      value: "{{this}}"
+  {{/each}}

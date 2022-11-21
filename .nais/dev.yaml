@@ -1,0 +1,5 @@
+
+ingresses:
+  - "https://bidrag-reisekostnader-ui.dev.intern.nav.no"
+env:
+  - BIDRAG_REISEKOSTNADER_API_URL: "https://bidrag-reisekostnad-api.dev.intern.nav.no"
