@@ -7,7 +7,7 @@ export default function RequestStartPage() {
 
   return (
     <div className="flex flex-col gap-10 items-center">
-      <GreetingCard />
+      <GreetingCard name={"Navn"} gender={"kvinne"} />
       <BodyShort>Dine rettigheter og plikter?</BodyShort>
       <ConfirmationPanel
         checked={isAgree}

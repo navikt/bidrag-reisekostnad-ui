@@ -1,13 +1,18 @@
 import { Heading } from "@navikt/ds-react";
 import React from "react";
 import { NavVeilederKvinne } from "../../../svg-icons/NavVeilederKvinne";
+import NavVeilederMann from "../../../svg-icons/NavVeilederMann";
 
-export default function GreetingCard() {
+interface IGreetingCardProps {
+  name: string;
+  gender: "kvinne" | "mann";
+}
+export default function GreetingCard({ name, gender }: IGreetingCardProps) {
   return (
     <div className="grid gap-3">
-      <NavVeilederKvinne />
+      {gender === "kvinne" ? <NavVeilederKvinne /> : <NavVeilederMann />}
       <Heading level="1" size="large">
-        Hei Navn
+        Hei {name}
       </Heading>
     </div>
   );

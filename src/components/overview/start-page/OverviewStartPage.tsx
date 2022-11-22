@@ -1,4 +1,4 @@
-import { Heading, BodyShort, Button, LinkPanel, Tag } from "@navikt/ds-react";
+import { Heading, BodyShort, Button } from "@navikt/ds-react";
 import React from "react";
 import GreetingCard from "../../card/greeting-card/GreetingCard";
 import OverviewCard from "../../card/overview-card/OverviewCard";
@@ -8,7 +8,7 @@ export default function OverviewStartPage() {
   return (
     <div className="w-[40rem] flex flex-col gap-8">
       <div className="w-full flex flex-col gap-10 items-center">
-        <GreetingCard />
+        <GreetingCard name={"Navn"} gender={"kvinne"} />
         <div className="flex flex-col gap-6">
           <BodyShort>
             Kari Nordmann har sendt en forerspørsel om fordeling av reisekostnader for Barn 1,
@@ -20,7 +20,7 @@ export default function OverviewStartPage() {
           <Heading level="2" size="small">
             Oversikt
           </Heading>
-          <OverviewCard />
+          <OverviewCard name="Fra: Kari Nordmann" status="Venter på signering" />
         </div>
       </div>
       <div className="flex space-x-12">
