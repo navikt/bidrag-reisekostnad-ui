@@ -9,12 +9,13 @@ import {
 } from "@navikt/nav-dekoratoren-moduler/ssr";
 
 const decoratorProps: DecoratorProps = {
-  env: "prod",
+  env: "dev",
   chatbot: false,
   simple: false,
   context: "privatperson",
   enforceLogin: false,
   redirectToApp: true,
+  level: "Level4",
   // TODO
   breadcrumbs: [
     { title: "Familie og barn", url: "https://www.nav.no/familie" },
