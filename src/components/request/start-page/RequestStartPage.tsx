@@ -4,19 +4,33 @@ import GreetingCard from "../../card/greeting-card/GreetingCard";
 
 export default function RequestStartPage() {
   const [isAgree, setIsAgree] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
+
+  function onClick() {
+    setShowError(!isAgree);
+  }
+
+  function onConfirm() {
+    setIsAgree((current) => {
+      setShowError(current);
+      return !current;
+    });
+  }
 
   return (
     <div className="flex flex-col gap-10 items-center">
       <GreetingCard name={"Navn"} gender={"kvinne"} />
       <BodyShort>Dine rettigheter og plikter?</BodyShort>
       <ConfirmationPanel
+        size="small"
         checked={isAgree}
         label="Jeg har lest og forstått...."
-        onChange={() => setIsAgree(!isAgree)}
-        size="small"
+        onChange={onConfirm}
+        error={showError && "Du må samtykke før du kan fortsette."}
       ></ConfirmationPanel>
       <div className="flex space-x-12">
-        <Button>Neste</Button>
+        <Button onClick={onClick}>Neste</Button>
+        {/* TODO: SKAL LEDE TILBAKE TIL OVERSIKTSIDE? */}
         <Button type="button" variant="secondary">
           Avbryt
         </Button>
