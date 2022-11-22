@@ -21,6 +21,12 @@ spec:
     min: 2
     max: 2
     cpuThresholdPercentage: 50
+  tokenx:
+    enabled: true
+  idporten:
+    enabled: true
+    sidecar:
+      autoLogin: true
   resources:
     limits:
       cpu: 1000m
