@@ -1,6 +1,6 @@
 
 ingresses:
-  - "https://bidrag-reisekostnad-ui.intern.nav.no"
+  - "https://bidrag-reisekostnad.intern.nav.no"
 env:
   BIDRAG_REISEKOSTNADER_API_URL: "https://bidrag-reisekostnad-api.intern.nav.no"
   DEKORATOR_ENV: prod

@@ -2,9 +2,13 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: bidrag-reisekostnad-ui
-  namespace: "bidrag"
+  namespace: bidrag
   labels:
-    "team": "bidrag"
+    team: bidrag
+    app: bidrag-reisekostnad-ui
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "64M"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
 spec:
   image: {{image}}
   port: 3000
@@ -22,23 +26,17 @@ spec:
     min: 2
     max: 2
     cpuThresholdPercentage: 50
-  accessPolicy:
-    outbound:
-      external:
-        - host: dev.dekoratoren.nav.no
-  tokenx:
-    enabled: true
   idporten:
     enabled: true
     sidecar:
       enabled: true
-      level: Level4
       autoLogin: true
-      autoLoginIgnorePaths:
-        - "/api/*"
-        - "/api/*/*"
-        - "/api/*/*/*"
-        - "/_next/static/*/*"
+  tokenx:
+    enabled: true
+  accessPolicy:
+    outbound:
+      external:
+        - host: dev.dekoratoren.nav.no
   resources:
     limits:
       cpu: 1000m
