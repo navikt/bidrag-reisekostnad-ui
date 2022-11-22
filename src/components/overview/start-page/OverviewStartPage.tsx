@@ -20,7 +20,7 @@ export default function OverviewStartPage() {
           <Heading level="2" size="small">
             Oversikt
           </Heading>
-          <OverviewCard name="Fra: Kari Nordmann" status="Venter på signering" />
+          <OverviewCard name="Kari Nordmann" status="Venter på signering" />
         </div>
       </div>
       <div className="flex space-x-12">

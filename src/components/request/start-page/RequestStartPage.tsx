@@ -1,5 +1,6 @@
 import { BodyShort, ConfirmationPanel, Button, Link } from "@navikt/ds-react";
 import React, { useState } from "react";
+import { MAA_SAMTYKKE } from "../../../constants/error";
 import GreetingCard from "../../card/greeting-card/GreetingCard";
 
 export default function RequestStartPage() {
@@ -8,6 +9,9 @@ export default function RequestStartPage() {
 
   function onClick() {
     setShowError(!isAgree);
+    if (isAgree) {
+      // TODO sende til velge barn side
+    }
   }
 
   function onConfirm() {
@@ -26,7 +30,7 @@ export default function RequestStartPage() {
         checked={isAgree}
         label="Jeg har lest og forstått...."
         onChange={onConfirm}
-        error={showError && "Du må samtykke før du kan fortsette."}
+        error={showError && MAA_SAMTYKKE}
       ></ConfirmationPanel>
       <div className="flex space-x-12">
         <Button onClick={onClick}>Neste</Button>
