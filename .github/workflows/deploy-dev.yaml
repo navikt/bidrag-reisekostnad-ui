@@ -6,6 +6,8 @@ on:
       - "!main"
 env:
   "IMAGE": "ghcr.io/${{ github.repository }}:${{ github.sha }}"
+  NPM_TOKEN: ${{ secrets.READER_TOKEN }}
+
 jobs:
   build:
     name: build
@@ -15,8 +17,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
+          registry-url: "https://npm.pkg.github.com"
       - name: "Clean install of dependencies"
         run: "npm ci"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: "Create an optimized production build of the application"
         run: "npm run build"
       - name: "Login to GitHub Docker Registry"

@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install --production=false --frozen-lockfile
+# RUN npm install --production=false --frozen-lockfile
 
 # Copy the app's source code / all except what is listed in .dockerignore \
 # after copying over files that define our app dependencies and install them. \
