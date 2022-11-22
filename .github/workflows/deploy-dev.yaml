@@ -18,6 +18,8 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - name: "Clean install of dependencies"
         run: "npm ci"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: "Create an optimized production build of the application"
         run: "npm run build"
       - name: "Login to GitHub Docker Registry"
@@ -28,9 +30,6 @@ jobs:
           "password": "${{ secrets.GITHUB_TOKEN }}"
       - name: "Build and push the Docker image"
         run: "docker build --pull --tag ${IMAGE} . && docker push ${IMAGE}"
-        with:
-          secrets: |
-            "NODE_AUTH_TOKEN=${{ secrets.READER_TOKEN }}"
 
   deployAppToDev:
     name: "Deploy application to development"
