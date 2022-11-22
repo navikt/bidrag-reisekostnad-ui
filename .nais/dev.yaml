@@ -3,3 +3,4 @@ ingresses:
   - "https://bidrag-reisekostnad-ui.dev.intern.nav.no"
 env:
   BIDRAG_REISEKOSTNADER_API_URL: "https://bidrag-reisekostnad-api.dev.intern.nav.no"
+  DEKORATOR_ENV: dev
