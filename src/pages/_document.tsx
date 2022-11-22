@@ -15,6 +15,7 @@ const decoratorProps: DecoratorProps = {
   context: "privatperson",
   enforceLogin: false,
   redirectToApp: true,
+  // TODO
   breadcrumbs: [
     { title: "Familie og barn", url: "https://www.nav.no/familie" },
     { title: "Fordeling  av reisekostnader", url: "https://www.nav.no/reisekostnad" },
