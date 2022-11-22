@@ -21,13 +21,23 @@ spec:
     min: 2
     max: 2
     cpuThresholdPercentage: 50
+  accessPolicy:
+    outbound:
+      external:
+        - host: dev.dekoratoren.nav.no
   tokenx:
     enabled: true
   idporten:
     enabled: true
     sidecar:
       enabled: true
+      level: Level4
       autoLogin: true
+      autoLoginIgnorePaths:
+        - "/api/*"
+        - "/api/*/*"
+        - "/api/*/*/*"
+        - "/_next/static/*/*"
   resources:
     limits:
       cpu: 1000m
