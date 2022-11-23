@@ -1,4 +1,4 @@
-import {getToken} from "./wonderwall";
+import {getToken} from "./security/wonderwall";
 import {NextRequest} from "next/server";
 
 export class TokenUtil {
