@@ -2,7 +2,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {getSession} from "../../libs/security/session";
 import PersonService from "../../service/PersonService";
-import {capitalizeFirstLetter} from "../../libs/string.util";
 
 type IMeResponse = {
   navn: string
