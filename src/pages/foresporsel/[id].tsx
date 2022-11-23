@@ -3,37 +3,51 @@ import { useState } from "react";
 import SamtykkeConfirmationContainer from "../../components/samtykke/samtykke-confirmation-container/SamtykkeConfirmationContainer";
 import SamtykkeContainer from "../../components/samtykke/samtykke-container/SamtykkeContainer";
 import { useReisekostnad } from "../../context/reisekostnadContext";
-import { IForesporsel } from "../../types/foresporsel";
+import { calculateAge } from "../../utils/dateUtils";
 
 interface IForesporselIdProps {
-  foresporslerSomMotpart?: IForesporsel;
+  foresporselId?: string;
 }
 
 export function getServerSideProps(context: GetServerSidePropsContext) {
   const { params } = context;
-  const { userInformation } = useReisekostnad();
-  const foresporsel = userInformation?.foresporslerSomMotpart.find(
-    (item) => item.idForesporsel === Number(params?.id)
-  );
+
   return {
     props: {
-      foresporslerSomMotpart: foresporsel,
+      foresporselId: params?.id,
     },
   };
 }
 
-export default function ForesporselId({ foresporslerSomMotpart }: IForesporselIdProps) {
+export default function ForesporselId({ foresporselId }: IForesporselIdProps) {
   const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
+  const { userInformation } = useReisekostnad();
+
+  if (!userInformation || !foresporselId) {
+    return null;
+  }
+
+  const foresporsel = userInformation.forespørslerSomMotpart.find(
+    (item) => item.idForespørsel === Number(foresporselId)
+  );
+
+  if (!foresporsel) {
+    return null;
+  }
+
+  const barnInformation = foresporsel.barn.map((person) => {
+    return `${person.fornavn}, ${person.fødselsdato}, ${calculateAge(person.fødselsdato)} år`;
+  });
 
   return (
     <>
       {showConfirmPage ? (
-        <SamtykkeConfirmationContainer />
+        <SamtykkeConfirmationContainer barnInformation={barnInformation} />
       ) : (
         <SamtykkeContainer
           onClick={(sendingInn) => setShowConfirmPage(sendingInn)}
-          barn={foresporslerSomMotpart?.barn}
-          hovedpart={foresporslerSomMotpart?.hovedpart}
+          barnInformation={barnInformation}
+          hovedpart={foresporsel.hovedpart}
         />
       )}
     </>

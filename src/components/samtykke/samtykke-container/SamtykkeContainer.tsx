@@ -12,12 +12,12 @@ interface IForesporselConfirmationProps {
 }
 
 interface ISamtykkeProps {
-  barn?: IPerson[];
-  hovedpart?: IPerson;
+  barnInformation: string[];
+  hovedpart: IPerson;
   onClick: (sendingIn: boolean) => void;
 }
 
-export default function SamtykkeContainer({ barn, hovedpart, onClick }: ISamtykkeProps) {
+export default function SamtykkeContainer({ barnInformation, hovedpart, onClick }: ISamtykkeProps) {
   const [haveReadAndUnderstood, setHaveReadAndUnderstood] = useState<IForesporselConfirmationProps>(
     {
       isAgree: false,
@@ -32,13 +32,19 @@ export default function SamtykkeContainer({ barn, hovedpart, onClick }: ISamtykk
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
-      return { isAgree: !current.isAgree, showError: current.showError ? false : true };
+      return {
+        isAgree: !current.isAgree,
+        showError: !!current.isAgree,
+      };
     });
   }
 
   function handleAwarenessThatRequestCannotBeWithdrawn() {
     setIsAwareThatRequestCannotBeWithdrawn((current) => {
-      return { isAgree: !current.isAgree, showError: current.showError ? false : true };
+      return {
+        isAgree: !current.isAgree,
+        showError: !!current.isAgree,
+      };
     });
   }
 
@@ -65,15 +71,13 @@ export default function SamtykkeContainer({ barn, hovedpart, onClick }: ISamtykk
         <BodyShort>
           Jeg samtykker at NAV skal behandle fordeling av reisekostnader for barn
         </BodyShort>
-        {barn &&
-          hovedpart &&
-          barn.map((person) => {
-            return (
-              <BodyShort className="font-bold">
-                {person.fornavn} {person.foedselsdato} {hovedpart.fornavn}
-              </BodyShort>
-            );
-          })}
+        {barnInformation.map((information, index) => {
+          return (
+            <BodyShort key={index} className="font-bold">
+              {`${information} (med ${hovedpart.fornavn})`}
+            </BodyShort>
+          );
+        })}
       </div>
       <div className="grid gap-7">
         <ConfirmationPanel
