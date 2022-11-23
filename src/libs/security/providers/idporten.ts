@@ -24,7 +24,7 @@ async function verifyToken(
         `unexpected "client_id" claim value`
     );
 
-  const authLevel = verifyResult.payload["acr"]
+  const authLevel = (verifyResult.payload["acr"] as string)?.toLowerCase()
   if (authLevel != "level4")
     throw new errors.JWTClaimValidationFailed(
         `authentication level is "${authLevel} but expected level4"`
