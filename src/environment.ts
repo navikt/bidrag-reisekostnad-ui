@@ -1,3 +1,5 @@
+import env from "env-var";
+
 // @ts-nocheck
 const system = {
   isDevelopment: process.env.NODE_ENV === "development",
@@ -5,7 +7,13 @@ const system = {
 };
 
 const url = {
-  bidragReisekostnad: process.env.BIDRAG_REISEKOSTNAD_URL,
+  bidragReisekostnad: env.get("BIDRAG_REISEKOSTNAD_URL").required().asString(),
+  bidragPerson: env.get("BIDRAG_PERSON_URL").required().asString()
 };
 
-export default { url, system };
+const audiences = {
+  bidrag_person: env.get("BIDRAG_PERSON_SCOPE").required().asString(),
+  bidrag_reisekostnad_api: env.get("BIDRAG_REISEKOSTNAD_API_SCOPE").required().asString()
+}
+
+export default { url, system, audiences };

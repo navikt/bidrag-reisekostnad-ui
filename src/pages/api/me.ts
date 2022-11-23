@@ -1,15 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {getSession} from "../../libs/security/session";
-import environment from "../../environment";
+import PersonService from "../../service/PersonService";
+import {capitalizeFirstLetter} from "../../libs/string.util";
 
-type Data = {
-  name: string
+type IMeResponse = {
+  navn: string
+  fodselsnummer: string;
 }
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<string>
+    res: NextApiResponse<IMeResponse>
 ) {
   const session = await getSession(req);
   if (!session) return res.status(401).end();
@@ -18,5 +20,6 @@ export default async function handler(
     return res.status(401).end();
   }
 
-  res.status(200).json(JSON.stringify({...session.user, token: session.token, person: await session.getOBOToken(environment.audiences.bidrag_person)}))
+  const personInfo = await new PersonService(session).hentPersonInfo(session.user.fnr)
+  res.status(200).json(personInfo!)
 }

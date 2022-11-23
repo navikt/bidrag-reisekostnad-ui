@@ -1,11 +1,13 @@
-import { DefaultRestService } from "@navikt/bidrag-ui-common";
 import { HTTPStatus } from "../enum/HttpStatus";
 import environment from "../environment";
+import { IForesporsel } from "../types/foresporsel";
+import {DefaultConsumer} from "./DefaultConsumer";
+import {ISession} from "../libs/security/session";
 import { IBrukerinformasjon } from "../types/foresporsel";
 
-export default class ReisekosnadService extends DefaultRestService {
-  constructor() {
-    super("bidrag-reisekostnad", environment.url.bidragReisekostnad);
+export default class ReisekosnadService extends DefaultConsumer {
+  constructor(session: ISession) {
+    super(environment.audiences.bidrag_reisekostnad_api, environment.url.bidragReisekostnad, session);
   }
 
   // TODO

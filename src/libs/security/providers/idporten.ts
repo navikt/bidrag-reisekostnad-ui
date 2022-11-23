@@ -1,7 +1,7 @@
 import {createRemoteJWKSet, errors, FlattenedJWSInput, JWSHeaderParameters, jwtVerify, JWTVerifyResult,} from "jose";
 import {GetKeyFunction} from "jose/dist/types/types";
 import {IdPortenProvider} from "./AuthProvider";
-import {getToken} from "../wonderwall";
+import {getToken} from "./wonderwall";
 
 let remoteJWKSet: GetKeyFunction<JWSHeaderParameters, FlattenedJWSInput>;
 
@@ -24,12 +24,17 @@ async function verifyToken(
         `unexpected "client_id" claim value`
     );
 
+  const authLevel = verifyResult.payload["acr"]
+  if (authLevel != "level4")
+    throw new errors.JWTClaimValidationFailed(
+        `authentication level is "${authLevel} but expected level4"`
+    );
   return verifyResult;
 }
 
 const idporten: IdPortenProvider = {
   name: "idporten",
-  getToken,
+  getToken: getToken,
   verifyToken,
 };
 export default idporten

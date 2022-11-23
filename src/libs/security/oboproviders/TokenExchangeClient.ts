@@ -1,4 +1,4 @@
-import { Client, errors, GrantBody, GrantExtras, Issuer } from "openid-client";
+import { Client as OpenIdClient, errors, GrantBody, GrantExtras, Issuer } from "openid-client";
 import { JWK } from "jose/dist/types/types";
 import OPError = errors.OPError;
 
@@ -18,14 +18,14 @@ export interface ClientConfig {
   privateJWK: JWK;
 }
 
-class TokenExchange {
+export default class TokenExchangeClient {
   protected _config: ClientConfig;
 
   constructor(config: ClientConfig) {
     this._config = config;
   }
 
-  getClient(): Client {
+  private getClient(): OpenIdClient {
     const issuer = new Issuer({
       issuer: this._config.issuer,
       token_endpoint: this._config.tokenEndpoint,
@@ -41,7 +41,7 @@ class TokenExchange {
     );
   }
 
-  grantBody(audience: string, subject_token: string): GrantBody {
+  private grantBody(audience: string, subject_token: string): GrantBody {
     return {
       grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
       client_assertion_type:
@@ -52,7 +52,7 @@ class TokenExchange {
     };
   }
 
-  additionalClaims(): GrantExtras {
+  private additionalClaims(): GrantExtras {
     const now = Math.floor(Date.now() / 1000);
     return {
       clientAssertionPayload: {
@@ -78,5 +78,3 @@ class TokenExchange {
     }
   }
 }
-
-export default TokenExchange;
