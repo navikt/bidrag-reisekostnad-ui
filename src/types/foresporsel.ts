@@ -1,29 +1,29 @@
-export interface IForesporsel {
+export interface IBrukerinformasjon {
   brukersFornavn: string;
   kanSokeOmFordelingAvReisekostnader: boolean;
-  foresporslerSomHovedpart: IForesporslerSomHovedpart[];
-  foresporslerSomMotpart: any[];
-  motparterMedFellesBarnUnderFemtenAar: IMotparterMedFellesBarnUnderFemtenAar[];
+  foresporslerSomHovedpart: IForesporsel[];
+  foresporslerSomMotpart: IForesporsel[];
+  motparterMedFellesBarnUnderFemtenAar: IMotpart[];
   barnMinstFemtenor: IPerson[];
 }
 
-interface IMotparterMedFellesBarnUnderFemtenAar {
-  motpart: IPerson;
-  fellesBarnUnder15Aar: IPerson[];
-}
-
-interface IForesporslerSomHovedpart {
+interface IForesporsel {
   idForesporsel: number;
   kreverSamtykke: boolean;
   barn: IPerson[];
   hovedpart: IPerson;
   motpart: IPerson;
   opprettet: string;
-  samtykket?: any;
-  journalfoert?: any;
+  samtykket: string;
+  journalfoert: string;
 }
 
 interface IPerson {
   fornavn: string;
   foedselsdato: string;
+}
+
+interface IMotpart {
+  motpart: IPerson;
+  fellesBarnUnder15Aar: IPerson[];
 }
