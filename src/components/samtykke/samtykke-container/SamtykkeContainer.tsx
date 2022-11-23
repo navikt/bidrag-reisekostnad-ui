@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";
 import { MAA_SAMTYKKE } from "../../../constants/error";
+import { IPerson } from "../../../types/foresporsel";
 import Collapse from "../../collapse/Collapse";
 
 interface IForesporselConfirmationProps {
@@ -11,10 +12,12 @@ interface IForesporselConfirmationProps {
 }
 
 interface ISamtykkeProps {
+  barn?: IPerson[];
+  hovedpart?: IPerson;
   onClick: (sendingIn: boolean) => void;
 }
 
-export default function SamtykkeContainer({ onClick }: ISamtykkeProps) {
+export default function SamtykkeContainer({ barn, hovedpart, onClick }: ISamtykkeProps) {
   const [haveReadAndUnderstood, setHaveReadAndUnderstood] = useState<IForesporselConfirmationProps>(
     {
       isAgree: false,
@@ -62,7 +65,15 @@ export default function SamtykkeContainer({ onClick }: ISamtykkeProps) {
         <BodyShort>
           Jeg samtykker at NAV skal behandle fordeling av reisekostnader for barn
         </BodyShort>
-        <BodyShort className="font-bold">Barn 3, dd.mm.yyyy, 5 år (med Kari Normann)</BodyShort>
+        {barn &&
+          hovedpart &&
+          barn.map((person) => {
+            return (
+              <BodyShort className="font-bold">
+                {person.fornavn} {person.foedselsdato} {hovedpart.fornavn}
+              </BodyShort>
+            );
+          })}
       </div>
       <div className="grid gap-7">
         <ConfirmationPanel

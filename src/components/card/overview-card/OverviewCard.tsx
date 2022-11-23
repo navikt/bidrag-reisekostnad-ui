@@ -4,12 +4,12 @@ import React from "react";
 interface IOverviewCardProps {
   name: string;
   status: string;
+  foresporselId: string;
 }
 
-export default function OverviewCard({ name, status }: IOverviewCardProps) {
+export default function OverviewCard({ name, status, foresporselId }: IOverviewCardProps) {
   return (
-    // TODO change href
-    <LinkPanel href="/foresporsel/123456" border>
+    <LinkPanel href={`/foresporsel/${foresporselId}`} border>
       <LinkPanel.Title className="text-medium">Reisekostnader</LinkPanel.Title>
       <LinkPanel.Description>Fra: {name}</LinkPanel.Description>
       <Tag variant="warning" size="small" className="mt-3">

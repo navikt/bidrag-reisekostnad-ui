@@ -7,7 +7,7 @@ export interface IBrukerinformasjon {
   barnMinstFemtenor: IPerson[];
 }
 
-interface IForesporsel {
+export interface IForesporsel {
   idForesporsel: number;
   kreverSamtykke: boolean;
   barn: IPerson[];
@@ -18,7 +18,7 @@ interface IForesporsel {
   journalfoert: string;
 }
 
-interface IPerson {
+export interface IPerson {
   fornavn: string;
   foedselsdato: string;
 }

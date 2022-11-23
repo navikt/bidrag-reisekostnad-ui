@@ -1,21 +1,27 @@
 import React, { createContext, PropsWithChildren, useState, useContext } from "react";
+import { IBrukerinformasjon } from "../types/foresporsel";
 
 interface IReisekostnadContext {
-  isAgree: boolean;
-  updateIsAgree: (isAgree: boolean) => void;
+  userInformation: IBrukerinformasjon | undefined;
+  updateUserInformation: (user: IBrukerinformasjon) => void;
 }
 
 export const ReisekostnadContext = createContext<IReisekostnadContext | undefined>(undefined);
 
 function ReisekostnadProvider({ children }: PropsWithChildren) {
-  const [isAgree, setIsAgreed] = useState<boolean>(false);
+  const [userInformation, setUserInformation] = useState<IBrukerinformasjon | undefined>(undefined);
 
-  const updateIsAgree = (isAgree: boolean) => {
-    setIsAgreed(isAgree);
+  const updateUserInformation = (user: IBrukerinformasjon) => {
+    setUserInformation(user);
   };
 
   return (
-    <ReisekostnadContext.Provider value={{ isAgree, updateIsAgree }}>
+    <ReisekostnadContext.Provider
+      value={{
+        userInformation,
+        updateUserInformation,
+      }}
+    >
       {children}
     </ReisekostnadContext.Provider>
   );
