@@ -1,7 +1,9 @@
 import { Heading, Accordion, BodyShort, ConfirmationPanel, Button } from "@navikt/ds-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
+import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";
 import { MAA_SAMTYKKE } from "../../../constants/error";
+import Collapse from "../../collapse/Collapse";
 
 interface IForesporselConfirmationProps {
   isAgree: boolean;
@@ -12,7 +14,7 @@ interface ISamtykkeProps {
   onClick: (sendingIn: boolean) => void;
 }
 
-export default function Samtykke({ onClick }: ISamtykkeProps) {
+export default function SamtykkeContainer({ onClick }: ISamtykkeProps) {
   const [haveReadAndUnderstood, setHaveReadAndUnderstood] = useState<IForesporselConfirmationProps>(
     {
       isAgree: false,
@@ -55,20 +57,7 @@ export default function Samtykke({ onClick }: ISamtykkeProps) {
       <Heading level="1" size="xlarge">
         Samtykke
       </Heading>
-      <Accordion>
-        <Accordion.Item className="grid gap-5">
-          <Accordion.Header>
-            Hva innebærer det å samtykke til fordeling av reisekostnader?
-          </Accordion.Header>
-          <Accordion.Content>TODO</Accordion.Content>
-        </Accordion.Item>
-        <Accordion.Item>
-          <Accordion.Header>
-            Hva hvis jeg ikke er enig om fordeling av reisekostander?
-          </Accordion.Header>
-          <Accordion.Content>TODO</Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
+      <Collapse data={SAMTYKKE_COLLAPSE} />
       <div className="grid gap-7">
         <BodyShort>
           Jeg samtykker at NAV skal behandle fordeling av reisekostnader for barn

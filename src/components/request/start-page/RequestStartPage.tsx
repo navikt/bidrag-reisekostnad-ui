@@ -1,5 +1,5 @@
 import { BodyShort, ConfirmationPanel, Button, Link } from "@navikt/ds-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { MAA_SAMTYKKE } from "../../../constants/error";
 import GreetingCard from "../../card/greeting-card/GreetingCard";
 

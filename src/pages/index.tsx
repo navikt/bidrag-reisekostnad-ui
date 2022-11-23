@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import OverviewStartPage from "../components/overview/start-page/OverviewStartPage";
+import OverviewStartPage from "../components/overview/Overview";
 
 // export function getStaticProps() {
 // }

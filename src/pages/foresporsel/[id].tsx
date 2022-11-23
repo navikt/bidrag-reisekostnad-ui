@@ -1,9 +1,7 @@
-import { Accordion, BodyShort, Button, ConfirmationPanel, Heading } from "@navikt/ds-react";
 import { GetServerSidePropsContext } from "next";
-import Link from "next/link";
-import React, { useState } from "react";
-import Samtykke from "../../components/overview/samtykke/Samtykke";
-import { MAA_SAMTYKKE } from "../../constants/error";
+import { useState } from "react";
+import SamtykkeConfirmationContainer from "../../components/samtykke/samtykke-confirmation-container/SamtykkeConfirmationContainer";
+import SamtykkeContainer from "../../components/samtykke/samtykke-container/SamtykkeContainer";
 
 interface IForesporselIdProps {
   id?: string;
@@ -20,12 +18,14 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function ForesporselId({ id }: IForesporselIdProps) {
-  const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
+  const [showConfirmPage, setShowConfirmPage] = useState<boolean>(true);
 
   return (
     <>
-      {showConfirmPage && <p>confirm page</p>}
-      {!showConfirmPage && <Samtykke onClick={(sendingInn) => setShowConfirmPage(sendingInn)} />}
+      {showConfirmPage && <SamtykkeConfirmationContainer />}
+      {!showConfirmPage && (
+        <SamtykkeContainer onClick={(sendingInn) => setShowConfirmPage(sendingInn)} />
+      )}
     </>
   );
 }
