@@ -1,4 +1,4 @@
-import { Heading, Accordion, BodyShort, ConfirmationPanel, Button } from "@navikt/ds-react";
+import { Heading, BodyShort, ConfirmationPanel, Button } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
 import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";

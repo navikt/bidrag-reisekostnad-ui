@@ -18,12 +18,13 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function ForesporselId({ id }: IForesporselIdProps) {
-  const [showConfirmPage, setShowConfirmPage] = useState<boolean>(true);
+  const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
 
   return (
     <>
-      {showConfirmPage && <SamtykkeConfirmationContainer />}
-      {!showConfirmPage && (
+      {showConfirmPage ? (
+        <SamtykkeConfirmationContainer />
+      ) : (
         <SamtykkeContainer onClick={(sendingInn) => setShowConfirmPage(sendingInn)} />
       )}
     </>

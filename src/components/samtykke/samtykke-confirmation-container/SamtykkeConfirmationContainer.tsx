@@ -1,4 +1,4 @@
-import { Accordion, BodyShort, Heading } from "@navikt/ds-react";
+import { BodyShort, Heading } from "@navikt/ds-react";
 import { SuccessStroke } from "@navikt/ds-icons";
 import Collapse from "../../collapse/Collapse";
 import { SAMTYKKE_CONFIRMATION_COLLAPSE } from "../../../constants/collapse";
@@ -11,13 +11,15 @@ export default function SamtykkeConfirmationContainer() {
       </Heading>
       <div className="flex space-x-14">
         <SuccessStroke color="green" fontSize="50" />
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-7">
           <div>
-            <BodyShort>Du har signert fordeling av reisekostnader med Kari Normann for</BodyShort>
+            <BodyShort spacing>
+              Du har signert fordeling av reisekostnader med Kari Normann for
+            </BodyShort>
             <b>Barn 3, dd.mm.yyyy, 5 år</b>
           </div>
           {/* TODO */}
-          <BodyShort>Du kan gjenfinne samtykken her [lenke].</BodyShort>
+          <BodyShort spacing>Du kan gjenfinne samtykken her [lenke].</BodyShort>
         </div>
       </div>
       <Collapse data={SAMTYKKE_CONFIRMATION_COLLAPSE} />

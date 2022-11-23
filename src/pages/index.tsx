@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import OverviewStartPage from "../components/overview/Overview";
 
 // export function getStaticProps() {
@@ -8,7 +7,7 @@ import OverviewStartPage from "../components/overview/Overview";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Fordeling av reisekostnader</title>
         <meta name="description" content="Fordeling av reisekostnader" />
