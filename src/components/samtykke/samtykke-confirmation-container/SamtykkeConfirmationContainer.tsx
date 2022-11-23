@@ -16,7 +16,7 @@ export default function SamtykkeConfirmationContainer({
         Kvittering/ bekreftelse på innsending
       </Heading>
       <div className="flex space-x-14">
-        <SuccessStroke color="green" fontSize="50" />
+        <SuccessStroke color="green" fontSize="60" />
         <div className="flex flex-col gap-7">
           <div>
             <BodyShort spacing>
