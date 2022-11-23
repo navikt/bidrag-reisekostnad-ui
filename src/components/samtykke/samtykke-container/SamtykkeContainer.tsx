@@ -29,13 +29,13 @@ export default function SamtykkeContainer({ onClick }: ISamtykkeProps) {
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
-      return { isAgree: !current.isAgree, showError: !current.showError };
+      return { isAgree: !current.isAgree, showError: current.showError ? false : true };
     });
   }
 
   function handleAwarenessThatRequestCannotBeWithdrawn() {
     setIsAwareThatRequestCannotBeWithdrawn((current) => {
-      return { isAgree: !current.isAgree, showError: !current.showError };
+      return { isAgree: !current.isAgree, showError: current.showError ? false : true };
     });
   }
 
