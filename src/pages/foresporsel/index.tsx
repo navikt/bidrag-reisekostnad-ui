@@ -3,10 +3,16 @@ import { useState } from "react";
 import Link from "next/link";
 import GreetingCard from "../../components/card/greeting-card/GreetingCard";
 import { MAA_SAMTYKKE } from "../../constants/error";
+import { useReisekostnad } from "../../context/reisekostnadContext";
 
 export default function Foresporsel() {
   const [isAgree, setIsAgree] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
+  const { userInformation } = useReisekostnad();
+
+  if (!userInformation) {
+    return null;
+  }
 
   function onClick() {
     setShowError(!isAgree);
@@ -24,7 +30,8 @@ export default function Foresporsel() {
 
   return (
     <div className="flex flex-col gap-10 items-center">
-      <GreetingCard name={"Navn"} gender={"kvinne"} />
+      {/* TODO mangler kjønn */}
+      <GreetingCard name={userInformation?.brukersFornavn} gender={"kvinne"} />
       <BodyShort>Dine rettigheter og plikter?</BodyShort>
       <ConfirmationPanel
         size="small"
