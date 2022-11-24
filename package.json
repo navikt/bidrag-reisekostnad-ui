@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
-    "prepare": "husky install",
-    "mocktoken": "export IDPORTEN_TOKEN=$0"
+    "prepare": "husky install"
   },
   "prettier": {
     "printWidth": 100
