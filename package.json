@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "mocktoken": "export IDPORTEN_TOKEN=$0"
   },
   "prettier": {
     "printWidth": 100
@@ -28,7 +29,6 @@
     "@navikt/nav-dekoratoren-moduler": "^1.8.1",
     "@svgr/webpack": "^6.5.1",
     "env-var": "^7.3.0",
-    "iron-session": "^6.3.1",
     "jose": "^4.11.1",
     "lodash.memoize": "^4.1.2",
     "next": "13.0.4",

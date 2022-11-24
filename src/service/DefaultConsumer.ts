@@ -66,7 +66,7 @@ export class DefaultConsumer {
             ...config?.headers,
         };
         const fullUrl = this.baseUrl + url
-        return fetch(fullUrl, {
+       return fetch(fullUrl, {
             body,
             method,
             headers,

@@ -16,7 +16,7 @@ async function verifyToken(
 
 const mockTokenProvider: MockProvider = {
   name: "mock",
-  getToken: (req: NextApiRequest)=>req.session.token!,
+  getToken: (req: NextApiRequest)=>process.env.IDPORTEN_TOKEN!,
   verifyToken,
 };
 export default mockTokenProvider

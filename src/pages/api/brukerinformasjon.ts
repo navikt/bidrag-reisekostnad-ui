@@ -1,13 +1,9 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {getSession} from "../../lib/security/session";
-import {withIronSessionApiRoute} from "iron-session/next";
-import {sessionOptions} from "../../types/session";
 import ReisekostnadService from "../../service/ReisekostnadService";
 import {IForesporsel} from "../../types/foresporsel";
 
-export default withIronSessionApiRoute(handler, sessionOptions);
-
-async function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<IForesporsel>
 ) {
