@@ -9,7 +9,8 @@ import {
 } from "@navikt/nav-dekoratoren-moduler/ssr";
 
 const decoratorProps: DecoratorProps = {
-  env: "dev",
+  // @ts-ignore
+  env: process.env.DEKORATOR_ENV ?? "dev",
   chatbot: false,
   simple: false,
   context: "privatperson",
@@ -74,7 +75,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
           />
           <Styles />
         </Head>
-        <body>
+        <body> 
           <Scripts />
           <Header />
           <Main />

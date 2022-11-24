@@ -1,6 +1,6 @@
 import {ApiError} from "@navikt/bidrag-ui-common";
 import { v4 as uuidV4 } from "uuid";
-import {ISession} from "../libs/security/session";
+import {ISession} from "../lib/security/session";
 
 type FetchMethods = "GET" | "POST" | "PUT";
 
@@ -66,7 +66,6 @@ export class DefaultConsumer {
             ...config?.headers,
         };
         const fullUrl = this.baseUrl + url
-        console.log(`Kaller url ${fullUrl} ${idToken}`)
         return fetch(fullUrl, {
             body,
             method,

@@ -2,9 +2,9 @@ import { HTTPStatus } from "../enum/HttpStatus";
 import environment from "../environment";
 import { IForesporsel } from "../types/foresporsel";
 import {DefaultConsumer} from "./DefaultConsumer";
-import {ISession} from "../libs/security/session";
+import {ISession} from "../lib/security/session";
 import {IPersonResponse} from "../types/person";
-import {capitalizeFirstLetter} from "../libs/string.util";
+import {capitalizeFirstLetter} from "../lib/string.util";
 import {IPerson} from "../types/person";
 
 export default class PersonService extends DefaultConsumer {

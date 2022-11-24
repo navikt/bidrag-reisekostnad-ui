@@ -1,14 +1,13 @@
 import {JWTVerifyResult,} from "jose";
 import {decodeJwt} from "jose";
 import {MockProvider} from "./AuthProvider";
-
-const mockToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIiLCJpYXQiOjE2NjkxOTQ3MTYsImV4cCI6MTcwMDczMDcxNiwiYXVkIjoiIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsInBpZCI6IjEyMzQ1Njc4OTEwIn0.7uVguLkvZ3eBzHd0lBjSTkq8IZACVQxvmQ6QIOk1eCE"
+import {NextApiRequest} from "next";
 
 async function verifyToken(
-    token: string | Uint8Array
+    token: string
 ): Promise<JWTVerifyResult> {
   return {
-    payload: decodeJwt(mockToken),
+    payload: decodeJwt(token),
     protectedHeader: {
       alg: "mock"
     }
@@ -17,7 +16,7 @@ async function verifyToken(
 
 const mockTokenProvider: MockProvider = {
   name: "mock",
-  getToken: ()=>mockToken,
+  getToken: (req: NextApiRequest)=>req.session.token!,
   verifyToken,
 };
 export default mockTokenProvider

@@ -1,5 +1,4 @@
 import {NextApiRequest} from "next";
-import {NextRequest} from "next/server";
 import tokenProvider from "./providers";
 import {oboToken} from "./oboproviders";
 
@@ -15,8 +14,7 @@ export interface IUserSession {
   fnr: string;
 }
 
-export async function getSession(req: NextApiRequest | NextRequest): Promise<ISession | null> {
-  try {
+export async function getSession(req: NextApiRequest): Promise<ISession | null> {
     const token = tokenProvider.getToken(req)
     if (!token) return null
     const { payload } = await tokenProvider.verifyToken(token);
@@ -29,9 +27,6 @@ export async function getSession(req: NextApiRequest | NextRequest): Promise<ISe
       expires_in: expiresIn(payload.exp!),
       getOBOToken: oboToken(tokenProvider, token),
     };
-  } catch (err) {
-    throw err;
-  }
 }
 
 function expiresIn(timestamp: number): number {

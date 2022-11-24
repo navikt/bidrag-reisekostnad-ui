@@ -1,8 +1,7 @@
-import {NextRequest} from "next/server";
 import {JWTVerifyResult} from "jose";
 import {NextApiRequest} from "next";
 
-export type GetToken = (req: NextRequest | NextApiRequest) => string | null;
+export type GetToken = (req: NextApiRequest) => string | null;
 export type VerifyAuth = (
     token: string
 ) => Promise<JWTVerifyResult>;

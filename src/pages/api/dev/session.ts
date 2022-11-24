@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type {NextApiRequest, NextApiResponse} from 'next'
-import {getSession} from "../../libs/security/session";
-import environment from "../../environment";
+import {getSession} from "../../../lib/security/session";
+import environment from "../../../environment";
 
 type Data = {
   name: string
@@ -18,5 +18,9 @@ export default async function handler(
     return res.status(401).end();
   }
 
-  res.status(200).json(JSON.stringify({...session.user, token: session.token, person: await session.getOBOToken(environment.audiences.bidrag_person)}))
+  res.status(200).json(JSON.stringify({
+    ...session.user,
+    idporten_token: session.token,
+    person_token: await session.getOBOToken(environment.audiences.bidrag_person),
+    reisekostnad_api_token: await session.getOBOToken(environment.audiences.bidrag_reisekostnad_api)}))
 }

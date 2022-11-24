@@ -1,4 +1,3 @@
-import mock from "./mock";
 import idporten from "./idporten";
 import mockTokenProvider from "./mock";
 
