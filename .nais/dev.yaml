@@ -2,7 +2,7 @@
 ingresses:
   - "https://bidrag-reisekostnad.dev.nav.no"
 env:
-  BIDRAG_REISEKOSTNADER_API_URL: "https://bidrag-reisekostnad-api.dev.intern.nav.no"
+  BIDRAG_REISEKOSTNAD_API_URL: "https://bidrag-reisekostnad-api.dev.intern.nav.no"
   BIDRAG_PERSON_URL: "https://bidrag-person-feature.dev-fss-pub.nais.io/bidrag-person"
   DEKORATOR_ENV: dev
   BIDRAG_PERSON_SCOPE: "dev-fss:bidrag:bidrag-person-feature"

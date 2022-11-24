@@ -7,7 +7,7 @@ const system = {
 };
 
 const url = {
-  bidragReisekostnad: env.get("BIDRAG_REISEKOSTNAD_URL").required().asString(),
+  bidragReisekostnad: env.get("BIDRAG_REISEKOSTNAD_API_URL").required().asString(),
   bidragPerson: env.get("BIDRAG_PERSON_URL").required().asString()
 };
 
