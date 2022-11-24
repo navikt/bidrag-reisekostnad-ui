@@ -3,10 +3,6 @@ import type {NextApiRequest, NextApiResponse} from 'next'
 import {getSession} from "../../../lib/security/session";
 import environment from "../../../environment";
 
-type Data = {
-  name: string
-}
-
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<string>
