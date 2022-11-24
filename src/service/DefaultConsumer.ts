@@ -66,7 +66,6 @@ export class DefaultConsumer {
             ...config?.headers,
         };
         const fullUrl = this.baseUrl + url
-        console.log("Kaller url " + fullUrl + " med token " + idToken?.substring(0, 30))
        return fetch(fullUrl, {
             body,
             method,
