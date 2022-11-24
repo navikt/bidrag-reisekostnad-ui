@@ -1,18 +1,15 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {getSession} from "../../lib/security/session";
-import PersonService from "../../service/PersonService";
-import { withIronSessionApiRoute } from "iron-session/next";
+import {withIronSessionApiRoute} from "iron-session/next";
 import {sessionOptions} from "../../types/session";
+import ReisekostnadService from "../../service/ReisekostnadService";
+import {IForesporsel} from "../../types/foresporsel";
 
-type IUser = {
-  navn: string
-  fodselsnummer: string;
-}
 export default withIronSessionApiRoute(handler, sessionOptions);
 
 async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<IUser>
+    res: NextApiResponse<IForesporsel>
 ) {
   const session = await getSession(req);
   if (!session) return res.status(401).end();
@@ -21,6 +18,6 @@ async function handler(
     return res.status(401).end();
   }
 
-  const personInfo = await new PersonService(session).hentPersonInfo(session.user.fnr)
+  const personInfo = await new ReisekostnadService(session).hentBrukerInformasjon()
   res.status(200).json(personInfo!)
 }

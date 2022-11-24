@@ -4,19 +4,19 @@ import { IForesporsel } from "../types/foresporsel";
 import {DefaultConsumer} from "./DefaultConsumer";
 import {ISession} from "../lib/security/session";
 
-export default class ReisekosnadService extends DefaultConsumer {
+export default class ReisekostnadService extends DefaultConsumer {
   constructor(session: ISession) {
     super(environment.audiences.bidrag_reisekostnad_api, environment.url.bidragReisekostnad, session);
   }
 
   // TODO
-  async hentForesporsel(ident: string): Promise<IForesporsel | null> {
-    const response = await this.post<IForesporsel>("/sak", JSON.stringify(ident));
+  async hentBrukerInformasjon(): Promise<IForesporsel | null> {
+    const response = await this.get<IForesporsel>("/api/v1/reisekostnad/brukerinformasjon");
 
     if (response.status !== HTTPStatus.OK) {
       throw new Error(`Fikk respons ${response.status}`);
     }
 
-    return null;
+    return response.data;
   }
 }
