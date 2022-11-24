@@ -67,6 +67,7 @@ export default class TokenExchangeClient {
       audience: string
   ): Promise<string | undefined> {
     try {
+      console.log(`Henter OBO token for audience ${audience}`)
       const tokenset = await this.getClient().grant(
           this.grantBody(audience, subject_token),
           this.additionalClaims()
