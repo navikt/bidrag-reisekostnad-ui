@@ -7,7 +7,6 @@ export default function Overview({ name }: { name: string }) {
   const { userInformation } = useReisekostnad();
 
   if (!userInformation) {
-    console.log("userInformation", userInformation);
     return null;
   }
 
