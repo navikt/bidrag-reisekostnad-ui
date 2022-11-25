@@ -1,25 +1,13 @@
-import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
 import SamtykkeConfirmationContainer from "../../views/samtykke/samtykke-confirmation-container/SamtykkeConfirmationContainer";
 import SamtykkeContainer from "../../views/samtykke/samtykke-container/SamtykkeContainer";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 import { calculateAge } from "../../utils/dateUtils";
+import { useRouter } from "next/router";
 
-interface IForesporselIdProps {
-  foresporselId?: string;
-}
-
-export function getServerSideProps(context: GetServerSidePropsContext) {
-  const { params } = context;
-
-  return {
-    props: {
-      foresporselId: params?.id,
-    },
-  };
-}
-
-export default function ForesporselId({ foresporselId }: IForesporselIdProps) {
+export default function ForesporselId() {
+  const router = useRouter();
+  const foresporselId = router.query.id as string;
   const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
   const { userInformation } = useReisekostnad();
 

@@ -1,4 +1,6 @@
-import { LinkPanel, Tag } from "@navikt/ds-react";
+import { Next } from "@navikt/ds-icons";
+import { LinkPanel, Panel, Tag } from "@navikt/ds-react";
+import Link from "next/link";
 import { IForesporsel, IPerson } from "../../../types/foresporsel";
 import { calculateAge } from "../../../utils/dateUtils";
 
@@ -33,10 +35,17 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
   const { idForespørsel, hovedpart, barn } = foresporsel;
 
   return (
-    <LinkPanel href={`/foresporsel/${idForespørsel}`} border>
-      <LinkPanel.Title className="text-medium">Reisekostnader</LinkPanel.Title>
-      <LinkPanel.Description>Fra: {hovedpart.fornavn}</LinkPanel.Description>
-      <Status barn={barn} />
-    </LinkPanel>
+    <Panel className="navds-link-panel" border>
+      <div className="navds-link-panel__content text-gray-900">
+        <Link className="no-underline" href={`/foresporsel/${idForespørsel}`} passHref>
+          <LinkPanel.Title className="text-medium text-gray-900">Reisekostnader</LinkPanel.Title>
+          <LinkPanel.Description className="text-gray-900">
+            Fra: {hovedpart.fornavn}
+          </LinkPanel.Description>
+          <Status barn={barn} />
+        </Link>
+      </div>
+      <Next className="navds-link-panel__chevron" aria-hidden />
+    </Panel>
   );
 }

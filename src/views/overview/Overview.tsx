@@ -32,7 +32,7 @@ export default function Overview({ name }: { name: string }) {
                   Det trenges ditt samtykke, slik at NAV kan behandle den videre.
                 </BodyShort>
               </div>
-              <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex flex-col gap-5">
                 {forespørslerSomMotpart && (
                   <Heading level="2" size="small">
                     Oversikt
