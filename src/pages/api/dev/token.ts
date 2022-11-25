@@ -14,5 +14,5 @@ export default async function handler(
     return res.status(401).end();
   }
 
-  res.status(200).json(session.token)
+  res.status(200).send(session.token)
 }
