@@ -3,8 +3,16 @@ import GreetingCard from "../card/greeting-card/GreetingCard";
 import OverviewCard from "../card/overview-card/OverviewCard";
 import Link from "next/link";
 import { useReisekostnad } from "../../context/reisekostnadContext";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function OverviewStartPage() {
+  const { data, error } = useSWR("/api/brukerinformasjon", fetcher);
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
   const { userInformation } = useReisekostnad();
 
   if (!userInformation) {
@@ -17,7 +25,7 @@ export default function OverviewStartPage() {
     <div className="flex flex-col gap-8">
       <div className="w-full flex flex-col gap-10 items-center">
         {/* TODO mangler kjønn */}
-        <GreetingCard name={userInformation.brukersFornavn} gender={"kvinne"} />
+        <GreetingCard name={data.brukersFornavn} gender={"kvinne"} />
         {forespørslerSomMotpart.length > 0 && (
           <>
             <div className="flex flex-col gap-6">
@@ -40,11 +48,6 @@ export default function OverviewStartPage() {
             </div>
           </>
         )}
-      </div>
-      <div className="flex space-x-12">
-        <Link href="/foresporsel">
-          <Button type="button">Opprett en ny fordeling av reisekostnader</Button>
-        </Link>
       </div>
     </div>
   );

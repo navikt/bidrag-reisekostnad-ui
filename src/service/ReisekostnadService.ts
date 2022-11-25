@@ -1,21 +1,25 @@
-import { DefaultRestService } from "@navikt/bidrag-ui-common";
 import { HTTPStatus } from "../enum/HttpStatus";
 import environment from "../environment";
 import { IBrukerinformasjon } from "../types/foresporsel";
+import { DefaultConsumer } from "./DefaultConsumer";
+import { ISession } from "../lib/security/session";
 
-export default class ReisekosnadService extends DefaultRestService {
-  constructor() {
-    super("bidrag-reisekostnad", environment.url.bidragReisekostnad);
+export default class ReisekostnadService extends DefaultConsumer {
+  constructor(session: ISession) {
+    super(
+      environment.audiences.bidrag_reisekostnad_api,
+      environment.url.bidragReisekostnad,
+      session
+    );
   }
 
-  // TODO
-  async hentForesporsel(ident: string): Promise<IBrukerinformasjon | null> {
-    const response = await this.post<IBrukerinformasjon>("/sak", JSON.stringify(ident));
+  async hentBrukerInformasjon(): Promise<IBrukerinformasjon | null> {
+    const response = await this.get<IBrukerinformasjon>("/api/v1/reisekostnad/brukerinformasjon");
 
     if (response.status !== HTTPStatus.OK) {
       throw new Error(`Fikk respons ${response.status}`);
     }
 
-    return null;
+    return response.data;
   }
 }
