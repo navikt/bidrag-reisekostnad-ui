@@ -1,4 +1,5 @@
-import { Heading, BodyShort } from "@navikt/ds-react";
+import { Heading, BodyShort, Button } from "@navikt/ds-react";
+import Link from "next/link";
 import GreetingCard from "../../components/card/greeting-card/GreetingCard";
 import OverviewCard from "../../components/card/overview-card/OverviewCard";
 import { PageMeta } from "../../components/page-meta/PageMeta";
@@ -16,7 +17,7 @@ export default function Overview({ name }: { name: string }) {
   return (
     <>
       <PageMeta title="Oversikt" />
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-5">
         <div className="w-full flex flex-col gap-10 items-center">
           {/* TODO mangler kjønn */}
           <GreetingCard name={name} gender={"kvinne"} />
@@ -45,6 +46,9 @@ export default function Overview({ name }: { name: string }) {
             </>
           )}
         </div>
+        <Link href="/foresporsel">
+          <Button>Opprett en ny fordeling av reisekostnader</Button>
+        </Link>
       </div>
     </>
   );
