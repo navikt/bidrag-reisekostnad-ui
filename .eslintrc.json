@@ -32,7 +32,7 @@
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/naming-convention": [
-      "error",
+      "warn",
       {
         "selector": "interface",
         "format": ["PascalCase"],

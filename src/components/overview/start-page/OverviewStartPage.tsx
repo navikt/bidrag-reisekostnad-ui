@@ -4,11 +4,11 @@ import GreetingCard from "../../card/greeting-card/GreetingCard";
 import OverviewCard from "../../card/overview-card/OverviewCard";
 import Link from "next/link";
 
-export default function OverviewStartPage() {
+export default function OverviewStartPage({name}: {name: string}) {
   return (
     <div className="w-[40rem] flex flex-col gap-8">
       <div className="w-full flex flex-col gap-10 items-center">
-        <GreetingCard name={"Navn"} gender={"kvinne"} />
+        <GreetingCard name={name} gender={"kvinne"} />
         <div className="flex flex-col gap-6">
           <BodyShort>
             Kari Nordmann har sendt en forerspørsel om fordeling av reisekostnader for Barn 1,

@@ -9,12 +9,14 @@ import {
 } from "@navikt/nav-dekoratoren-moduler/ssr";
 
 const decoratorProps: DecoratorProps = {
-  env: "prod",
+  // @ts-ignore
+  env: process.env.DEKORATOR_ENV ?? "dev",
   chatbot: false,
   simple: false,
   context: "privatperson",
   enforceLogin: false,
   redirectToApp: true,
+  level: "Level4",
   // TODO
   breadcrumbs: [
     { title: "Familie og barn", url: "https://www.nav.no/familie" },
@@ -73,7 +75,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
           />
           <Styles />
         </Head>
-        <body>
+        <body> 
           <Scripts />
           <Header />
           <Main />
