@@ -2,7 +2,6 @@ import React from "react";
 import Document, { DocumentContext, Head, Html, Main, NextScript } from "next/document";
 import {
   Components as DecoratorComponents,
-  Env,
   fetchDecoratorReact,
   Locale,
   Props as DecoratorProps,
@@ -75,7 +74,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
           />
           <Styles />
         </Head>
-        <body> 
+        <body>
           <Scripts />
           <Header />
           <Main />

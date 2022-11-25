@@ -9,7 +9,7 @@ interface IGreetingCardProps {
 }
 export default function GreetingCard({ name, gender }: IGreetingCardProps) {
   return (
-    <div className="grid gap-3">
+    <div className="flex flex-col items-center gap-5">
       {gender === "kvinne" ? <NavVeilederKvinne /> : <NavVeilederMann />}
       <Heading level="1" size="large">
         Hei {name}

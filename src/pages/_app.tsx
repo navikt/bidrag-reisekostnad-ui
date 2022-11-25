@@ -6,10 +6,10 @@ import TokenInput from "../components/TokenInput";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ReisekostnadProvider>
-      <main className="max-w-xl mx-auto px-4 py-18 ">
+      <main className="max-w-max mx-auto px-4 py-18">
         <Component {...pageProps} />
       </main>
-      <TokenInput/>
+      <TokenInput />
     </ReisekostnadProvider>
   );
 }

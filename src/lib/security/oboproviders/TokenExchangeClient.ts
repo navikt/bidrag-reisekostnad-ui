@@ -2,16 +2,13 @@ import { Client as OpenIdClient, errors, GrantBody, GrantExtras, Issuer } from "
 import { JWK } from "jose/dist/types/types";
 import OPError = errors.OPError;
 
-export type GetToken = (
-    subject_token: string,
-    audience: string
-) => Promise<string | undefined>;
+export type GetToken = (subject_token: string, audience: string) => Promise<string | undefined>;
 
-export interface TokenIssuer {
+export interface ITokenIssuer {
   exchangeToken: () => GetToken;
 }
 
-export interface ClientConfig {
+export interface IClientConfig {
   issuer: string;
   tokenEndpoint: string;
   clientId: string;
@@ -19,9 +16,9 @@ export interface ClientConfig {
 }
 
 export default class TokenExchangeClient {
-  protected _config: ClientConfig;
+  protected _config: IClientConfig;
 
-  constructor(config: ClientConfig) {
+  constructor(config: IClientConfig) {
     this._config = config;
   }
 
@@ -33,19 +30,18 @@ export default class TokenExchangeClient {
     });
     const jwk = this._config.privateJWK;
     return new issuer.Client(
-        {
-          client_id: this._config.clientId,
-          token_endpoint_auth_method: "private_key_jwt",
-        },
-        { keys: [jwk] }
+      {
+        client_id: this._config.clientId,
+        token_endpoint_auth_method: "private_key_jwt",
+      },
+      { keys: [jwk] }
     );
   }
 
   private grantBody(audience: string, subject_token: string): GrantBody {
     return {
       grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
-      client_assertion_type:
-          "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+      client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
       subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
       audience,
       subject_token,
@@ -62,14 +58,11 @@ export default class TokenExchangeClient {
     };
   }
 
-  async getToken(
-      subject_token: string,
-      audience: string
-  ): Promise<string | undefined> {
+  async getToken(subject_token: string, audience: string): Promise<string | undefined> {
     try {
       const tokenset = await this.getClient().grant(
-          this.grantBody(audience, subject_token),
-          this.additionalClaims()
+        this.grantBody(audience, subject_token),
+        this.additionalClaims()
       );
       return tokenset.access_token;
     } catch (e) {

@@ -1,21 +1,50 @@
-import React, {createContext, PropsWithChildren, useContext, useState} from "react";
+import React, { createContext, PropsWithChildren, useState, useContext, useEffect } from "react";
+import { IBrukerinformasjon, IForesporsel, IPerson } from "../types/foresporsel";
+import brukerTestData from "../test-data/brukerinformasjon.json";
+import { calculateAge } from "../utils/dateUtils";
+import { isEveryoneOver15YearsOld, isAgeOver15YearsOld } from "../utils/personUtils";
 
 interface IReisekostnadContext {
-  isAgree: boolean;
-  updateIsAgree: (isAgree: boolean) => void;
+  userInformation: IBrukerinformasjon | undefined;
+  updateUserInformation: (user: IBrukerinformasjon) => void;
 }
 
 export const ReisekostnadContext = createContext<IReisekostnadContext | undefined>(undefined);
 
 function ReisekostnadProvider({ children }: PropsWithChildren) {
-  const [isAgree, setIsAgreed] = useState<boolean>(false);
+  const [userInformation, setUserInformation] = useState<IBrukerinformasjon | undefined>(undefined);
 
-  const updateIsAgree = (isAgree: boolean) => {
-    setIsAgreed(isAgree);
+  const updateUserInformation = (user: IBrukerinformasjon) => {
+    const foresporslerSomMotpart =
+      process.env.NODE_ENV === "development"
+        ? brukerTestData.forespørslerSomMotpart
+        : user.forespørslerSomMotpart;
+
+    const forespørslerSomMotpartMedAlder = foresporslerSomMotpart.map((foresporsel) => ({
+      ...foresporsel,
+      barn: foresporsel.barn.map((person) => ({
+        ...person,
+        alder: calculateAge(person.fødselsdato),
+        erOver15: isAgeOver15YearsOld(person.fødselsdato),
+      })),
+      erAlleOver15: isEveryoneOver15YearsOld(foresporsel.barn as IPerson[]),
+    })) as unknown as IForesporsel[];
+
+    user = {
+      ...user,
+      forespørslerSomMotpart: [...forespørslerSomMotpartMedAlder],
+    };
+    console.log(user);
+    setUserInformation(user);
   };
 
   return (
-    <ReisekostnadContext.Provider value={{ isAgree, updateIsAgree }}>
+    <ReisekostnadContext.Provider
+      value={{
+        userInformation,
+        updateUserInformation,
+      }}
+    >
       {children}
     </ReisekostnadContext.Provider>
   );
