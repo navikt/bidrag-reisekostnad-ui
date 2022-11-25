@@ -1,10 +1,15 @@
 import Head from "next/head";
-import OverviewStartPage from "../components/overview/Overview";
+import OverviewStart from "../components/overview/Overview";
+import useSWR from "swr";
 
-// export function getStaticProps() {
-// }
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home() {
+  const { data, error } = useSWR("/api/brukerinformasjon", fetcher);
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
   return (
     <div>
       <Head>
@@ -13,7 +18,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <OverviewStartPage />
+      <OverviewStart name={data.brukersFornavn} />
     </div>
   );
 }

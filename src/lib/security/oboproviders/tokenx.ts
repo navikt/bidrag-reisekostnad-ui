@@ -1,9 +1,7 @@
-
-
 import env from "env-var";
 import { JWK } from "jose/dist/types/types";
-import TokenExchangeClient, {TokenIssuer} from "./TokenExchangeClient";
-import memoize from "lodash.memoize"
+import TokenExchangeClient, { ITokenIssuer } from "./TokenExchangeClient";
+import memoize from "lodash.memoize";
 
 const options = memoize(() => ({
   clientId: env.get("TOKEN_X_CLIENT_ID").required().asString(),
@@ -17,6 +15,6 @@ const exchangeToken = memoize(() => {
   return client.getToken.bind(client);
 });
 
-const tokenx: TokenIssuer = { exchangeToken };
+const tokenx: ITokenIssuer = { exchangeToken };
 
 export default tokenx;
