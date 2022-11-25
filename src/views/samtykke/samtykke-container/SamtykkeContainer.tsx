@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";
 import { MAA_SAMTYKKE } from "../../../constants/error";
 import { IPerson } from "../../../types/foresporsel";
-import Collapse from "../../collapse/Collapse";
+import Collapse from "../../../components/collapse/Collapse";
 
 interface IForesporselConfirmationProps {
   isAgree: boolean;

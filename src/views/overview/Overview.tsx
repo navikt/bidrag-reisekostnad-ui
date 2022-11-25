@@ -1,12 +1,13 @@
 import { Heading, BodyShort } from "@navikt/ds-react";
-import GreetingCard from "../card/greeting-card/GreetingCard";
-import OverviewCard from "../card/overview-card/OverviewCard";
+import GreetingCard from "../../components/card/greeting-card/GreetingCard";
+import OverviewCard from "../../components/card/overview-card/OverviewCard";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 
-export default function OverviewStart({ name }: { name: string }) {
+export default function Overview({ name }: { name: string }) {
   const { userInformation } = useReisekostnad();
 
   if (!userInformation) {
+    console.log("userInformation", userInformation);
     return null;
   }
 

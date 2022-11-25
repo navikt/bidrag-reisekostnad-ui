@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
-import SamtykkeConfirmationContainer from "../../components/samtykke/samtykke-confirmation-container/SamtykkeConfirmationContainer";
-import SamtykkeContainer from "../../components/samtykke/samtykke-container/SamtykkeContainer";
+import SamtykkeConfirmationContainer from "../../views/samtykke/samtykke-confirmation-container/SamtykkeConfirmationContainer";
+import SamtykkeContainer from "../../views/samtykke/samtykke-container/SamtykkeContainer";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 import { calculateAge } from "../../utils/dateUtils";
 

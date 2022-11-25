@@ -1,6 +1,6 @@
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { SuccessStroke } from "@navikt/ds-icons";
-import Collapse from "../../collapse/Collapse";
+import Collapse from "../../../components/collapse/Collapse";
 import { SAMTYKKE_CONFIRMATION_COLLAPSE } from "../../../constants/collapse";
 
 interface ISamtykkeConfirmationContainerProps {
