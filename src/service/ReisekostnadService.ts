@@ -1,6 +1,6 @@
 import { HTTPStatus } from "../enum/HttpStatus";
 import environment from "../environment";
-import { IForesporsel } from "../types/foresporsel";
+import { IBrukerinformasjon } from "../types/foresporsel";
 import {DefaultConsumer} from "./DefaultConsumer";
 import {ISession} from "../lib/security/session";
 
@@ -9,8 +9,8 @@ export default class ReisekostnadService extends DefaultConsumer {
     super(environment.audiences.bidrag_reisekostnad_api, environment.url.bidragReisekostnad, session);
   }
 
-  async hentBrukerInformasjon(): Promise<IForesporsel | null> {
-    const response = await this.get<IForesporsel>("/api/v1/reisekostnad/brukerinformasjon");
+  async hentBrukerInformasjon(): Promise<IBrukerinformasjon | null> {
+    const response = await this.get<IBrukerinformasjon>("/api/v1/reisekostnad/brukerinformasjon");
 
     if (response.status !== HTTPStatus.OK) {
       throw new Error(`Fikk respons ${response.status}`);

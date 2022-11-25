@@ -2,12 +2,18 @@ import { Heading, BodyShort, Button } from "@navikt/ds-react";
 import GreetingCard from "../card/greeting-card/GreetingCard";
 import OverviewCard from "../card/overview-card/OverviewCard";
 import Link from "next/link";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function OverviewStartPage() {
+  const { data, error } = useSWR('/api/brukerinformasjon', fetcher)
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Loading...</div>
   return (
     <div className="flex flex-col gap-8">
       <div className="w-full flex flex-col gap-10 items-center">
-        <GreetingCard name={"Navn"} gender={"kvinne"} />
+        <GreetingCard name={data.brukersFornavn} gender={"kvinne"} />
         <div className="flex flex-col gap-6">
           <BodyShort>
             Kari Nordmann har sendt en forerspørsel om fordeling av reisekostnader for Barn 1,

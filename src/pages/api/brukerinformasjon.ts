@@ -1,11 +1,11 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {getSession} from "../../lib/security/session";
 import ReisekostnadService from "../../service/ReisekostnadService";
-import {IForesporsel} from "../../types/foresporsel";
+import {IBrukerinformasjon} from "../../types/foresporsel";
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<IForesporsel>
+    res: NextApiResponse<IBrukerinformasjon>
 ) {
   const session = await getSession(req);
   if (!session) return res.status(401).end();
