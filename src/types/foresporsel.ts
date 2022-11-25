@@ -16,11 +16,17 @@ export interface IForesporsel {
   opprettet: string | null;
   samtykket: string | null;
   journalfoert: string | null;
+  erAlleOver15: boolean;
 }
 
-export interface IPerson {
+export interface IPerson extends IPersonAge {
   fornavn: string;
   fødselsdato: string;
+}
+
+export interface IPersonAge {
+  alder: number;
+  erOver15: boolean;
 }
 
 interface IMotpart {

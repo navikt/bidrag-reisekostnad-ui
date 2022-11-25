@@ -1,6 +1,8 @@
 import React, { createContext, PropsWithChildren, useState, useContext, useEffect } from "react";
-import { IBrukerinformasjon } from "../types/foresporsel";
+import { IBrukerinformasjon, IForesporsel, IPerson } from "../types/foresporsel";
 import brukerTestData from "../test-data/brukerinformasjon.json";
+import { calculateAge } from "../utils/dateUtils";
+import { isEveryoneOver15YearsOld, isAgeOver15YearsOld } from "../utils/personUtils";
 
 interface IReisekostnadContext {
   userInformation: IBrukerinformasjon | undefined;
@@ -13,13 +15,26 @@ function ReisekostnadProvider({ children }: PropsWithChildren) {
   const [userInformation, setUserInformation] = useState<IBrukerinformasjon | undefined>(undefined);
 
   const updateUserInformation = (user: IBrukerinformasjon) => {
+    const foresporslerSomMotpart =
+      process.env.NODE_ENV === "development"
+        ? brukerTestData.forespørslerSomMotpart
+        : user.forespørslerSomMotpart;
+
+    const forespørslerSomMotpartMedAlder = foresporslerSomMotpart.map((foresporsel) => ({
+      ...foresporsel,
+      barn: foresporsel.barn.map((person) => ({
+        ...person,
+        alder: calculateAge(person.fødselsdato),
+        erOver15: isAgeOver15YearsOld(person.fødselsdato),
+      })),
+      erAlleOver15: isEveryoneOver15YearsOld(foresporsel.barn as IPerson[]),
+    })) as unknown as IForesporsel[];
+
     user = {
       ...user,
-      forespørslerSomMotpart: [
-        ...user.forespørslerSomMotpart,
-        ...brukerTestData.forespørslerSomMotpart,
-      ],
+      forespørslerSomMotpart: [...forespørslerSomMotpartMedAlder],
     };
+    console.log(user);
     setUserInformation(user);
   };
 
