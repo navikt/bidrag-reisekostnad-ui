@@ -14,15 +14,16 @@ export interface IUserSession {
   fnr: string;
 }
 
-export async function getSession(req: NextApiRequest): Promise<ISession | null> {
+export async function getValidSession(req: NextApiRequest): Promise<ISession | null> {
     const token = tokenProvider.getToken(req)
     if (!token) return null
     const { payload } = await tokenProvider.verifyToken(token);
+    if (!payload?.pid) return null;
     return {
       token,
       user: {
-        sub: payload.sub as string,
-        fnr: payload.pid as string
+        sub: payload?.sub as string,
+        fnr: payload?.pid as string
       },
       expires_in: expiresIn(payload.exp!),
       getOBOToken: await oboToken(tokenProvider, token),
