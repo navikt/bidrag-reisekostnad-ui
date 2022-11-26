@@ -65,13 +65,13 @@ export default class TokenExchangeClient {
   async getToken(
       subject_token: string,
       audience: string
-  ): Promise<string | undefined> {
+  ): Promise<string | null> {
     try {
       const tokenset = await this.getClient().grant(
           this.grantBody(audience, subject_token),
           this.additionalClaims()
       );
-      return tokenset.access_token;
+      return tokenset.access_token ?? null;
     } catch (e) {
       if (e instanceof OPError) console.warn(e.message, e.response?.body || "");
       throw e;
