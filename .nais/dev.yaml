@@ -1,4 +1,3 @@
-
 ingresses:
   - "https://bidrag-reisekostnad.dev.nav.no"
 env:
@@ -7,6 +6,8 @@ env:
   DEKORATOR_ENV: dev
   BIDRAG_PERSON_SCOPE: "dev-fss:bidrag:bidrag-person-feature"
   BIDRAG_REISEKOSTNAD_API_SCOPE: "dev-gcp:bidrag:bidrag-reisekostnad-api"
+  REDIS_HOST: bidrag-reisekostnad-ui-redis.bidrag.svc.cluster.local
+  REDIS_PORT: 6379
 replicas:
   count: 1
 external:
