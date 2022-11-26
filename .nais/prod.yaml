@@ -7,3 +7,5 @@ env:
   DEKORATOR_ENV: prod
   BIDRAG_PERSON_SCOPE: "prod-fss:bidrag:bidrag-person"
   BIDRAG_REISEKOSTNAD_API_SCOPE: "prod-gcp:bidrag:bidrag-reisekostnad-api"
+replicas.count: 2
+external.decorator: dekoratoren.nav.no

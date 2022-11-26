@@ -5,7 +5,7 @@ on:
       - "**"
       - "!main"
 env:
-  "IMAGE": "ghcr.io/${{ github.repository }}:${{ github.sha }}"
+  IMAGE: "ghcr.io/${{ github.repository }}:${{ github.sha }}"
   NPM_TOKEN: ${{ secrets.READER_TOKEN }}
 
 jobs:
@@ -18,20 +18,20 @@ jobs:
         with:
           node-version: "18"
           registry-url: "https://npm.pkg.github.com"
-      - name: "Clean install of dependencies"
+      - name: Clean install of dependencies
         run: "npm ci"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-      - name: "Create an optimized production build of the application"
-        run: "npm run build"
-      - name: "Login to GitHub Docker Registry"
-        uses: "docker/login-action@v2"
+      - name: Create an optimized production build of the application
+        run: npm run build
+      - name: Login to GitHub Docker Registry
+        uses: docker/login-action@v2
         with:
-          "registry": "ghcr.io"
-          "username": "${{ github.actor }}"
-          "password": "${{ secrets.GITHUB_TOKEN }}"
-      - name: "Build and push the Docker image"
-        run: "docker build --pull --tag ${IMAGE} . && docker push ${IMAGE}"
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push the Docker image
+        run: docker build --pull --tag ${IMAGE} . && docker push ${IMAGE}
 
   deployAppToDev:
     name: "Deploy application to development"
@@ -39,10 +39,10 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
-      - name: "Deploy to DEV"
-        uses: "nais/deploy/actions/deploy@v1"
+      - name: Deploy to DEV
+        uses: nais/deploy/actions/deploy@v1
         env:
-          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
-          CLUSTER: "dev-gcp"
-          RESOURCE: ".nais/nais.yaml"
-          VARS: ".nais/dev.yaml"
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: .nais/nais.yaml,.nais/redis.yaml
+          VARS: .nais/dev.yaml

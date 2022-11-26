@@ -12,6 +12,13 @@ const nextConfig = {
 module.exports = (phase) => {
   const isDev = phase === PHASE_DEVELOPMENT_SERVER
   return {
+    webpack: (config) => {
+      // this will override the experiments
+      config.experiments = { ...config.experiments, ...{ topLevelAwait: true }};
+      // this will just update topLevelAwait property of config.experiments
+      // config.experiments.topLevelAwait = true
+      return config;
+    },
     env: {
       IS_DEVELOPMENT: isDev
     },

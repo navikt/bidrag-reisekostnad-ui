@@ -6,7 +6,7 @@ export interface ISession {
   token: string;
   user: IUserSession,
   expires_in: number,
-  getOBOToken: (audience: string)=>Promise<string|undefined>
+  getOBOToken: (audience: string)=>Promise<string|null>
 }
 
 export interface IUserSession {
@@ -25,7 +25,7 @@ export async function getSession(req: NextApiRequest): Promise<ISession | null> 
         fnr: payload.pid as string
       },
       expires_in: expiresIn(payload.exp!),
-      getOBOToken: oboToken(tokenProvider, token),
+      getOBOToken: await oboToken(tokenProvider, token),
     };
 }
 

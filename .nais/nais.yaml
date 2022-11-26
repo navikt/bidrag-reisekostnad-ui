@@ -6,9 +6,6 @@ metadata:
   labels:
     team: bidrag
     app: bidrag-reisekostnad-ui
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "64M"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
 spec:
   image: {{image}}
   port: 3000
@@ -23,20 +20,22 @@ spec:
     initialDelay: 20
     timeout: 60
   replicas:
-    min: 2
-    max: 2
+    min: {{replicas.count}}
+    max: {{replicas.count}}
     cpuThresholdPercentage: 50
   idporten:
     enabled: true
     sidecar:
       enabled: true
       autoLogin: true
+      autoLoginIgnorePaths:
+        - "/_next/static/*/*"
   tokenx:
     enabled: true
   accessPolicy:
     outbound:
       external:
-        - host: dev.dekoratoren.nav.no
+        - host: {{external.decorator}}
   resources:
     limits:
       cpu: 1000m
@@ -55,3 +54,7 @@ spec:
   {{/each}}
     - name: NPM_CONFIG_CACHE
       value: /tmp
+  secureLogs:
+    enabled: true
+  envFrom:
+    - secret: bidrag-reisekostnad-ui-redis-password
