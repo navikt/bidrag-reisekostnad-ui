@@ -21,7 +21,7 @@ module.exports = (phase) => {
     },
     env: {
       IS_DEVELOPMENT: isDev,
-      NODE_ENV: isDev ? "development" : "production"
+      IS_PRODUCTION: !isDev
     },
     ...nextConfig
   }
