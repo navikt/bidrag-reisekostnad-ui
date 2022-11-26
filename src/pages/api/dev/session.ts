@@ -1,20 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type {NextApiRequest, NextApiResponse} from 'next'
-import {getSession} from "../../../lib/security/session";
 import environment from "../../../environment";
+import {withSessionApiRoute} from "../../../lib/security/withSessionApiRoute";
 
-export default async function handler(
+
+export default withSessionApiRoute(handler)
+
+async function handler(
     req: NextApiRequest,
     res: NextApiResponse<string>
 ) {
-
-  const session = await getSession(req);
-  if (!session) return res.status(401).end();
-
-  if (!session?.user?.fnr) {
-    return res.status(401).end();
-  }
-
+  const session = req.session
   res.status(200).json(JSON.stringify({
     ...session.user,
     idporten_token: session.token,
