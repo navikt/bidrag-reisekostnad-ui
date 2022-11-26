@@ -1,6 +1,7 @@
 import { Client as OpenIdClient, errors, GrantBody, GrantExtras, Issuer } from "openid-client";
 import { JWK } from "jose/dist/types/types";
 import OPError = errors.OPError;
+import {logger} from "../../logging/logger";
 
 export type OboProvider = (
     subject_token: string,
@@ -73,7 +74,7 @@ export default class TokenExchangeClient {
       );
       return tokenset.access_token ?? null;
     } catch (e) {
-      if (e instanceof OPError) console.warn(e.message, e.response?.body || "");
+      if (e instanceof OPError) logger.warn(e.message, e.response?.body || "");
       throw e;
     }
   }

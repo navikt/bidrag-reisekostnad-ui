@@ -1,6 +1,5 @@
 import pino from 'pino';
 import fs from "fs"
-import environment from "../../environment";
 
 export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
     pino({
@@ -29,7 +28,7 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
 
 function getStreams(){
 
-  if (environment.system.isProduction){
+  if (process.env.NODE_ENV == "production"){
     return [{ stream: fs.createWriteStream("/secure-logs/secure.log") }]
   }
   return [{ stream: process.stdout }]

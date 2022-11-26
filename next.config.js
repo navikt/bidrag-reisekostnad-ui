@@ -20,7 +20,8 @@ module.exports = (phase) => {
       return config;
     },
     env: {
-      IS_DEVELOPMENT: isDev
+      IS_DEVELOPMENT: isDev,
+      NODE_ENV: isDev ? "development" : "production"
     },
     ...nextConfig
   }
