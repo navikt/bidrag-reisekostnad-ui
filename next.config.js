@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const {
   PHASE_DEVELOPMENT_SERVER,
+  PHASE_PRODUCTION_SERVER,
 } = require('next/constants')
 
 const nextConfig = {
@@ -11,6 +12,7 @@ const nextConfig = {
 
 module.exports = (phase) => {
   const isDev = phase === PHASE_DEVELOPMENT_SERVER
+  const isProd = phase === PHASE_PRODUCTION_SERVER
   return {
     webpack: (config) => {
       // this will override the experiments
@@ -21,7 +23,7 @@ module.exports = (phase) => {
     },
     env: {
       IS_DEVELOPMENT: isDev,
-      IS_PRODUCTION: !isDev
+      IS_PRODUCTION: isProd
     },
     ...nextConfig
   }

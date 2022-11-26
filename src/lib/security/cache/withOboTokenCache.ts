@@ -1,26 +1,8 @@
-import NodeCache from "node-cache";
 import { decodeJwt, JWTPayload } from "jose";
 import {OboProvider} from "../oboproviders/TokenExchangeClient";
 import {secondsUntil} from "../../time.util";
 import {logger} from "../../logging/logger";
-import environment from "../../../environment";
-import {createRedisInstance} from "./redis";
-import {getLocalCache} from "./localcache";
-import {TCache} from "./types";
-
-let cache: TCache;
-
-async function getCache() {
-  if (cache){
-    return cache
-  }
-  if (environment.redis.enabled){
-    return createRedisInstance();
-  }
-
-  return getLocalCache()
-}
-
+import cache from "../../cache/cache";
 const NO_CACHE_TTL = 0;
 
 function getSecondsToExpire(payload: JWTPayload) {
@@ -38,7 +20,6 @@ export async function withOboTokenCache(
     oboProvider: OboProvider,
     { expireOffsetInSeconds }: CacheOptions = {}
 ): Promise<OboProvider> {
-  const cache = await getCache();
 
   return async (token: string, audience: string) => {
     const key = `${token}-${audience}`;

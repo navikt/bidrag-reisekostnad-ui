@@ -10,6 +10,7 @@ export function getLocalCache(): TCache {
     set: async (key: string, value: string, ttlSeconds: number) => {
       cache.set(key, value, ttlSeconds)
       return Promise.resolve("OK")
-    }
+    },
+    isReady: ()=>true
   }
 }

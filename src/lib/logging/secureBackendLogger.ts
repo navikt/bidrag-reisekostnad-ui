@@ -28,7 +28,7 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
 
 function getStreams(){
 
-  if (process.env.IS_PRODUCTION == "true"){
+  if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "false"){
     return [{ stream: fs.createWriteStream("/secure-logs/secure.log") }]
   }
   return [{ stream: process.stdout }]

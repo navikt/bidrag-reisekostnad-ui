@@ -1,10 +1,10 @@
 import Redis, { RedisOptions } from 'ioredis';
-import environment from "../../../environment";
-import {logger} from "../../logging/logger";
-import memoize from "lodash.memoize";
 import {TCache} from "./types";
+import environment from "../../environment";
+import {logger} from "../logging/logger";
 
-export const createRedisInstance: ()=>TCache = memoize(() =>{
+export const createRedisInstance: ()=>TCache = () =>{
+  logger.info("Creating redis instance")
   try {
     const options: RedisOptions = {
       host: environment.redis.host,
@@ -31,11 +31,16 @@ export const createRedisInstance: ()=>TCache = memoize(() =>{
       logger.warn('[Redis] Error connecting', error);
     });
 
+    redis.on("ready", () => {
+      logger.info("Redis cache initialized")
+    })
+
     return {
       get: (key: string) => redis.get(key),
-      set: (key: string, value: string, ttlSeconds: number) => redis.set(key, value, "EX", ttlSeconds)
-    };
+      set: (key: string, value: string, ttlSeconds: number) => redis.set(key, value, "EX", ttlSeconds),
+      isReady: () => redis.status == "ready"
+    }
   } catch (e) {
     throw new Error(`[Redis] Could not create a Redis instance`);
   }
-})
+}
