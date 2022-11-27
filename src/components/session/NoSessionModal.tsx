@@ -4,22 +4,22 @@ import React, { useEffect, useState } from "react";
 import styles from "./NoSessionModal.module.css";
 import { WarningColored } from "@navikt/ds-icons";
 import useSWR from "swr";
-import {ISessionData} from "../../pages/api/auth/session";
-import {fetcher} from "../../lib/api.utils";
-import {useCountdown} from "../hooks/useCountdown";
+import { ISessionData } from "../../pages/api/auth/session";
+import { useCountdown } from "../hooks/useCountdown";
+import { fetcher } from "../../utils/apiUtils";
 
 export function NoSessionModal() {
   const router = useRouter();
   const { data: session, error: isError } = useSWR<ISessionData>("/api/auth/session", fetcher);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const isLoading = !isError && !session
+  const isLoading = !isError && !session;
 
-  const hasExpired = useCountdown(session?.expiresIn ?? 1000)
+  const hasExpired = useCountdown(session?.expiresIn ?? 1000);
 
-  useEffect(()=>{
-    setModalOpen(hasExpired)
-  }, [])
+  useEffect(() => {
+    setModalOpen(hasExpired);
+  }, []);
 
   useEffect(() => {
     if (Modal.setAppElement) {
@@ -32,9 +32,8 @@ export function NoSessionModal() {
       if (!session || isError) {
         setModalOpen(true);
       } else {
-        setModalOpen(false)
+        setModalOpen(false);
       }
-
     }
   }, [session, isLoading, isError]);
 
@@ -43,34 +42,32 @@ export function NoSessionModal() {
   }
 
   return (
-      <Modal
-          className="modal-container modal-container--error"
-          onClose={() => {
-            return;
-          }}
-          open={modalOpen}
-          closeButton={false}
-          shouldCloseOnOverlayClick={false}
-      >
-        <Modal.Content>
-          <div className={styles.iconContainer}>
-            <WarningColored className={styles.icon} />
-          </div>
-          <Heading size={"medium"} spacing>
-            Du er i ferd med å logge ut
-          </Heading>
-          <p>
-            Sesjonen din har utløpt, og du må logge inn med BankID på nytt for å fortsette.
-          </p>
-          <div className={styles.actionButtonsContainer}>
-            <Button variant="primary" onClick={login}>
-              Logg inn på nytt
-            </Button>
-            <Button variant="tertiary" onClick={() => router.push("https://nav.no/")}>
-              Gå til forsiden
-            </Button>
-          </div>
-        </Modal.Content>
-      </Modal>
+    <Modal
+      className="modal-container modal-container--error"
+      onClose={() => {
+        return;
+      }}
+      open={modalOpen}
+      closeButton={false}
+      shouldCloseOnOverlayClick={false}
+    >
+      <Modal.Content>
+        <div className={styles.iconContainer}>
+          <WarningColored className={styles.icon} />
+        </div>
+        <Heading size={"medium"} spacing>
+          Du er i ferd med å logge ut
+        </Heading>
+        <p>Sesjonen din har utløpt, og du må logge inn med BankID på nytt for å fortsette.</p>
+        <div className={styles.actionButtonsContainer}>
+          <Button variant="primary" onClick={login}>
+            Logg inn på nytt
+          </Button>
+          <Button variant="tertiary" onClick={() => router.push("https://nav.no/")}>
+            Gå til forsiden
+          </Button>
+        </div>
+      </Modal.Content>
+    </Modal>
   );
 }

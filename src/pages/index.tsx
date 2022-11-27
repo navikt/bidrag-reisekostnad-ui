@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useReisekostnad } from "../context/reisekostnadContext";
 import { fetcher } from "../utils/apiUtils";
 import { Loader } from "@navikt/ds-react";
+import { logger } from "../lib/logging/logger";
 
 export default function Home() {
   const { data, error } = useSWR("/api/brukerinformasjon", fetcher);
@@ -11,6 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     if (data) {
+      logger.info("Lastet informasjon om bruker " + data.brukersFornavn);
       updateUserInformation(data);
     }
   }, [data]);
