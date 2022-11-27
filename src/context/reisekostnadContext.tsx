@@ -1,6 +1,5 @@
 import React, { createContext, PropsWithChildren, useState, useContext, useEffect } from "react";
 import { IBrukerinformasjon, IForesporsel, IPerson } from "../types/foresporsel";
-import brukerTestData from "../test-data/brukerinformasjon.json";
 import { calculateAge } from "../utils/dateUtils";
 import { isEveryoneOver15YearsOld, isAgeOver15YearsOld } from "../utils/personUtils";
 
@@ -15,10 +14,7 @@ function ReisekostnadProvider({ children }: PropsWithChildren) {
   const [userInformation, setUserInformation] = useState<IBrukerinformasjon | undefined>(undefined);
 
   const updateUserInformation = (user: IBrukerinformasjon) => {
-    const foresporslerSomMotpart =
-      process.env.NODE_ENV === "development"
-        ? brukerTestData.forespørslerSomMotpart
-        : user.forespørslerSomMotpart;
+    const foresporslerSomMotpart = user.forespørslerSomMotpart;
 
     const forespørslerSomMotpartMedAlder = foresporslerSomMotpart.map((foresporsel) => ({
       ...foresporsel,
