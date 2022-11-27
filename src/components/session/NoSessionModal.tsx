@@ -15,27 +15,20 @@ export function NoSessionModal() {
 
   const isLoading = !isError && !session;
 
+  const isProduction = process.env.NEXT_PUBLIC_IS_PRODUCTION == "true";
   const hasExpired = useCountdown(session?.expiresIn ?? 1000);
-
-  useEffect(() => {
-    setModalOpen(hasExpired);
-  }, []);
 
   useEffect(() => {
     if (Modal.setAppElement) {
       Modal.setAppElement("#__next");
     }
 
-    if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "false") {
+    if (isProduction) {
       if (isLoading) return;
 
-      if (!session || isError) {
-        setModalOpen(true);
-      } else {
-        setModalOpen(false);
-      }
+      setModalOpen(!session || isError || hasExpired);
     }
-  }, [session, isLoading, isError]);
+  }, [session, isLoading, isError, hasExpired]);
 
   function login() {
     window.location.reload();
