@@ -15,7 +15,11 @@ export function NoSessionModal() {
 
   const isLoading = !isError && !session
 
-  useCountdown(session?.expiresIn ?? 1, ()=>setModalOpen(true))
+  const hasExpired = useCountdown(session?.expiresIn ?? 1000)
+
+  useEffect(()=>{
+    setModalOpen(hasExpired)
+  }, [])
 
   useEffect(() => {
     if (Modal.setAppElement) {

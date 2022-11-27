@@ -1,22 +1,24 @@
 import {useEffect} from "react";
 import {useState} from "react";
 
+export const useCountdown = (_timeLeft: number) => {
+  const [timeLeft, setTimeLeft] = useState<number | undefined>(_timeLeft);
 
-export const useCountdown = (countfrom: number, onCountdownFinished: () => void) => {
-  const [timeLeft, setTimeLeft] = useState<number | undefined>(countfrom);
+
+  useEffect(()=>{
+    setTimeLeft(_timeLeft)
+  }, [_timeLeft])
 
   useEffect(() => {
 
     if (!timeLeft) return;
 
-    if (timeLeft === 1) {
-      onCountdownFinished();
-    }
-
     const intervalId = setInterval(() => {
-      setTimeLeft(timeLeft - 1);
+      setTimeLeft(Math.max(0, timeLeft - 1));
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, [timeLeft]);
+
+  return timeLeft === 0
 }
