@@ -9,7 +9,7 @@ export default function TokenInput(): ReactElement | null {
   const [idToken, setIdToken] = useState<string>();
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  const isDevelopment = process.env.IS_DEVELOPMENT
+  const isDevelopment = process.env.NEXT_PUBLIC_IS_PRODUCTION !== "true"
   if (!isDevelopment || !isOpen) {
     return null;
   }

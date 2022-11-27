@@ -1,11 +1,12 @@
 import { Client as OpenIdClient, errors, GrantBody, GrantExtras, Issuer } from "openid-client";
 import { JWK } from "jose/dist/types/types";
 import OPError = errors.OPError;
+import { logger } from "../../logging/logger";
 
-export type GetToken = (subject_token: string, audience: string) => Promise<string | undefined>;
+export type OboProvider = (subject_token: string, audience: string) => Promise<string | null>;
 
 export interface ITokenIssuer {
-  exchangeToken: () => GetToken;
+  exchangeToken: () => OboProvider;
 }
 
 export interface IClientConfig {
@@ -58,15 +59,15 @@ export default class TokenExchangeClient {
     };
   }
 
-  async getToken(subject_token: string, audience: string): Promise<string | undefined> {
+  async getToken(subject_token: string, audience: string): Promise<string | null> {
     try {
       const tokenset = await this.getClient().grant(
         this.grantBody(audience, subject_token),
         this.additionalClaims()
       );
-      return tokenset.access_token;
+      return tokenset.access_token ?? null;
     } catch (e) {
-      if (e instanceof OPError) console.warn(e.message, e.response?.body || "");
+      if (e instanceof OPError) logger.warn(e.message, e.response?.body || "");
       throw e;
     }
   }
