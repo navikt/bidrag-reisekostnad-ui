@@ -9,7 +9,7 @@ export interface ITokenIssuer {
   exchangeToken: () => OboProvider;
 }
 
-export interface ClientConfig {
+export interface IClientConfig {
   issuer: string;
   tokenEndpoint: string;
   clientId: string;
@@ -17,9 +17,9 @@ export interface ClientConfig {
 }
 
 export default class TokenExchangeClient {
-  protected _config: ClientConfig;
+  protected _config: IClientConfig;
 
-  constructor(config: ClientConfig) {
+  constructor(config: IClientConfig) {
     this._config = config;
   }
 
