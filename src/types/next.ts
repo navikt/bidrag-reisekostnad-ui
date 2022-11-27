@@ -1,8 +1,6 @@
-import {ISession} from "../lib/security/session";
+import { ISession } from "../lib/security/session";
 
-export default function getPropertyDescriptorForReqSession(
-    session: ISession,
-): PropertyDescriptor {
+export default function getPropertyDescriptorForReqSession(session: ISession): PropertyDescriptor {
   return {
     enumerable: true,
     get() {
