@@ -26,7 +26,7 @@ export function NoSessionModal() {
       Modal.setAppElement("#__next");
     }
 
-    if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "true") {
+    if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "false") {
       if (isLoading) return;
 
       if (!session || isError) {
@@ -58,7 +58,8 @@ export function NoSessionModal() {
         <Heading size={"medium"} spacing>
           Du er i ferd med å logge ut
         </Heading>
-        <p>Sesjonen din har utløpt, og du må logge inn med BankID på nytt for å fortsette.</p>
+        <p>Sesjonen din har utløpt og du må logge inn på nytt for å fortsette.</p>
+        <p>Merk at du vil miste dine ulagrede endringer etter innlogging.</p>
         <div className={styles.actionButtonsContainer}>
           <Button variant="primary" onClick={login}>
             Logg inn på nytt
