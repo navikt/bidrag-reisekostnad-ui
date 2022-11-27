@@ -20,6 +20,7 @@ export interface IForesporsel {
 }
 
 export interface IPerson extends IPersonAge {
+  ident: string;
   fornavn: string;
   fødselsdato: string;
 }
@@ -36,5 +37,5 @@ interface IMotpart {
 
 interface IMotpart {
   motpart: IPerson;
-  fellesBarnUnder15Aar: IPerson[];
+  fellesBarnUnder15År: IPerson[];
 }
