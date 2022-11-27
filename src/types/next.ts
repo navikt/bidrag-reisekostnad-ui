@@ -14,13 +14,13 @@ export default function getPropertyDescriptorForReqSession(
 
       currentKeys.forEach((key) => {
         if (!keys.includes(key)) {
-          // @ts-ignore See comment in IronSessionData interface
+          // @ts-ignore
           delete session[key];
         }
       });
 
       keys.forEach((key) => {
-        // @ts-ignore See comment in IronSessionData interface
+        // @ts-ignore
         session[key] = value[key];
       });
     },
