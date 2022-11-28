@@ -1,13 +1,13 @@
 import Overview from "../views/overview/Overview";
 import { useEffect } from "react";
 import { useReisekostnad } from "../context/reisekostnadContext";
-import { fetcher } from "../utils/apiUtils";
 import { Loader } from "@navikt/ds-react";
 import useSWRImmutable from "swr/immutable";
-import {logger} from "../lib/logging/logger";
+import { logger } from "../lib/logging/logger";
+import { IBrukerinformasjon } from "../types/foresporsel";
 
 export default function Home() {
-  const { data, error } = useSWRImmutable("/api/brukerinformasjon", fetcher);
+  const { data, error } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
   const { updateUserInformation } = useReisekostnad();
 
   useEffect(() => {
