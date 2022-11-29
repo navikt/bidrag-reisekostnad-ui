@@ -12,7 +12,7 @@ export default function Overview({ name }: { name: string }) {
     return null;
   }
 
-  const { forespørslerSomMotpart } = userInformation;
+  const { forespørslerSomMotpart, forespørslerSomHovedpart } = userInformation;
 
   return (
     <>
@@ -36,14 +36,24 @@ export default function Overview({ name }: { name: string }) {
               <div className="w-full flex flex-col gap-5">
                 {forespørslerSomMotpart && (
                   <Heading level="2" size="small">
-                    Oversikt
+                    Sendt til deg:
                   </Heading>
                 )}
-                {forespørslerSomMotpart?.map((request, index) => {
+                {forespørslerSomMotpart.map((request, index) => {
                   return <OverviewCard key={index} foresporsel={request} />;
                 })}
               </div>
             </>
+          )}
+          {forespørslerSomHovedpart.length > 0 && (
+            <div className="w-full flex flex-col gap-5">
+              <Heading level="2" size="small">
+                Sendt fra deg:
+              </Heading>
+              {forespørslerSomHovedpart.map((request, index) => {
+                return <OverviewCard key={index} foresporsel={request} />;
+              })}
+            </div>
           )}
         </div>
         <Link href="/foresporsel">
