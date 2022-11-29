@@ -5,7 +5,7 @@ import OverviewCard from "../../components/card/overview-card/OverviewCard";
 import { PageMeta } from "../../components/page-meta/PageMeta";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 
-export default function Overview({ name }: { name: string }) {
+export default function Overview() {
   const { userInformation } = useReisekostnad();
 
   if (!userInformation) {
@@ -19,15 +19,21 @@ export default function Overview({ name }: { name: string }) {
       <PageMeta title="Oversikt" />
       <div className="flex flex-col gap-5">
         <div className="w-full flex flex-col gap-10 items-center">
-          {/* TODO mangler kjønn */}
-          <GreetingCard name={name} gender={"kvinne"} />
+          <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
           {forespørslerSomMotpart.length > 0 && (
             <>
               <div className="flex flex-col gap-6">
                 {/* TODO: MIDLERTIDIG LØSNING. TEKSTEN ER VELDIG SPESIFIKK MOT EN MOTPART, MEN EN PERSON KAN FÅ FORESØPLER FRA FLERE FORSKJELLIGE MOTPART */}
                 <BodyShort>
                   {forespørslerSomMotpart[0].hovedpart.fornavn} har sendt en forerspørsel om
-                  fordeling av reisekostnader for Barn 1, dd.mm.yyyy til deg.
+                  fordeling av reisekostnader for
+                  {forespørslerSomMotpart[0].barn.map((person, i) => {
+                    return (
+                      <p key={i}>
+                        {person.fornavn}, {person.fødselsdato}
+                      </p>
+                    );
+                  })}
                 </BodyShort>
                 <BodyShort>
                   Det trenges ditt samtykke, slik at NAV kan behandle den videre.

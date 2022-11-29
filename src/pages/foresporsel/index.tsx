@@ -48,8 +48,7 @@ export default function Foresporsel() {
       <div className="flex flex-col gap-10 items-center">
         {!showStep2 && (
           <>
-            {/* TODO mangler kjønn */}
-            <GreetingCard name={userInformation?.brukersFornavn} gender={"kvinne"} />
+            <GreetingCard name={userInformation?.fornavn} gender={userInformation.kjønn} />
             <BodyShort>Dine rettigheter og plikter?</BodyShort>
             <ConfirmationPanel
               size="small"

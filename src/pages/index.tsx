@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     if (data) {
-      logger.info("Lastet informasjon om bruker " + data.brukersFornavn);
+      logger.info("Lastet informasjon om bruker " + data.fornavn);
       updateUserInformation(data);
     }
   }, [data]);
@@ -26,5 +26,5 @@ export default function Home() {
       </div>
     );
 
-  return <Overview name={data.brukersFornavn} />;
+  return <Overview />;
 }

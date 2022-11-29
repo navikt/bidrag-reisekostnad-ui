@@ -1,5 +1,9 @@
+import { Gender } from "../enum/gender";
+
 export interface IBrukerinformasjon {
-  brukersFornavn: string;
+  fornavn: string;
+  kjønn: Gender;
+  harDiskresjon: boolean;
   kanSøkeOmFordelingAvReisekostnader: boolean;
   forespørslerSomHovedpart: IForesporsel[];
   forespørslerSomMotpart: IForesporsel[];

@@ -33,37 +33,43 @@ export default function ForesporselVelgBarn() {
   }
 
   return (
-    <div className="grid gap-10">
+    <div className="w-full grid gap-10">
       <Stepper header="Barn" step="1">
         {activeStep === 1 && (
-          <div>
+          <div className="w-full grid gap-5">
             <CheckboxGroup
               legend="Velg barn søknaden gjelder for."
               onChange={(val: any[]) => handleChange(val)}
             >
-              {allBarn?.map((barn) => {
-                return <Checkbox value={barn.ident}>{getBarnInformationText(barn)}</Checkbox>;
+              {allBarn?.map((barn, i) => {
+                return (
+                  <Checkbox key={i} value={barn.ident}>
+                    {getBarnInformationText(barn)}
+                  </Checkbox>
+                );
               })}
             </CheckboxGroup>
             {foundPersonOver15 && (
-              <Alert variant="info">
+              <Alert variant="info" className="w-[80%]">
                 Motparten trenger ikke å samtykke til behandling for barn over 15. Det betyr at
                 søknaden skal automatisk gå til NAV. Motparten skal informeres om dette.
               </Alert>
             )}
-            <Button onClick={() => onStepChange(2)}>NESTE</Button>
-            <Link href="/" className="no-underline">
-              <Button type="button" variant="secondary">
-                AVBRYT
-              </Button>
-            </Link>
+            <div className="flex gap-5">
+              <Button onClick={() => onStepChange(2)}>NESTE</Button>
+              <Link href="/" className="no-underline">
+                <Button type="button" variant="secondary">
+                  AVBRYT
+                </Button>
+              </Link>
+            </div>
           </div>
         )}
         {activeStep === 2 && (
-          <div className="grid grid-cols-2 justify-start">
+          <div className="w-full grid grid-cols-2 justify-start">
             <div className="flex flex-col gap-5">
-              {allBarn?.map((barn) => {
-                return <span>{getBarnInformationText(barn)}</span>;
+              {allBarn?.map((barn, i) => {
+                return <span key={i}>{getBarnInformationText(barn)}</span>;
               })}
             </div>
             <Button
@@ -80,10 +86,10 @@ export default function ForesporselVelgBarn() {
       </Stepper>
       <Stepper header="Oppsummering/ Innsending" step="2">
         {activeStep === 2 && (
-          <div className="flex flex-col gap-5">
+          <div className="w-full flex flex-col gap-5">
             <span>Jeg ønsker at NAV skal behandle fordeling av reisekostnader for barn</span>
-            {allBarn?.map((barn) => {
-              return <b>{getBarnInformationText(barn)}</b>;
+            {allBarn?.map((barn, i) => {
+              return <b key={i}>{getBarnInformationText(barn)}</b>;
             })}
             <ConfirmationPanel
               checked={checked}
@@ -92,7 +98,7 @@ export default function ForesporselVelgBarn() {
               size="small"
               className="w-[60%]"
             ></ConfirmationPanel>
-            <div>
+            <div className="flex gap-5">
               <Button onClick={() => onStepChange(2)}>NESTE</Button>
               <Link href="/" className="no-underline">
                 <Button type="button" variant="secondary">
