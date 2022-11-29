@@ -34,8 +34,3 @@ interface IMotpart {
   motpart: IPerson;
   fellesBarnUnder15År: IPerson[];
 }
-
-interface IMotpart {
-  motpart: IPerson;
-  fellesBarnUnder15År: IPerson[];
-}

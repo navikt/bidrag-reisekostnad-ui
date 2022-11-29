@@ -12,3 +12,7 @@ export function isAgeOver15YearsOld(fodselsdato: string): boolean {
 export function isEveryoneOver15YearsOld(person: IPerson[]): boolean {
   return person.every((i) => isAgeOver15YearsOld(i.fødselsdato));
 }
+
+export function mapToPersonWithAge(person: IPerson[]): IPerson[] {
+  return person.map((p) => ({ ...p, alder: calculateAge(p.fødselsdato) }));
+}

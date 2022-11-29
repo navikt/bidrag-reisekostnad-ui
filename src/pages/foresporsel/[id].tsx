@@ -1,32 +1,53 @@
 import { useEffect, useState } from "react";
 import SamtykkeConfirmationContainer from "../../views/samtykke/samtykke-confirmation-container/SamtykkeConfirmationContainer";
 import SamtykkeContainer from "../../views/samtykke/samtykke-container/SamtykkeContainer";
-import { useReisekostnad } from "../../context/reisekostnadContext";
 import { useRouter } from "next/router";
 import { getBarnInformationText } from "../../utils/stringUtils";
-import { IForesporsel } from "../../types/foresporsel";
+import { IBrukerinformasjon, IForesporsel } from "../../types/foresporsel";
+import useSWRImmutable from "swr/immutable";
+import { Loader } from "@navikt/ds-react";
+import { useReisekostnad } from "../../context/reisekostnadContext";
 
 export default function ForesporselId() {
   const router = useRouter();
   const foresporselId = router.query.id as string;
   const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
   const [foresporsel, setForesporsel] = useState<IForesporsel>();
-  const { userInformation } = useReisekostnad();
+
+  const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
+  const { userInformation, updateUserInformation } = useReisekostnad();
+
+  useEffect(() => {
+    if (data) {
+      updateUserInformation(data);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (foresporselId && userInformation) {
       const foresporselSomMotpart = userInformation.forespørslerSomMotpart.find(
         (item) => item.idForespørsel === Number(foresporselId)
       );
-
       if (foresporselSomMotpart) {
         setForesporsel(foresporselSomMotpart);
         setShowConfirmPage(foresporselSomMotpart.erAlleOver15);
+      } else {
+        const foresporslerSomHovedpart = userInformation.forespørslerSomHovedpart.find(
+          (item) => item.idForespørsel === Number(foresporselId)
+        );
+        setForesporsel(foresporslerSomHovedpart);
+        setShowConfirmPage(!!foresporslerSomHovedpart);
       }
     }
   }, [foresporselId]);
 
-  if (!userInformation || !foresporselId || !foresporsel) {
+  if (!userInformation) {
+    <div className="w-full flex flex-col items-center">
+      <Loader size="3xlarge" title="venter..." variant="interaction" />
+    </div>;
+  }
+
+  if (!foresporselId || !foresporsel) {
     return null;
   }
 
