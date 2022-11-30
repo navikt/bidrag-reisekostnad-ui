@@ -18,30 +18,22 @@ export default function Overview() {
     <>
       <PageMeta title="Oversikt" />
       <div className="flex flex-col gap-5">
-        <div className="w-full flex flex-col gap-10 items-center">
+        <div className="w-full flex flex-col gap-10">
           <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
+          <BodyShort>
+            {/* TODO: ENDRE PÅ TEKSTEN */}
+            {forespørslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0
+              ? "Du har ingen forespørsel å vise"
+              : "Her finner du oversikt over forerspørsel om reisekostander du har sendt inn. + noe om at du har mopttatt"}
+          </BodyShort>
+          <Link href="/foresporsel">
+            <Button type="button">Opprett en ny fordeling av reisekostnader</Button>
+          </Link>
           {forespørslerSomMotpart.length > 0 && (
             <>
-              <div className="flex flex-col gap-6">
-                {/* TODO: MIDLERTIDIG LØSNING. TEKSTEN ER VELDIG SPESIFIKK MOT EN MOTPART, MEN EN PERSON KAN FÅ FORESØPLER FRA FLERE FORSKJELLIGE MOTPART */}
-                <BodyShort>
-                  {forespørslerSomMotpart[0].hovedpart.fornavn} har sendt en forerspørsel om
-                  fordeling av reisekostnader for
-                  {forespørslerSomMotpart[0].barn.map((person, i) => {
-                    return (
-                      <p key={i}>
-                        {person.fornavn}, {person.fødselsdato}
-                      </p>
-                    );
-                  })}
-                </BodyShort>
-                <BodyShort>
-                  Det trenges ditt samtykke, slik at NAV kan behandle den videre.
-                </BodyShort>
-              </div>
               <div className="w-full flex flex-col gap-5">
                 {forespørslerSomMotpart && (
-                  <Heading level="2" size="small">
+                  <Heading level="1" size="small">
                     Sendt til deg:
                   </Heading>
                 )}
@@ -53,7 +45,7 @@ export default function Overview() {
           )}
           {forespørslerSomHovedpart.length > 0 && (
             <div className="w-full flex flex-col gap-5">
-              <Heading level="2" size="small">
+              <Heading level="1" size="small">
                 Sendt fra deg:
               </Heading>
               {forespørslerSomHovedpart.map((request, index) => {
@@ -62,9 +54,6 @@ export default function Overview() {
             </div>
           )}
         </div>
-        <Link href="/foresporsel">
-          <Button>Opprett en ny fordeling av reisekostnader</Button>
-        </Link>
       </div>
     </>
   );
