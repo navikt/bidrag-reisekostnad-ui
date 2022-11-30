@@ -12,7 +12,7 @@ import { useReisekostnad } from "../../context/reisekostnadContext";
 export default function Foresporsel() {
   const [isAgree, setIsAgree] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
-  const [showStep2, setShowStep2] = useState<boolean>(false);
+  const [showNextStep, setShowNextStep] = useState<boolean>(false);
   const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
   const { userInformation, updateUserInformation } = useReisekostnad();
 
@@ -28,11 +28,7 @@ export default function Foresporsel() {
 
   function onClick() {
     setShowError(!isAgree);
-    if (isAgree) {
-      setShowStep2(true);
-    } else {
-      setShowStep2(false);
-    }
+    setShowNextStep(isAgree);
   }
 
   function onConfirm() {
@@ -45,34 +41,32 @@ export default function Foresporsel() {
   return (
     <>
       <PageMeta title="Sende forespørsel" />
-      <div className="flex flex-col gap-10 items-center">
-        {!showStep2 && (
-          <>
-            <GreetingCard name={userInformation?.fornavn} gender={userInformation.kjønn} />
-            <BodyShort>Dine rettigheter og plikter?</BodyShort>
-            <ConfirmationPanel
-              size="small"
-              checked={isAgree}
-              label="Jeg har lest og forstått...."
-              onChange={onConfirm}
-              error={showError && MAA_SAMTYKKE}
-            ></ConfirmationPanel>
-            <div className="w-[15rem] flex justify-between">
-              <Button onClick={onClick}>NESTE</Button>
-              <Link href="/" className="no-underline">
-                <Button type="button" variant="secondary">
-                  AVBRYT
-                </Button>
-              </Link>
-            </div>
-            <Link href="https://www.nav.no/soknader/nb/person/familie/foreldrepenger-og-engangsstonad#NAV140507">
-              Les om hvordan NAV behandler personopplysningene dine.
+      {!showNextStep && (
+        <div className="w-full flex flex-col items-center  gap-10">
+          <GreetingCard name={userInformation?.fornavn} gender={userInformation.kjønn} />
+          <BodyShort>Dine rettigheter og plikter?</BodyShort>
+          <ConfirmationPanel
+            size="small"
+            checked={isAgree}
+            label="Jeg har lest og forstått...."
+            onChange={onConfirm}
+            error={showError && MAA_SAMTYKKE}
+          ></ConfirmationPanel>
+          <div className="w-[15rem] flex justify-between">
+            <Button onClick={onClick}>NESTE</Button>
+            <Link href="/" className="no-underline">
+              <Button type="button" variant="secondary">
+                AVBRYT
+              </Button>
             </Link>
-          </>
-        )}
+          </div>
+          <Link href="https://www.nav.no/soknader/nb/person/familie/foreldrepenger-og-engangsstonad#NAV140507">
+            Les om hvordan NAV behandler personopplysningene dine.
+          </Link>
+        </div>
+      )}
 
-        {showStep2 && <ForesporselVelgBarn />}
-      </div>
+      {showNextStep && <ForesporselVelgBarn />}
     </>
   );
 }

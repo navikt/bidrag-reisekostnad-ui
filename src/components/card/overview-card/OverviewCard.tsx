@@ -1,35 +1,17 @@
 import { Next } from "@navikt/ds-icons";
-import { LinkPanel, Panel, Tag } from "@navikt/ds-react";
+import { LinkPanel, Panel } from "@navikt/ds-react";
 import Link from "next/link";
 import { IForesporsel } from "../../../types/foresporsel";
 import { getBarnInformationText } from "../../../utils/stringUtils";
 import BarnOver15Alert from "../../alert/barn-over-15-alert/BarnOver15Alert";
+import StatusBar from "../../status-bar/StatusBar";
 
 interface IOverviewCardProps {
   foresporsel: IForesporsel;
 }
-interface IStatusProps {
-  isOver15: boolean;
-}
-
-function Status({ isOver15 }: IStatusProps) {
-  if (isOver15) {
-    return (
-      <Tag variant="success" size="small" className="mt-3">
-        Automatisk sendt inn til NAV
-      </Tag>
-    );
-  }
-
-  return (
-    <Tag variant="warning" size="small" className="mt-3">
-      Venter på signering
-    </Tag>
-  );
-}
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { idForespørsel, hovedpart, barn, erAlleOver15 } = foresporsel;
+  const { idForespørsel, hovedpart, barn, erAlleOver15, status } = foresporsel;
 
   return (
     <Panel className="navds-link-panel cursor-pointer" border>
@@ -54,7 +36,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
             </div>
           </LinkPanel.Description>
         </Link>
-        <Status isOver15={erAlleOver15} />
+        <StatusBar status={status} />
         <BarnOver15Alert barn={barn} />
       </div>
       <Next className="navds-link-panel__chevron" aria-hidden />

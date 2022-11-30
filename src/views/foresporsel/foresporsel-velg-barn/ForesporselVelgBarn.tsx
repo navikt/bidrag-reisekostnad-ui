@@ -1,114 +1,82 @@
-import { Alert, Button, Checkbox, CheckboxGroup, ConfirmationPanel, Link } from "@navikt/ds-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { IPerson } from "../../../types/foresporsel";
-import { getBarnInformationText } from "../../../utils/stringUtils";
-import Stepper from "../../../components/stepper/stepper";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
+import BarnContainer from "./barn-container/BarnContainer";
+import OppsummeringContainer from "./oppsummering-container/OppsummeringContainer";
+import { Button } from "@navikt/ds-react";
+import Link from "next/link";
 
 export default function ForesporselVelgBarn() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
-  const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>();
-  const [activeStep, setActiveStep] = useState<number>(1);
-  const [checked, setChecked] = useState<boolean>(false);
+  const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
+  const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
+  const [samtykke, setSamtykke] = useState<boolean>(false);
+  const [showBarnError, setShowBarnError] = useState<boolean>(false);
+  const [showSamtykkeError, setShowSamtykkeError] = useState<boolean>(false);
   const { userInformation } = useReisekostnad();
 
   useEffect(() => {
     if (userInformation) {
       const { barnMinstFemtenÅr, motparterMedFellesBarnUnderFemtenÅr } = userInformation;
-      const fellesBarnUnder15År = motparterMedFellesBarnUnderFemtenÅr.flatMap(
+      const fellesBarnUnder15Aar = motparterMedFellesBarnUnderFemtenÅr.flatMap(
         (barn) => barn.fellesBarnUnder15År
       );
-      setAllBarn([...barnMinstFemtenÅr, ...fellesBarnUnder15År]);
-      setFoundPersonOver15(fellesBarnUnder15År.length > 0);
+
+      setAllBarn([...barnMinstFemtenÅr, ...fellesBarnUnder15Aar]);
+      setFoundPersonOver15(fellesBarnUnder15Aar.length > 0);
     }
   }, [userInformation]);
 
-  function handleChange(val: any[]) {
-    console.log("val", val);
+  if (!allBarn) {
+    return null;
   }
 
-  function onStepChange(step: number) {
-    setActiveStep(step);
+  function onSelectBarn(selectedIdents: string[]) {
+    if (showBarnError) {
+      setShowBarnError(false);
+    }
+
+    setSelectedBarn(selectedIdents);
+  }
+
+  function onSubmit() {
+    setShowBarnError(selectedBarn.length === 0);
+    setShowSamtykkeError(!samtykke);
+    if (!showBarnError && !showSamtykkeError) {
+      // TODO: send forespørsel til backend
+    }
+  }
+
+  function onSamtykke(checked: boolean) {
+    if (showSamtykkeError) {
+      setShowSamtykkeError(false);
+    }
+
+    setSamtykke(checked);
   }
 
   return (
     <div className="w-full grid gap-10">
-      <Stepper header="Barn" step="1">
-        {activeStep === 1 && (
-          <div className="w-full grid gap-5">
-            <CheckboxGroup
-              legend="Velg barn søknaden gjelder for."
-              onChange={(val: any[]) => handleChange(val)}
-            >
-              {allBarn?.map((barn, i) => {
-                return (
-                  <Checkbox key={i} value={barn.ident}>
-                    {getBarnInformationText(barn)}
-                  </Checkbox>
-                );
-              })}
-            </CheckboxGroup>
-            {foundPersonOver15 && (
-              <Alert variant="info" className="w-[80%]">
-                Motparten trenger ikke å samtykke til behandling for barn over 15. Det betyr at
-                søknaden skal automatisk gå til NAV. Motparten skal informeres om dette.
-              </Alert>
-            )}
-            <div className="flex gap-5">
-              <Button onClick={() => onStepChange(2)}>NESTE</Button>
-              <Link href="/" className="no-underline">
-                <Button type="button" variant="secondary">
-                  AVBRYT
-                </Button>
-              </Link>
-            </div>
-          </div>
-        )}
-        {activeStep === 2 && (
-          <div className="w-full grid grid-cols-2 justify-start">
-            <div className="flex flex-col gap-5">
-              {allBarn?.map((barn, i) => {
-                return <span key={i}>{getBarnInformationText(barn)}</span>;
-              })}
-            </div>
-            <Button
-              type="button"
-              variant="tertiary"
-              size="xsmall"
-              className="hover:bg-transparent"
-              onClick={() => onStepChange(1)}
-            >
-              ENDRE
-            </Button>
-          </div>
-        )}
-      </Stepper>
-      <Stepper header="Oppsummering/ Innsending" step="2">
-        {activeStep === 2 && (
-          <div className="w-full flex flex-col gap-5">
-            <span>Jeg ønsker at NAV skal behandle fordeling av reisekostnader for barn</span>
-            {allBarn?.map((barn, i) => {
-              return <b key={i}>{getBarnInformationText(barn)}</b>;
-            })}
-            <ConfirmationPanel
-              checked={checked}
-              label="Jeg samtrykker at opplysningene jeg har oppgir er korrekte"
-              onChange={() => setChecked((current) => !current)}
-              size="small"
-              className="w-[60%]"
-            ></ConfirmationPanel>
-            <div className="flex gap-5">
-              <Button onClick={() => onStepChange(2)}>NESTE</Button>
-              <Link href="/" className="no-underline">
-                <Button type="button" variant="secondary">
-                  AVBRYT
-                </Button>
-              </Link>
-            </div>
-          </div>
-        )}
-      </Stepper>
+      <BarnContainer
+        allBarn={allBarn}
+        foundPersonOver15={foundPersonOver15}
+        onSelectBarn={onSelectBarn}
+        showError={showBarnError}
+      />
+      <OppsummeringContainer
+        checked={samtykke}
+        updateChecked={onSamtykke}
+        showError={showSamtykkeError}
+      />
+      <div className="flex gap-5">
+        <Button onClick={onSubmit}>SEND INN</Button>
+        <Link href="/" className="no-underline" passHref>
+          <Button type="button" variant="secondary">
+            AVBRYT
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

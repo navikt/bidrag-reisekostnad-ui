@@ -1,3 +1,4 @@
+import { ForesporselStatus } from "../enum/foresporsel-status";
 import { Gender } from "../enum/gender";
 
 export interface IBrukerinformasjon {
@@ -11,7 +12,7 @@ export interface IBrukerinformasjon {
   barnMinstFemtenÅr: IPerson[];
 }
 
-export interface IForesporsel {
+export interface IForesporsel extends IForesporselUi {
   idForespørsel: number;
   kreverSamtykke: boolean;
   barn: IPerson[];
@@ -20,7 +21,11 @@ export interface IForesporsel {
   opprettet: string | null;
   samtykket: string | null;
   journalfoert: string | null;
+}
+
+interface IForesporselUi {
   erAlleOver15: boolean;
+  status: ForesporselStatus;
 }
 
 export interface IPerson extends IPersonAge {

@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren, useState, useContext } from "react";
 import { IBrukerinformasjon } from "../types/foresporsel";
-import { mapToForesporselWithPersonsAge } from "../utils/foresporselUtils";
+import { mapToForesporselWithStatusAndPersonsAge } from "../utils/foresporselUtils";
 import { mapToPersonWithAge } from "../utils/personUtils";
 
 interface IReisekostnadContext {
@@ -21,9 +21,10 @@ function ReisekostnadProvider({ children }: PropsWithChildren) {
       motparterMedFellesBarnUnderFemtenÅr,
     } = user;
 
-    const forespørslerSomMotpartMedAlder = mapToForesporselWithPersonsAge(forespørslerSomMotpart);
+    const forespørslerSomMotpartMedAlder =
+      mapToForesporselWithStatusAndPersonsAge(forespørslerSomMotpart);
     const forespørslerSomHovedpartMedAlder =
-      mapToForesporselWithPersonsAge(forespørslerSomHovedpart);
+      mapToForesporselWithStatusAndPersonsAge(forespørslerSomHovedpart);
     const barnMinstFemtenÅrMedAlder = mapToPersonWithAge(barnMinstFemtenÅr);
     const motparterMedFellesBarnUnderFemtenÅrMedAlder = motparterMedFellesBarnUnderFemtenÅr.map(
       (motpart) => {

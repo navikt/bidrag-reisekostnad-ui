@@ -13,16 +13,18 @@ export const BRUKER_INFORMASJON_1 = {
       kreverSamtykke: true,
       barn: [
         {
+          ident: "88888888888",
           fornavn: "Småstein",
           fødselsdato: "2012-11-21",
         },
         {
+          ident: "99999999999",
           fornavn: "Barn 2",
           fødselsdato: "2012-11-21",
         },
       ],
       hovedpart: {
-        fornavn: "Streng",
+        fornavn: "Gråtass",
         fødselsdato: "1982-11-21",
       },
       motpart: {
@@ -38,12 +40,13 @@ export const BRUKER_INFORMASJON_1 = {
       kreverSamtykke: false,
       barn: [
         {
+          ident: "77777777777",
           fornavn: "Grus",
           fødselsdato: "2006-11-21",
         },
       ],
       hovedpart: {
-        fornavn: "Streng",
+        fornavn: "Gråtass",
         fødselsdato: "1982-11-21",
       },
       motpart: {
@@ -61,10 +64,12 @@ export const BRUKER_INFORMASJON_1 = {
       kreverSamtykke: true,
       barn: [
         {
+          ident: "88888888888",
           fornavn: "Småstein",
           fødselsdato: "2012-11-21",
         },
         {
+          ident: "99999999999",
           fornavn: "Barn 2",
           fødselsdato: "2012-11-21",
         },
@@ -86,6 +91,7 @@ export const BRUKER_INFORMASJON_1 = {
       kreverSamtykke: false,
       barn: [
         {
+          ident: "77777777777",
           fornavn: "Grus",
           fødselsdato: "2006-11-21",
         },
@@ -111,7 +117,13 @@ export const BRUKER_INFORMASJON_1 = {
       },
       fellesBarnUnder15År: [
         {
+          ident: "88888888888",
           fornavn: "Småstein",
+          fødselsdato: "2012-11-21",
+        },
+        {
+          ident: "99999999999",
+          fornavn: "Barn 2",
           fødselsdato: "2012-11-21",
         },
       ],
@@ -119,6 +131,7 @@ export const BRUKER_INFORMASJON_1 = {
   ],
   barnMinstFemtenÅr: [
     {
+      ident: "77777777777",
       fornavn: "Grus",
       fødselsdato: "2006-11-21",
     },

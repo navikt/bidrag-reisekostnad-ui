@@ -7,12 +7,18 @@ import { IBrukerinformasjon, IForesporsel } from "../../types/foresporsel";
 import useSWRImmutable from "swr/immutable";
 import { Loader } from "@navikt/ds-react";
 import { useReisekostnad } from "../../context/reisekostnadContext";
+import { findForesporselById } from "../../utils/foresporselUtils";
+import { ForesporselStatus } from "../../enum/foresporsel-status";
+import KvitteringMedTrekkTilbake from "../../views/kvittering-med-trekktilbake/KvitteringMedTrekkTilbake";
+import ForesporselConfirmationContainer from "../../views/foresporsel/foresporsel-confirmation-container/ForesporselConfirmationContainer";
 
 export default function ForesporselId() {
   const router = useRouter();
   const foresporselId = router.query.id as string;
   const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
   const [foresporsel, setForesporsel] = useState<IForesporsel>();
+
+  const [isHovedpart, setIsHovedpart] = useState<boolean>(false);
 
   const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
   const { userInformation, updateUserInformation } = useReisekostnad();
@@ -25,21 +31,26 @@ export default function ForesporselId() {
 
   useEffect(() => {
     if (foresporselId && userInformation) {
-      const foresporselSomMotpart = userInformation.forespørslerSomMotpart.find(
-        (item) => item.idForespørsel === Number(foresporselId)
+      const foresporselSomHovedpart = findForesporselById(
+        userInformation.forespørslerSomHovedpart,
+        foresporselId
       );
-      if (foresporselSomMotpart) {
-        setForesporsel(foresporselSomMotpart);
-        setShowConfirmPage(foresporselSomMotpart.erAlleOver15);
+      const hovedpart = userInformation.fornavn === foresporselSomHovedpart?.hovedpart.fornavn;
+      setIsHovedpart(hovedpart);
+
+      if (hovedpart) {
+        setForesporsel(foresporselSomHovedpart);
       } else {
-        const foresporslerSomHovedpart = userInformation.forespørslerSomHovedpart.find(
-          (item) => item.idForespørsel === Number(foresporselId)
+        const foresporselSomMotpart = findForesporselById(
+          userInformation.forespørslerSomMotpart,
+          foresporselId
         );
-        setForesporsel(foresporslerSomHovedpart);
-        setShowConfirmPage(!!foresporslerSomHovedpart);
+        setForesporsel(foresporselSomMotpart);
+        // show confirmation page if barn is over 15 years old
+        setShowConfirmPage(foresporselSomMotpart?.erAlleOver15 ?? false);
       }
     }
-  }, [foresporselId]);
+  }, [foresporselId, userInformation]);
 
   if (!userInformation) {
     <div className="w-full flex flex-col items-center">
@@ -57,9 +68,23 @@ export default function ForesporselId() {
 
   return (
     <>
-      {showConfirmPage ? (
+      {/* should be possible to cancel the request if barn is under 15 years old */}
+      {isHovedpart &&
+        foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE &&
+        !foresporsel.erAlleOver15 && (
+          <KvitteringMedTrekkTilbake barnInformation={barnInformation} />
+        )}
+
+      {/* should not be possible to cancel the request if barn is over 15 years old */}
+      {isHovedpart &&
+        foresporsel.status !== ForesporselStatus.VENTER_PAA_SAMTYKKE &&
+        foresporsel.erAlleOver15 && <ForesporselConfirmationContainer />}
+
+      {!isHovedpart && showConfirmPage && (
         <SamtykkeConfirmationContainer barnInformation={barnInformation} />
-      ) : (
+      )}
+
+      {!isHovedpart && !showConfirmPage && (
         <SamtykkeContainer
           onClick={(sendingInn) => setShowConfirmPage(sendingInn)}
           barnInformation={barnInformation}

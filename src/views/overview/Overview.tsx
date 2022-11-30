@@ -26,9 +26,11 @@ export default function Overview() {
               ? "Du har ingen forespørsel å vise"
               : "Her finner du oversikt over forerspørsel om reisekostander du har sendt inn. + noe om at du har mopttatt"}
           </BodyShort>
-          <Link href="/foresporsel">
-            <Button type="button">Opprett en ny fordeling av reisekostnader</Button>
-          </Link>
+          <div>
+            <Link href="/foresporsel">
+              <Button type="button">Opprett en ny fordeling av reisekostnader</Button>
+            </Link>
+          </div>
           {forespørslerSomMotpart.length > 0 && (
             <>
               <div className="w-full flex flex-col gap-5">
