@@ -33,7 +33,6 @@
     "@navikt/ds-tailwind": "^2.0.0",
     "@navikt/nav-dekoratoren-moduler": "^1.8.1",
     "@svgr/webpack": "^6.5.1",
-    "classnames": "^2.3.1",
     "dayjs": "^1.11.6",
     "env-var": "^7.3.0",
     "ioredis": "^5.2.4",

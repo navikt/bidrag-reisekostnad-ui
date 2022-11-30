@@ -2,13 +2,13 @@ import { SuccessStroke } from "@navikt/ds-icons";
 import { BodyShort } from "@navikt/ds-react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 
-interface ISamtykkeConfirmationContainerProps {
+interface ISamtykkeKvitteringContainerProps {
   barnInformation: string[];
 }
 
-export default function SamtykkeConfirmationContainer({
+export default function SamtykkeKvitteringContainer({
   barnInformation,
-}: ISamtykkeConfirmationContainerProps) {
+}: ISamtykkeKvitteringContainerProps) {
   return (
     <ConfirmationLayout>
       <div className="flex space-x-14">

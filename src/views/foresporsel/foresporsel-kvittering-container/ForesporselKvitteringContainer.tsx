@@ -2,7 +2,7 @@ import { SuccessStroke } from "@navikt/ds-icons";
 import { Alert, BodyShort } from "@navikt/ds-react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 
-export default function ForesporselConfirmationContainer() {
+export default function ForesporselKvitteringContainer() {
   return (
     <ConfirmationLayout>
       <div className="grid grid-cols-[10%_90%]">
