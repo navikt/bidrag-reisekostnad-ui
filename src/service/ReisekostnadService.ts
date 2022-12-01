@@ -22,4 +22,13 @@ export default class ReisekostnadService extends DefaultConsumer {
 
     return response.data;
   }
+
+  async opprettNyForesporsel(identerBarn: string[]): Promise<number> {
+    const response = await this.post<string[]>(
+      "/api/v1/reisekostnad/ny",
+      JSON.stringify({ identerBarn: [...identerBarn] })
+    );
+
+    return response.status;
+  }
 }

@@ -5,7 +5,7 @@ import styles from "./NoSessionModal.module.css";
 import { WarningColored } from "@navikt/ds-icons";
 import useSWR from "swr";
 import { ISessionData } from "../../pages/api/auth/session";
-import { useCountdown } from "../hooks/useCountdown";
+import { useCountdown } from "../../hooks/useCountdown";
 
 export function NoSessionModal() {
   const router = useRouter();

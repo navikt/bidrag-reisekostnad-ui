@@ -14,9 +14,9 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
   const { idForespørsel, hovedpart, barn, erAlleOver15, status } = foresporsel;
 
   return (
-    <Panel className="navds-link-panel cursor-pointer" border>
-      <div className="w-full navds-link-panel__content text-gray-900">
-        <Link className="no-underline" href={`/foresporsel/${idForespørsel}`} passHref>
+    <Link className="no-underline" href={`/foresporsel/${idForespørsel}`} passHref>
+      <Panel className="navds-link-panel cursor-pointer" border>
+        <div className="w-full navds-link-panel__content text-gray-900">
           <LinkPanel.Title className="text-large text-gray-900">Reisekostnader</LinkPanel.Title>
           <LinkPanel.Description className="text-gray-900">
             <div className="w-full grid grid-cols-[70%_30%]">
@@ -35,11 +35,11 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
               <span>Fra: {hovedpart.fornavn}</span>
             </div>
           </LinkPanel.Description>
-        </Link>
-        <StatusBar status={status} />
-        <BarnOver15Alert barn={barn} />
-      </div>
-      <Next className="navds-link-panel__chevron" aria-hidden />
-    </Panel>
+          <StatusBar status={status} />
+          <BarnOver15Alert barn={barn} />
+        </div>
+        <Next className="navds-link-panel__chevron" aria-hidden />
+      </Panel>
+    </Link>
   );
 }

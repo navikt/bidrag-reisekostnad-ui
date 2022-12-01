@@ -1,4 +1,4 @@
 import { authHandlers } from "./handlers/authHandlers";
-import { brukerinfoHandlers } from "./handlers/brukerinfoHandlers";
+import { brukerinfoHandlers, opprettNyForesporselHandlers } from "./handlers/brukerinfoHandlers";
 
-export const handlers = [...authHandlers, ...brukerinfoHandlers];
+export const handlers = [...authHandlers, ...brukerinfoHandlers, ...opprettNyForesporselHandlers];

@@ -4,8 +4,10 @@ import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import OppsummeringContainer from "./oppsummering-container/OppsummeringContainer";
-import { Button } from "@navikt/ds-react";
+import { Alert, Button } from "@navikt/ds-react";
 import Link from "next/link";
+import useCreateForesporsel from "../../../hooks/useCreateForesporsel";
+import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 
 export default function ForesporselVelgBarn() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -14,7 +16,9 @@ export default function ForesporselVelgBarn() {
   const [samtykke, setSamtykke] = useState<boolean>(false);
   const [showBarnError, setShowBarnError] = useState<boolean>(false);
   const [showSamtykkeError, setShowSamtykkeError] = useState<boolean>(false);
+
   const { userInformation } = useReisekostnad();
+  const { submitting, success, createForesporsel, failedToPost } = useCreateForesporsel();
 
   useEffect(() => {
     if (userInformation) {
@@ -40,11 +44,15 @@ export default function ForesporselVelgBarn() {
     setSelectedBarn(selectedIdents);
   }
 
-  function onSubmit() {
-    setShowBarnError(selectedBarn.length === 0);
-    setShowSamtykkeError(!samtykke);
-    if (!showBarnError && !showSamtykkeError) {
-      // TODO: send forespørsel til backend
+  async function onSubmit() {
+    const hasSelectedBarn = selectedBarn.length !== 0;
+    const hasAgreed = samtykke;
+
+    setShowBarnError(!hasSelectedBarn);
+    setShowSamtykkeError(!hasAgreed);
+
+    if (hasSelectedBarn && hasAgreed) {
+      createForesporsel(selectedBarn);
     }
   }
 
@@ -58,25 +66,39 @@ export default function ForesporselVelgBarn() {
 
   return (
     <div className="w-full grid gap-10">
-      <BarnContainer
-        allBarn={allBarn}
-        foundPersonOver15={foundPersonOver15}
-        onSelectBarn={onSelectBarn}
-        showError={showBarnError}
-      />
-      <OppsummeringContainer
-        checked={samtykke}
-        updateChecked={onSamtykke}
-        showError={showSamtykkeError}
-      />
-      <div className="flex gap-5">
-        <Button onClick={onSubmit}>SEND INN</Button>
-        <Link href="/" className="no-underline" passHref>
-          <Button type="button" variant="secondary">
-            AVBRYT
-          </Button>
-        </Link>
-      </div>
+      {success && (
+        <ForesporselKvitteringContainer
+          barn={allBarn.filter((barn) => selectedBarn.includes(barn.ident))}
+        />
+      )}
+      {!success && failedToPost && (
+        <Alert variant="error">Det skjedde en feil ved registrering av forespørsel</Alert>
+      )}
+      {!success && (
+        <>
+          <BarnContainer
+            allBarn={allBarn}
+            foundPersonOver15={foundPersonOver15}
+            onSelectBarn={onSelectBarn}
+            showError={showBarnError}
+          />
+          <OppsummeringContainer
+            checked={samtykke}
+            updateChecked={onSamtykke}
+            showError={showSamtykkeError}
+          />
+          <div className="flex gap-5">
+            <Button onClick={onSubmit} loading={submitting}>
+              SEND INN
+            </Button>
+            <Link href="/" className="no-underline" passHref>
+              <Button type="button" variant="secondary">
+                AVBRYT
+              </Button>
+            </Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }
