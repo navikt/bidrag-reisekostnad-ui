@@ -25,7 +25,7 @@ export default function BarnContainer({
 
   return (
     <div className="w-full grid gap-5">
-      <Heading size="xlarge" level="1">
+      <Heading size="large" level="2">
         Barn
       </Heading>
       <CheckboxGroup

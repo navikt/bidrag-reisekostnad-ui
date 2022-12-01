@@ -77,7 +77,7 @@ export const BRUKER_INFORMASJON_1 = {
         fødselsdato: "1982-11-21",
       },
       motpart: {
-        fornavn: "Streng",
+        fornavn: "Gråtass",
         fødselsdato: "1984-11-21",
       },
       opprettet: "2022-11-21T10:54:31.152379",
@@ -99,7 +99,7 @@ export const BRUKER_INFORMASJON_1 = {
         fødselsdato: "1982-11-21",
       },
       motpart: {
-        fornavn: "Streng",
+        fornavn: "Gråtass",
         fødselsdato: "1984-11-21",
       },
       opprettet: "2022-11-21T10:54:31.071878",

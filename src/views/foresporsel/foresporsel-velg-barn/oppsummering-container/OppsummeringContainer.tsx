@@ -13,7 +13,7 @@ export default function OppsummeringContainer({
 }: IOppsummeringContainerProps) {
   return (
     <div className="w-full flex flex-col gap-5">
-      <Heading size="xlarge" level="1">
+      <Heading size="large" level="2">
         Samtykke
       </Heading>
       {/* TODO */}

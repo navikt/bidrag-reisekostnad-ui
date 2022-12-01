@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import { getBarnInformationText } from "../../utils/stringUtils";
 import { IBrukerinformasjon, IForesporsel } from "../../types/foresporsel";
 import useSWRImmutable from "swr/immutable";
-import { Loader } from "@navikt/ds-react";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 import { findForesporselById } from "../../utils/foresporselUtils";
 import { ForesporselStatus } from "../../enum/foresporsel-status";
 import KvitteringMedTrekkTilbake from "../../views/kvittering-med-trekktilbake/KvitteringMedTrekkTilbake";
 import ForesporselKvitteringContainer from "../../views/foresporsel/foresporsel-kvittering-container/ForesporselKvitteringContainer";
+import Spinner from "../../components/spinner/spinner/spinner";
 
 export default function ForesporselId() {
   const router = useRouter();
@@ -53,11 +53,7 @@ export default function ForesporselId() {
   }, [foresporselId, userInformation]);
 
   if (!userInformation || !foresporselId || !foresporsel) {
-    return (
-      <div className="w-full flex flex-col items-center">
-        <Loader size="3xlarge" title="venter..." variant="interaction" />
-      </div>
-    );
+    return <Spinner />;
   }
 
   const barnInformation = foresporsel.barn.map((person) => {

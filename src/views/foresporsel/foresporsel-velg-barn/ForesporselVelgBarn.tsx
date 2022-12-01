@@ -4,10 +4,11 @@ import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import OppsummeringContainer from "./oppsummering-container/OppsummeringContainer";
-import { Alert, Button } from "@navikt/ds-react";
+import { Alert, Button, GuidePanel, Heading } from "@navikt/ds-react";
 import Link from "next/link";
 import useCreateForesporsel from "../../../hooks/useCreateForesporsel";
 import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
+import { PageMeta } from "../../../components/page-meta/PageMeta";
 
 export default function ForesporselVelgBarn() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -65,7 +66,8 @@ export default function ForesporselVelgBarn() {
   }
 
   return (
-    <div className="w-full grid gap-10">
+    <div className="grid gap-10">
+      <PageMeta title="Opprett forespørsel" />
       {success && (
         <ForesporselKvitteringContainer
           barn={allBarn.filter((barn) => selectedBarn.includes(barn.ident))}
@@ -76,6 +78,16 @@ export default function ForesporselVelgBarn() {
       )}
       {!success && (
         <>
+          <Heading size="xlarge" level="1">
+            Fordeling av reisekostander
+          </Heading>
+          <GuidePanel>
+            <span>Noe om rettigheter og plikter</span>
+            <span>
+              Pluss lenke til side om reisekostander og om hvordan NAV behandler personopplysningene
+              dine
+            </span>
+          </GuidePanel>
           <BarnContainer
             allBarn={allBarn}
             foundPersonOver15={foundPersonOver15}

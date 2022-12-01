@@ -14,9 +14,21 @@ export function mapToForesporselWithStatusAndPersonsAge(
       erOver15: isAgeOver15YearsOld(person.fødselsdato),
     })),
     erAlleOver15: isEveryoneOver15YearsOld(foresporsel.barn as IPerson[]),
-    // TODO: IMPLEMENTERE RIKTIG STATUS
-    status: ForesporselStatus.VENTER_PAA_SAMTYKKE,
+    status: getStatus(foresporsel),
   })) as unknown as IForesporsel[];
+}
+
+function getStatus(foresporsel: IForesporsel): ForesporselStatus {
+  if (isEveryoneOver15YearsOld(foresporsel.barn as IPerson[])) {
+    return ForesporselStatus.AUTOMATISK_SENDT_INN_TIL_NAV;
+  } else if (foresporsel.samtykket) {
+    return ForesporselStatus.SAMTYKKET;
+  } else if (foresporsel.samtykket === null) {
+    return ForesporselStatus.VENTER_PAA_SAMTYKKE;
+  } else {
+    // TODO
+    return ForesporselStatus.TREKKET_TILBAKE;
+  }
 }
 
 export function findForesporselById(

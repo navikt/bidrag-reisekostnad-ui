@@ -1,18 +1,11 @@
-import { BodyShort, ConfirmationPanel, Button } from "@navikt/ds-react";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import GreetingCard from "../../components/card/greeting-card/GreetingCard";
-import { MAA_SAMTYKKE } from "../../constants/error";
-import { PageMeta } from "../../components/page-meta/PageMeta";
+import { useEffect } from "react";
 import ForesporselVelgBarn from "../../views/foresporsel/foresporsel-velg-barn/ForesporselVelgBarn";
 import useSWRImmutable from "swr/immutable";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { useReisekostnad } from "../../context/reisekostnadContext";
+import Spinner from "../../components/spinner/spinner/spinner";
 
 export default function Foresporsel() {
-  const [isAgree, setIsAgree] = useState<boolean>(false);
-  const [showError, setShowError] = useState<boolean>(false);
-  const [showNextStep, setShowNextStep] = useState<boolean>(false);
   const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
   const { userInformation, updateUserInformation } = useReisekostnad();
 
@@ -23,50 +16,8 @@ export default function Foresporsel() {
   }, [data]);
 
   if (!userInformation || !data) {
-    return null;
+    return <Spinner />;
   }
 
-  function onClick() {
-    setShowError(!isAgree);
-    setShowNextStep(isAgree);
-  }
-
-  function onConfirm() {
-    setIsAgree((current) => {
-      setShowError(current);
-      return !current;
-    });
-  }
-
-  return (
-    <>
-      <PageMeta title="Sende forespørsel" />
-      {!showNextStep && (
-        <div className="w-full flex flex-col items-center  gap-10">
-          <GreetingCard name={userInformation?.fornavn} gender={userInformation.kjønn} />
-          <BodyShort>Dine rettigheter og plikter?</BodyShort>
-          <ConfirmationPanel
-            size="small"
-            checked={isAgree}
-            label="Jeg har lest og forstått...."
-            onChange={onConfirm}
-            error={showError && MAA_SAMTYKKE}
-          ></ConfirmationPanel>
-          <div className="w-[15rem] flex justify-between">
-            <Button onClick={onClick}>NESTE</Button>
-            <Link href="/" className="no-underline">
-              <Button type="button" variant="secondary">
-                AVBRYT
-              </Button>
-            </Link>
-          </div>
-          <Link href="https://www.nav.no/soknader/nb/person/familie/foreldrepenger-og-engangsstonad#NAV140507">
-            Les om hvordan NAV behandler personopplysningene dine.
-          </Link>
-        </div>
-      )}
-
-      {showNextStep && <ForesporselVelgBarn />}
-    </>
-  );
+  return <ForesporselVelgBarn />;
 }
