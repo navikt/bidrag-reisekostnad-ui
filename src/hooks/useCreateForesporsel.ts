@@ -4,6 +4,7 @@ import useSWRImmutable from "swr/immutable";
 import { HTTPStatus } from "../enum/HttpStatus";
 
 import { requestBody } from "../utils/apiUtils";
+import { INyForespørsel } from "../types/payload/foresporselPayload";
 
 export default function useCreateForesporsel() {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -11,7 +12,7 @@ export default function useCreateForesporsel() {
   const [success, setSuccess] = useState<boolean>(false);
   const { mutate } = useSWRImmutable("/api/brukerinformasjon");
 
-  async function createForesporsel(identerBarn: string[]): Promise<void> {
+  async function createForesporsel(identer: string[]): Promise<void> {
     try {
       if (failedToPost) {
         setFailedToPost(false);
@@ -20,7 +21,7 @@ export default function useCreateForesporsel() {
       setSubmitting(true);
       const result = await fetch(
         "/api/foresporsel/ny",
-        requestBody(ApiOperation.POST, identerBarn)
+        requestBody(ApiOperation.POST, { identerBarn: [...identer] } as INyForespørsel)
       );
 
       if (result.status === HTTPStatus.OK) {

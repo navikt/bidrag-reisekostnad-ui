@@ -3,6 +3,7 @@ import environment from "../environment";
 import { IBrukerinformasjon } from "../types/foresporsel";
 import { DefaultConsumer } from "./DefaultConsumer";
 import { ISession } from "../lib/security/session";
+import { INyForespørsel } from "../types/payload/foresporselPayload";
 
 export default class ReisekostnadService extends DefaultConsumer {
   constructor(session: ISession) {
@@ -23,12 +24,16 @@ export default class ReisekostnadService extends DefaultConsumer {
     return response.data;
   }
 
-  async opprettNyForesporsel(identerBarn: string[]): Promise<number> {
-    const response = await this.post<string[]>(
+  async opprettNyForesporsel(nyForeporsel: INyForespørsel): Promise<number> {
+    const response = await this.post<INyForespørsel>(
       "/api/v1/reisekostnad/ny",
-      JSON.stringify({ identerBarn: [...identerBarn] })
+      JSON.stringify(nyForeporsel)
     );
 
     return response.status;
   }
+}
+
+interface IPayload {
+  identerBarn: string[];
 }
