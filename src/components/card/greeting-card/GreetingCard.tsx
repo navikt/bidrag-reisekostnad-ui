@@ -11,16 +11,7 @@ interface IGreetingCardProps {
 export default function GreetingCard({ name, gender }: IGreetingCardProps) {
   return (
     <div className="flex flex-col items-center gap-5">
-      {(() => {
-        switch (gender) {
-          case Gender.KVINNE:
-            return <NavVeilederKvinne />;
-          case Gender.MANN:
-            return <NavVeilederMann />;
-          default:
-            return null;
-        }
-      })()}
+      {gender === Gender.KVINNE ? <NavVeilederKvinne /> : <NavVeilederMann />}
       <Heading level="1" size="large">
         Hei {name}
       </Heading>
