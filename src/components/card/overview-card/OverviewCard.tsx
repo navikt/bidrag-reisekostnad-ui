@@ -11,7 +11,7 @@ interface IOverviewCardProps {
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { idForespørsel, hovedpart, barn, erAlleOver15, status } = foresporsel;
+  const { idForespørsel, hovedpart, barn, status } = foresporsel;
 
   return (
     <Link className="no-underline" href={`/foresporsel/${idForespørsel}`} passHref>

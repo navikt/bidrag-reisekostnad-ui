@@ -1,9 +1,10 @@
-import pino from 'pino';
-import fs from "fs"
-import {mapError} from "./types";
+import pino from "pino";
+import fs from "fs";
+import { mapError } from "./types";
 
 export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
-    pino({
+  pino(
+    {
       ...defaultConfig,
       timestamp: false,
       formatters: {
@@ -11,19 +12,18 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
           return { level: label };
         },
         log: (object: any) => {
-          mapError(object)
-          object.isSecure = true
+          mapError(object);
+          object.isSecure = true;
           return object;
         },
       },
-    }, pino.multistream(getStreams()));
+    },
+    pino.multistream(getStreams())
+  );
 
-
-
-function getStreams(){
-
-  if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "true"){
-    return [{ stream: fs.createWriteStream("/secure-logs/secure.log") }]
+function getStreams() {
+  if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "true") {
+    return [{ stream: fs.createWriteStream("/secure-logs/secure.log") }];
   }
-  return [{ stream: process.stdout }]
+  return [{ stream: process.stdout }];
 }

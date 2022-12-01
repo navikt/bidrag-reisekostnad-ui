@@ -1,5 +1,5 @@
-import {NextApiHandler} from "next";
-import {getValidSession} from "./session";
+import { NextApiHandler } from "next";
+import { getValidSession } from "./session";
 import getPropertyDescriptorForReqSession from "../../types/next";
 
 export function withSessionApiRoute(handler: NextApiHandler): NextApiHandler {
@@ -7,12 +7,7 @@ export function withSessionApiRoute(handler: NextApiHandler): NextApiHandler {
     const session = await getValidSession(req);
     if (!session) return res.status(401).end();
 
-    Object.defineProperty(
-        req,
-        "session",
-        getPropertyDescriptorForReqSession(session),
-    );
-    return handler(req, res)
-  }
-
+    Object.defineProperty(req, "session", getPropertyDescriptorForReqSession(session));
+    return handler(req, res);
+  };
 }

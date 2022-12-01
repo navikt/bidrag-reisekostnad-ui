@@ -1,13 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  message: string
-}
+  message: string;
+};
 
 // NAIS configuration
-export default function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<Data>
-) {
-  res.status(200).json({ message: 'OK' })
+export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  res.status(200).json({ message: "OK" });
 }

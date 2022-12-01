@@ -1,5 +1,3 @@
-import { IBrukerinformasjon } from "../../types/foresporsel";
-
 export const BRUKERENS_FORNAVN = "Nils";
 
 export const BRUKER_INFORMASJON_1 = {

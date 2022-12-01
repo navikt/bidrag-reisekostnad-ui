@@ -1,5 +1,4 @@
 import { ConfirmationPanel, Heading } from "@navikt/ds-react";
-import { IPerson } from "../../../../types/foresporsel";
 
 interface IOppsummeringContainerProps {
   checked: boolean;

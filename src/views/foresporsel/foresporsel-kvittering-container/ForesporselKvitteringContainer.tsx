@@ -32,16 +32,16 @@ export default function ForesporselKvitteringContainer({
             {`Du har sendt inn en forerspørsel om fordeling av reisekostnader til NAV ${today()}.`}
           </span>
           <ul className="list-none flex flex-col gap-3">
-            {barnOver15?.map((person) => {
+            {barnOver15?.map((person, i) => {
               return (
-                <li>{`Forerspørsel for ${getBarnInformationText(
+                <li key={i}>{`Forerspørsel for ${getBarnInformationText(
                   person
                 )} går til NAV automatisk og trenger ikke signering fra motparten`}</li>
               );
             })}
-            {barnUnder15?.map((person) => {
+            {barnUnder15?.map((person, i) => {
               return (
-                <li>{`Forerspørsel for ${getBarnInformationText(
+                <li key={i}>{`Forerspørsel for ${getBarnInformationText(
                   person
                 )} må samtykkes slik at NAV skal behandle den videre`}</li>
               );

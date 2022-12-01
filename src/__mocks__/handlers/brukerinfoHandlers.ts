@@ -1,4 +1,4 @@
-import { rest, RestHandler } from "msw";
+import { rest } from "msw";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { BRUKER_INFORMASJON_1 } from "../testdata/brukerinformasjon";
 
