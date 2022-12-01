@@ -52,14 +52,12 @@ export default function ForesporselId() {
     }
   }, [foresporselId, userInformation]);
 
-  if (!userInformation) {
-    <div className="w-full flex flex-col items-center">
-      <Loader size="3xlarge" title="venter..." variant="interaction" />
-    </div>;
-  }
-
-  if (!foresporselId || !foresporsel) {
-    return null;
+  if (!userInformation || !foresporselId || !foresporsel) {
+    return (
+      <div className="w-full flex flex-col items-center">
+        <Loader size="3xlarge" title="venter..." variant="interaction" />
+      </div>
+    );
   }
 
   const barnInformation = foresporsel.barn.map((person) => {
@@ -72,7 +70,11 @@ export default function ForesporselId() {
       {isHovedpart &&
         foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE &&
         !foresporsel.erAlleOver15 && (
-          <KvitteringMedTrekkTilbake barnInformation={barnInformation} />
+          <KvitteringMedTrekkTilbake
+            barnInformation={barnInformation}
+            sentDate={foresporsel.opprettet}
+            status={foresporsel.status}
+          />
         )}
 
       {/* should not be possible to cancel the request if barn is over 15 years old */}

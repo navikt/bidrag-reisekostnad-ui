@@ -59,6 +59,7 @@ export default function SamtykkeContainer({ barnInformation, hovedpart, onClick 
 
     if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
       onClick(true);
+      //TODO sende samtykke til backend
     }
   }
 

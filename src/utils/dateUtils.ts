@@ -7,3 +7,7 @@ export function calculateAge(date: string) {
 export function today(): string {
   return dayjs().format("DD-MM-YYYY");
 }
+
+export function formatDate(date: string): string {
+  return dayjs(date).format("DD-MM-YYYY");
+}
