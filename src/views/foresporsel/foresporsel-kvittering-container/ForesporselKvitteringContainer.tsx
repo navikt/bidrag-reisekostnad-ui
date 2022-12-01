@@ -35,15 +35,15 @@ export default function ForesporselKvitteringContainer({
             {barnOver15?.map((person, i) => {
               return (
                 <li key={i}>
-                  Forerspørsel for <b>{getBarnInformationText(person)}</b>
-                  går til NAV automatisk og trenger ikke signering fra motparten
+                  Forerspørsel for <b>{getBarnInformationText(person)}</b> går til NAV automatisk og
+                  trenger ikke signering fra motparten
                 </li>
               );
             })}
             {barnUnder15?.map((person, i) => {
               return (
                 <li key={i}>
-                  Forerspørsel for <b>${getBarnInformationText(person)}</b>å samtykkes slik at NAV
+                  Forerspørsel for <b>{getBarnInformationText(person)}</b> å samtykkes slik at NAV
                   skal behandle den videre
                 </li>
               );

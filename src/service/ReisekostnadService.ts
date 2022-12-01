@@ -1,7 +1,7 @@
 import { HTTPStatus } from "../enum/HttpStatus";
 import environment from "../environment";
 import { IBrukerinformasjon } from "../types/foresporsel";
-import { DefaultConsumer } from "./DefaultConsumer";
+import { DefaultConsumer, IApiResponse } from "./DefaultConsumer";
 import { ISession } from "../lib/security/session";
 import { INyForespørsel } from "../types/payload/foresporselPayload";
 
@@ -24,13 +24,19 @@ export default class ReisekostnadService extends DefaultConsumer {
     return response.data;
   }
 
-  async opprettNyForesporsel(nyForeporsel: INyForespørsel): Promise<number> {
+  async opprettNyForesporsel(nyForeporsel: INyForespørsel): Promise<IApiResponse<unknown>> {
     const response = await this.post<INyForespørsel>(
       "/api/v1/reisekostnad/ny",
       JSON.stringify(nyForeporsel)
     );
 
-    return response.status;
+    return response;
+  }
+
+  async trekkeForesporsel(foresporselId: number): Promise<IApiResponse<unknown>> {
+    const response = await this.put(`/api/v1/reisekostnad/ny/${foresporselId}`);
+
+    return response;
   }
 }
 

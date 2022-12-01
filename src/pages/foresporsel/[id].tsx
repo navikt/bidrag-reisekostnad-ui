@@ -70,6 +70,7 @@ export default function ForesporselId() {
             barnInformation={barnInformation}
             sentDate={foresporsel.opprettet}
             status={foresporsel.status}
+            foresporselId={foresporsel.idForespørsel}
           />
         )}
 

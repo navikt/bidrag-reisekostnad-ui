@@ -6,7 +6,7 @@ import BarnContainer from "./barn-container/BarnContainer";
 import OppsummeringContainer from "./oppsummering-container/OppsummeringContainer";
 import { Alert, Button, GuidePanel, Heading } from "@navikt/ds-react";
 import Link from "next/link";
-import useCreateForesporsel from "../../../hooks/useCreateForesporsel";
+import useForesporselApi from "../../../hooks/useForesporselApi";
 import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 
@@ -19,7 +19,7 @@ export default function ForesporselVelgBarn() {
   const [showSamtykkeError, setShowSamtykkeError] = useState<boolean>(false);
 
   const { userInformation } = useReisekostnad();
-  const { submitting, success, createForesporsel, failedToPost } = useCreateForesporsel();
+  const { submitting, success, createForesporsel, failed } = useForesporselApi();
 
   useEffect(() => {
     if (userInformation) {
@@ -73,7 +73,7 @@ export default function ForesporselVelgBarn() {
           barn={allBarn.filter((barn) => selectedBarn.includes(barn.ident))}
         />
       )}
-      {!success && failedToPost && (
+      {!success && failed && (
         <Alert variant="error">Det skjedde en feil ved registrering av forespørsel</Alert>
       )}
       {!success && (
