@@ -24,7 +24,7 @@ export default function KvitteringMedTrekkTilbake({
   const router = useRouter();
 
   useEffect(() => {
-    if (success) {
+    if (success && !failed) {
       router.push("/");
     }
   }, [success]);

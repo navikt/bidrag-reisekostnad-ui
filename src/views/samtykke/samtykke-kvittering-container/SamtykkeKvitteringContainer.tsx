@@ -18,9 +18,15 @@ export default function SamtykkeKvitteringContainer({
             <BodyShort spacing>
               Du har signert fordeling av reisekostnader med Kari Normann for
             </BodyShort>
-            {barnInformation.map((information, index) => {
-              return <b key={index}>{information}</b>;
-            })}
+            <ul className="p-0">
+              {barnInformation.map((information, index) => {
+                return (
+                  <li key={index} className="list-none font-bold">
+                    {information}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
           {/* TODO */}
           <BodyShort spacing>Du kan gjenfinne samtykken her [lenke].</BodyShort>

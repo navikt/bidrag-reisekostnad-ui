@@ -1,4 +1,4 @@
-import { Heading, BodyShort, ConfirmationPanel, Button } from "@navikt/ds-react";
+import { Heading, BodyShort, ConfirmationPanel, Button, Alert } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
 import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";
@@ -6,6 +6,8 @@ import { MAA_SAMTYKKE } from "../../../constants/error";
 import { IPerson } from "../../../types/foresporsel";
 import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
+import useForesporselApi from "../../../hooks/useForesporselApi";
+import { useEffect } from "react";
 
 interface IForesporselConfirmationProps {
   isAgree: boolean;
@@ -13,12 +15,18 @@ interface IForesporselConfirmationProps {
 }
 
 interface ISamtykkeProps {
+  foresporselId: number;
   barnInformation: string[];
   hovedpart: IPerson;
-  onClick: (sendingIn: boolean) => void;
+  showConfirmation: (sendingIn: boolean) => void;
 }
 
-export default function SamtykkeContainer({ barnInformation, hovedpart, onClick }: ISamtykkeProps) {
+export default function SamtykkeContainer({
+  foresporselId,
+  barnInformation,
+  hovedpart,
+  showConfirmation,
+}: ISamtykkeProps) {
   const [haveReadAndUnderstood, setHaveReadAndUnderstood] = useState<IForesporselConfirmationProps>(
     {
       isAgree: false,
@@ -30,6 +38,13 @@ export default function SamtykkeContainer({ barnInformation, hovedpart, onClick 
       isAgree: false,
       showError: false,
     });
+  const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
+
+  useEffect(() => {
+    if (success && !failed) {
+      showConfirmation(true);
+    }
+  }, [success]);
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
@@ -58,8 +73,7 @@ export default function SamtykkeContainer({ barnInformation, hovedpart, onClick 
     });
 
     if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
-      onClick(true);
-      //TODO sende samtykke til backend
+      samtykkeForesporsel(foresporselId);
     }
   }
 
@@ -67,6 +81,9 @@ export default function SamtykkeContainer({ barnInformation, hovedpart, onClick 
     <>
       <PageMeta title="Samtykke" />
       <div className="grid gap-12">
+        {!success && failed && (
+          <Alert variant="error">Det skjedde en feil ved samtykke av forespørselen</Alert>
+        )}
         <Heading level="1" size="xlarge">
           Samtykke
         </Heading>
@@ -98,7 +115,9 @@ export default function SamtykkeContainer({ barnInformation, hovedpart, onClick 
           ></ConfirmationPanel>
         </div>
         <div className="flex space-x-12">
-          <Button onClick={handleSendIn}>SEND INN</Button>
+          <Button onClick={handleSendIn} loading={submitting}>
+            SEND INN
+          </Button>
           <Link href="/" className="no-underline">
             <Button type="button" variant="secondary">
               AVBRYT

@@ -38,6 +38,12 @@ export default class ReisekostnadService extends DefaultConsumer {
 
     return response;
   }
+
+  async samtykkeForesporsel(foresporselId: number): Promise<IApiResponse<unknown>> {
+    const response = await this.put(`/api/v1/reisekostnad/samtykke/${foresporselId}`);
+
+    return response;
+  }
 }
 
 interface IPayload {

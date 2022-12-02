@@ -13,3 +13,10 @@ export const trekkeForesporselHandlers = [
     return res(ctx.set("Content-Type", "application/json"), ctx.status(201));
   }),
 ];
+
+export const samtykkeForesporselHandlers = [
+  rest.put("/api/foresporsel/samtykke", (_req, res, ctx) => {
+    // @ts-ignore
+    return res(ctx.set("Content-Type", "application/json"), ctx.status(201));
+  }),
+];

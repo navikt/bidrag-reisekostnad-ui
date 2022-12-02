@@ -9,7 +9,7 @@ export default withSessionApiRoute(handler);
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const foresporselId = req.body;
-    const response = await new ReisekostnadService(req.session).trekkeForesporsel(foresporselId);
+    const response = await new ReisekostnadService(req.session).samtykkeForesporsel(foresporselId);
 
     if (response.status !== HTTPStatus.CREATED) {
       logger.error(response);

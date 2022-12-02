@@ -3,6 +3,7 @@ import { brukerinfoHandlers } from "./handlers/brukerinfoHandlers";
 import {
   opprettNyForesporselHandlers,
   trekkeForesporselHandlers,
+  samtykkeForesporselHandlers,
 } from "./handlers/foresporselHandlers";
 
 export const handlers = [
@@ -10,4 +11,5 @@ export const handlers = [
   ...brukerinfoHandlers,
   ...opprettNyForesporselHandlers,
   ...trekkeForesporselHandlers,
+  ...samtykkeForesporselHandlers,
 ];

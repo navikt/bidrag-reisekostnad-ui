@@ -85,7 +85,8 @@ export default function ForesporselId() {
 
       {!isHovedpart && !showConfirmPage && (
         <SamtykkeContainer
-          onClick={(sendingInn) => setShowConfirmPage(sendingInn)}
+          foresporselId={foresporsel.idForespørsel}
+          showConfirmation={(sendingInn) => setShowConfirmPage(sendingInn)}
           barnInformation={barnInformation}
           hovedpart={foresporsel.hovedpart}
         />

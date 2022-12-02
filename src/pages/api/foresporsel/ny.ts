@@ -14,6 +14,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       logger.error(response);
       throw new Error(`Fikk respons ${response}`);
     }
+
+    return res.status(HTTPStatus.OK);
   } catch (error) {
     logger.error(error);
     return res.status(500).send(error);
