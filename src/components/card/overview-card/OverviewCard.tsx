@@ -3,6 +3,7 @@ import { LinkPanel, Panel } from "@navikt/ds-react";
 import Link from "next/link";
 import { IForesporsel } from "../../../types/foresporsel";
 import { formatDate } from "../../../utils/dateUtils";
+import { isAutomaticSubmission } from "../../../utils/foresporselUtils";
 import { getBarnInformationText } from "../../../utils/stringUtils";
 import BarnOver15Alert from "../../alert/barn-over-15-alert/BarnOver15Alert";
 import StatusBar from "../../status-bar/StatusBar";
@@ -12,7 +13,7 @@ interface IOverviewCardProps {
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { id, opprettet, barn, status } = foresporsel;
+  const { id, opprettet, barn, status, kreverSamtykke, samtykket, journalført } = foresporsel;
 
   return (
     <Link className="no-underline" href={`/foresporsel/${id}`} passHref>
@@ -33,14 +34,14 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                   })}
                 </div>
               </div>
-              <div className="grid">
+              <div className="flex flex-col">
                 <span>Sendt inn:</span>
                 <span>{opprettet ? formatDate(opprettet) : ""}</span>
               </div>
             </div>
           </LinkPanel.Description>
           <StatusBar status={status} />
-          <BarnOver15Alert barn={barn} />
+          {isAutomaticSubmission(foresporsel) && <BarnOver15Alert barn={barn} />}
         </div>
         <Next className="navds-link-panel__chevron" aria-hidden />
       </Panel>

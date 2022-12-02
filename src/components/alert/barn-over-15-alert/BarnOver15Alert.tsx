@@ -1,4 +1,4 @@
-import { Alert, Link } from "@navikt/ds-react";
+import { Alert } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
 import { IPerson } from "../../../types/foresporsel";
 import { getPersonOver15YearsOld } from "../../../utils/personUtils";
@@ -10,7 +10,6 @@ interface IBarnOver15AlertProps {
 
 export default function BarnOver15Alert({ barn }: IBarnOver15AlertProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
-
   useEffect(() => {
     const personOver15 = getPersonOver15YearsOld(barn);
     if (personOver15.length > 0) {
@@ -30,8 +29,7 @@ export default function BarnOver15Alert({ barn }: IBarnOver15AlertProps) {
       <span>
         har blitt 15 år mens forerspørselen ventet på samtykke, derfor gikk forerspørselen
         automatisk til NAV. Du kan lese mer om saksbehandling av reisekostnader for barn over 15 på
-        {/* TODO: legg til lenke */}
-        NAV sine sider. <Link href="#">Lenke</Link>
+        NAV sine sider.
       </span>
     </Alert>
   );

@@ -106,6 +106,28 @@ export const BRUKER_INFORMASJON_1 = {
       samtykket: null,
       journalført: null,
     },
+    {
+      id: 5,
+      kreverSamtykke: false,
+      barn: [
+        {
+          ident: "93847563829",
+          fornavn: "Kristine",
+          fødselsdato: "2007-01-16",
+        },
+      ],
+      hovedpart: {
+        fornavn: "Streng",
+        fødselsdato: "1982-11-21",
+      },
+      motpart: {
+        fornavn: "Gråtass",
+        fødselsdato: "1984-11-21",
+      },
+      opprettet: "2022-11-21T10:54:31.071878",
+      samtykket: null,
+      journalført: "2022-12-2022T10:54:31.071878",
+    },
   ],
   motparterMedFellesBarnUnderFemtenÅr: [
     {
