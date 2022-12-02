@@ -19,7 +19,6 @@ export default function ForesporselKvitteringContainer({
   const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
 
   useEffect(() => {
-    console.log(barn);
     setBarnOver15(barn.filter((person) => person.alder >= 15));
     setBarnUnder15(barn.filter((person) => person.alder < 15));
   }, [barn]);
