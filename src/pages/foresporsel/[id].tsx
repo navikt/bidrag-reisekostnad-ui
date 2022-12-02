@@ -11,6 +11,7 @@ import { ForesporselStatus } from "../../enum/foresporsel-status";
 import KvitteringMedTrekkTilbake from "../../views/kvittering-med-trekktilbake/KvitteringMedTrekkTilbake";
 import ForesporselKvitteringContainer from "../../views/foresporsel/foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import Spinner from "../../components/spinner/spinner/spinner";
+import { formatDate } from "../../utils/dateUtils";
 
 export default function ForesporselId() {
   const router = useRouter();
@@ -77,7 +78,12 @@ export default function ForesporselId() {
       {/* should not be possible to cancel the request if barn is over 15 years old */}
       {isHovedpart &&
         foresporsel.status !== ForesporselStatus.VENTER_PAA_SAMTYKKE &&
-        foresporsel.erAlleOver15 && <ForesporselKvitteringContainer barn={foresporsel.barn} />}
+        foresporsel.erAlleOver15 && (
+          <ForesporselKvitteringContainer
+            barn={foresporsel.barn}
+            sentDate={formatDate(foresporsel.opprettet)}
+          />
+        )}
 
       {!isHovedpart && showConfirmPage && (
         <SamtykkeKvitteringContainer barnInformation={barnInformation} />

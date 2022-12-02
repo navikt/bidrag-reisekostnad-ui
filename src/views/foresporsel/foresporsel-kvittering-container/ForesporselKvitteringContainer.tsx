@@ -4,15 +4,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 import { IPerson } from "../../../types/foresporsel";
-import { today } from "../../../utils/dateUtils";
 import { getBarnInformationText } from "../../../utils/stringUtils";
 
 interface IForesporselKvitteringContainerProps {
   barn: IPerson[];
+  sentDate: string;
 }
 
 export default function ForesporselKvitteringContainer({
   barn,
+  sentDate,
 }: IForesporselKvitteringContainerProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
   const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
@@ -29,7 +30,7 @@ export default function ForesporselKvitteringContainer({
         <div className="grid gap-8">
           <span className="flex items-center">
             <SuccessStroke color="green" fontSize="50" />
-            {`Du har sendt inn en forerspørsel om fordeling av reisekostnader til NAV ${today()}.`}
+            {`Du har sendt inn en forerspørsel om fordeling av reisekostnader til NAV ${sentDate}.`}
           </span>
           <ul className="list-none flex flex-col gap-3">
             {barnOver15?.map((person, i) => {

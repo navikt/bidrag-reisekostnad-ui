@@ -10,6 +10,7 @@ import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
+import { today } from "../../../utils/dateUtils";
 
 export default function ForesporselVelgBarn() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -74,6 +75,7 @@ export default function ForesporselVelgBarn() {
       {success && (
         <ForesporselKvitteringContainer
           barn={allBarn.filter((barn) => selectedBarn.includes(barn.ident))}
+          sentDate={today()}
         />
       )}
       {!success && failed && (
