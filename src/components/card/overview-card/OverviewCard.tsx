@@ -2,6 +2,7 @@ import { Next } from "@navikt/ds-icons";
 import { LinkPanel, Panel } from "@navikt/ds-react";
 import Link from "next/link";
 import { IForesporsel } from "../../../types/foresporsel";
+import { formatDate } from "../../../utils/dateUtils";
 import { getBarnInformationText } from "../../../utils/stringUtils";
 import BarnOver15Alert from "../../alert/barn-over-15-alert/BarnOver15Alert";
 import StatusBar from "../../status-bar/StatusBar";
@@ -11,7 +12,7 @@ interface IOverviewCardProps {
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { idForespørsel, hovedpart, barn, status } = foresporsel;
+  const { idForespørsel, opprettet, barn, status } = foresporsel;
 
   return (
     <Link className="no-underline" href={`/foresporsel/${idForespørsel}`} passHref>
@@ -19,7 +20,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
         <div className="w-full navds-link-panel__content text-gray-900">
           <LinkPanel.Title className="text-large text-gray-900">Reisekostnader</LinkPanel.Title>
           <LinkPanel.Description className="text-gray-900">
-            <div className="w-full grid grid-cols-[70%_30%]">
+            <div className="w-full grid grid-cols-[80%_30%]">
               <div className="flex gap-2">
                 <span>For: </span>
                 <div className="grid gap-2">
@@ -32,7 +33,10 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                   })}
                 </div>
               </div>
-              <span>Fra: {hovedpart.fornavn}</span>
+              <div className="grid">
+                <span>Sendt inn:</span>
+                <span>{opprettet ? formatDate(opprettet) : ""}</span>
+              </div>
             </div>
           </LinkPanel.Description>
           <StatusBar status={status} />
