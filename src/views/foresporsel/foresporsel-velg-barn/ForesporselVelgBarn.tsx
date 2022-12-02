@@ -5,10 +5,11 @@ import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import OppsummeringContainer from "./oppsummering-container/OppsummeringContainer";
 import { Alert, Button, GuidePanel, Heading } from "@navikt/ds-react";
-import Link from "next/link";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
+import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
+import { useRouter } from "next/router";
 
 export default function ForesporselVelgBarn() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -17,9 +18,11 @@ export default function ForesporselVelgBarn() {
   const [samtykke, setSamtykke] = useState<boolean>(false);
   const [showBarnError, setShowBarnError] = useState<boolean>(false);
   const [showSamtykkeError, setShowSamtykkeError] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const { userInformation } = useReisekostnad();
   const { submitting, success, createForesporsel, failed } = useForesporselApi();
+  const router = useRouter();
 
   useEffect(() => {
     if (userInformation) {
@@ -103,12 +106,24 @@ export default function ForesporselVelgBarn() {
             <Button onClick={onSubmit} loading={submitting}>
               SEND INN
             </Button>
-            <Link href="/" className="no-underline" passHref>
-              <Button type="button" variant="secondary">
-                AVBRYT
-              </Button>
-            </Link>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setOpen((current) => !current)}
+            >
+              AVBRYT
+            </Button>
           </div>
+          <ConfirmModal
+            open={open}
+            header="Vil du avbryte forerspørselen?"
+            content="Avbryter du nå, skal forerspørselen slettes og 
+            du må starte på nytt."
+            submitText="Tilbake til søknaden"
+            onSubmit={() => setOpen(false)}
+            onCancel={() => router.push("/")}
+            onClose={() => setOpen(false)}
+          />
         </>
       )}
     </div>
