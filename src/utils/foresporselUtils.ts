@@ -19,14 +19,16 @@ export function mapToForesporselWithStatusAndPersonsAge(
 }
 
 function getStatus(foresporsel: IForesporsel): ForesporselStatus {
-  if (isEveryoneOver15YearsOld(foresporsel.barn as IPerson[])) {
+  if (isAutomaticSubmission(foresporsel)) {
     return ForesporselStatus.AUTOMATISK_SENDT_INN_TIL_NAV;
+  } else if (isEveryoneOver15YearsOld(foresporsel.barn)) {
+    return ForesporselStatus.SENDT_INN_TIL_NAV;
   } else if (foresporsel.samtykket) {
     return ForesporselStatus.SAMTYKKET;
   } else if (foresporsel.samtykket === null) {
     return ForesporselStatus.VENTER_PAA_SAMTYKKE;
   } else {
-    // TODO
+    // TODO venter med avklaring om forespørsler med trekket tilbake status skal vise eller ikke
     return ForesporselStatus.TREKKET_TILBAKE;
   }
 }
@@ -40,7 +42,7 @@ export function findForesporselById(
 
 // - kreverSamtykke: false (pga at barnet var under 15 da den ble opprettet)
 // - samtykket: null (motpart trenger ikke lenger å samtykke ettersom barnet har fylt 15)
-// - journalført: ikke null (har blitt sendt inn til NAV etter at barnet ble 15 år, kommer forresten til å endre feltnavn til journalført)
+// - journalført: ikke null (har blitt sendt inn til NAV etter at barnet ble 15 år)
 export function isAutomaticSubmission(foresporsler: IForesporsel): boolean {
   const { kreverSamtykke, samtykket, journalført } = foresporsler;
   return !kreverSamtykke && samtykket === null && journalført !== null;

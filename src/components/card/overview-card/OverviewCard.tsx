@@ -1,6 +1,7 @@
 import { Next } from "@navikt/ds-icons";
 import { LinkPanel, Panel } from "@navikt/ds-react";
 import Link from "next/link";
+import { ForesporselStatus } from "../../../enum/foresporsel-status";
 import { IForesporsel } from "../../../types/foresporsel";
 import { formatDate } from "../../../utils/dateUtils";
 import { isAutomaticSubmission } from "../../../utils/foresporselUtils";
@@ -41,7 +42,9 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
             </div>
           </LinkPanel.Description>
           <StatusBar status={status} />
-          {isAutomaticSubmission(foresporsel) && <BarnOver15Alert barn={barn} />}
+          {foresporsel.status === ForesporselStatus.AUTOMATISK_SENDT_INN_TIL_NAV && (
+            <BarnOver15Alert barn={barn} />
+          )}
         </div>
         <Next className="navds-link-panel__chevron" aria-hidden />
       </Panel>
