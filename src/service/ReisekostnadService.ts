@@ -25,7 +25,7 @@ export default class ReisekostnadService extends DefaultConsumer {
   }
 
   async opprettNyForesporsel(nyForeporsel: INyForespørsel): Promise<IApiResponse<unknown>> {
-    const response = await this.post<INyForespørsel>(
+    const response = await this.post(
       "/api/v1/reisekostnad/forespoersel/ny",
       JSON.stringify(nyForeporsel)
     );
@@ -44,8 +44,4 @@ export default class ReisekostnadService extends DefaultConsumer {
 
     return response;
   }
-}
-
-interface IPayload {
-  identerBarn: string[];
 }
