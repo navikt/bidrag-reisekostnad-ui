@@ -1,5 +1,6 @@
 import { Alert, BodyShort, Button, Heading, Modal } from "@navikt/ds-react";
 import { WarningColored } from "@navikt/ds-icons";
+import { useEffect } from "react";
 
 interface IConfirmModalProps {
   open: boolean;
@@ -28,9 +29,13 @@ export default function ConfirmModal({
   showError = false,
   errorMessage = "Det skjedde en feil",
 }: IConfirmModalProps) {
+  useEffect(() => {
+    Modal.setAppElement("#__next");
+  }, []);
+
   return (
     <Modal
-      className="p-5 w-1/3"
+      className="p-5"
       open={open}
       onClose={onClose}
       closeButton={false}
