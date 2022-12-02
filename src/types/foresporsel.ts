@@ -13,14 +13,14 @@ export interface IBrukerinformasjon {
 }
 
 export interface IForesporsel extends IForesporselUi {
-  idForespørsel: number;
+  id: number;
   kreverSamtykke: boolean;
   barn: IPerson[];
   hovedpart: IPerson;
   motpart: IPerson;
   opprettet: string | null;
   samtykket: string | null;
-  journalfoert: string | null;
+  journalført: string | null;
 }
 
 interface IForesporselUi {

@@ -12,10 +12,10 @@ interface IOverviewCardProps {
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { idForespørsel, opprettet, barn, status } = foresporsel;
+  const { id, opprettet, barn, status } = foresporsel;
 
   return (
-    <Link className="no-underline" href={`/foresporsel/${idForespørsel}`} passHref>
+    <Link className="no-underline" href={`/foresporsel/${id}`} passHref>
       <Panel className="navds-link-panel cursor-pointer" border>
         <div className="w-full navds-link-panel__content text-gray-900">
           <LinkPanel.Title className="text-large text-gray-900">Reisekostnader</LinkPanel.Title>

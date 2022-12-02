@@ -7,7 +7,7 @@ export const BRUKER_INFORMASJON_1 = {
   kanSøkeOmFordelingAvReisekostnader: true,
   forespørslerSomHovedpart: [
     {
-      idForespørsel: 2,
+      id: 2,
       kreverSamtykke: true,
       barn: [
         {
@@ -31,16 +31,16 @@ export const BRUKER_INFORMASJON_1 = {
       },
       opprettet: "2022-11-21T10:54:31.152379",
       samtykket: null,
-      journalfoert: null,
+      journalført: null,
     },
     {
-      idForespørsel: 1,
+      id: 1,
       kreverSamtykke: false,
       barn: [
         {
           ident: "77777777777",
           fornavn: "Grus",
-          fødselsdato: "2006-11-21",
+          fødselsdato: "2007-11-21",
         },
       ],
       hovedpart: {
@@ -53,12 +53,12 @@ export const BRUKER_INFORMASJON_1 = {
       },
       opprettet: "2022-11-21T10:54:31.071878",
       samtykket: null,
-      journalfoert: null,
+      journalført: null,
     },
   ],
   forespørslerSomMotpart: [
     {
-      idForespørsel: 3,
+      id: 3,
       kreverSamtykke: true,
       barn: [
         {
@@ -82,16 +82,16 @@ export const BRUKER_INFORMASJON_1 = {
       },
       opprettet: "2022-11-21T10:54:31.152379",
       samtykket: null,
-      journalfoert: null,
+      journalført: null,
     },
     {
-      idForespørsel: 4,
+      id: 4,
       kreverSamtykke: false,
       barn: [
         {
           ident: "77777777777",
           fornavn: "Grus",
-          fødselsdato: "2006-11-21",
+          fødselsdato: "2007-11-21",
         },
       ],
       hovedpart: {
@@ -104,7 +104,7 @@ export const BRUKER_INFORMASJON_1 = {
       },
       opprettet: "2022-11-21T10:54:31.071878",
       samtykket: null,
-      journalfoert: null,
+      journalført: null,
     },
   ],
   motparterMedFellesBarnUnderFemtenÅr: [
@@ -131,7 +131,7 @@ export const BRUKER_INFORMASJON_1 = {
     {
       ident: "77777777777",
       fornavn: "Grus",
-      fødselsdato: "2006-11-21",
+      fødselsdato: "2007-11-21",
     },
   ],
 };

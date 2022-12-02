@@ -70,7 +70,7 @@ export default function ForesporselId() {
             barnInformation={barnInformation}
             sentDate={foresporsel.opprettet}
             status={foresporsel.status}
-            foresporselId={foresporsel.idForespørsel}
+            foresporselId={foresporsel.id}
           />
         )}
 
@@ -85,7 +85,7 @@ export default function ForesporselId() {
 
       {!isHovedpart && !showConfirmPage && (
         <SamtykkeContainer
-          foresporselId={foresporsel.idForespørsel}
+          foresporselId={foresporsel.id}
           showConfirmation={(sendingInn) => setShowConfirmPage(sendingInn)}
           barnInformation={barnInformation}
           hovedpart={foresporsel.hovedpart}

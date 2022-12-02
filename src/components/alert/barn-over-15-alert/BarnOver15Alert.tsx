@@ -12,9 +12,9 @@ export default function BarnOver15Alert({ barn }: IBarnOver15AlertProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
 
   useEffect(() => {
-    const personsOver15 = getPersonOver15YearsOld(barn);
-    if (personsOver15.length > 0) {
-      setBarnOver15(personsOver15);
+    const personOver15 = getPersonOver15YearsOld(barn);
+    if (personOver15.length > 0) {
+      setBarnOver15(personOver15);
     }
   }, [barn]);
 
