@@ -81,7 +81,7 @@ export default function ForesporselId() {
         foresporsel.erAlleOver15 && (
           <ForesporselKvitteringContainer
             barn={foresporsel.barn}
-            sentDate={formatDate(foresporsel.opprettet)}
+            sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
           />
         )}
 
