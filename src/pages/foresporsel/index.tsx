@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ForesporselVelgBarn from "../../views/foresporsel/foresporsel-velg-barn/ForesporselVelgBarn";
+import OpprettForesporsel from "../../views/foresporsel/opprett-foresporsel/OpprettForesporsel";
 import useSWRImmutable from "swr/immutable";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { useReisekostnad } from "../../context/reisekostnadContext";
@@ -19,5 +19,5 @@ export default function Foresporsel() {
     return <Spinner />;
   }
 
-  return <ForesporselVelgBarn />;
+  return <OpprettForesporsel />;
 }

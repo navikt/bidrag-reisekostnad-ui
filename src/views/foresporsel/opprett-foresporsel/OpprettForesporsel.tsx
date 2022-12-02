@@ -12,7 +12,7 @@ import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
 import { today } from "../../../utils/dateUtils";
 
-export default function ForesporselVelgBarn() {
+export default function OpprettForesporsel() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
   const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
