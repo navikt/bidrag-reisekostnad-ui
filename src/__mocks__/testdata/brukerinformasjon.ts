@@ -5,6 +5,7 @@ export const BRUKER_INFORMASJON_1 = {
   kjønn: "Kvinne",
   harDiskresjon: true,
   kanSøkeOmFordelingAvReisekostnader: true,
+  harSkjulteFamilieenheterMedDiskresjon: true,
   forespørslerSomHovedpart: [
     {
       id: 2,

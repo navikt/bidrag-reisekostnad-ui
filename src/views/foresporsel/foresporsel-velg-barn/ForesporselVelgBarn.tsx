@@ -91,6 +91,9 @@ export default function ForesporselVelgBarn() {
               dine
             </span>
           </GuidePanel>
+          {userInformation && userInformation.harSkjulteFamilieenheterMedDiskresjon && (
+            <Alert variant="info">TODO: personen har skjulte familieenheter med diskresjon</Alert>
+          )}
           <BarnContainer
             allBarn={allBarn}
             foundPersonOver15={foundPersonOver15}

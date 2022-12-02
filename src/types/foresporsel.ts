@@ -6,6 +6,7 @@ export interface IBrukerinformasjon {
   kjønn: Gender;
   harDiskresjon: boolean;
   kanSøkeOmFordelingAvReisekostnader: boolean;
+  harSkjulteFamilieenheterMedDiskresjon: boolean;
   forespørslerSomHovedpart: IForesporsel[];
   forespørslerSomMotpart: IForesporsel[];
   motparterMedFellesBarnUnderFemtenÅr: IMotpart[];
