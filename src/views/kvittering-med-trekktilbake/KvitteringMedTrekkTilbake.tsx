@@ -1,11 +1,12 @@
-import { Alert, Button } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 import ConfirmationLayout from "../../components/layout/confirmation-layout/ConfirmationLayout";
 import StatusBar from "../../components/status-bar/StatusBar";
 import { ForesporselStatus } from "../../enum/foresporsel-status";
 import useForesporselApi from "../../hooks/useForesporselApi";
 import { formatDate } from "../../utils/dateUtils";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ConfirmModal from "../../components/modal/confirm-modal/ConfirmModal";
 
 interface IKvitteringMedTrekkTilbakeProps {
   foresporselId: number;
@@ -20,6 +21,8 @@ export default function KvitteringMedTrekkTilbake({
   sentDate,
   status,
 }: IKvitteringMedTrekkTilbakeProps) {
+  const [open, setOpen] = useState<boolean>(false);
+
   const { submitting, success, failed, trekkeForesporsel } = useForesporselApi();
   const router = useRouter();
 
@@ -31,9 +34,6 @@ export default function KvitteringMedTrekkTilbake({
 
   return (
     <div className="grid gap-12">
-      {!success && failed && (
-        <Alert variant="error">Det skjedde en feil ved tilbaketrekking av forespørselen</Alert>
-      )}
       <ConfirmationLayout>
         <div className="grid gap-12">
           <div className="w-[40rem] grid grid-cols-[70%_30%]">
@@ -55,14 +55,26 @@ export default function KvitteringMedTrekkTilbake({
               <Button
                 type="button"
                 variant="secondary"
-                onClick={() => trekkeForesporsel(foresporselId)}
-                loading={submitting}
+                onClick={() => setOpen((current) => !current)}
               >
                 TREKK TILBAKE
               </Button>
             </div>
           </div>
         </div>
+        <ConfirmModal
+          open={open}
+          header="Vil du trekke forerspørselen tilbake?"
+          content="Trekker du forerspørselen nå, skal 
+          den slettes. Motparten blir informert om det."
+          submitText="Trekk tilbake"
+          onSubmit={() => trekkeForesporsel(foresporselId)}
+          onCancel={() => router.push("/")}
+          onClose={() => setOpen(false)}
+          loading={submitting}
+          showError={!success && failed}
+          errorMessage="Det skjedde en feil tilbaketrekking av forespørselen"
+        />
       </ConfirmationLayout>
     </div>
   );
