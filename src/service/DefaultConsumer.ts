@@ -1,6 +1,6 @@
-import { ApiError } from "@navikt/bidrag-ui-common";
-import { v4 as uuidV4 } from "uuid";
-import { ISession } from "../lib/security/session";
+import {ApiError} from "@navikt/bidrag-ui-common";
+import {ISession} from "../lib/security/session";
+import {getCorrelationIdFromContext} from "../lib/logging/als";
 
 type FetchMethods = "GET" | "POST" | "PUT";
 
@@ -59,7 +59,7 @@ export class DefaultConsumer {
   ): Promise<IApiResponse<T>> {
     const idToken = await this.session.getOBOToken(this.audience);
     const headers: HeadersInit = {
-      "X-Correlation-ID": uuidV4(),
+      "X-Correlation-ID": getCorrelationIdFromContext(),
       Authorization: "Bearer " + idToken,
       "Content-type": "application/json; charset=UTF-8",
       "Nav-Consumer-Id": "bidrag-reisekostnad-ui",
@@ -86,7 +86,8 @@ export class DefaultConsumer {
         } as IApiResponse<T>;
       })
       .catch(async (err: any) => {
-        const correlationId = err?.headers?.get("x-correlation-id") || uuidV4();
+        const correlationId =
+          err?.headers?.get("x-correlation-id") || getCorrelationIdFromContext();
         const responseBody = typeof err.text === "function" ? await err?.text() : err.message;
         const errorMessage =
           `Det skjedde feil ved kall mot ${url} med http-metode ${method}. ` +

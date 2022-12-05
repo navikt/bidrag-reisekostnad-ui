@@ -2,7 +2,11 @@
 
 import pino from "pino";
 
-export const logger = (await getLogger())();
+export let logger = (await getLogger())();
+
+export async function initLoggerWithContext() {
+  logger = (await getLogger())();
+}
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 async function getLogger(): Promise<(defaultConfig?: {}) => pino.Logger> {

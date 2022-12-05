@@ -1,6 +1,8 @@
 import pino from "pino";
 import fs from "fs";
-import { mapError } from "./types";
+import {mapError} from "./types";
+import {getCorrelationIdFromContext} from "./als";
+import {getTransactionIdFromContext} from "./als";
 
 export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
   pino(
@@ -19,7 +21,10 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
       },
     },
     pino.multistream(getStreams())
-  );
+  ).child({
+    correlationId: getCorrelationIdFromContext(),
+    transactionId: getTransactionIdFromContext(),
+  });
 
 function getStreams() {
   if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "true") {
