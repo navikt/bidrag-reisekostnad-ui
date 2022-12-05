@@ -5,6 +5,7 @@ import { DefaultConsumer, IApiResponse } from "./DefaultConsumer";
 import { ISession } from "../lib/security/session";
 import { INyForespørsel } from "../types/payload/foresporselPayload";
 import { logger } from "../lib/logging/logger";
+import ForesporselId from "../pages/foresporsel/[id]";
 
 export default class ReisekostnadService extends DefaultConsumer {
   constructor(session: ISession) {
@@ -36,15 +37,21 @@ export default class ReisekostnadService extends DefaultConsumer {
   }
 
   async trekkeForesporsel(foresporselId: number): Promise<IApiResponse<unknown>> {
+    logger.info(`Trekke forespørsel: ${ForesporselId} tilbake`);
+
     const response = await this.put<void>(
-      `/api/v1/reisekostnad/forespoersel/trekke/${foresporselId}`
+      `/api/v1/reisekostnad/forespoersel/trekke?id?=${foresporselId}`
     );
 
     return response;
   }
 
   async samtykkeForesporsel(foresporselId: number): Promise<IApiResponse<unknown>> {
-    const response = await this.put(`/api/v1/reisekostnad/forespoersel/samtykke/${foresporselId}`);
+    logger.info(`Samtykke forespørsel: ${ForesporselId}`);
+
+    const response = await this.put(
+      `/api/v1/reisekostnad/forespoersel/samtykke?id=${foresporselId}`
+    );
 
     return response;
   }
