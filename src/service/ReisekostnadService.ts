@@ -4,6 +4,7 @@ import { IBrukerinformasjon } from "../types/foresporsel";
 import { DefaultConsumer, IApiResponse } from "./DefaultConsumer";
 import { ISession } from "../lib/security/session";
 import { INyForespørsel } from "../types/payload/foresporselPayload";
+import { logger } from "../lib/logging/logger";
 
 export default class ReisekostnadService extends DefaultConsumer {
   constructor(session: ISession) {
@@ -25,7 +26,8 @@ export default class ReisekostnadService extends DefaultConsumer {
   }
 
   async opprettNyForesporsel(nyForeporsel: INyForespørsel): Promise<IApiResponse<unknown>> {
-    const response = await this.post(
+    logger.info("Lage en ny forepørsel for " + nyForeporsel);
+    const response = await this.post<void>(
       "/api/v1/reisekostnad/forespoersel/ny",
       JSON.stringify(nyForeporsel)
     );
@@ -34,7 +36,9 @@ export default class ReisekostnadService extends DefaultConsumer {
   }
 
   async trekkeForesporsel(foresporselId: number): Promise<IApiResponse<unknown>> {
-    const response = await this.put(`/api/v1/reisekostnad/forespoersel/trekke/${foresporselId}`);
+    const response = await this.put<void>(
+      `/api/v1/reisekostnad/forespoersel/trekke/${foresporselId}`
+    );
 
     return response;
   }
