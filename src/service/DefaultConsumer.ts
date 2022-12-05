@@ -90,7 +90,7 @@ export class DefaultConsumer {
           err?.headers?.get("x-correlation-id") || getCorrelationIdFromContext();
         const responseBody = typeof err.text === "function" ? await err?.text() : err.message;
         const errorMessage =
-          `Det skjedde feil ved kall mot ${url} med http-metode ${method}. ` +
+          `Det skjedde feil ved kall mot ${fullUrl} med http-metode ${method}. ` +
           `Fikk respons fra endepunkt med feilmelding=${err.statusText} og feilkode=${err.status}`;
         throw new ApiError(errorMessage, responseBody, correlationId, err.status);
       });
