@@ -28,6 +28,6 @@ export function getTransactionIdFromContext() {
 export function getLoggerContext() {
   return {
     correlationId: getCorrelationIdFromContext(),
-    "Transaction-Id": getTransactionIdFromContext(),
+    transactionId: getTransactionIdFromContext(),
   };
 }
