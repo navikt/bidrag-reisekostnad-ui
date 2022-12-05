@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { ApiOperation } from "../enum/api";
-import useSWRImmutable from "swr/immutable";
 import { HTTPStatus } from "../enum/HttpStatus";
 
 import { requestBody } from "../utils/apiUtils";
 import { INyForespørsel } from "../types/payload/foresporselPayload";
+import { useSWRConfig } from "swr";
 
 export default function useForesporselApi() {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [failed, setFailed] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  const { mutate } = useSWRImmutable("/api/brukerinformasjon");
+  const { mutate } = useSWRConfig();
 
   function updateStatesBeforeCall(): void {
     if (failed) {
@@ -20,9 +20,13 @@ export default function useForesporselApi() {
     setSubmitting(true);
   }
 
-  function updateStatesAfterCall(result: Response, successStatusCode: HTTPStatus): void {
+  async function updateStatesAfterCall(
+    result: Response,
+    successStatusCode: HTTPStatus
+  ): Promise<void> {
     if (result.status === successStatusCode) {
-      mutate();
+      await mutate("/api/brukerinformasjon");
+
       setSuccess(true);
     } else {
       setFailed(true);
@@ -39,7 +43,7 @@ export default function useForesporselApi() {
         requestBody(ApiOperation.POST, { identerBarn: [...identer] } as INyForespørsel)
       );
 
-      updateStatesAfterCall(result, HTTPStatus.OK);
+      updateStatesAfterCall(result, HTTPStatus.CREATED);
     } catch (error: unknown) {
       setFailed(true);
     }
@@ -51,10 +55,10 @@ export default function useForesporselApi() {
 
       const result = await fetch(
         "/api/foresporsel/trekke",
-        requestBody(ApiOperation.PUT, { foresporselId })
+        requestBody(ApiOperation.PUT, foresporselId)
       );
 
-      updateStatesAfterCall(result, HTTPStatus.CREATED);
+      updateStatesAfterCall(result, HTTPStatus.OK);
     } catch (error: unknown) {
       setFailed(true);
     }
@@ -66,7 +70,7 @@ export default function useForesporselApi() {
 
       const result = await fetch(
         "/api/foresporsel/samtykke",
-        requestBody(ApiOperation.PUT, { foresporselId })
+        requestBody(ApiOperation.PUT, foresporselId)
       );
 
       updateStatesAfterCall(result, HTTPStatus.CREATED);

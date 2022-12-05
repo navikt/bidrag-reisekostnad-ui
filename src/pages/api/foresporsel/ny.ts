@@ -10,12 +10,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const response = await new ReisekostnadService(req.session).opprettNyForesporsel(req.body);
 
-    if (response.status !== HTTPStatus.OK) {
+    if (response.status !== HTTPStatus.CREATED) {
       logger.error(response);
       throw new Error(`Fikk respons ${response}`);
     }
 
-    return res.status(HTTPStatus.OK);
+    return res.status(HTTPStatus.CREATED).end();
   } catch (error) {
     logger.error(error);
     return res.status(500).send(error);
