@@ -6,7 +6,6 @@ import { IRequestContext } from "./als";
 import { getAsyncStorage } from "./als";
 import { initLoggerWithContext } from "./logger";
 import { initSecureLoggerWithContext } from "./secureLogger";
-import { initCacheWithContext } from "../cache/cache";
 
 export function withLoggerContext(handler: NextApiHandler): NextApiHandler {
   return async function errorHandler(req, res) {
@@ -17,7 +16,6 @@ export function withLoggerContext(handler: NextApiHandler): NextApiHandler {
     await getAsyncStorage().run(store, async () => {
       await initLoggerWithContext();
       await initSecureLoggerWithContext();
-      await initCacheWithContext();
       handler(req, res);
     });
   };

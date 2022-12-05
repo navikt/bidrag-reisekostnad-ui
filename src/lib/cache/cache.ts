@@ -11,9 +11,5 @@ async function getCache() {
   return getLocalCache();
 }
 
-let cache: TCache = await getCache();
-
-export async function initCacheWithContext() {
-  cache = await getCache();
-}
+const cache: TCache = await getCache();
 export default cache;

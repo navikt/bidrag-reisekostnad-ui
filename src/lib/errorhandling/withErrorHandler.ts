@@ -19,7 +19,7 @@ export function withErrorHandler(handler: NextApiHandler): NextApiHandler {
           .error(e, errorMessage);
       }
 
-      return res.status(500).end();
+      return res.status(500).send(e);
     }
   };
 }
