@@ -7,7 +7,6 @@ import { IPerson } from "../../../types/foresporsel";
 import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import useForesporselApi from "../../../hooks/useForesporselApi";
-import { useEffect } from "react";
 
 interface IForesporselConfirmationProps {
   isAgree: boolean;
@@ -18,14 +17,12 @@ interface ISamtykkeProps {
   foresporselId: number;
   barnInformation: string[];
   hovedpart: IPerson;
-  showConfirmation: (sendingIn: boolean) => void;
 }
 
 export default function SamtykkeContainer({
   foresporselId,
   barnInformation,
   hovedpart,
-  showConfirmation,
 }: ISamtykkeProps) {
   const [haveReadAndUnderstood, setHaveReadAndUnderstood] = useState<IForesporselConfirmationProps>(
     {
@@ -39,12 +36,6 @@ export default function SamtykkeContainer({
       showError: false,
     });
   const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
-
-  useEffect(() => {
-    if (success && !failed) {
-      showConfirmation(true);
-    }
-  }, [success]);
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
@@ -64,7 +55,7 @@ export default function SamtykkeContainer({
     });
   }
 
-  function handleSendIn() {
+  async function handleSendIn() {
     setHaveReadAndUnderstood((current) => {
       return { ...current, showError: !current.isAgree };
     });
@@ -73,7 +64,7 @@ export default function SamtykkeContainer({
     });
 
     if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
-      samtykkeForesporsel(foresporselId);
+      await samtykkeForesporsel(foresporselId);
     }
   }
 

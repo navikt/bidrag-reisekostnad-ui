@@ -5,7 +5,6 @@ import { DefaultConsumer, IApiResponse } from "./DefaultConsumer";
 import { ISession } from "../lib/security/session";
 import { INyForespørsel } from "../types/payload/foresporselPayload";
 import { logger } from "../lib/logging/logger";
-import ForesporselId from "../pages/foresporsel/[id]";
 
 export default class ReisekostnadService extends DefaultConsumer {
   constructor(session: ISession) {

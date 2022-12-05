@@ -11,7 +11,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const foresporselId = req.body;
     const response = await new ReisekostnadService(req.session).samtykkeForesporsel(foresporselId);
 
-    if (response.status !== HTTPStatus.CREATED) {
+    if (response.status !== HTTPStatus.OK) {
       logger.error(response);
       throw new Error(`Fikk respons ${response.status}`);
     }

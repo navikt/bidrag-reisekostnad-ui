@@ -16,7 +16,6 @@ import { formatDate } from "../../utils/dateUtils";
 export default function ForesporselId() {
   const router = useRouter();
   const foresporselId = router.query.id as string;
-  const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
   const [foresporsel, setForesporsel] = useState<IForesporsel>();
 
   const [isHovedpart, setIsHovedpart] = useState<boolean>(false);
@@ -47,11 +46,9 @@ export default function ForesporselId() {
           foresporselId
         );
         setForesporsel(foresporselSomMotpart);
-        // show confirmation page if barn is over 15 years old
-        setShowConfirmPage(foresporselSomMotpart?.erAlleOver15 ?? false);
       }
     }
-  }, [foresporselId, userInformation]);
+  }, [foresporselId, userInformation, isHovedpart]);
 
   if (!userInformation || !foresporselId || !foresporsel) {
     return <Spinner />;
@@ -64,16 +61,14 @@ export default function ForesporselId() {
   return (
     <>
       {/* should be possible to cancel the request if barn is under 15 years old */}
-      {isHovedpart &&
-        foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE &&
-        !foresporsel.erAlleOver15 && (
-          <KvitteringMedTrekkTilbake
-            barnInformation={barnInformation}
-            sentDate={foresporsel.opprettet}
-            status={foresporsel.status}
-            foresporselId={foresporsel.id}
-          />
-        )}
+      {isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
+        <KvitteringMedTrekkTilbake
+          barnInformation={barnInformation}
+          sentDate={foresporsel.opprettet}
+          status={foresporsel.status}
+          foresporselId={foresporsel.id}
+        />
+      )}
 
       {/* should not be possible to cancel the request if barn is over 15 years old */}
       {isHovedpart &&
@@ -85,14 +80,13 @@ export default function ForesporselId() {
           />
         )}
 
-      {!isHovedpart && showConfirmPage && (
+      {!isHovedpart && foresporsel.status === ForesporselStatus.SAMTYKKET && (
         <SamtykkeKvitteringContainer barnInformation={barnInformation} />
       )}
 
-      {!isHovedpart && !showConfirmPage && (
+      {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
         <SamtykkeContainer
           foresporselId={foresporsel.id}
-          showConfirmation={(sendingInn) => setShowConfirmPage(sendingInn)}
           barnInformation={barnInformation}
           hovedpart={foresporsel.hovedpart}
         />
