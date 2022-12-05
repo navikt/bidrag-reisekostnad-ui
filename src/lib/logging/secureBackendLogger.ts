@@ -1,8 +1,8 @@
 import pino from "pino";
 import fs from "fs";
-import {mapError} from "./types";
-import {getCorrelationIdFromContext} from "./als";
-import {getTransactionIdFromContext} from "./als";
+import { mapError } from "./types";
+import { getCorrelationIdFromContext } from "./als";
+import { getTransactionIdFromContext } from "./als";
 
 export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
   pino(

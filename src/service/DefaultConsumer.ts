@@ -1,6 +1,6 @@
-import {ApiError} from "@navikt/bidrag-ui-common";
-import {ISession} from "../lib/security/session";
-import {getCorrelationIdFromContext} from "../lib/logging/als";
+import { ApiError } from "@navikt/bidrag-ui-common";
+import { ISession } from "../lib/security/session";
+import { getCorrelationIdFromContext } from "../lib/logging/als";
 
 type FetchMethods = "GET" | "POST" | "PUT";
 
