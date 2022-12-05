@@ -22,3 +22,10 @@ export function getTransactionIdFromContext() {
   const store = asyncStorage.getStore() as IRequestContext;
   return store?.eid ?? -1;
 }
+
+export function getLoggerContext() {
+  return {
+    correlationId: getCorrelationIdFromContext(),
+    "Transaction-Id": getTransactionIdFromContext(),
+  };
+}

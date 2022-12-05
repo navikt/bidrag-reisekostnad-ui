@@ -1,7 +1,6 @@
 import pino from "pino";
 import { mapError } from "./types";
-import { getCorrelationIdFromContext } from "./als";
-import { getTransactionIdFromContext } from "./als";
+import { getLoggerContext } from "./als";
 
 export const backendLogger = (defaultConfig = {}): pino.Logger =>
   pino({
@@ -16,7 +15,4 @@ export const backendLogger = (defaultConfig = {}): pino.Logger =>
         return object;
       },
     },
-  }).child({
-    correlationId: getCorrelationIdFromContext(),
-    transactionId: getTransactionIdFromContext(),
-  });
+  }).child(getLoggerContext());
