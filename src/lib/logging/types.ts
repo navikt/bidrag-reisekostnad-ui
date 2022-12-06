@@ -18,6 +18,7 @@ export function generateAndStoreCorrelationIdAsCookie() {
   const corrId = getCorrelationId();
   document.cookie = `${CORRELATION_ID_COOKIE_NAME}=${corrId}`;
 }
+
 export function errorifyMessages(logEvent: pino.LogEvent): pino.LogEvent {
   logEvent.messages = logEvent.messages.map((message) => {
     if (typeof message === "object" && "stack" in message) {

@@ -8,7 +8,7 @@ export function withErrorHandler(handler: NextApiHandler): NextApiHandler {
       return await handler(req, res);
     } catch (e) {
       const execptionMessage = e instanceof Error ? e.message : "";
-      const errorMessage = `Det skjedde en feil ved håndtering av api endepunkt ${req.url} med feilmedling ${execptionMessage}`;
+      const errorMessage = `Det skjedde en feil ved håndtering av api endepunkt ${req.url} med feilmelding ${execptionMessage}`;
       logger.error(e, errorMessage);
       if (req.body) {
         const bodyString = JSON.stringify(req.body);
