@@ -11,6 +11,10 @@ import { PageMeta } from "../../../components/page-meta/PageMeta";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
 import { today } from "../../../utils/dateUtils";
+import {
+  getBarnWithNoActiveForesporsler,
+  isEveryoneOver15YearsOld,
+} from "../../../utils/personUtils";
 
 export default function OpprettForesporsel() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -27,13 +31,9 @@ export default function OpprettForesporsel() {
 
   useEffect(() => {
     if (userInformation) {
-      const { barnMinstFemtenÅr, motparterMedFellesBarnUnderFemtenÅr } = userInformation;
-      const fellesBarnUnder15Aar = motparterMedFellesBarnUnderFemtenÅr.flatMap(
-        (barn) => barn.fellesBarnUnder15År
-      );
-
-      setAllBarn([...barnMinstFemtenÅr, ...fellesBarnUnder15Aar]);
-      setFoundPersonOver15(fellesBarnUnder15Aar.length > 0);
+      const barn = getBarnWithNoActiveForesporsler(userInformation);
+      setAllBarn(barn);
+      setFoundPersonOver15(isEveryoneOver15YearsOld(barn));
     }
   }, [userInformation]);
 

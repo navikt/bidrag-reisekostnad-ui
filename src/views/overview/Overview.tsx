@@ -39,9 +39,11 @@ export default function Overview() {
                     Sendt til deg:
                   </Heading>
                 )}
-                {forespørslerSomMotpart.map((request, index) => {
-                  return <OverviewCard key={index} foresporsel={request} />;
-                })}
+                {forespørslerSomMotpart
+                  .filter((foresporsel) => !foresporsel.erAlleOver15)
+                  .map((request, index) => {
+                    return <OverviewCard key={index} foresporsel={request} />;
+                  })}
               </div>
             </>
           )}

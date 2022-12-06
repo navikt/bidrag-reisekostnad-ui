@@ -1,4 +1,4 @@
-import { IPerson } from "../types/foresporsel";
+import { IBrukerinformasjon, IPerson } from "../types/foresporsel";
 import { calculateAge } from "./dateUtils";
 
 export function getPersonOver15YearsOld(person: IPerson[]): IPerson[] {
@@ -15,4 +15,39 @@ export function isEveryoneOver15YearsOld(person: IPerson[]): boolean {
 
 export function mapToPersonWithAge(person: IPerson[]): IPerson[] {
   return person.map((p) => ({ ...p, alder: calculateAge(p.fødselsdato) }));
+}
+
+export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformasjon): IPerson[] {
+  const {
+    barnMinstFemtenÅr,
+    motparterMedFellesBarnUnderFemtenÅr,
+    forespørslerSomHovedpart,
+    forespørslerSomMotpart,
+  } = userInformation;
+  const fellesBarnUnder15Aar = motparterMedFellesBarnUnderFemtenÅr.flatMap(
+    (barn) => barn.fellesBarnUnder15År
+  );
+  const allBarn = [...barnMinstFemtenÅr, ...fellesBarnUnder15Aar];
+
+  const barnIForespørslerSomHovedpart = forespørslerSomHovedpart.flatMap(
+    (foresporsel) => foresporsel.barn
+  );
+  const barnIForespørslerSomMotpart = forespørslerSomMotpart.flatMap(
+    (foresporsel) => foresporsel.barn
+  );
+
+  const allBarnIdenterIForesporsler = [
+    ...barnIForespørslerSomHovedpart,
+    ...barnIForespørslerSomMotpart,
+  ].map((i) => i.ident);
+
+  const result = [] as IPerson[];
+
+  allBarn.forEach((barn) => {
+    if (!allBarnIdenterIForesporsler.includes(barn.ident)) {
+      result.push(barn);
+    }
+  });
+
+  return result;
 }

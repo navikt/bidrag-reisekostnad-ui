@@ -28,6 +28,9 @@ export default function BarnContainer({
       <Heading size="large" level="2">
         Barn
       </Heading>
+      <Alert variant="info" className="w-[80%]">
+        KUN TILGJENGELIG BARN ER LISTE
+      </Alert>
       <CheckboxGroup
         legend="Velg barn søknaden gjelder for."
         onChange={(val: any[]) => handleChange(val)}
