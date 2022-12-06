@@ -26,7 +26,7 @@ function getStatus(foresporsel: IForesporsel): ForesporselStatus {
     return ForesporselStatus.AUTOMATISK_SENDT_INN_TIL_NAV;
   } else if (kreverSamtykke && samtykket !== null) {
     return ForesporselStatus.UNDER_BEHANDLING;
-  } else if (!kreverSamtykke && samtykket === null) {
+  } else if (kreverSamtykke && samtykket === null) {
     return ForesporselStatus.VENTER_PAA_SAMTYKKE;
   } else {
     // TODO sjekke om forespørselen er deaktivert
