@@ -1,6 +1,7 @@
 import pino from "pino";
 import fs from "fs";
 import { mapError } from "./types";
+import { getLoggerContext } from "./als";
 
 export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
   pino(
@@ -19,7 +20,7 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
       },
     },
     pino.multistream(getStreams())
-  );
+  ).child(getLoggerContext());
 
 function getStreams() {
   if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "true") {

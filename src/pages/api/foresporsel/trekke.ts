@@ -7,18 +7,13 @@ import ReisekostnadService from "../../../service/ReisekostnadService";
 export default withSessionApiRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    const foresporselId = req.body;
-    const response = await new ReisekostnadService(req.session).trekkeForesporsel(foresporselId);
+  const foresporselId = req.body;
+  const response = await new ReisekostnadService(req.session).trekkeForesporsel(foresporselId);
 
-    if (response.status !== HTTPStatus.OK) {
-      logger.error(response);
-      throw new Error(`Fikk respons ${response.status}`);
-    }
-
-    return res.status(HTTPStatus.OK).end();
-  } catch (error) {
-    logger.error(error);
-    return res.status(500).send(error);
+  if (response.status !== HTTPStatus.OK) {
+    logger.error(response);
+    throw new Error(`Fikk respons ${response.status}`);
   }
+
+  return res.status(HTTPStatus.OK).end();
 }

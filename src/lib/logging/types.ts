@@ -3,6 +3,8 @@ import { v4 as uuidV4 } from "uuid";
 import pino from "pino";
 
 export const CORRELATION_ID_STORAGE_NAME = "correlationId";
+export const CORRELATION_ID_COOKIE_NAME = CORRELATION_ID_STORAGE_NAME;
+
 export function getCorrelationId() {
   let correlationId = SessionStorage.get(CORRELATION_ID_STORAGE_NAME);
   if (!correlationId) {
@@ -10,6 +12,11 @@ export function getCorrelationId() {
     SessionStorage.set(CORRELATION_ID_STORAGE_NAME, correlationId);
   }
   return correlationId;
+}
+
+export function generateAndStoreCorrelationIdAsCookie() {
+  const corrId = getCorrelationId();
+  document.cookie = `${CORRELATION_ID_COOKIE_NAME}=${corrId}`;
 }
 
 export function errorifyMessages(logEvent: pino.LogEvent): pino.LogEvent {
