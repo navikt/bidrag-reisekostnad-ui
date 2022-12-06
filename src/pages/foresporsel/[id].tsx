@@ -60,7 +60,6 @@ export default function ForesporselId() {
 
   return (
     <>
-      {/* should be possible to cancel the request if barn is under 15 years old */}
       {isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
         <KvitteringMedTrekkTilbake
           barnInformation={barnInformation}
@@ -70,15 +69,12 @@ export default function ForesporselId() {
         />
       )}
 
-      {/* should not be possible to cancel the request if barn is over 15 years old */}
-      {isHovedpart &&
-        foresporsel.status !== ForesporselStatus.VENTER_PAA_SAMTYKKE &&
-        foresporsel.erAlleOver15 && (
-          <ForesporselKvitteringContainer
-            barn={foresporsel.barn}
-            sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
-          />
-        )}
+      {isHovedpart && foresporsel.status !== ForesporselStatus.VENTER_PAA_SAMTYKKE && (
+        <ForesporselKvitteringContainer
+          barn={foresporsel.barn}
+          sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
+        />
+      )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
         <SamtykkeKvitteringContainer barnInformation={barnInformation} />

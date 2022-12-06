@@ -1,18 +1,34 @@
 import { Heading, Button, Alert } from "@navikt/ds-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import GreetingCard from "../../components/card/greeting-card/GreetingCard";
 import OverviewCard from "../../components/card/overview-card/OverviewCard";
 import { PageMeta } from "../../components/page-meta/PageMeta";
 import { useReisekostnad } from "../../context/reisekostnadContext";
+import { IForesporsel } from "../../types/foresporsel";
 
 export default function Overview() {
   const { userInformation } = useReisekostnad();
+  const [showedForespørslerSomMotpart, setShowedForespørslerSomMotpart] = useState<IForesporsel[]>(
+    []
+  );
+
+  useEffect(() => {
+    if (userInformation) {
+      const { forespørslerSomMotpart } = userInformation;
+      const foresporslerWithBarnUnder15 = forespørslerSomMotpart.filter(
+        (foresporsel) => !foresporsel.erAlleOver15
+      );
+
+      setShowedForespørslerSomMotpart(foresporslerWithBarnUnder15);
+    }
+  }, [userInformation]);
 
   if (!userInformation) {
     return null;
   }
 
-  const { forespørslerSomMotpart, forespørslerSomHovedpart } = userInformation;
+  const { forespørslerSomHovedpart } = userInformation;
 
   return (
     <>
@@ -28,7 +44,7 @@ export default function Overview() {
             </p>
             <p>I tillegg kan du fra denne siden sende inn en ny sak til behandling.</p>
           </div>
-          {forespørslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
+          {showedForespørslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
             <Alert variant="info">Du har ingen saker om fordeling av reisekostnader</Alert>
           )}
           <div>
@@ -36,19 +52,17 @@ export default function Overview() {
               <Button type="button">Send inn en ny sak om fordeling av reisekostnader</Button>
             </Link>
           </div>
-          {forespørslerSomMotpart.length > 0 && (
+          {showedForespørslerSomMotpart.length > 0 && (
             <>
               <div className="w-full flex flex-col gap-5">
-                {forespørslerSomMotpart && (
+                {showedForespørslerSomMotpart && (
                   <Heading level="1" size="small">
                     Saker du har mottatt fra den andre forelderen:
                   </Heading>
                 )}
-                {forespørslerSomMotpart
-                  .filter((foresporsel) => !foresporsel.erAlleOver15)
-                  .map((request, index) => {
-                    return <OverviewCard key={index} foresporsel={request} />;
-                  })}
+                {showedForespørslerSomMotpart.map((request, index) => {
+                  return <OverviewCard key={index} foresporsel={request} />;
+                })}
               </div>
             </>
           )}
