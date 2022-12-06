@@ -20,6 +20,7 @@ export default function OpprettForesporsel() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
   const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
+  const [foundPersonCouldBe15In30Days, setFoundPersonCouldBe15In30Days] = useState<boolean>(false);
   const [samtykke, setSamtykke] = useState<boolean>(false);
   const [showBarnError, setShowBarnError] = useState<boolean>(false);
   const [showSamtykkeError, setShowSamtykkeError] = useState<boolean>(false);
@@ -32,8 +33,10 @@ export default function OpprettForesporsel() {
   useEffect(() => {
     if (userInformation) {
       const barn = getBarnWithNoActiveForesporsler(userInformation);
+
       setAllBarn(barn);
       setFoundPersonOver15(isEveryoneOver15YearsOld(barn));
+      setFoundPersonCouldBe15In30Days(barn.some((i) => i.er15Om30Dager));
     }
   }, [userInformation]);
 
@@ -115,6 +118,7 @@ export default function OpprettForesporsel() {
           <BarnContainer
             allBarn={allBarn}
             foundPersonOver15={foundPersonOver15}
+            foundPersonCouldBe15In30Days={foundPersonCouldBe15In30Days}
             onSelectBarn={onSelectBarn}
             showError={showBarnError}
           />

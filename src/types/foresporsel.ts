@@ -38,6 +38,7 @@ export interface IPerson extends IPersonAge {
 export interface IPersonAge {
   alder: number;
   erOver15: boolean;
+  er15Om30Dager: boolean;
 }
 
 interface IMotpart {

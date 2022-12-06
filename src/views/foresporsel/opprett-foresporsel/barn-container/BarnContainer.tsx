@@ -6,6 +6,7 @@ import { getBarnInformationText } from "../../../../utils/stringUtils";
 interface IBarnContainerProps {
   allBarn: IPerson[];
   foundPersonOver15: boolean;
+  foundPersonCouldBe15In30Days: boolean;
   showError: boolean;
   onSelectBarn: (selectedBarn: string[]) => void;
 }
@@ -13,6 +14,7 @@ interface IBarnContainerProps {
 export default function BarnContainer({
   allBarn,
   foundPersonOver15,
+  foundPersonCouldBe15In30Days,
   showError,
   onSelectBarn,
 }: IBarnContainerProps) {
@@ -46,12 +48,16 @@ export default function BarnContainer({
           );
         })}
       </CheckboxGroup>
-      {/* TODO: SKAL OGSÅ VÆRE TEKST FOR BARN SOM KAN BLI 15 ÅR I LØPER AV BEHANDLINGER */}
       {foundPersonOver15 && (
         <Alert variant="info" className="w-[80%]">
           Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke
           fra den andre forelderen for at NAV kan behandle saken. Da går saken automatisk videre til
           behandling.
+        </Alert>
+      )}
+      {foundPersonCouldBe15In30Days && (
+        <Alert variant="info" className="w-[80%]">
+          TEKST FOR BARN SOM KAN BLI 15 ÅR I LØPER AV BEHANDLINGER
         </Alert>
       )}
     </div>

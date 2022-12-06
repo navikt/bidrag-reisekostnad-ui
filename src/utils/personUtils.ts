@@ -1,5 +1,5 @@
 import { IBrukerinformasjon, IPerson } from "../types/foresporsel";
-import { calculateAge } from "./dateUtils";
+import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
 
 export function getPersonOver15YearsOld(person: IPerson[]): IPerson[] {
   return person.filter((i) => i.alder >= 15);
@@ -14,7 +14,12 @@ export function isEveryoneOver15YearsOld(person: IPerson[]): boolean {
 }
 
 export function mapToPersonWithAge(person: IPerson[]): IPerson[] {
-  return person.map((p) => ({ ...p, alder: calculateAge(p.fødselsdato) }));
+  return person.map((p) => ({
+    ...p,
+    alder: calculateAge(p.fødselsdato),
+    erOver15: isAgeOver15YearsOld(p.fødselsdato),
+    er15Om30Dager: is15YearsOldIn30Days(p.fødselsdato),
+  }));
 }
 
 export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformasjon): IPerson[] {

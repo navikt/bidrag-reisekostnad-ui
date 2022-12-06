@@ -1,6 +1,6 @@
 import { ForesporselStatus } from "../enum/foresporsel-status";
 import { IForesporsel, IPerson } from "../types/foresporsel";
-import { calculateAge } from "./dateUtils";
+import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
 import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./personUtils";
 
 export function mapToForesporselWithStatusAndPersonsAge(
@@ -12,6 +12,7 @@ export function mapToForesporselWithStatusAndPersonsAge(
       ...person,
       alder: calculateAge(person.fødselsdato),
       erOver15: isAgeOver15YearsOld(person.fødselsdato),
+      er15Om30Dager: is15YearsOldIn30Days(person.fødselsdato),
     })),
     erAlleOver15: isEveryoneOver15YearsOld(foresporsel.barn as IPerson[]),
     status: getStatus(foresporsel),
