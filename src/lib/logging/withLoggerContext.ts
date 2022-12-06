@@ -13,10 +13,12 @@ export function withLoggerContext(handler: NextApiHandler): NextApiHandler {
     const tid = triggerAsyncId();
     const correlationId = req.cookies[CORRELATION_ID_COOKIE_NAME] ?? uuidV4();
     const store: IRequestContext = { correlationId, eid, tid };
-    await getAsyncStorage().run(store, async () => {
-      await initLoggerWithContext();
-      await initSecureLoggerWithContext();
-      handler(req, res);
-    });
+    return new Promise((resolve) =>
+      getAsyncStorage().run(store, async () => {
+        await initLoggerWithContext();
+        await initSecureLoggerWithContext();
+        resolve(handler(req, res));
+      })
+    );
   };
 }
