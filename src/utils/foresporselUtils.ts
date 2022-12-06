@@ -28,7 +28,6 @@ function getStatus(foresporsel: IForesporsel): ForesporselStatus {
   } else if (foresporsel.samtykket === null) {
     return ForesporselStatus.VENTER_PAA_SAMTYKKE;
   } else {
-    // TODO venter med avklaring om forespørsler med trekket tilbake status skal vise eller ikke
     return ForesporselStatus.TREKKET_TILBAKE;
   }
 }

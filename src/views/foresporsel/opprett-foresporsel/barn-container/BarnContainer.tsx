@@ -32,7 +32,7 @@ export default function BarnContainer({
         KUN TILGJENGELIG BARN ER LISTE
       </Alert>
       <CheckboxGroup
-        legend="Velg barn søknaden gjelder for."
+        legend="Velg barn forespørselen gjelder for:"
         onChange={(val: any[]) => handleChange(val)}
         value={selectedBarn}
         // TODO
@@ -46,10 +46,12 @@ export default function BarnContainer({
           );
         })}
       </CheckboxGroup>
+      {/* TODO: SKAL OGSÅ VÆRE TEKST FOR BARN SOM KAN BLI 15 ÅR I LØPER AV BEHANDLINGER */}
       {foundPersonOver15 && (
         <Alert variant="info" className="w-[80%]">
-          Motparten trenger ikke å samtykke til behandling for barn over 15. Det betyr at søknaden
-          skal automatisk gå til NAV. Motparten skal informeres om dette.
+          Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke
+          fra den andre forelderen for at NAV kan behandle saken. Da går saken automatisk videre til
+          behandling.
         </Alert>
       )}
     </div>

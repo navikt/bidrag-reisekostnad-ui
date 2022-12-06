@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ForesporselStatus } from "../../../enum/foresporsel-status";
 import { IForesporsel } from "../../../types/foresporsel";
 import { formatDate } from "../../../utils/dateUtils";
-import { isAutomaticSubmission } from "../../../utils/foresporselUtils";
 import { getBarnInformationText } from "../../../utils/stringUtils";
 import BarnOver15Alert from "../../alert/barn-over-15-alert/BarnOver15Alert";
 import StatusBar from "../../status-bar/StatusBar";
@@ -14,13 +13,15 @@ interface IOverviewCardProps {
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { id, opprettet, barn, status, kreverSamtykke, samtykket, journalført } = foresporsel;
+  const { id, opprettet, barn, status } = foresporsel;
 
   return (
     <Link className="no-underline" href={`/foresporsel/${id}`} passHref>
       <Panel className="navds-link-panel cursor-pointer" border>
         <div className="w-full navds-link-panel__content text-gray-900">
-          <LinkPanel.Title className="text-large text-gray-900">Reisekostnader</LinkPanel.Title>
+          <LinkPanel.Title className="text-large text-gray-900">
+            Fordeling av reisekostnader for
+          </LinkPanel.Title>
           <LinkPanel.Description className="text-gray-900">
             <div className="w-full grid grid-cols-[80%_30%]">
               <div className="flex gap-2">
