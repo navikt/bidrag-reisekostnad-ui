@@ -40,6 +40,7 @@ function ReisekostnadProvider({ children }: PropsWithChildren) {
       motparterMedFellesBarnUnderFemtenÅr: motparterMedFellesBarnUnderFemtenÅrMedAlder,
     };
 
+    console.log(user);
     setUserInformation(user);
   };
 

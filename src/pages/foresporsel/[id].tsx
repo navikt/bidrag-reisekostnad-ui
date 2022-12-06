@@ -80,7 +80,7 @@ export default function ForesporselId() {
           />
         )}
 
-      {!isHovedpart && foresporsel.status === ForesporselStatus.SAMTYKKET && (
+      {!isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
         <SamtykkeKvitteringContainer barnInformation={barnInformation} />
       )}
 

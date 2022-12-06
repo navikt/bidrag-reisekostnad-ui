@@ -20,7 +20,7 @@ export default function BarnContainer({
 }: IBarnContainerProps) {
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
 
-  function handleChange(val: any[]) {
+  function handleChange(val: string[]) {
     setSelectedBarn(val);
     onSelectBarn(val);
   }
@@ -35,7 +35,7 @@ export default function BarnContainer({
       </Alert>
       <CheckboxGroup
         legend="Velg barn forespørselen gjelder for:"
-        onChange={(val: any[]) => handleChange(val)}
+        onChange={(val: string[]) => handleChange(val)}
         value={selectedBarn}
         // TODO
         error={showError && "Velg minst et av barna"}
