@@ -18,7 +18,7 @@ export function mapToForesporselWithStatusAndPersonsAge(
     status: getStatus(foresporsel),
   })) as unknown as IForesporsel[];
 
-  return nyForesporsel;
+  return sortByStatus(nyForesporsel);
 }
 
 function getStatus(foresporsel: IForesporsel): ForesporselStatus {
@@ -31,8 +31,12 @@ function getStatus(foresporsel: IForesporsel): ForesporselStatus {
   } else if (deaktivert !== null) {
     return ForesporselStatus.TREKKET_TILBAKE;
   }
-  console.log(foresporsel);
+
   return ForesporselStatus.VENTER_PAA_OVERFORING;
+}
+
+function sortByStatus(foresporsler: IForesporsel[]) {
+  return foresporsler.sort((a, b) => b.status.toString().localeCompare(a.status.toString()));
 }
 
 export function findForesporselById(
