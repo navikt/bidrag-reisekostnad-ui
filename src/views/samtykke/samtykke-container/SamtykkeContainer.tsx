@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";
 import { MAA_SAMTYKKE } from "../../../constants/error";
-import { IPerson } from "../../../types/foresporsel";
 import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import useForesporselApi from "../../../hooks/useForesporselApi";
@@ -16,14 +15,9 @@ interface IForesporselConfirmationProps {
 interface ISamtykkeProps {
   foresporselId: number;
   barnInformation: string[];
-  hovedpart: IPerson;
 }
 
-export default function SamtykkeContainer({
-  foresporselId,
-  barnInformation,
-  hovedpart,
-}: ISamtykkeProps) {
+export default function SamtykkeContainer({ foresporselId, barnInformation }: ISamtykkeProps) {
   const [haveReadAndUnderstood, setHaveReadAndUnderstood] = useState<IForesporselConfirmationProps>(
     {
       isAgree: false,

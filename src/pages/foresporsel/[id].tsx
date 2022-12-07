@@ -86,11 +86,7 @@ export default function ForesporselId() {
       )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
-        <SamtykkeContainer
-          foresporselId={foresporsel.id}
-          barnInformation={barnInformation}
-          hovedpart={foresporsel.hovedpart}
-        />
+        <SamtykkeContainer foresporselId={foresporsel.id} barnInformation={barnInformation} />
       )}
     </>
   );
