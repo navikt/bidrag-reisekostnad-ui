@@ -90,6 +90,7 @@ export default function OpprettForesporsel() {
           <Heading size="xlarge" level="1">
             Fordeling av reisekostnader
           </Heading>
+          {allBarn.length === 0 && <Alert variant="info">Du har ingen tilgjengelig barn</Alert>}
           <GuidePanel>
             <p>
               Her kan du sende inn en forespørsel om NAV kan beregne reisekostnader ved samvær med
