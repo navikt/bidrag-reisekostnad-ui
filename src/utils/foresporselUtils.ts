@@ -26,7 +26,7 @@ function getStatus(foresporsel: IForesporsel): ForesporselStatus {
 
   if (journalført !== null) {
     return ForesporselStatus.UNDER_BEHANDLING;
-  } else if (kreverSamtykke && samtykket === null && journalført === null) {
+  } else if (kreverSamtykke && samtykket === null && journalført === null && deaktivert === null) {
     return ForesporselStatus.VENTER_PAA_SAMTYKKE;
   } else if (deaktivert !== null) {
     return ForesporselStatus.TREKKET_TILBAKE;
