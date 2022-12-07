@@ -9,11 +9,13 @@ import { getBarnInformationText } from "../../../utils/stringUtils";
 interface IForesporselKvitteringContainerProps {
   barn: IPerson[];
   sentDate: string;
+  showWarning?: boolean;
 }
 
 export default function ForesporselKvitteringContainer({
   barn,
   sentDate,
+  showWarning = false,
 }: IForesporselKvitteringContainerProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
   const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
@@ -50,12 +52,14 @@ export default function ForesporselKvitteringContainer({
             })}
           </ul>
         </div>
-        <Alert variant="warning" className="flex place-content-center">
-          Forerspørselen er ikke gyldig før motparten har samtykket. Han/hun kan allerede nå logge
-          seg inn NAV sine sider og samtykke fordeling av reisekostnader. Du bør gjøre motparten
-          oppmerksom på dette. Hvis motparten ikke har signert innen tre dager vil vi sende han en
-          påminnelse per sms.
-        </Alert>
+        {showWarning && barnOver15 && barnOver15.length > 0 && (
+          <Alert variant="warning" className="flex place-content-center">
+            Forerspørselen er ikke gyldig før motparten har samtykket. Han/hun kan allerede nå logge
+            seg inn NAV sine sider og samtykke fordeling av reisekostnader. Du bør gjøre motparten
+            oppmerksom på dette. Hvis motparten ikke har signert innen tre dager vil vi sende han en
+            påminnelse per sms.
+          </Alert>
+        )}
       </div>
     </ConfirmationLayout>
   );

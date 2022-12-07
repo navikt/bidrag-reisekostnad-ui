@@ -86,7 +86,7 @@ export default function SamtykkeContainer({
           {barnInformation.map((information, index) => {
             return (
               <BodyShort key={index} className="font-bold">
-                {`${information} (med ${hovedpart.fornavn})`}
+                {information}
               </BodyShort>
             );
           })}

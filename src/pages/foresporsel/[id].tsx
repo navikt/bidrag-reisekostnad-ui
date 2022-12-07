@@ -14,6 +14,11 @@ import Spinner from "../../components/spinner/spinner/spinner";
 import { formatDate } from "../../utils/dateUtils";
 
 export default function ForesporselId() {
+  const STATUS_TO_RENDER_CONFIRMATION = [
+    ForesporselStatus.UNDER_BEHANDLING,
+    ForesporselStatus.VENTER_PAA_OVERFORING,
+    ForesporselStatus.TREKKET_TILBAKE,
+  ];
   const router = useRouter();
   const foresporselId = router.query.id as string;
   const [foresporsel, setForesporsel] = useState<IForesporsel>();
@@ -69,14 +74,14 @@ export default function ForesporselId() {
         />
       )}
 
-      {isHovedpart && foresporsel.status !== ForesporselStatus.VENTER_PAA_SAMTYKKE && (
+      {isHovedpart && STATUS_TO_RENDER_CONFIRMATION.includes(foresporsel.status) && (
         <ForesporselKvitteringContainer
           barn={foresporsel.barn}
           sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
         />
       )}
 
-      {!isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
+      {!isHovedpart && STATUS_TO_RENDER_CONFIRMATION.includes(foresporsel.status) && (
         <SamtykkeKvitteringContainer barnInformation={barnInformation} />
       )}
 
