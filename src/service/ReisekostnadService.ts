@@ -27,31 +27,18 @@ export default class ReisekostnadService extends DefaultConsumer {
 
   async opprettNyForesporsel(nyForeporsel: INyForespørsel): Promise<IApiResponse<unknown>> {
     logger.info("Lage en ny forepørsel for " + nyForeporsel);
-    const response = await this.post<void>(
-      "/api/v1/reisekostnad/forespoersel/ny",
-      JSON.stringify(nyForeporsel)
-    );
-
-    return response;
+    return await this.post<void>("/api/v1/reisekostnad/forespoersel/ny", nyForeporsel);
   }
 
   async trekkeForesporsel(foresporselId: number): Promise<IApiResponse<unknown>> {
     logger.info(`Trekke forespørsel: ${foresporselId} tilbake`);
 
-    const response = await this.put<void>(
-      `/api/v1/reisekostnad/forespoersel/trekke?id=${foresporselId}`
-    );
-
-    return response;
+    return await this.put<void>(`/api/v1/reisekostnad/forespoersel/trekke?id=${foresporselId}`);
   }
 
   async samtykkeForesporsel(foresporselId: number): Promise<IApiResponse<unknown>> {
     logger.info(`Samtykke forespørsel: ${foresporselId}`);
 
-    const response = await this.put(
-      `/api/v1/reisekostnad/forespoersel/samtykke?id=${foresporselId}`
-    );
-
-    return response;
+    return await this.put(`/api/v1/reisekostnad/forespoersel/samtykke?id=${foresporselId}`);
   }
 }

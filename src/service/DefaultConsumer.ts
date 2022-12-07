@@ -45,20 +45,21 @@ export class DefaultConsumer {
   protected get<T>(url: string, config?: IFetchConfig) {
     return this.fetchResponse<T>(url, "GET", undefined, config);
   }
-  protected put<T>(url: string, body?: string, config?: IFetchConfig) {
+  protected put<T>(url: string, body?: string | object, config?: IFetchConfig) {
     return this.fetchResponse<T>(url, "PUT", body, config);
   }
-  protected post<T>(url: string, body?: string, config?: IFetchConfig) {
+  protected post<T>(url: string, body?: string | object, config?: IFetchConfig) {
     return this.fetchResponse<T>(url, "POST", body, config);
   }
 
   async fetchResponse<T>(
     url: string,
     method: FetchMethods,
-    body?: BodyInit,
+    body?: string | object,
     config?: IFetchConfig
   ): Promise<IApiResponse<T>> {
     const idToken = await this.session.getOBOToken(this.audience);
+    const bodyString = typeof body == "string" ? body : JSON.stringify(body);
     const headers: HeadersInit = {
       "X-Correlation-ID": getCorrelationIdFromContext(),
       Authorization: "Bearer " + idToken,
@@ -68,7 +69,7 @@ export class DefaultConsumer {
     };
     const fullUrl = this.baseUrl + url;
     return fetch(fullUrl, {
-      body,
+      body: bodyString,
       method,
       headers,
     })
