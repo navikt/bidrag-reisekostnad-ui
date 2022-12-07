@@ -4,7 +4,7 @@ import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import OppsummeringContainer from "./oppsummering-container/OppsummeringContainer";
-import { Alert, Button, GuidePanel, Heading } from "@navikt/ds-react";
+import { Alert, Button, Heading } from "@navikt/ds-react";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
@@ -16,6 +16,8 @@ import {
   isEveryoneOver15YearsOld,
 } from "../../../utils/personUtils";
 import FordelingGuideCard from "../../../components/card/fordeling-guide-card/FordelingGuideCard";
+import Link from "next/link";
+import { Left } from "@navikt/ds-icons";
 
 export default function OpprettForesporsel() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -91,7 +93,19 @@ export default function OpprettForesporsel() {
           <Heading size="xlarge" level="1">
             Fordeling av reisekostnader
           </Heading>
-          {allBarn.length === 0 && <Alert variant="info">Du har ingen tilgjengelig barn</Alert>}
+          {allBarn.length === 0 && (
+            <>
+              <Alert variant="info">Du har ingen tilgjengelig barn</Alert>
+              <Link
+                href="/"
+                className="no-underline flex gap-2 items-center hover:underline"
+                passHref
+              >
+                <Left aria-hidden />
+                Til oversikten
+              </Link>
+            </>
+          )}
           {allBarn.length > 0 && (
             <>
               <FordelingGuideCard />

@@ -20,8 +20,8 @@ export default function useForesporselApi() {
     setSubmitting(true);
   }
 
-  async function updateStatesAfterCall(result: Response): Promise<void> {
-    if (result.status === HTTPStatus.OK) {
+  async function updateStatesAfterCall(result: Response, successCode: HTTPStatus): Promise<void> {
+    if (result.status === successCode) {
       await mutate("/api/brukerinformasjon");
 
       setSuccess(true);
@@ -40,7 +40,7 @@ export default function useForesporselApi() {
         requestBody(ApiOperation.POST, { identerBarn: [...identer] } as INyForespørsel)
       );
 
-      await updateStatesAfterCall(result);
+      await updateStatesAfterCall(result, HTTPStatus.CREATED);
     } catch (error: unknown) {
       setFailed(true);
     }
@@ -55,7 +55,7 @@ export default function useForesporselApi() {
         requestBody(ApiOperation.PUT, foresporselId)
       );
 
-      await updateStatesAfterCall(result);
+      await updateStatesAfterCall(result, HTTPStatus.OK);
     } catch (error: unknown) {
       setFailed(true);
     }
@@ -70,7 +70,7 @@ export default function useForesporselApi() {
         requestBody(ApiOperation.PUT, foresporselId)
       );
 
-      await updateStatesAfterCall(result);
+      await updateStatesAfterCall(result, HTTPStatus.OK);
     } catch (error: unknown) {
       setFailed(true);
     }
