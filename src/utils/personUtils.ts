@@ -29,17 +29,18 @@ export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformas
     forespørslerSomHovedpart,
     forespørslerSomMotpart,
   } = userInformation;
+
   const fellesBarnUnder15Aar = motparterMedFellesBarnUnderFemtenÅr.flatMap(
     (barn) => barn.fellesBarnUnder15År
   );
   const allBarn = [...barnMinstFemtenÅr, ...fellesBarnUnder15Aar];
 
-  const barnIForespørslerSomHovedpart = forespørslerSomHovedpart.flatMap(
-    (foresporsel) => foresporsel.barn
-  );
-  const barnIForespørslerSomMotpart = forespørslerSomMotpart.flatMap(
-    (foresporsel) => foresporsel.barn
-  );
+  const barnIForespørslerSomHovedpart = forespørslerSomHovedpart
+    .filter((foresporspel) => foresporspel.deaktivert === null)
+    .flatMap((foresporsel) => foresporsel.barn);
+  const barnIForespørslerSomMotpart = forespørslerSomMotpart
+    .filter((foresporspel) => foresporspel.deaktivert === null)
+    .flatMap((foresporsel) => foresporsel.barn);
 
   const allBarnIdenterIForesporsler = [
     ...barnIForespørslerSomHovedpart,

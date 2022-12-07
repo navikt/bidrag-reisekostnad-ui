@@ -23,9 +23,7 @@ export default function OpprettForesporsel() {
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
   const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
   const [foundPersonCouldBe15In30Days, setFoundPersonCouldBe15In30Days] = useState<boolean>(false);
-  const [samtykke, setSamtykke] = useState<boolean>(false);
   const [showBarnError, setShowBarnError] = useState<boolean>(false);
-  const [showSamtykkeError, setShowSamtykkeError] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
   const { userInformation } = useReisekostnad();
@@ -56,22 +54,12 @@ export default function OpprettForesporsel() {
 
   async function onSubmit() {
     const hasSelectedBarn = selectedBarn.length !== 0;
-    const hasAgreed = samtykke;
 
     setShowBarnError(!hasSelectedBarn);
-    setShowSamtykkeError(!hasAgreed);
 
-    if (hasSelectedBarn && hasAgreed) {
+    if (hasSelectedBarn) {
       createForesporsel(selectedBarn);
     }
-  }
-
-  function onSamtykke(checked: boolean) {
-    if (showSamtykkeError) {
-      setShowSamtykkeError(false);
-    }
-
-    setSamtykke(checked);
   }
 
   return (

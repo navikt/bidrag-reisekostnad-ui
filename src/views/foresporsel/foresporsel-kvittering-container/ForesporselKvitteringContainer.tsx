@@ -23,7 +23,7 @@ export default function ForesporselKvitteringContainer({
   useEffect(() => {
     setBarnOver15(barn.filter((person) => person.alder >= 15));
     setBarnUnder15(barn.filter((person) => person.alder < 15));
-  }, [barn]);
+  }, []);
 
   return (
     <ConfirmationLayout>
