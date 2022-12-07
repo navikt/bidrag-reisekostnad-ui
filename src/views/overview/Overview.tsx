@@ -38,18 +38,32 @@ export default function Overview() {
           <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
           <div>
             <p>
-              På denne siden finner du en oversikt over dine saker om fordeling av reisekostnader.
-              Det vil si at hvis du har noen saker, finner du både de du har sendt inn selv og de
-              som du eventuelt har mottatt fra den andre forelderen.
+              Her kan du sende inn en forespørsel om NAV kan beregne fordeling av reisekostnader i
+              forbindelse med samvær med barn.
             </p>
-            <p>I tillegg kan du fra denne siden sende inn en ny sak til behandling.</p>
+            <p>
+              For at NAV skal beregne for dere, må det foreligge såkalte særlige grunner til at
+              reisekostnadene ikke skal deles forholdsmessig etter størrelsen på inntekten deres.
+              Hva som er «særlige grunner» blir vurdert av en saksbehandler, på bakgrunn av hva dere
+              oppgir som grunn.
+            </p>
+            <b>Når innhenter vi samtykke fra den andre forelderen?</b>
+            <p>
+              Når barnet er under 15 år, må begge foreldre være enige i at NAV skal beregne
+              fordelingen for dere. Vi innhenter derfor et samtykke fra den andre forelderen. Hvis
+              den andre forelderen ikke vil samtykke, må NAV avvise forespørselen om beregning
+            </p>
+            <p>
+              Når barnet er 15 år, eller eldre, trengs det ikke samtykke fra den andre forelderen.
+              Da blir forespørselen automatisk sendt videre til behandling.
+            </p>
           </div>
           {showedForespørslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
             <Alert variant="info">Du har ingen saker om fordeling av reisekostnader</Alert>
           )}
           <div>
             <Link href="/foresporsel">
-              <Button type="button">Send inn en ny sak om fordeling av reisekostnader</Button>
+              <Button type="button">Send forespørsel om fordeling</Button>
             </Link>
           </div>
           {showedForespørslerSomMotpart.length > 0 && (

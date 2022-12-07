@@ -4,24 +4,24 @@ export default function FordelingGuideCard() {
   return (
     <GuidePanel>
       <p>
-        Her kan du sende inn en forespørsel om NAV kan beregne reisekostnader ved samvær med barn.
+        Her kan du sende en forespørsel om NAV kan beregne fordelingen av reisekostnader i
+        forbindelse med samvær med barn.
+      </p>
+      <b>For barn under 15 år</b>
+      <p>
+        Når du har sendt inn forespørselen, sender vi en henvendelse til den andre forelderen for å
+        innhente et samtykke. Frist for å samtykke er 30 dager fra forespørselen er sendt fra deg
+        til oss.
       </p>
       <p>
-        Normalt skal dere som foreldre selv avtale fordelingen på den måten dere synes er best. Det
-        vanlige er at reisekostnadene fordeles forholdsmessig mellom dere, etter størrelsen på
-        inntekten deres. For at NAV skal beregne for dere, må det foreligge såkalte særlige grunner.
-        Dette kan være hvis dere er uenige i fordelingen, samtidig som det er store
-        inntektsforskjeller og store reisekostnader.
+        Hvis den andre forelderen samtykker innen fristen, går saken automatisk videre til
+        behandling. En saksbehandler tar så kontakt med dere, for avklaringer som trengs i saken.
       </p>
-      <b>Samtykke fra den andre forelderen</b>
+      <p>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen.</p>
+      <b>For barn som er 15 år, eller eldre</b>
       <p>
-        Når barnet er under 15 år, må begge foreldre være enige i at NAV skal beregne fordelingen
-        for dere. Vi innhenter derfor et samtykke fra den andre forelderen. Hvis den andre
-        forelderen ikke vil samtykke, må NAV avvise forespørselen om beregning.
-      </p>
-      <p>
-        Når barnet er 15 år, eller eldre, trengs det ikke samtykke fra den andre forelderen. Da blir
-        forespørselen automatisk sendt videre til behandling.
+        Det trengs ikke samtykke fra den andre forelderen, når barnet er 15 år eller eldre. Da går
+        saken automatisk videre til behandling.
       </p>
     </GuidePanel>
   );

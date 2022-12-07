@@ -8,33 +8,6 @@ export const BRUKER_INFORMASJON_1 = {
   harSkjulteFamilieenheterMedDiskresjon: true,
   forespørslerSomHovedpart: [
     {
-      id: 2,
-      kreverSamtykke: true,
-      barn: [
-        {
-          ident: "88888888888",
-          fornavn: "Småstein",
-          fødselsdato: "2012-11-21",
-        },
-        {
-          ident: "99999999999",
-          fornavn: "Barn 2",
-          fødselsdato: "2012-11-21",
-        },
-      ],
-      hovedpart: {
-        fornavn: "Gråtass",
-        fødselsdato: "1982-11-21",
-      },
-      motpart: {
-        fornavn: "Streng",
-        fødselsdato: "1984-11-21",
-      },
-      opprettet: "2022-11-21T10:54:31.152379",
-      samtykket: null,
-      journalført: null,
-    },
-    {
       id: 1,
       kreverSamtykke: false,
       barn: [
@@ -58,33 +31,6 @@ export const BRUKER_INFORMASJON_1 = {
     },
   ],
   forespørslerSomMotpart: [
-    {
-      id: 3,
-      kreverSamtykke: true,
-      barn: [
-        {
-          ident: "88888888888",
-          fornavn: "Småstein",
-          fødselsdato: "2012-11-21",
-        },
-        {
-          ident: "99999999999",
-          fornavn: "Barn 2",
-          fødselsdato: "2012-11-21",
-        },
-      ],
-      hovedpart: {
-        fornavn: "Streng",
-        fødselsdato: "1982-11-21",
-      },
-      motpart: {
-        fornavn: "Gråtass",
-        fødselsdato: "1984-11-21",
-      },
-      opprettet: "2022-11-21T10:54:31.152379",
-      samtykket: null,
-      journalført: null,
-    },
     {
       id: 4,
       kreverSamtykke: false,

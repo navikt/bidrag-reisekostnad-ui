@@ -3,8 +3,7 @@ import { useState } from "react";
 import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
-import OppsummeringContainer from "./oppsummering-container/OppsummeringContainer";
-import { Alert, Button, Heading } from "@navikt/ds-react";
+import { Accordion, Alert, Button, Heading } from "@navikt/ds-react";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
@@ -121,11 +120,6 @@ export default function OpprettForesporsel() {
                 onSelectBarn={onSelectBarn}
                 showError={showBarnError}
               />
-              <OppsummeringContainer
-                checked={samtykke}
-                updateChecked={onSamtykke}
-                showError={showSamtykkeError}
-              />
               <div className="flex gap-5">
                 <Button onClick={onSubmit} loading={submitting}>
                   SEND INN
@@ -138,6 +132,31 @@ export default function OpprettForesporsel() {
                   AVBRYT
                 </Button>
               </div>
+              <Accordion>
+                <Accordion.Item>
+                  <Accordion.Header>Slik behandler NAV personopplysningene dine</Accordion.Header>
+                  <Accordion.Content>
+                    <span>
+                      Vi innhenter og mottar opplysninger om deg for å behandle saken din.
+                      Opplysningene vi innhenter kommer enten fra deg eller fra offentlige registre:
+                    </span>
+                    <ul>
+                      <li>hvilke barn du er registrert som forelder til.</li>
+                      <li>hvem den andre forelderen er.</li>
+                      <li>Inntekten din.</li>
+                      {/* TODO */}
+                      <li>Her kommer det nok me</li>
+                    </ul>
+                    <span>
+                      Du har rett til innsyn i saken din. Vil du vite mer om hvordan NAV behandler
+                      personopplysninger? Se {/* TODO ER LENKE RIKTIG? */}
+                      <Link href="https://www.nav.no/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten">
+                        nav.no/personvern
+                      </Link>
+                    </span>
+                  </Accordion.Content>
+                </Accordion.Item>
+              </Accordion>
               <ConfirmModal
                 open={open}
                 header="Vil du avbryte forerspørselen?"
