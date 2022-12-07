@@ -6,7 +6,7 @@ import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./personUtils";
 export function mapToForesporselWithStatusAndPersonsAge(
   foresporsel: IForesporsel[]
 ): IForesporsel[] {
-  return foresporsel.map((foresporsel) => ({
+  const nyForesporsel = foresporsel.map((foresporsel) => ({
     ...foresporsel,
     barn: foresporsel.barn.map((person) => ({
       ...person,
@@ -17,6 +17,8 @@ export function mapToForesporselWithStatusAndPersonsAge(
     erAlleOver15: isEveryoneOver15YearsOld(foresporsel.barn as IPerson[]),
     status: getStatus(foresporsel),
   })) as unknown as IForesporsel[];
+
+  return nyForesporsel;
 }
 
 function getStatus(foresporsel: IForesporsel): ForesporselStatus {
@@ -29,8 +31,8 @@ function getStatus(foresporsel: IForesporsel): ForesporselStatus {
   } else if (deaktivert !== null) {
     return ForesporselStatus.TREKKET_TILBAKE;
   }
-
-  return ForesporselStatus.UKJENT;
+  console.log(foresporsel);
+  return ForesporselStatus.VENTER_PAA_OVERFORING;
 }
 
 export function findForesporselById(

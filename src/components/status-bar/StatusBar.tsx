@@ -22,6 +22,12 @@ export default function StatusBar({ status }: IStatusBar) {
                 {status}
               </Tag>
             );
+          case ForesporselStatus.VENTER_PAA_OVERFORING:
+            return (
+              <Tag variant="warning" size="small" className="mt-3">
+                {status}
+              </Tag>
+            );
           default:
             return (
               <Tag variant="success" size="small" className="mt-3">
