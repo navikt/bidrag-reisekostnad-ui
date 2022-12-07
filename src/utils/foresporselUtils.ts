@@ -20,18 +20,17 @@ export function mapToForesporselWithStatusAndPersonsAge(
 }
 
 function getStatus(foresporsel: IForesporsel): ForesporselStatus {
-  const { kreverSamtykke, samtykket } = foresporsel;
+  const { kreverSamtykke, samtykket, journalført, deaktivert } = foresporsel;
 
-  if (isAutomaticSubmission(foresporsel)) {
-    return ForesporselStatus.AUTOMATISK_SENDT_INN_TIL_NAV;
-  } else if (kreverSamtykke && samtykket !== null) {
+  if (journalført !== null) {
     return ForesporselStatus.UNDER_BEHANDLING;
-  } else if (kreverSamtykke && samtykket === null) {
+  } else if (kreverSamtykke && samtykket === null && journalført === null) {
     return ForesporselStatus.VENTER_PAA_SAMTYKKE;
-  } else {
-    // TODO sjekke om forespørselen er deaktivert
+  } else if (deaktivert !== null) {
     return ForesporselStatus.TREKKET_TILBAKE;
   }
+
+  return ForesporselStatus.UKJENT;
 }
 
 export function findForesporselById(

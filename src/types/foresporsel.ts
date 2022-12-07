@@ -22,6 +22,7 @@ export interface IForesporsel extends IForesporselUi {
   opprettet: string | null;
   samtykket: string | null;
   journalført: string | null;
+  deaktivert: string | null;
 }
 
 interface IForesporselUi {
