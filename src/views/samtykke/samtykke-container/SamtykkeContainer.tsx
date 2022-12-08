@@ -5,6 +5,7 @@ import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import { useTranslation } from "next-i18next";
+import parse from "html-react-parser";
 
 interface IForesporselConfirmationProps {
   isAgree: boolean;
@@ -73,7 +74,8 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         </Heading>
         <Collapse data={samtykkeTranslate("accordion", { returnObjects: true })} />
         <div className="grid gap-7">
-          <BodyShort>{samtykkeTranslate("samtykk_message")}</BodyShort>
+          <BodyShort>{parse(samtykkeTranslate("description"))}</BodyShort>
+          <b>{samtykkeTranslate("bekreftelse_message")}</b>
           {barnInformation.map((information, index) => {
             return (
               <BodyShort key={index} className="font-bold">
