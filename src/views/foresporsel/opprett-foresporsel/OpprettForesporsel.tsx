@@ -3,7 +3,7 @@ import { useState } from "react";
 import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
-import { Accordion, Alert, Button, Heading } from "@navikt/ds-react";
+import { Alert, Button, Heading } from "@navikt/ds-react";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
@@ -16,6 +16,8 @@ import {
 } from "../../../utils/personUtils";
 import Link from "next/link";
 import { Left } from "@navikt/ds-icons";
+import Collapse from "../../../components/collapse/Collapse";
+import { BEHANDLING_AV_PERSONLIGOPPLYSNING_COLLAPSE } from "../../../constants/collapse-data";
 
 export default function OpprettForesporsel() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -118,36 +120,11 @@ export default function OpprettForesporsel() {
                   AVBRYT
                 </Button>
               </div>
-              <Accordion>
-                <Accordion.Item>
-                  <Accordion.Header>Slik behandler NAV personopplysningene dine</Accordion.Header>
-                  <Accordion.Content>
-                    <span>
-                      Vi innhenter og mottar opplysninger om deg for å behandle saken din.
-                      Opplysningene vi innhenter kommer enten fra deg eller fra offentlige registre:
-                    </span>
-                    <ul>
-                      <li>hvilke barn du er registrert som forelder til.</li>
-                      <li>hvem den andre forelderen er.</li>
-                      <li>Inntekten din.</li>
-                      {/* TODO */}
-                      <li>Her kommer det nok me</li>
-                    </ul>
-                    <span>
-                      Du har rett til innsyn i saken din. Vil du vite mer om hvordan NAV behandler
-                      personopplysninger? Se {/* TODO ER LENKE RIKTIG? */}
-                      <Link href="https://www.nav.no/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten">
-                        nav.no/personvern
-                      </Link>
-                    </span>
-                  </Accordion.Content>
-                </Accordion.Item>
-              </Accordion>
+              <Collapse data={BEHANDLING_AV_PERSONLIGOPPLYSNING_COLLAPSE} />
               <ConfirmModal
                 open={open}
                 header="Vil du avbryte forerspørselen?"
-                content="Avbryter du nå, skal forerspørselen slettes og 
-            du må starte på nytt."
+                content="Avbryter du nå, skal forerspørselen slettes og du må starte på nytt."
                 submitText="Tilbake til søknaden"
                 onSubmit={() => setOpen(false)}
                 onCancel={() => router.push("/")}

@@ -1,7 +1,7 @@
 import { Heading } from "@navikt/ds-react";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import { SAMTYKKE_CONFIRMATION_COLLAPSE } from "../../../constants/collapse";
+import { SAMTYKKE_CONFIRMATION_COLLAPSE } from "../../../constants/collapse-data";
 import Collapse from "../../collapse/Collapse";
 import { PageMeta } from "../../page-meta/PageMeta";
 import { Right } from "@navikt/ds-icons";

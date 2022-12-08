@@ -1,7 +1,7 @@
 import { Heading, BodyShort, ConfirmationPanel, Button, Alert } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
-import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";
+import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse-data";
 import { MAA_SAMTYKKE } from "../../../constants/error";
 import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";

@@ -1,8 +1,9 @@
 import { Accordion } from "@navikt/ds-react";
+import { ReactNode } from "react";
 
 export interface ICollapseData {
   header: string;
-  content: string;
+  content: ReactNode;
 }
 
 interface ICollapseProps {

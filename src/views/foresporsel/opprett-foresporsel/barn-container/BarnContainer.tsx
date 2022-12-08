@@ -1,5 +1,7 @@
 import { CheckboxGroup, Checkbox, Alert, Heading } from "@navikt/ds-react";
 import { useState } from "react";
+import Collapse from "../../../../components/collapse/Collapse";
+import { GJELDER_BARN_SOM_IKKE_VISES_HER_COLLAPSE } from "../../../../constants/collapse-data";
 import { IPerson } from "../../../../types/foresporsel";
 import { getBarnInformationText } from "../../../../utils/stringUtils";
 
@@ -30,9 +32,6 @@ export default function BarnContainer({
       <Heading size="large" level="2">
         Barn
       </Heading>
-      <Alert variant="info" className="w-[80%]">
-        KUN TILGJENGELIG BARN ER LISTE
-      </Alert>
       <CheckboxGroup
         legend="Velg barn forespørselen gjelder for:"
         onChange={(val: string[]) => handleChange(val)}
@@ -48,6 +47,7 @@ export default function BarnContainer({
           );
         })}
       </CheckboxGroup>
+      <Collapse data={GJELDER_BARN_SOM_IKKE_VISES_HER_COLLAPSE} />
       {foundPersonOver15 && (
         <Alert variant="info" className="w-[80%]">
           Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke
