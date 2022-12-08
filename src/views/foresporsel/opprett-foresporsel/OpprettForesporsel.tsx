@@ -14,7 +14,6 @@ import {
   getBarnWithNoActiveForesporsler,
   isEveryoneOver15YearsOld,
 } from "../../../utils/personUtils";
-import FordelingGuideCard from "../../../components/card/fordeling-guide-card/FordelingGuideCard";
 import Link from "next/link";
 import { Left } from "@navikt/ds-icons";
 
@@ -95,7 +94,6 @@ export default function OpprettForesporsel() {
           )}
           {allBarn.length > 0 && (
             <>
-              <FordelingGuideCard />
               {userInformation && userInformation.harSkjulteFamilieenheterMedDiskresjon && (
                 <Alert variant="info">
                   TODO: personen har skjulte familieenheter med diskresjon
