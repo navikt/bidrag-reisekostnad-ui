@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Overview from "../views/overview/Overview";
 import { useEffect, useState } from "react";
 import { useReisekostnad } from "../context/reisekostnadContext";
@@ -34,4 +35,12 @@ export default function Home() {
   }
 
   return <Overview />;
+}
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }

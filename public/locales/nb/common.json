@@ -1,0 +1,10 @@
+{
+  "button": {
+    "send_inn": "SEND INN",
+    "avbryt": "AVBRYT",
+    "til_oversikten": "Til oversikten",
+    "trekk_tilbake": "Trekk tilbake",
+    "send_foresporsel_om_fordeling": "Send forespørsel om fordeling",
+    "tilbake_til_soknad": "Tilbake til søknaden"
+  }
+}

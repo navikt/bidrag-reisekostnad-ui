@@ -6,9 +6,12 @@ import OverviewCard from "../../components/card/overview-card/OverviewCard";
 import { PageMeta } from "../../components/page-meta/PageMeta";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 import { IForesporsel } from "../../types/foresporsel";
+import { useTranslation } from "next-i18next";
 
 export default function Overview() {
   const { userInformation } = useReisekostnad();
+  const { t: translate } = useTranslation();
+
   const [showedForespørslerSomMotpart, setShowedForespørslerSomMotpart] = useState<IForesporsel[]>(
     []
   );
@@ -63,7 +66,7 @@ export default function Overview() {
           )}
           <div>
             <Link href="/foresporsel">
-              <Button type="button">Send forespørsel om fordeling</Button>
+              <Button type="button"> {translate("button.send_foresporsel_om_fordeling")}</Button>
             </Link>
           </div>
           {showedForespørslerSomMotpart.length > 0 && (

@@ -5,8 +5,11 @@ import { SAMTYKKE_CONFIRMATION_COLLAPSE } from "../../../constants/collapse-data
 import Collapse from "../../collapse/Collapse";
 import { PageMeta } from "../../page-meta/PageMeta";
 import { Right } from "@navikt/ds-icons";
+import { useTranslation } from "next-i18next";
 
 export default function ConfirmationLayout({ children }: PropsWithChildren) {
+  const { t: translate } = useTranslation();
+
   return (
     <>
       <PageMeta title="Bekreftelse på innsending" />
@@ -21,7 +24,7 @@ export default function ConfirmationLayout({ children }: PropsWithChildren) {
         </div>
         <div className="grid gap-2">
           <Link href="/" className="no-underline flex gap-2 items-center hover:underline" passHref>
-            Til oversikten
+            {translate("button.til_oversikten")}
             <Right aria-hidden />
           </Link>
           <Collapse data={SAMTYKKE_CONFIRMATION_COLLAPSE} />

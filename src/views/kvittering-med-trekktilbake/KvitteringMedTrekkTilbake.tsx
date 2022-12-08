@@ -7,6 +7,7 @@ import { formatDate } from "../../utils/dateUtils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ConfirmModal from "../../components/modal/confirm-modal/ConfirmModal";
+import { useTranslation } from "next-i18next";
 
 interface IKvitteringMedTrekkTilbakeProps {
   foresporselId: number;
@@ -25,6 +26,7 @@ export default function KvitteringMedTrekkTilbake({
 
   const { submitting, success, failed, trekkeForesporsel } = useForesporselApi();
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (success && !failed) {
@@ -57,7 +59,7 @@ export default function KvitteringMedTrekkTilbake({
                 variant="secondary"
                 onClick={() => setOpen((current) => !current)}
               >
-                TREKK TILBAKE
+                {translate("button.trekk_tilbake")}
               </Button>
             </div>
           </div>
@@ -67,7 +69,7 @@ export default function KvitteringMedTrekkTilbake({
           header="Vil du trekke forerspørselen tilbake?"
           content="Trekker du forerspørselen nå, skal 
           den slettes. Motparten blir informert om det."
-          submitText="Trekk tilbake"
+          submitText={translate("button.trekk_tilbake")}
           onSubmit={() => trekkeForesporsel(foresporselId)}
           onCancel={() => router.push("/")}
           onClose={() => setOpen(false)}

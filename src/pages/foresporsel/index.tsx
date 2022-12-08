@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect } from "react";
 import OpprettForesporsel from "../../views/foresporsel/opprett-foresporsel/OpprettForesporsel";
 import useSWRImmutable from "swr/immutable";
@@ -20,4 +21,12 @@ export default function Foresporsel() {
   }
 
   return <OpprettForesporsel />;
+}
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }

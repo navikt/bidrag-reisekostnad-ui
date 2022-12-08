@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useState } from "react";
 import SamtykkeKvitteringContainer from "../../views/samtykke/samtykke-kvittering-container/SamtykkeKvitteringContainer";
 import SamtykkeContainer from "../../views/samtykke/samtykke-container/SamtykkeContainer";
@@ -90,4 +91,12 @@ export default function ForesporselId() {
       )}
     </>
   );
+}
+
+export async function getServerSideProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }

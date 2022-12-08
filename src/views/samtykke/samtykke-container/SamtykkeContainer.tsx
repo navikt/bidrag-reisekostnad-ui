@@ -6,6 +6,7 @@ import { MAA_SAMTYKKE } from "../../../constants/error";
 import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import useForesporselApi from "../../../hooks/useForesporselApi";
+import { useTranslation } from "next-i18next";
 
 interface IForesporselConfirmationProps {
   isAgree: boolean;
@@ -30,6 +31,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
       showError: false,
     });
   const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
+  const { t: translate } = useTranslation();
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
@@ -101,11 +103,11 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         </div>
         <div className="flex space-x-12">
           <Button onClick={handleSendIn} loading={submitting}>
-            SEND INN
+            {translate("button.send_inn")}
           </Button>
           <Link href="/" className="no-underline">
             <Button type="button" variant="secondary">
-              AVBRYT
+              {translate("button.avbryt")}
             </Button>
           </Link>
         </div>

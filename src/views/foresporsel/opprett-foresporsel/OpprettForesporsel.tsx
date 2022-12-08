@@ -18,6 +18,7 @@ import Link from "next/link";
 import { Left } from "@navikt/ds-icons";
 import Collapse from "../../../components/collapse/Collapse";
 import { BEHANDLING_AV_PERSONLIGOPPLYSNING_COLLAPSE } from "../../../constants/collapse-data";
+import { useTranslation } from "next-i18next";
 
 export default function OpprettForesporsel() {
   const [allBarn, setAllBarn] = useState<IPerson[]>();
@@ -30,6 +31,7 @@ export default function OpprettForesporsel() {
   const { userInformation } = useReisekostnad();
   const { submitting, success, createForesporsel, failed } = useForesporselApi();
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (userInformation) {
@@ -90,7 +92,7 @@ export default function OpprettForesporsel() {
                 passHref
               >
                 <Left aria-hidden />
-                Til oversikten
+                {translate("button.til_oversikten")}
               </Link>
             </>
           )}
@@ -110,14 +112,14 @@ export default function OpprettForesporsel() {
               />
               <div className="flex gap-5">
                 <Button onClick={onSubmit} loading={submitting}>
-                  SEND INN
+                  {translate("button.send_inn")}
                 </Button>
                 <Button
                   type="button"
                   variant="secondary"
                   onClick={() => setOpen((current) => !current)}
                 >
-                  AVBRYT
+                  {translate("button.avbryt")}
                 </Button>
               </div>
               <Collapse data={BEHANDLING_AV_PERSONLIGOPPLYSNING_COLLAPSE} />
@@ -125,7 +127,7 @@ export default function OpprettForesporsel() {
                 open={open}
                 header="Vil du avbryte forerspørselen?"
                 content="Avbryter du nå, skal forerspørselen slettes og du må starte på nytt."
-                submitText="Tilbake til søknaden"
+                submitText={translate("button.tilbake_til_soknad")}
                 onSubmit={() => setOpen(false)}
                 onCancel={() => router.push("/")}
                 onClose={() => setOpen(false)}
