@@ -30,8 +30,8 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                 <ul className="grid gap-2 p-0 m-0">
                   {barn.map((person, i) => {
                     return (
-                      <li className="list-none">
-                        <b className="text-medium" key={i}>
+                      <li className="list-none" key={i}>
+                        <b className="text-medium">
                           {getBarnInformationText(person, translate("aar"))}
                         </b>
                       </li>
