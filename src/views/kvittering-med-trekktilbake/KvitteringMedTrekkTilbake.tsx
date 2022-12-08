@@ -28,7 +28,6 @@ export default function KvitteringMedTrekkTilbake({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { t: kvitteringTranslate } = useTranslation("kvittering");
-  const { t: errorsTranslate } = useTranslation("errors");
 
   useEffect(() => {
     if (success && !failed) {
@@ -76,7 +75,7 @@ export default function KvitteringMedTrekkTilbake({
           onClose={() => setOpen(false)}
           loading={submitting}
           showError={!success && failed}
-          errorMessage={errorsTranslate("tilbaketrekking_failed") ?? ""}
+          errorMessage={translate("errors.tilbaketrekking_failed") ?? ""}
         />
       </ConfirmationLayout>
     </div>

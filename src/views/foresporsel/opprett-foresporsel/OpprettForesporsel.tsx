@@ -67,7 +67,7 @@ export default function OpprettForesporsel() {
 
   return (
     <div className="grid gap-10">
-      <PageMeta title="Opprett forespørsel" />
+      <PageMeta title={foresporselTranslate("page_title")} />
       {success && (
         <ForesporselKvitteringContainer
           barn={allBarn.filter((barn) => selectedBarn.includes(barn.ident))}
@@ -75,17 +75,15 @@ export default function OpprettForesporsel() {
           showWarning
         />
       )}
-      {!success && failed && (
-        <Alert variant="error">Det skjedde en feil ved registrering av forespørsel</Alert>
-      )}
+      {!success && failed && <Alert variant="error">{translate("error.opprette_failed")}</Alert>}
       {!success && (
         <>
           <Heading size="xlarge" level="1">
-            Fordeling av reisekostnader
+            {foresporselTranslate("title")}
           </Heading>
           {allBarn.length === 0 && (
             <>
-              <Alert variant="info">Du har ingen tilgjengelig barn</Alert>
+              <Alert variant="info">{translate("alert.ingen_barn")}</Alert>
               <Link
                 href="/"
                 className="no-underline flex gap-2 items-center hover:underline"
@@ -99,9 +97,7 @@ export default function OpprettForesporsel() {
           {allBarn.length > 0 && (
             <>
               {userInformation && userInformation.harSkjulteFamilieenheterMedDiskresjon && (
-                <Alert variant="info">
-                  TODO: personen har skjulte familieenheter med diskresjon
-                </Alert>
+                <Alert variant="info">{translate("alert.skjulte_familieenheter")}</Alert>
               )}
               <BarnContainer
                 allBarn={allBarn}

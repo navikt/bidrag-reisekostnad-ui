@@ -32,7 +32,6 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
   const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
   const { t: translate } = useTranslation();
   const { t: samtykkeTranslate } = useTranslation("samtykke");
-  const { t: errorsTranslate } = useTranslation("errors");
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
@@ -69,7 +68,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
     <>
       <PageMeta title={samtykkeTranslate("page_title")} />
       <div className="grid gap-12">
-        {!success && failed && <Alert variant="error">{errorsTranslate("samtykke_failed")}</Alert>}
+        {!success && failed && <Alert variant="error">{translate("errors.samtykke_failed")}</Alert>}
         <Heading level="1" size="xlarge">
           {samtykkeTranslate("title")}
         </Heading>
