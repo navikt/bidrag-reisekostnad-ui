@@ -1,0 +1,9 @@
+{
+  "page_title": "Oversikt",
+  "greeting": "Hei",
+  "title": {
+    "sendt_inn_saker": "Saker du har sendt inn:",
+    "motatt_saker": "Saker du har mottatt fra den andre forelderen:"
+  },
+  "description": "Her kan du sende inn en forespørsel om NAV kan beregne fordeling av reisekostnader i forbindelse med samvær med barn.<br></br>For at NAV skal beregne for dere, må det foreligge såkalte særlige grunner til at reisekostnadene ikke skal deles forholdsmessig etter størrelsen på inntekten deres. Hva som er «særlige grunner» blir vurdert av en saksbehandler, på bakgrunn av hva dere oppgir som grunn.<br></br><b>Når innhenter vi samtykke fra den andre forelderen?</b><br></br> Når barnet er under 15 år, må begge foreldre være enige i at NAV skal beregne fordelingen for dere. Vi innhenter derfor et samtykke fra den andre forelderen. Hvis den andre forelderen ikke vil samtykke, må NAV avvise forespørselen om beregning<br></br> Når barnet er 15 år, eller eldre, trengs det ikke samtykke fra den andre forelderen. Da blir forespørselen automatisk sendt videre til behandling."
+}

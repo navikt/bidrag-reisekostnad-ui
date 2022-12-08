@@ -12,5 +12,9 @@
     "trekket_tilbake": "Trekket tilbake",
     "under_behandling": "Under behandling",
     "venter_paa_overforing": "Venter på overføring"
-  }
+  },
+  "alert": {
+    "ingen_saker": "Du har ingen saker om fordeling av reisekostnader"
+  },
+  "page_meta_content": "Fordeling av reisekostnader"
 }

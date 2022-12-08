@@ -7,9 +7,11 @@ import { PageMeta } from "../../components/page-meta/PageMeta";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 import { IForesporsel } from "../../types/foresporsel";
 import { useTranslation } from "next-i18next";
+import parse from "html-react-parser";
 
 export default function Overview() {
   const { userInformation } = useReisekostnad();
+  const { t: oversiktTranslate } = useTranslation("oversikt");
   const { t: translate } = useTranslation();
 
   const [showedForespørslerSomMotpart, setShowedForespørslerSomMotpart] = useState<IForesporsel[]>(
@@ -35,38 +37,17 @@ export default function Overview() {
 
   return (
     <>
-      <PageMeta title="Oversikt" />
+      <PageMeta title={oversiktTranslate("page_title")} />
       <div className="flex flex-col gap-5">
         <div className="w-full flex flex-col gap-10">
           <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
-          <div>
-            <p>
-              Her kan du sende inn en forespørsel om NAV kan beregne fordeling av reisekostnader i
-              forbindelse med samvær med barn.
-            </p>
-            <p>
-              For at NAV skal beregne for dere, må det foreligge såkalte særlige grunner til at
-              reisekostnadene ikke skal deles forholdsmessig etter størrelsen på inntekten deres.
-              Hva som er «særlige grunner» blir vurdert av en saksbehandler, på bakgrunn av hva dere
-              oppgir som grunn.
-            </p>
-            <b>Når innhenter vi samtykke fra den andre forelderen?</b>
-            <p>
-              Når barnet er under 15 år, må begge foreldre være enige i at NAV skal beregne
-              fordelingen for dere. Vi innhenter derfor et samtykke fra den andre forelderen. Hvis
-              den andre forelderen ikke vil samtykke, må NAV avvise forespørselen om beregning
-            </p>
-            <p>
-              Når barnet er 15 år, eller eldre, trengs det ikke samtykke fra den andre forelderen.
-              Da blir forespørselen automatisk sendt videre til behandling.
-            </p>
-          </div>
+          <p>{parse(oversiktTranslate("description"))}</p>
           {showedForespørslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
-            <Alert variant="info">Du har ingen saker om fordeling av reisekostnader</Alert>
+            <Alert variant="info">{translate("alert.ingen_saker")}</Alert>
           )}
           <div>
             <Link href="/foresporsel">
-              <Button type="button"> {translate("button.send_foresporsel_om_fordeling")}</Button>
+              <Button type="button">{translate("button.send_foresporsel_om_fordeling")}</Button>
             </Link>
           </div>
           {showedForespørslerSomMotpart.length > 0 && (
@@ -74,7 +55,7 @@ export default function Overview() {
               <div className="w-full flex flex-col gap-5">
                 {showedForespørslerSomMotpart && (
                   <Heading level="1" size="small">
-                    Saker du har mottatt fra den andre forelderen:
+                    {oversiktTranslate("title.motatt_saker")}
                   </Heading>
                 )}
                 {showedForespørslerSomMotpart.map((request, index) => {
@@ -86,7 +67,7 @@ export default function Overview() {
           {forespørslerSomHovedpart.length > 0 && (
             <div className="w-full flex flex-col gap-5">
               <Heading level="1" size="small">
-                Saker du har sendt inn:
+                {oversiktTranslate("title.sendt_inn_saker")}
               </Heading>
               {forespørslerSomHovedpart.map((request, index) => {
                 return <OverviewCard key={index} foresporsel={request} />;
