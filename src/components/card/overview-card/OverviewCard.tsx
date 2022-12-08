@@ -7,6 +7,7 @@ import { isAutomaticSubmission } from "../../../utils/foresporselUtils";
 import { getBarnInformationText } from "../../../utils/stringUtils";
 import BarnOver15Alert from "../../alert/barn-over-15-alert/BarnOver15Alert";
 import StatusBar from "../../status-bar/StatusBar";
+import { useTranslation } from "next-i18next";
 
 interface IOverviewCardProps {
   foresporsel: IForesporsel;
@@ -14,13 +15,14 @@ interface IOverviewCardProps {
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
   const { id, opprettet, barn, status } = foresporsel;
+  const { t: translate } = useTranslation();
 
   return (
     <Link className="no-underline" href={`/foresporsel/${id}`} passHref>
       <Panel className="navds-link-panel cursor-pointer" border>
         <div className="w-full navds-link-panel__content text-gray-900">
           <LinkPanel.Title className="text-large text-gray-900">
-            Fordeling av reisekostnader for
+            {translate("title.fordeling_av_reisekostnader_for")}
           </LinkPanel.Title>
           <LinkPanel.Description className="text-gray-900">
             <div className="w-full grid grid-cols-[80%_30%]">
@@ -30,15 +32,16 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                   {barn.map((person, i) => {
                     return (
                       <b className="text-medium" key={i}>
-                        {getBarnInformationText(person)}
+                        {getBarnInformationText(person, translate("aar"))}
                       </b>
                     );
                   })}
                 </div>
               </div>
               <div className="flex flex-col">
-                <span>Sendt inn:</span>
-                <span>{opprettet ? formatDate(opprettet) : ""}</span>
+                <span>
+                  {translate("sendt_inn", { date: opprettet ? formatDate(opprettet) : "" })}
+                </span>
               </div>
             </div>
           </LinkPanel.Description>

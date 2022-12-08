@@ -5,6 +5,7 @@ import { useState } from "react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 import { IPerson } from "../../../types/foresporsel";
 import { getBarnInformationText } from "../../../utils/stringUtils";
+import { useTranslation } from "next-i18next";
 
 interface IForesporselKvitteringContainerProps {
   barn: IPerson[];
@@ -19,6 +20,9 @@ export default function ForesporselKvitteringContainer({
 }: IForesporselKvitteringContainerProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
   const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
+  const { t: translate } = useTranslation();
+
+  const year = translate("aar");
 
   useEffect(() => {
     setBarnOver15(barn.filter((person) => person.alder >= 15));
@@ -37,16 +41,16 @@ export default function ForesporselKvitteringContainer({
             {barnOver15?.map((person, i) => {
               return (
                 <li key={i}>
-                  Forerspørsel for <b>{getBarnInformationText(person)}</b> går til NAV automatisk og
-                  trenger ikke signering fra motparten
+                  Forerspørsel for <b>{getBarnInformationText(person, year)}</b> går til NAV
+                  automatisk og trenger ikke signering fra motparten
                 </li>
               );
             })}
             {barnUnder15?.map((person, i) => {
               return (
                 <li key={i}>
-                  Forerspørsel for <b>{getBarnInformationText(person)}</b> å samtykkes slik at NAV
-                  skal behandle den videre
+                  Forerspørsel for <b>{getBarnInformationText(person, year)}</b> å samtykkes slik at
+                  NAV skal behandle den videre
                 </li>
               );
             })}

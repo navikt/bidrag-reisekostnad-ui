@@ -4,6 +4,7 @@ import Collapse from "../../../../components/collapse/Collapse";
 import { GJELDER_BARN_SOM_IKKE_VISES_HER_COLLAPSE } from "../../../../constants/collapse-data";
 import { IPerson } from "../../../../types/foresporsel";
 import { getBarnInformationText } from "../../../../utils/stringUtils";
+import { useTranslation } from "next-i18next";
 
 interface IBarnContainerProps {
   allBarn: IPerson[];
@@ -21,6 +22,7 @@ export default function BarnContainer({
   onSelectBarn,
 }: IBarnContainerProps) {
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
+  const { t: translate } = useTranslation();
 
   function handleChange(val: string[]) {
     setSelectedBarn(val);
@@ -42,7 +44,7 @@ export default function BarnContainer({
         {allBarn.map((barn, i) => {
           return (
             <Checkbox key={i} value={barn.ident}>
-              {getBarnInformationText(barn)}
+              {getBarnInformationText(barn, translate("aar"))}
             </Checkbox>
           );
         })}

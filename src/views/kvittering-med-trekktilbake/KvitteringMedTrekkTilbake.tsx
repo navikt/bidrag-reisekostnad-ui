@@ -47,7 +47,7 @@ export default function KvitteringMedTrekkTilbake({
                 })}
               </div>
             </div>
-            <div>Sendt inn: {sentDate ? formatDate(sentDate) : ""}</div>
+            <div>{translate("sendt_inn", { date: sentDate ? formatDate(sentDate) : "" })}</div>
           </div>
           <div className="grid gap-6">
             <div>

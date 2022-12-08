@@ -13,6 +13,7 @@ import KvitteringMedTrekkTilbake from "../../views/kvittering-med-trekktilbake/K
 import ForesporselKvitteringContainer from "../../views/foresporsel/foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import Spinner from "../../components/spinner/spinner/spinner";
 import { formatDate } from "../../utils/dateUtils";
+import { useTranslation } from "next-i18next";
 
 export default function ForesporselId() {
   const STATUS_TO_RENDER_CONFIRMATION = [
@@ -28,6 +29,7 @@ export default function ForesporselId() {
 
   const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
   const { userInformation, updateUserInformation } = useReisekostnad();
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (data) {
@@ -61,7 +63,7 @@ export default function ForesporselId() {
   }
 
   const barnInformation = foresporsel.barn.map((person) => {
-    return getBarnInformationText(person);
+    return getBarnInformationText(person, translate("aar"));
   });
 
   return (
