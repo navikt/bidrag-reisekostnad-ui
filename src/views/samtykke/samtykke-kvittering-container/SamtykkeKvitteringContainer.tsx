@@ -13,7 +13,7 @@ export default function SamtykkeKvitteringContainer({
   const { t: translate } = useTranslation("kvittering");
 
   return (
-    <ConfirmationLayout>
+    <ConfirmationLayout title={translate("title")}>
       <div className="flex space-x-14">
         <SuccessStroke color="green" fontSize="60" />
         <div className="flex flex-col gap-7">

@@ -2,7 +2,10 @@
   "page_title": "Bekreftelse på innsending",
   "title": "Bekreftelse på innsending",
   "accordion": [
-    { "header": "Hva skjer videre", "content": "TODO" },
+    {
+      "header": "Hva skjer videre",
+      "content": "<b>For barn under 15 år</b><br></br>Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at NAV skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.<br></br>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer som trengs i saken.<br></br>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen. I så tilfelle vil du få beskjed om det.<br></br>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.<br></br><b>For barn som er 15 år, eller eldre</b><br></br>Forespørselen fra deg har automatisk gått videre til behandling. En saksbehandler tar kontakt med både deg og den andre forelderen, for avklaringer som trengs i saken.<br></br>"
+    },
     { "header": "Hva skjer hvis", "content": "TODO" },
     { "header": "Relaterte ytelser og tjenester fra NAV", "content": "TODO" }
   ],
@@ -15,9 +18,10 @@
     "gjenfinne": "Du kan gjenfinne samtykken her"
   },
   "foresporsel": {
-    "description": "Du har sendt inn en forerspørsel om fordeling av reisekostnader til NAV {{date}}.",
+    "title": "Vi har mottatt forespørselen din",
+    "description": "Du har sendt en forespørsel om fordeling av reisekostnader {{date}}.",
     "automatisk_til_nav": "Forerspørsel for <b>{{barnInfo}}</b> går til NAV automatisk og trenger ikke signering fra motparten",
-    "trenger_samtykke": "Forerspørsel for <b>{{barnInfo}}</b> å samtykkes slik at NAV skal behandle den videre",
+    "trenger_samtykke": "Forerspørsel for <b>{{barnInfo}}</b> trenger å samtykkes slik at NAV skal behandle den videre",
     "alert": "Forerspørselen er ikke gyldig før motparten har samtykket. Han/hun kan allerede nå logge seg inn NAV sine sider og samtykke fordeling av reisekostnader. Du bør gjøre motparten oppmerksom på dette. Hvis motparten ikke har signert innen tre dager vil vi sende han en påminnelse per sms."
   }
 }

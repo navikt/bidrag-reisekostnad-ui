@@ -32,7 +32,7 @@ export default function ForesporselKvitteringContainer({
   }, []);
 
   return (
-    <ConfirmationLayout>
+    <ConfirmationLayout title={kvitteringTranslate("foresporsel.title")}>
       <div className="grid gap-8">
         <div className="grid gap-8">
           <span className="flex items-center">

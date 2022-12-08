@@ -38,7 +38,7 @@ export default function KvitteringMedTrekkTilbake({
 
   return (
     <div className="grid gap-12">
-      <ConfirmationLayout>
+      <ConfirmationLayout title={kvitteringTranslate("title")}>
         <div className="grid gap-12">
           <div className="w-[40rem] grid grid-cols-[70%_30%]">
             <div className="flex gap-4">

@@ -55,7 +55,7 @@ export default function Overview() {
               <div className="w-full flex flex-col gap-5">
                 {showedForespørslerSomMotpart && (
                   <Heading level="1" size="small">
-                    {oversiktTranslate("title.motatt_saker")}
+                    {oversiktTranslate("title.motatt_foresporsler")}
                   </Heading>
                 )}
                 {showedForespørslerSomMotpart.map((request, index) => {
@@ -67,7 +67,7 @@ export default function Overview() {
           {forespørslerSomHovedpart.length > 0 && (
             <div className="w-full flex flex-col gap-5">
               <Heading level="1" size="small">
-                {oversiktTranslate("title.sendt_inn_saker")}
+                {oversiktTranslate("title.sendt_inn_foresporsler")}
               </Heading>
               {forespørslerSomHovedpart.map((request, index) => {
                 return <OverviewCard key={index} foresporsel={request} />;
