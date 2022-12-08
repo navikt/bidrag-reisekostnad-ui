@@ -1,6 +1,13 @@
 {
   "page_title": "Opprett forespørsel",
   "title": "Fordeling av reisekostnader",
+  "checkbox": {
+    "legend": "Velg barn forespørselen gjelder for:"
+  },
+  "alert": {
+    "barn_over_15": "Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke fra den andre forelderen for at NAV kan behandle saken. Da går saken automatisk videre til behandling.",
+    "barn_bli_15_i_lopet_av_behandling": "TEKST FOR BARN SOM KAN BLI 15 ÅR I LØPER AV BEHANDLINGER"
+  },
   "accordion": {
     "barn_som_ikke_vises": [
       {

@@ -29,6 +29,7 @@
     "samtykke_failed": "Det skjedde en feil ved samtykke av forespørselen",
     "opprette_failed": "Det skjedde en feil ved registrering av forespørsel",
     "maa_samtykke": "Du må samtykke før du kan fortsette.",
-    "maa_velge": "Du må velge ett alternativ"
+    "maa_velge": "Du må velge ett alternativ",
+    "velg_barn": "Du må velge minst ett barn"
   }
 }

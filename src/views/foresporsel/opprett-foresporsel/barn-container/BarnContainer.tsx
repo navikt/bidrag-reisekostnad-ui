@@ -35,11 +35,10 @@ export default function BarnContainer({
         Barn
       </Heading>
       <CheckboxGroup
-        legend="Velg barn forespørselen gjelder for:"
+        legend={foresporselTranslate("checkbox.legend")}
         onChange={(val: string[]) => handleChange(val)}
         value={selectedBarn}
-        // TODO
-        error={showError && "Velg minst et av barna"}
+        error={showError && translate("errors.velg_barn")}
       >
         {allBarn.map((barn, i) => {
           return (
@@ -54,14 +53,12 @@ export default function BarnContainer({
       />
       {foundPersonOver15 && (
         <Alert variant="info" className="w-[80%]">
-          Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke
-          fra den andre forelderen for at NAV kan behandle saken. Da går saken automatisk videre til
-          behandling.
+          {foresporselTranslate("alert.barn_over_15")}
         </Alert>
       )}
       {foundPersonCouldBe15In30Days && (
         <Alert variant="info" className="w-[80%]">
-          TEKST FOR BARN SOM KAN BLI 15 ÅR I LØPER AV BEHANDLINGER
+          {foresporselTranslate("alert.barn_bli_15_i_lopet_av_behandling")}
         </Alert>
       )}
     </div>
