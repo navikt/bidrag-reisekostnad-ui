@@ -1,6 +1,7 @@
 import { SuccessStroke } from "@navikt/ds-icons";
 import { BodyShort } from "@navikt/ds-react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
+import { useTranslation } from "next-i18next";
 
 interface ISamtykkeKvitteringContainerProps {
   barnInformation: string[];
@@ -9,15 +10,15 @@ interface ISamtykkeKvitteringContainerProps {
 export default function SamtykkeKvitteringContainer({
   barnInformation,
 }: ISamtykkeKvitteringContainerProps) {
+  const { t: translate } = useTranslation("kvittering");
+
   return (
     <ConfirmationLayout>
       <div className="flex space-x-14">
         <SuccessStroke color="green" fontSize="60" />
         <div className="flex flex-col gap-7">
           <div>
-            <BodyShort spacing>
-              Du har signert fordeling av reisekostnader med Kari Normann for
-            </BodyShort>
+            <BodyShort spacing>{translate("samtykke.description")}</BodyShort>
             <ul className="p-0">
               {barnInformation.map((information, index) => {
                 return (
@@ -29,7 +30,7 @@ export default function SamtykkeKvitteringContainer({
             </ul>
           </div>
           {/* TODO */}
-          <BodyShort spacing>Du kan gjenfinne samtykken her [lenke].</BodyShort>
+          <BodyShort spacing>{translate("samtykke.gjenfinne")} [lenke].</BodyShort>
         </div>
       </div>
     </ConfirmationLayout>

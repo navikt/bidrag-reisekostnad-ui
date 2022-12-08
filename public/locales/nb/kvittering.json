@@ -1,0 +1,22 @@
+{
+  "title": "Bekreftelse på innsending",
+  "accordion": [
+    { "header": "Hva skjer videre", "content": "TODO" },
+    { "header": "Hva skjer hvis", "content": "TODO" },
+    { "header": "Relaterte ytelser og tjenester fra NAV", "content": "TODO" }
+  ],
+  "modal": {
+    "header": "Vil du trekke forerspørselen tilbake?",
+    "content": "Trekker du forerspørselen nå, skal den slettes. Motparten blir informert om det."
+  },
+  "samtykke": {
+    "description": "Du har signert fordeling av reisekostnader med Kari Normann for",
+    "gjenfinne": "Du kan gjenfinne samtykken her"
+  },
+  "foresporsel": {
+    "description": "Du har sendt inn en forerspørsel om fordeling av reisekostnader til NAV {{date}}.",
+    "automatisk_til_nav": "Forerspørsel for <b>{{barnInfo}}</b> går til NAV automatisk og trenger ikke signering fra motparten",
+    "trenger_samtykke": "Forerspørsel for <b>{{barnInfo}}</b> å samtykkes slik at NAV skal behandle den videre",
+    "alert": "Forerspørselen er ikke gyldig før motparten har samtykket. Han/hun kan allerede nå logge seg inn NAV sine sider og samtykke fordeling av reisekostnader. Du bør gjøre motparten oppmerksom på dette. Hvis motparten ikke har signert innen tre dager vil vi sende han en påminnelse per sms."
+  }
+}

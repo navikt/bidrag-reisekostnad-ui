@@ -6,6 +6,7 @@ import ConfirmationLayout from "../../../components/layout/confirmation-layout/C
 import { IPerson } from "../../../types/foresporsel";
 import { getBarnInformationText } from "../../../utils/stringUtils";
 import { useTranslation } from "next-i18next";
+import parse from "html-react-parser";
 
 interface IForesporselKvitteringContainerProps {
   barn: IPerson[];
@@ -21,6 +22,7 @@ export default function ForesporselKvitteringContainer({
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
   const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
   const { t: translate } = useTranslation();
+  const { t: kvitteringTranslate } = useTranslation("kvittering");
 
   const year = translate("aar");
 
@@ -35,22 +37,28 @@ export default function ForesporselKvitteringContainer({
         <div className="grid gap-8">
           <span className="flex items-center">
             <SuccessStroke color="green" fontSize="50" />
-            {`Du har sendt inn en forerspørsel om fordeling av reisekostnader til NAV ${sentDate}.`}
+            {kvitteringTranslate("foresporsel.description", { date: sentDate })}
           </span>
           <ul className="list-none flex flex-col gap-3">
             {barnOver15?.map((person, i) => {
               return (
                 <li key={i}>
-                  Forerspørsel for <b>{getBarnInformationText(person, year)}</b> går til NAV
-                  automatisk og trenger ikke signering fra motparten
+                  {parse(
+                    kvitteringTranslate("foresporsel.automatisk_til_nav", {
+                      barnInfo: getBarnInformationText(person, year),
+                    })
+                  )}
                 </li>
               );
             })}
             {barnUnder15?.map((person, i) => {
               return (
                 <li key={i}>
-                  Forerspørsel for <b>{getBarnInformationText(person, year)}</b> å samtykkes slik at
-                  NAV skal behandle den videre
+                  {parse(
+                    kvitteringTranslate("foresporsel.trenger_samtykke", {
+                      barnInfo: getBarnInformationText(person, year),
+                    })
+                  )}
                 </li>
               );
             })}
@@ -58,10 +66,7 @@ export default function ForesporselKvitteringContainer({
         </div>
         {showWarning && barnOver15 && barnOver15.length > 0 && (
           <Alert variant="warning" className="flex place-content-center">
-            Forerspørselen er ikke gyldig før motparten har samtykket. Han/hun kan allerede nå logge
-            seg inn NAV sine sider og samtykke fordeling av reisekostnader. Du bør gjøre motparten
-            oppmerksom på dette. Hvis motparten ikke har signert innen tre dager vil vi sende han en
-            påminnelse per sms.
+            {kvitteringTranslate("foresporsel.alert")}
           </Alert>
         )}
       </div>

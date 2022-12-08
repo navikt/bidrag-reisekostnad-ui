@@ -27,6 +27,8 @@ export default function KvitteringMedTrekkTilbake({
   const { submitting, success, failed, trekkeForesporsel } = useForesporselApi();
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { t: kvitteringTranslate } = useTranslation("kvittering");
+  const { t: errorsTranslate } = useTranslation("errors");
 
   useEffect(() => {
     if (success && !failed) {
@@ -66,16 +68,15 @@ export default function KvitteringMedTrekkTilbake({
         </div>
         <ConfirmModal
           open={open}
-          header="Vil du trekke forerspørselen tilbake?"
-          content="Trekker du forerspørselen nå, skal 
-          den slettes. Motparten blir informert om det."
+          header={kvitteringTranslate("modal.header")}
+          content={kvitteringTranslate("modal.content")}
           submitText={translate("button.trekk_tilbake")}
           onSubmit={() => trekkeForesporsel(foresporselId)}
           onCancel={() => router.push("/")}
           onClose={() => setOpen(false)}
           loading={submitting}
           showError={!success && failed}
-          errorMessage="Det skjedde en feil tilbaketrekking av forespørselen"
+          errorMessage={errorsTranslate("tilbaketrekking_failed") ?? ""}
         />
       </ConfirmationLayout>
     </div>
