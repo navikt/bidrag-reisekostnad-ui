@@ -12,7 +12,7 @@ export default function ConfirmationLayout({ children }: PropsWithChildren) {
 
   return (
     <>
-      <PageMeta title="Bekreftelse på innsending" />
+      <PageMeta title={kvitteringTranslate("page_title")} />
       <div className="w-full grid gap-10">
         <div className="flex flex-col gap-14 items-center">
           <Heading level="1" size="xlarge">

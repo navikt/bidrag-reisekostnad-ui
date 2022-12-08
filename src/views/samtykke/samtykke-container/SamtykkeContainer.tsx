@@ -67,7 +67,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
 
   return (
     <>
-      <PageMeta title="Samtykke" />
+      <PageMeta title={samtykkeTranslate("page_title")} />
       <div className="grid gap-12">
         {!success && failed && <Alert variant="error">{errorsTranslate("samtykke_failed")}</Alert>}
         <Heading level="1" size="xlarge">
