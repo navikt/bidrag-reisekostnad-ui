@@ -6,5 +6,11 @@
     "trekk_tilbake": "Trekk tilbake",
     "send_foresporsel_om_fordeling": "Send forespørsel om fordeling",
     "tilbake_til_soknad": "Tilbake til søknaden"
+  },
+  "status": {
+    "venter_paa_samtykke": "Venter på samtykke",
+    "trekket_tilbake": "Trekket tilbake",
+    "under_behandling": "Under behandling",
+    "venter_paa_overforing": "Venter på overføring"
   }
 }
