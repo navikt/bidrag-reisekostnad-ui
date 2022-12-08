@@ -2,25 +2,23 @@ import { SuccessStroke } from "@navikt/ds-icons";
 import { BodyShort } from "@navikt/ds-react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 import { useTranslation } from "next-i18next";
-import { ForesporselStatus } from "../../../enum/foresporsel-status";
 import parse from "html-react-parser";
 
 interface ISamtykkeKvitteringContainerProps {
   barnInformation: string[];
-  status: ForesporselStatus;
 }
 
 export default function SamtykkeKvitteringContainer({
   barnInformation,
-  status,
 }: ISamtykkeKvitteringContainerProps) {
   const { t: translate } = useTranslation("kvittering");
-  const content =
-    status === ForesporselStatus.KANSELLERT
-      ? translate("samtykke.nei.description", {
-          barn: barnInformation.join("\n"),
-        })
-      : translate("samtykke.ja.description");
+  const content = translate("samtykke.ja.description");
+  // const content =
+  //   status === ForesporselStatus.KANSELLERT
+  //     ? translate("samtykke.nei.description", {
+  //         barn: barnInformation.join("\n"),
+  //       })
+  //     : translate("samtykke.ja.description");
 
   return (
     <ConfirmationLayout title={translate("samtykke.title")}>

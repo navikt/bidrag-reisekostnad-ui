@@ -14,7 +14,7 @@ interface IOverviewCardProps {
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { id, opprettet, barn, status } = foresporsel;
+  const { id, opprettet, barn, status, samtykkefrist } = foresporsel;
   const { t: translate } = useTranslation();
 
   return (
@@ -39,9 +39,14 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                   })}
                 </ul>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col whitespace-pre-wrap text-medium">
                 <span>
                   {translate("sendt_inn", { date: opprettet ? formatDate(opprettet) : "" })}
+                </span>
+                <span>
+                  {translate("samtykkefrist", {
+                    date: samtykkefrist ? formatDate(samtykkefrist) : "-",
+                  })}
                 </span>
               </div>
             </div>

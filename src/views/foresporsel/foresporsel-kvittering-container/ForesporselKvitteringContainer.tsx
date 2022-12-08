@@ -51,17 +51,19 @@ export default function ForesporselKvitteringContainer({
                 </li>
               );
             })}
-            {barnUnder15?.map((person, i) => {
-              return (
-                <li key={i}>
-                  {parse(
-                    kvitteringTranslate("foresporsel.trenger_samtykke", {
-                      barnInfo: getBarnInformationText(person, year),
-                    })
-                  )}
-                </li>
-              );
-            })}
+            {barnUnder15 &&
+              barnUnder15.length > 0 &&
+              barnUnder15.map((person, i) => {
+                return (
+                  <li key={i}>
+                    {parse(
+                      kvitteringTranslate("foresporsel.trenger_samtykke", {
+                        barnInfo: getBarnInformationText(person, year),
+                      })
+                    )}
+                  </li>
+                );
+              })}
           </ul>
         </div>
         {showWarning && barnOver15 && barnOver15.length > 0 && (
