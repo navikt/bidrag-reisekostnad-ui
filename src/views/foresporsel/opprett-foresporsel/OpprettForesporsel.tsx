@@ -125,8 +125,8 @@ export default function OpprettForesporsel() {
               />
               <ConfirmModal
                 open={open}
-                header="Vil du avbryte forerspørselen?"
-                content="Avbryter du nå, skal forerspørselen slettes og du må starte på nytt."
+                header={foresporselTranslate("modal.header")}
+                content={foresporselTranslate("modal.content")}
                 submitText={translate("button.tilbake_til_soknad")}
                 onSubmit={() => setOpen(false)}
                 onCancel={() => router.push("/")}

@@ -12,6 +12,7 @@ interface IBarnOver15AlertProps {
 export default function BarnOver15Alert({ barn }: IBarnOver15AlertProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
   const { t: translate } = useTranslation();
+  const { t: overviewTranslate } = useTranslation("oversikt");
 
   useEffect(() => {
     const personOver15 = getPersonOver15YearsOld(barn);
@@ -29,11 +30,7 @@ export default function BarnOver15Alert({ barn }: IBarnOver15AlertProps) {
       {barnOver15.map((person, i) => {
         return <b key={i}>{getBarnInformationText(person, translate("aar"))}</b>;
       })}
-      <span>
-        har blitt 15 år mens forerspørselen ventet på samtykke, derfor gikk forerspørselen
-        automatisk til NAV. Du kan lese mer om saksbehandling av reisekostnader for barn over 15 på
-        NAV sine sider.
-      </span>
+      <span>{overviewTranslate("automatisk_sendt_inn_messge")}</span>
     </Alert>
   );
 }

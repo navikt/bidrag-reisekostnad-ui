@@ -1,7 +1,6 @@
 import { Heading, BodyShort, ConfirmationPanel, Button, Alert } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
-import { MAA_SAMTYKKE } from "../../../constants/error";
 import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import useForesporselApi from "../../../hooks/useForesporselApi";
@@ -86,15 +85,17 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         <div className="grid gap-7">
           <ConfirmationPanel
             checked={haveReadAndUnderstood.isAgree}
-            label={samtykkeTranslate("confirmation_panel.lest_og_forstått")}
+            label={samtykkeTranslate("confirmation_panel.lest_og_forstaatt")}
             onChange={handleReadAndUnderstood}
-            error={haveReadAndUnderstood.showError && MAA_SAMTYKKE}
+            error={haveReadAndUnderstood.showError && translate("errors.maa_samtykke")}
           ></ConfirmationPanel>
           <ConfirmationPanel
             checked={isAwareThatRequestCannotBeWithdrawn.isAgree}
             label={samtykkeTranslate("confirmation_panel.ikke_kan_trekkes_tilbake")}
             onChange={handleAwarenessThatRequestCannotBeWithdrawn}
-            error={isAwareThatRequestCannotBeWithdrawn.showError && MAA_SAMTYKKE}
+            error={
+              isAwareThatRequestCannotBeWithdrawn.showError && translate("errors.maa_samtykke")
+            }
           ></ConfirmationPanel>
         </div>
         <div className="flex space-x-12">

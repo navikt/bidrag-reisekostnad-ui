@@ -26,6 +26,7 @@
   "errors": {
     "tilbaketrekking_failed": "Det skjedde en feil tilbaketrekking av forespørselen",
     "samtykke_failed": "Det skjedde en feil ved samtykke av forespørselen",
-    "opprette_failed": "Det skjedde en feil ved registrering av forespørsel"
+    "opprette_failed": "Det skjedde en feil ved registrering av forespørsel",
+    "maa_samtykke": "Du må samtykke før du kan fortsette."
   }
 }
