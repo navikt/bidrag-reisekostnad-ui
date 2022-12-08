@@ -1,7 +1,6 @@
 import { Heading, BodyShort, ConfirmationPanel, Button, Alert } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
-import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse-data";
 import { MAA_SAMTYKKE } from "../../../constants/error";
 import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
@@ -32,6 +31,8 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
     });
   const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
   const { t: translate } = useTranslation();
+  const { t: samtykkeTranslate } = useTranslation("samtykke");
+  const { t: errorsTranslate } = useTranslation("errors");
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
@@ -68,17 +69,13 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
     <>
       <PageMeta title="Samtykke" />
       <div className="grid gap-12">
-        {!success && failed && (
-          <Alert variant="error">Det skjedde en feil ved samtykke av forespørselen</Alert>
-        )}
+        {!success && failed && <Alert variant="error">{errorsTranslate("samtykke_failed")}</Alert>}
         <Heading level="1" size="xlarge">
-          Samtykke
+          {samtykkeTranslate("title")}
         </Heading>
-        <Collapse data={SAMTYKKE_COLLAPSE} />
+        <Collapse data={samtykkeTranslate("accordion", { returnObjects: true })} />
         <div className="grid gap-7">
-          <BodyShort>
-            Jeg samtykker at NAV skal behandle fordeling av reisekostnader for barn
-          </BodyShort>
+          <BodyShort>{samtykkeTranslate("samtykk_message")}</BodyShort>
           {barnInformation.map((information, index) => {
             return (
               <BodyShort key={index} className="font-bold">
@@ -90,13 +87,13 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         <div className="grid gap-7">
           <ConfirmationPanel
             checked={haveReadAndUnderstood.isAgree}
-            label="Jeg har lest og fortstått hva fordeling av reisekostander innebærer."
+            label={samtykkeTranslate("confirmation_panel.lest_og_forstått")}
             onChange={handleReadAndUnderstood}
             error={haveReadAndUnderstood.showError && MAA_SAMTYKKE}
           ></ConfirmationPanel>
           <ConfirmationPanel
             checked={isAwareThatRequestCannotBeWithdrawn.isAgree}
-            label="Jeg er kjent med at denne bekreftelsen ikke kan trekkes tilbake på et senere tidspunkt."
+            label={samtykkeTranslate("confirmation_panel.ikke_kan_trekkes_tilbake")}
             onChange={handleAwarenessThatRequestCannotBeWithdrawn}
             error={isAwareThatRequestCannotBeWithdrawn.showError && MAA_SAMTYKKE}
           ></ConfirmationPanel>

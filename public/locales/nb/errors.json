@@ -1,3 +1,4 @@
 {
-  "tilbaketrekking_failed": "Det skjedde en feil tilbaketrekking av forespørselen"
+  "tilbaketrekking_failed": "Det skjedde en feil tilbaketrekking av forespørselen",
+  "samtykke_failed": "Det skjedde en feil ved samtykke av forespørselen"
 }

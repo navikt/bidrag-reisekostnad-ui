@@ -1,0 +1,15 @@
+{
+  "title": "Samtykke",
+  "accordion": [
+    {
+      "header": "Hva innebærer det å samtykke til fordeling av reisekostnader?",
+      "content": "TODO"
+    },
+    { "header": "Hva hvis jeg ikke er enig om fordeling av reisekostander?", "content": "TODO" }
+  ],
+  "samtykk_message": "Jeg samtykker at NAV skal behandle fordeling av reisekostnader for barn",
+  "confirmation_panel": {
+    "lest_og_forstått": "Jeg har lest og fortstått hva fordeling av reisekostander innebærer.",
+    "ikke_kan_trekkes_tilbake": "Jeg er kjent med at denne bekreftelsen ikke kan trekkes tilbake på et senere tidspunkt."
+  }
+}

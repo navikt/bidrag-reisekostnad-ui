@@ -1,17 +1,6 @@
 import Link from "next/link";
 import { ICollapseData } from "../components/collapse/Collapse";
 
-export const SAMTYKKE_COLLAPSE: ICollapseData[] = [
-  {
-    header: "Hva innebærer det å samtykke til fordeling av reisekostnader?",
-    content: "TODO",
-  },
-  {
-    header: "Hva hvis jeg ikke er enig om fordeling av reisekostander?",
-    content: "TODO",
-  },
-];
-
 export const GJELDER_BARN_SOM_IKKE_VISES_HER_COLLAPSE: ICollapseData[] = [
   {
     header: "Gjelder forespørselen barn som ikke vises her?",

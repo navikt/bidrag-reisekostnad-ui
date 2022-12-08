@@ -98,7 +98,7 @@ export default function ForesporselId() {
 export async function getServerSideProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "kvittering", "errors"])),
+      ...(await serverSideTranslations(locale, ["common", "kvittering", "errors", "samtykke"])),
     },
   };
 }
