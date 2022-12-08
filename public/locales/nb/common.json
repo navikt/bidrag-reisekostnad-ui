@@ -9,9 +9,8 @@
   },
   "status": {
     "venter_paa_samtykke": "Venter på samtykke",
-    "trekket_tilbake": "Trekket tilbake",
-    "under_behandling": "Under behandling",
-    "venter_paa_overforing": "Venter på overføring"
+    "kansellert": "Kansellert",
+    "under_behandling": "Under behandling"
   },
   "alert": {
     "ingen_saker": "Du har ingen saker om fordeling av reisekostnader"

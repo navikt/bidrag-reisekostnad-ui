@@ -29,10 +29,10 @@ function getStatus(foresporsel: IForesporsel): ForesporselStatus {
   } else if (kreverSamtykke && samtykket === null && journalført === null && deaktivert === null) {
     return ForesporselStatus.VENTER_PAA_SAMTYKKE;
   } else if (deaktivert !== null) {
-    return ForesporselStatus.TREKKET_TILBAKE;
+    return ForesporselStatus.KANSELLERT;
   }
 
-  return ForesporselStatus.VENTER_PAA_OVERFORING;
+  return ForesporselStatus.UNDER_BEHANDLING;
 }
 
 function sortByStatus(foresporsler: IForesporsel[]) {

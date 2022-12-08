@@ -18,8 +18,7 @@ import { useTranslation } from "next-i18next";
 export default function ForesporselId() {
   const STATUS_TO_RENDER_CONFIRMATION = [
     ForesporselStatus.UNDER_BEHANDLING,
-    ForesporselStatus.VENTER_PAA_OVERFORING,
-    ForesporselStatus.TREKKET_TILBAKE,
+    ForesporselStatus.KANSELLERT,
   ];
   const router = useRouter();
   const foresporselId = router.query.id as string;

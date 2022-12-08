@@ -19,16 +19,10 @@ export default function StatusBar({ status }: IStatusBar) {
                 {translate("status.venter_paa_samtykke")}
               </Tag>
             );
-          case ForesporselStatus.TREKKET_TILBAKE:
+          case ForesporselStatus.KANSELLERT:
             return (
               <Tag variant="neutral" size="small" className="mt-3">
-                {translate("status.trekket_tilbake")}
-              </Tag>
-            );
-          case ForesporselStatus.VENTER_PAA_OVERFORING:
-            return (
-              <Tag variant="alt2" size="small" className="mt-3">
-                {translate("status.venter_paa_overforing")}
+                {translate("status.kansellert")}
               </Tag>
             );
           default:
