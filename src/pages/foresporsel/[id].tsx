@@ -82,9 +82,12 @@ export default function ForesporselId() {
           sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
         />
       )}
-
+      {/* TODO: bruker status som midlertidig løsning, sjekk hvilken felt som skal sjekkes mot */}
       {!isHovedpart && STATUS_TO_RENDER_CONFIRMATION.includes(foresporsel.status) && (
-        <SamtykkeKvitteringContainer barnInformation={barnInformation} />
+        <SamtykkeKvitteringContainer
+          barnInformation={barnInformation}
+          status={foresporsel.status}
+        />
       )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (

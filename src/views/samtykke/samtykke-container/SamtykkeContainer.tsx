@@ -1,4 +1,12 @@
-import { Heading, BodyShort, ConfirmationPanel, Button, Alert } from "@navikt/ds-react";
+import {
+  Heading,
+  BodyShort,
+  ConfirmationPanel,
+  Button,
+  Alert,
+  RadioGroup,
+  Radio,
+} from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
 import Collapse from "../../../components/collapse/Collapse";
@@ -29,6 +37,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
       isAgree: false,
       showError: false,
     });
+  const [isSamtykke, setIsSamtykke] = useState<boolean>();
   const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
   const { t: translate } = useTranslation();
   const { t: samtykkeTranslate } = useTranslation("samtykke");
@@ -52,15 +61,17 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
   }
 
   async function handleSendIn() {
-    setHaveReadAndUnderstood((current) => {
-      return { ...current, showError: !current.isAgree };
-    });
-    setIsAwareThatRequestCannotBeWithdrawn((current) => {
-      return { ...current, showError: !current.isAgree };
-    });
+    if (isSamtykke !== undefined) {
+      setHaveReadAndUnderstood((current) => {
+        return { ...current, showError: !current.isAgree };
+      });
+      setIsAwareThatRequestCannotBeWithdrawn((current) => {
+        return { ...current, showError: !current.isAgree };
+      });
 
-    if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
-      await samtykkeForesporsel(foresporselId);
+      if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
+        await samtykkeForesporsel(foresporselId);
+      }
     }
   }
 
@@ -75,14 +86,27 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         <Collapse data={samtykkeTranslate("accordion", { returnObjects: true })} />
         <div className="grid gap-7">
           <BodyShort>{parse(samtykkeTranslate("description"))}</BodyShort>
-          <b>{samtykkeTranslate("bekreftelse_message")}</b>
-          {barnInformation.map((information, index) => {
-            return (
-              <BodyShort key={index} className="font-bold">
-                {information}
-              </BodyShort>
-            );
-          })}
+          <RadioGroup
+            legend={
+              <>
+                {samtykkeTranslate("radio.legend")}
+                <ul className="list-none p-0 my-2">
+                  {barnInformation.map((information, index) => {
+                    return (
+                      <li key={index} className="font-bold">
+                        {information}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            }
+            onChange={(val: boolean) => setIsSamtykke(val)}
+            error={isSamtykke === undefined && translate("errors.maa_velge")}
+          >
+            <Radio value={true}>{samtykkeTranslate("radio.ja")}</Radio>
+            <Radio value={false}>{samtykkeTranslate("radio.nei")}</Radio>
+          </RadioGroup>
         </div>
         <div className="grid gap-7">
           <ConfirmationPanel

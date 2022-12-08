@@ -14,8 +14,13 @@
     "content": "Trekker du forerspørselen nå, skal den slettes. Motparten blir informert om det."
   },
   "samtykke": {
-    "description": "Du har signert fordeling av reisekostnader med Kari Normann for",
-    "gjenfinne": "Du kan gjenfinne samtykken her"
+    "title": "Vi har mottatt svar fra deg",
+    "ja": {
+      "description": "Vi har mottatt et samtykke fra deg i forbindelse med fordeling av reisekostnader. Saken har automatisk blitt sendt videre til behandling.<br></br>En saksbehandler tar kontakt med deg, for avklaringer som trengs i saken."
+    },
+    "nei": {
+      "description": "Vi har mottatt svar fra deg i forbindelse med fordeling av reisekostnader. Du samtykker ikke i at NAV skal beregne fordeling av reisekostnader for <br><br>{{barn}}<br><br>Begge foreldrene må være enige i at NAV skal gjøre denne tjenesten. Forespørselen til den andre forelderen blir derfor kansellert. Vi orienterer den andre forelderen om dette."
+    }
   },
   "foresporsel": {
     "title": "Vi har mottatt forespørselen din",
