@@ -1,7 +1,6 @@
 import { CheckboxGroup, Checkbox, Alert, Heading } from "@navikt/ds-react";
 import { useState } from "react";
 import Collapse from "../../../../components/collapse/Collapse";
-import { GJELDER_BARN_SOM_IKKE_VISES_HER_COLLAPSE } from "../../../../constants/collapse-data";
 import { IPerson } from "../../../../types/foresporsel";
 import { getBarnInformationText } from "../../../../utils/stringUtils";
 import { useTranslation } from "next-i18next";
@@ -23,6 +22,7 @@ export default function BarnContainer({
 }: IBarnContainerProps) {
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
   const { t: translate } = useTranslation();
+  const { t: foresporselTranslate } = useTranslation("opprettForesporsel");
 
   function handleChange(val: string[]) {
     setSelectedBarn(val);
@@ -49,7 +49,9 @@ export default function BarnContainer({
           );
         })}
       </CheckboxGroup>
-      <Collapse data={GJELDER_BARN_SOM_IKKE_VISES_HER_COLLAPSE} />
+      <Collapse
+        data={foresporselTranslate("accordion.barn_som_ikke_vises", { returnObjects: true })}
+      />
       {foundPersonOver15 && (
         <Alert variant="info" className="w-[80%]">
           Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke

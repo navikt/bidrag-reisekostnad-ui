@@ -17,7 +17,6 @@ import {
 import Link from "next/link";
 import { Left } from "@navikt/ds-icons";
 import Collapse from "../../../components/collapse/Collapse";
-import { BEHANDLING_AV_PERSONLIGOPPLYSNING_COLLAPSE } from "../../../constants/collapse-data";
 import { useTranslation } from "next-i18next";
 
 export default function OpprettForesporsel() {
@@ -32,6 +31,7 @@ export default function OpprettForesporsel() {
   const { submitting, success, createForesporsel, failed } = useForesporselApi();
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { t: foresporselTranslate } = useTranslation("opprettForesporsel");
 
   useEffect(() => {
     if (userInformation) {
@@ -122,7 +122,11 @@ export default function OpprettForesporsel() {
                   {translate("button.avbryt")}
                 </Button>
               </div>
-              <Collapse data={BEHANDLING_AV_PERSONLIGOPPLYSNING_COLLAPSE} />
+              <Collapse
+                data={foresporselTranslate("accordion.behandling_av_personligopplysning", {
+                  returnObjects: true,
+                })}
+              />
               <ConfirmModal
                 open={open}
                 header="Vil du avbryte forerspørselen?"
