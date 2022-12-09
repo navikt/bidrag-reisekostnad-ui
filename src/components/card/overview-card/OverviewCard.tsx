@@ -43,11 +43,13 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                 <span>
                   {translate("sendt_inn", { date: opprettet ? formatDate(opprettet) : "" })}
                 </span>
-                <span>
-                  {translate("samtykkefrist", {
-                    date: samtykkefrist ? formatDate(samtykkefrist) : "-",
-                  })}
-                </span>
+                {samtykkefrist && (
+                  <span>
+                    {translate("samtykkefrist", {
+                      date: formatDate(samtykkefrist),
+                    })}
+                  </span>
+                )}
               </div>
             </div>
           </LinkPanel.Description>
