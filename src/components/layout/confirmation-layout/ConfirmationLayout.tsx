@@ -28,7 +28,7 @@ export default function ConfirmationLayout({ title, children }: IConfirmationLay
         <div className="grid gap-2">
           <Link href="/" className="no-underline flex gap-2 items-center hover:underline" passHref>
             {translate("button.til_oversikten")}
-            <Right aria-hidden={false} aria-label={translate("button.til_oversikten") as string} />
+            <Right />
           </Link>
         </div>
       </div>

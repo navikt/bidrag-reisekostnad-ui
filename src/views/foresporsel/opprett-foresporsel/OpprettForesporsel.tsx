@@ -89,10 +89,7 @@ export default function OpprettForesporsel() {
                 className="no-underline flex gap-2 items-center hover:underline"
                 passHref
               >
-                <Left
-                  aria-hidden={false}
-                  aria-label={translate("button.til_oversikten") as string}
-                />
+                <Left />
                 {translate("button.til_oversikten")}
               </Link>
             </>

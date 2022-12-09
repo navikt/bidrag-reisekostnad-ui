@@ -36,12 +36,7 @@ export default function ForesporselKvitteringContainer({
       <div className="grid gap-8">
         <div className="grid gap-1">
           <span className="flex items-center">
-            <SuccessStroke
-              color="green"
-              fontSize="50"
-              aria-label="success icon"
-              aria-hidden={false}
-            />
+            <SuccessStroke color="green" fontSize="50" />
             {kvitteringTranslate("foresporsel.description", { date: sentDate })}
           </span>
           {barnOver15 && barnOver15.length > 0 && (

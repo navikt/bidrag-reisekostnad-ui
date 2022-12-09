@@ -25,12 +25,7 @@ export default function SamtykkeKvitteringContainer({
     <ConfirmationLayout title={translate("samtykke.title")}>
       <div className="flex gap-8">
         <div>
-          <SuccessStroke
-            color="green"
-            fontSize="60"
-            aria-label="success icon"
-            aria-hidden={false}
-          />
+          <SuccessStroke color="green" fontSize="60" />
         </div>
         <div className="flex flex-col gap-7">
           <div className="whitespace-pre-wrap">{parse(content)}</div>
