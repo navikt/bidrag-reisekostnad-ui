@@ -1,12 +1,4 @@
-import {
-  Heading,
-  BodyShort,
-  ConfirmationPanel,
-  Button,
-  Alert,
-  RadioGroup,
-  Radio,
-} from "@navikt/ds-react";
+import { Heading, ConfirmationPanel, Button, Alert, RadioGroup, Radio } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
 import Collapse from "../../../components/collapse/Collapse";
@@ -39,7 +31,8 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
     });
   const [isSamtykke, setIsSamtykke] = useState<boolean>();
   const [showRadioError, setShowRadioError] = useState<boolean>(false);
-  const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
+  const { submitting, failed, success, samtykkeForesporsel, trekkeForesporsel } =
+    useForesporselApi();
   const { t: translate } = useTranslation();
   const { t: samtykkeTranslate } = useTranslation("samtykke");
 
@@ -73,7 +66,11 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
       });
 
       if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
-        await samtykkeForesporsel(foresporselId);
+        if (isSamtykke) {
+          await samtykkeForesporsel(foresporselId);
+        } else {
+          await trekkeForesporsel(foresporselId);
+        }
       }
     }
   }

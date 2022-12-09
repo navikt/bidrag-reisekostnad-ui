@@ -24,6 +24,7 @@ export interface IForesporsel extends IForesporselUi {
   journalført: string | null;
   deaktivert: string | null;
   samtykkefrist: string | null;
+  deaktivertAv: "HOVEDPART" | "MOTPART" | "SYSTEM" | null;
 }
 
 interface IForesporselUi {
@@ -46,4 +47,9 @@ export interface IPersonAge {
 interface IMotpart {
   motpart: IPerson;
   fellesBarnUnder15År: IPerson[];
+}
+
+export interface IActiveInactiveForesporsel {
+  active: IForesporsel[];
+  inactive: IForesporsel[];
 }
