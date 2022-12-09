@@ -15,7 +15,7 @@
   "alert": {
     "ingen_saker": "Du har ingen saker om fordeling av reisekostnader",
     "barnet_har_foresporsel": "Du har allerede sendt en forespørsel for dette barnet.",
-    "barna_har_foresporsel": "Du har allerede sendt en forespørsel for disse barna..",
+    "barna_har_foresporsel": "Du har allerede sendt en forespørsel for disse barna.",
     "funnet_ingen_barn": "Vi har ikke funnet barn som er registrert på deg. Du må derfor kontakte oss på telefon 55 55 33 33, eller benytte tjenesten <a href=\"https://www.nav.no/skriv-til-oss\">Skriv til oss</a>. Der opplyser du om navn og fødselsnummer på hvilket barn det gjelder, og for den andre forelderen."
   },
   "page_meta_content": "Fordeling av reisekostnader",
