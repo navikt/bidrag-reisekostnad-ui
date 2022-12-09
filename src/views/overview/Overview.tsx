@@ -54,7 +54,7 @@ export default function Overview() {
             <>
               <div className="w-full flex flex-col gap-5">
                 {showedForespørslerSomMotpart && (
-                  <Heading level="1" size="small">
+                  <Heading level="2" size="small">
                     {oversiktTranslate("title.motatt_foresporsler")}
                   </Heading>
                 )}
@@ -66,7 +66,7 @@ export default function Overview() {
           )}
           {forespørslerSomHovedpart.length > 0 && (
             <div className="w-full flex flex-col gap-5">
-              <Heading level="1" size="small">
+              <Heading level="2" size="small">
                 {oversiktTranslate("title.sendt_inn_foresporsler")}
               </Heading>
               {forespørslerSomHovedpart.map((request, index) => {

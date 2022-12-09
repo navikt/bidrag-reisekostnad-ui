@@ -31,9 +31,9 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                   {barn.map((person, i) => {
                     return (
                       <li className="list-none" key={i}>
-                        <b className="text-medium">
+                        <strong className="text-medium">
                           {getBarnInformationText(person, translate("aar"))}
-                        </b>
+                        </strong>
                       </li>
                     );
                   })}
@@ -56,7 +56,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
           <StatusBar status={status} />
           {isAutomaticSubmission(foresporsel) && <BarnOver15Alert barn={barn} />}
         </div>
-        <Next className="navds-link-panel__chevron" aria-hidden />
+        <Next className="navds-link-panel__chevron" />
       </Panel>
     </Link>
   );
