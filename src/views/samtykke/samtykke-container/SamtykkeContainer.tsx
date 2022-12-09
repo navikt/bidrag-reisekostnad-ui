@@ -38,6 +38,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
       showError: false,
     });
   const [isSamtykke, setIsSamtykke] = useState<boolean>();
+  const [showRadioError, setShowRadioError] = useState<boolean>(false);
   const { submitting, failed, success, samtykkeForesporsel } = useForesporselApi();
   const { t: translate } = useTranslation();
   const { t: samtykkeTranslate } = useTranslation("samtykke");
@@ -61,7 +62,9 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
   }
 
   async function handleSendIn() {
-    if (isSamtykke !== undefined) {
+    if (isSamtykke === undefined) {
+      setShowRadioError(true);
+    } else {
       setHaveReadAndUnderstood((current) => {
         return { ...current, showError: !current.isAgree };
       });
@@ -75,6 +78,11 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
     }
   }
 
+  function handleRadioGroup(value: boolean) {
+    setShowRadioError(false);
+    setIsSamtykke(value);
+  }
+
   return (
     <>
       <PageMeta title={samtykkeTranslate("page_title")} />
@@ -85,12 +93,12 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         </Heading>
         <Collapse data={samtykkeTranslate("accordion", { returnObjects: true })} />
         <div className="grid gap-7">
-          <BodyShort>{parse(samtykkeTranslate("description"))}</BodyShort>
+          <div>{parse(samtykkeTranslate("description"))}</div>
           <RadioGroup
             legend={
               <>
                 {samtykkeTranslate("radio.legend")}
-                <ul className="list-none p-0 my-2">
+                <ul className="list-none p-0 my-1">
                   {barnInformation.map((information, index) => {
                     return (
                       <li key={index} className="font-bold">
@@ -101,8 +109,8 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
                 </ul>
               </>
             }
-            onChange={(val: boolean) => setIsSamtykke(val)}
-            error={isSamtykke === undefined && translate("errors.maa_velge")}
+            onChange={handleRadioGroup}
+            error={showRadioError && translate("errors.maa_velge")}
           >
             <Radio value={true}>{samtykkeTranslate("radio.ja")}</Radio>
             <Radio value={false}>{samtykkeTranslate("radio.nei")}</Radio>
