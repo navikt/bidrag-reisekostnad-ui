@@ -35,7 +35,12 @@ export default function TokenInput(): ReactElement | null {
     >
       <div>Idporten token:</div>
       <form onSubmit={onFormSubmit}>
-        <input style={{ width: "50vw" }} onChange={(e) => setIdToken(e.target.value)} />
+        <input
+          style={{ width: "50vw" }}
+          type="text"
+          aria-label="token"
+          onChange={(e) => setIdToken(e.target.value)}
+        />
         <button>submit</button>
       </form>
       <div>

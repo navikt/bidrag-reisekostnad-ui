@@ -31,5 +31,10 @@
     "maa_samtykke": "Du må samtykke før du kan fortsette.",
     "maa_velge": "Du må velge ett alternativ",
     "velg_barn": "Du må velge minst ett barn"
+  },
+  "logo_title": {
+    "kvinne": "Logo for kvinne",
+    "mann": "Logo for mann",
+    "next_icon": "Gå til forespørselen"
   }
 }

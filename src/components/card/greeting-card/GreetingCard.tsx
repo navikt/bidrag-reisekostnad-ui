@@ -1,5 +1,4 @@
 import { Heading } from "@navikt/ds-react";
-import React from "react";
 import { Gender } from "../../../enum/gender";
 import { NavVeilederKvinne } from "../../../svg-icons/NavVeilederKvinne";
 import NavVeilederMann from "../../../svg-icons/NavVeilederMann";
@@ -10,13 +9,18 @@ interface IGreetingCardProps {
   gender: Gender;
 }
 export default function GreetingCard({ name, gender }: IGreetingCardProps) {
-  const { t: translate } = useTranslation("oversikt");
+  const { t: oversiktTranslate } = useTranslation("oversikt");
+  const { t: translate } = useTranslation();
 
   return (
     <div className="flex flex-col items-center gap-5">
-      {gender === Gender.KVINNE ? <NavVeilederKvinne /> : <NavVeilederMann />}
+      {gender === Gender.KVINNE ? (
+        <NavVeilederKvinne id="kvinne-logo" title={translate("logo_title.kvinne")} />
+      ) : (
+        <NavVeilederMann id="mann-logo" title={translate("logo_title.mann")} />
+      )}
       <Heading level="1" size="large">
-        {translate("greeting")} {name}
+        {oversiktTranslate("greeting")} {name}
       </Heading>
     </div>
   );

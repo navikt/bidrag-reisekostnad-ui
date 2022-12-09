@@ -1,4 +1,6 @@
-export default function NavVeilederMann() {
+import { INavVeilederProps } from "./NavVeilederKvinne";
+
+export default function NavVeilederMann({ title, id }: INavVeilederProps) {
   return (
     <svg
       width="150"
@@ -6,7 +8,10 @@ export default function NavVeilederMann() {
       viewBox="0 0 150 150"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-labelledby={id}
     >
+      <title id={id}>{title}</title>
       <circle cx="75" cy="75" r="74.5" fill="#E0DAE7" stroke="#C1B5D0" />
       <path
         fillRule="evenodd"

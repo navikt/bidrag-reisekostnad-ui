@@ -56,7 +56,10 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
           <StatusBar status={status} />
           {isAutomaticSubmission(foresporsel) && <BarnOver15Alert barn={barn} />}
         </div>
-        <Next className="navds-link-panel__chevron" />
+        <Next
+          className="navds-link-panel__chevron"
+          aria-label={translate("logo_title.next_icon") as string}
+        />
       </Panel>
     </Link>
   );
