@@ -36,24 +36,32 @@ export default function ForesporselKvitteringContainer({
       <div className="grid gap-8">
         <div className="grid gap-8">
           <span className="flex items-center">
-            <SuccessStroke color="green" fontSize="50" />
+            <SuccessStroke
+              color="green"
+              fontSize="50"
+              aria-label="success icon"
+              aria-hidden={false}
+            />
             {kvitteringTranslate("foresporsel.description", { date: sentDate })}
           </span>
-          <ul className="list-none flex flex-col gap-3">
-            {barnOver15?.map((person, i) => {
-              return (
-                <li key={i}>
-                  {parse(
-                    kvitteringTranslate("foresporsel.automatisk_til_nav", {
-                      barnInfo: getBarnInformationText(person, year),
-                    })
-                  )}
-                </li>
-              );
-            })}
-            {barnUnder15 &&
-              barnUnder15.length > 0 &&
-              barnUnder15.map((person, i) => {
+          {barnOver15 && barnOver15.length > 0 && (
+            <ul className="list-none flex flex-col gap-3">
+              {barnOver15?.map((person, i) => {
+                return (
+                  <li key={i}>
+                    {parse(
+                      kvitteringTranslate("foresporsel.automatisk_til_nav", {
+                        barnInfo: getBarnInformationText(person, year),
+                      })
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+          {barnUnder15 && barnUnder15.length > 0 && (
+            <ul className="list-none flex flex-col gap-3">
+              {barnUnder15.map((person, i) => {
                 return (
                   <li key={i}>
                     {parse(
@@ -64,7 +72,8 @@ export default function ForesporselKvitteringContainer({
                   </li>
                 );
               })}
-          </ul>
+            </ul>
+          )}
         </div>
         {showWarning && barnOver15 && barnOver15.length > 0 && (
           <Alert variant="warning" className="flex place-content-center">
