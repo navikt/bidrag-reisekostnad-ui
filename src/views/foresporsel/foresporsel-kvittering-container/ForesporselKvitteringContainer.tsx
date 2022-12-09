@@ -1,5 +1,5 @@
 import { SuccessStroke } from "@navikt/ds-icons";
-import { Alert } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
@@ -34,7 +34,7 @@ export default function ForesporselKvitteringContainer({
   return (
     <ConfirmationLayout title={kvitteringTranslate("foresporsel.title")}>
       <div className="grid gap-8">
-        <div className="grid gap-8">
+        <div className="grid gap-1">
           <span className="flex items-center">
             <SuccessStroke
               color="green"
@@ -75,11 +75,15 @@ export default function ForesporselKvitteringContainer({
             </ul>
           )}
         </div>
-        {showWarning && barnOver15 && barnOver15.length > 0 && (
-          <Alert variant="warning" className="flex place-content-center">
-            {kvitteringTranslate("foresporsel.alert")}
-          </Alert>
-        )}
+        <div>
+          <Heading level="2" size="medium" spacing>
+            {kvitteringTranslate("foresporsel.content.title")}
+          </Heading>
+          <strong>{kvitteringTranslate("foresporsel.content.subtitle_1")}</strong>
+          <div>{parse(kvitteringTranslate("foresporsel.content.body_1"))}</div>
+          <strong>{kvitteringTranslate("foresporsel.content.subtitle_1")}</strong>
+          <div>{parse(kvitteringTranslate("foresporsel.content.body_2"))}</div>
+        </div>
       </div>
     </ConfirmationLayout>
   );

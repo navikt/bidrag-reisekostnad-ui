@@ -1,7 +1,6 @@
 import { Heading } from "@navikt/ds-react";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import Collapse from "../../collapse/Collapse";
 import { PageMeta } from "../../page-meta/PageMeta";
 import { Right } from "@navikt/ds-icons";
 import { useTranslation } from "next-i18next";
@@ -31,7 +30,6 @@ export default function ConfirmationLayout({ title, children }: IConfirmationLay
             {translate("button.til_oversikten")}
             <Right aria-hidden={false} aria-label={translate("button.til_oversikten") as string} />
           </Link>
-          <Collapse data={kvitteringTranslate("accordion", { returnObjects: true })} />
         </div>
       </div>
     </>

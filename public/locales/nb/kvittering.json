@@ -1,14 +1,6 @@
 {
   "page_title": "Bekreftelse på innsending",
   "title": "Bekreftelse på innsending",
-  "accordion": [
-    {
-      "header": "Hva skjer videre",
-      "content": "<strong>For barn under 15 år</strong><p>Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at NAV skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.</p><p>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer som trengs i saken.</p><p>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen. I så tilfelle vil du få beskjed om det.</p><p>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.</p><strong>For barn som er 15 år, eller eldre</strong><p>Forespørselen fra deg har automatisk gått videre til behandling. En saksbehandler tar kontakt med både deg og den andre forelderen, for avklaringer som trengs i saken.</p>"
-    },
-    { "header": "Hva skjer hvis", "content": "TODO" },
-    { "header": "Relaterte ytelser og tjenester fra NAV", "content": "TODO" }
-  ],
   "modal": {
     "header": "Vil du trekke forerspørselen tilbake?",
     "content": "Trekker du forerspørselen nå, skal den slettes. Motparten blir informert om det."
@@ -27,6 +19,12 @@
     "description": "Du har sendt en forespørsel om fordeling av reisekostnader {{date}}.",
     "automatisk_til_nav": "Forerspørsel for <strong>{{barnInfo}}</strong> går til NAV automatisk og trenger ikke signering fra motparten",
     "trenger_samtykke": "Forerspørsel for <strong>{{barnInfo}}</strong> trenger å samtykkes slik at NAV skal behandle den videre",
-    "alert": "Forerspørselen er ikke gyldig før motparten har samtykket. Han/hun kan allerede nå logge seg inn NAV sine sider og samtykke fordeling av reisekostnader. Du bør gjøre motparten oppmerksom på dette. Hvis motparten ikke har signert innen tre dager vil vi sende han en påminnelse per sms."
+    "content": {
+      "title": "Hva skjer videre?",
+      "subtitle_1": "For barn under 15 år",
+      "subtitle_2": "For barn som er 15 år, eller eldre",
+      "body_1": "<p>Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at NAV skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.</p><p>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer som trengs i saken</p><p>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen. I så tilfelle vil du få beskjed om det.</p><p>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.</p>",
+      "body_2": "<p>Forespørselen fra deg har automatisk gått videre til behandling. En saksbehandler tar kontakt med både deg og den andre forelderen, for avklaringer som trengs i saken.</p>"
+    }
   }
 }
