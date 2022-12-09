@@ -22,6 +22,15 @@ export function mapToPersonWithAge(person: IPerson[]): IPerson[] {
   }));
 }
 
+export function getAllBarn(userInformation: IBrukerinformasjon): IPerson[] {
+  const { barnMinstFemtenÅr, motparterMedFellesBarnUnderFemtenÅr } = userInformation;
+
+  const fellesBarnUnder15Aar = motparterMedFellesBarnUnderFemtenÅr.flatMap(
+    (barn) => barn.fellesBarnUnder15År
+  );
+
+  return [...barnMinstFemtenÅr, ...fellesBarnUnder15Aar];
+}
 export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformasjon): IPerson[] {
   const {
     barnMinstFemtenÅr,

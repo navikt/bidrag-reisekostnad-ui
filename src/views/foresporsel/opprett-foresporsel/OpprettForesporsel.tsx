@@ -11,6 +11,7 @@ import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
 import { today } from "../../../utils/dateUtils";
 import {
+  getAllBarn,
   getBarnWithNoActiveForesporsler,
   isEveryoneOver15YearsOld,
 } from "../../../utils/personUtils";
@@ -20,6 +21,7 @@ import Collapse from "../../../components/collapse/Collapse";
 import { useTranslation } from "next-i18next";
 
 export default function OpprettForesporsel() {
+  const [availableBarn, setAvailableBarn] = useState<IPerson[]>();
   const [allBarn, setAllBarn] = useState<IPerson[]>();
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
   const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
@@ -36,14 +38,14 @@ export default function OpprettForesporsel() {
   useEffect(() => {
     if (userInformation) {
       const barn = getBarnWithNoActiveForesporsler(userInformation);
-
-      setAllBarn(barn);
+      setAllBarn(getAllBarn(userInformation));
+      setAvailableBarn(barn);
       setFoundPersonOver15(isEveryoneOver15YearsOld(barn));
       setFoundPersonCouldBe15In30Days(barn.some((i) => i.er15Om30Dager));
     }
   }, [userInformation]);
 
-  if (!allBarn) {
+  if (!availableBarn) {
     return null;
   }
 
@@ -70,7 +72,7 @@ export default function OpprettForesporsel() {
       <PageMeta title={foresporselTranslate("page_title")} />
       {success && (
         <ForesporselKvitteringContainer
-          barn={allBarn.filter((barn) => selectedBarn.includes(barn.ident))}
+          barn={availableBarn.filter((barn) => selectedBarn.includes(barn.ident))}
           sentDate={today()}
           showWarning
         />
@@ -81,9 +83,13 @@ export default function OpprettForesporsel() {
           <Heading size="xlarge" level="1">
             {foresporselTranslate("title")}
           </Heading>
-          {allBarn.length === 0 && (
+          {availableBarn.length === 0 && (
             <>
-              <Alert variant="info">{translate("alert.ingen_barn")}</Alert>
+              {allBarn && allBarn.length > 1 ? (
+                <Alert variant="info">{translate("alert.barna_har_foresporsel")}</Alert>
+              ) : (
+                <Alert variant="info">{translate("alert.barnet_har_foresporsel")}</Alert>
+              )}
               <Link
                 href="/"
                 className="no-underline flex gap-2 items-center hover:underline"
@@ -94,10 +100,10 @@ export default function OpprettForesporsel() {
               </Link>
             </>
           )}
-          {allBarn.length > 0 && (
+          {availableBarn.length > 0 && (
             <>
               <BarnContainer
-                allBarn={allBarn}
+                allBarn={availableBarn}
                 foundPersonOver15={foundPersonOver15}
                 foundPersonCouldBe15In30Days={foundPersonCouldBe15In30Days}
                 onSelectBarn={onSelectBarn}
