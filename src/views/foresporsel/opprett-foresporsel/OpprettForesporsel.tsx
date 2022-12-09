@@ -99,9 +99,6 @@ export default function OpprettForesporsel() {
           )}
           {allBarn.length > 0 && (
             <>
-              {userInformation && userInformation.harSkjulteFamilieenheterMedDiskresjon && (
-                <Alert variant="info">{translate("alert.skjulte_familieenheter")}</Alert>
-              )}
               <BarnContainer
                 allBarn={allBarn}
                 foundPersonOver15={foundPersonOver15}

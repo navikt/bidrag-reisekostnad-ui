@@ -14,8 +14,7 @@
   },
   "alert": {
     "ingen_saker": "Du har ingen saker om fordeling av reisekostnader",
-    "ingen_barn": "Du har ingen tilgjengelig barn",
-    "skjulte_familieenheter": "Personen har skjulte familieenheter med diskresjon"
+    "ingen_barn": "Du har ingen tilgjengelig barn"
   },
   "page_meta_content": "Fordeling av reisekostnader",
   "sendt_inn": "Sendt Inn:\n{{date}}",

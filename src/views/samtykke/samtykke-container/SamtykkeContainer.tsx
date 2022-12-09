@@ -1,7 +1,6 @@
 import { Heading, ConfirmationPanel, Button, Alert, RadioGroup, Radio } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
-import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import { useTranslation } from "next-i18next";
@@ -24,11 +23,6 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
       showError: false,
     }
   );
-  const [isAwareThatRequestCannotBeWithdrawn, setIsAwareThatRequestCannotBeWithdrawn] =
-    useState<IForesporselConfirmationProps>({
-      isAgree: false,
-      showError: false,
-    });
   const [isSamtykke, setIsSamtykke] = useState<boolean>();
   const [showRadioError, setShowRadioError] = useState<boolean>(false);
   const { submitting, failed, success, samtykkeForesporsel, trekkeForesporsel } =
@@ -45,15 +39,6 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
     });
   }
 
-  function handleAwarenessThatRequestCannotBeWithdrawn() {
-    setIsAwareThatRequestCannotBeWithdrawn((current) => {
-      return {
-        isAgree: !current.isAgree,
-        showError: !!current.isAgree,
-      };
-    });
-  }
-
   async function handleSendIn() {
     if (isSamtykke === undefined) {
       setShowRadioError(true);
@@ -61,11 +46,8 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
       setHaveReadAndUnderstood((current) => {
         return { ...current, showError: !current.isAgree };
       });
-      setIsAwareThatRequestCannotBeWithdrawn((current) => {
-        return { ...current, showError: !current.isAgree };
-      });
 
-      if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
+      if (haveReadAndUnderstood.isAgree) {
         if (isSamtykke) {
           await samtykkeForesporsel(foresporselId);
         } else {
@@ -88,9 +70,8 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         <Heading level="1" size="xlarge">
           {samtykkeTranslate("title")}
         </Heading>
-        <Collapse data={samtykkeTranslate("accordion", { returnObjects: true })} />
         <div className="grid gap-7">
-          <div>{parse(samtykkeTranslate("description"))}</div>
+          <div className="leading-relaxed">{parse(samtykkeTranslate("description"))}</div>
           <RadioGroup
             legend={
               <>
@@ -119,14 +100,6 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
             label={samtykkeTranslate("confirmation_panel.lest_og_forstaatt")}
             onChange={handleReadAndUnderstood}
             error={haveReadAndUnderstood.showError && translate("errors.maa_samtykke")}
-          ></ConfirmationPanel>
-          <ConfirmationPanel
-            checked={isAwareThatRequestCannotBeWithdrawn.isAgree}
-            label={samtykkeTranslate("confirmation_panel.ikke_kan_trekkes_tilbake")}
-            onChange={handleAwarenessThatRequestCannotBeWithdrawn}
-            error={
-              isAwareThatRequestCannotBeWithdrawn.showError && translate("errors.maa_samtykke")
-            }
           ></ConfirmationPanel>
         </div>
         <div className="flex space-x-12">

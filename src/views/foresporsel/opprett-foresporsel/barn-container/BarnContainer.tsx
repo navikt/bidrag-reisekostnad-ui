@@ -48,9 +48,6 @@ export default function BarnContainer({
           );
         })}
       </CheckboxGroup>
-      <Collapse
-        data={foresporselTranslate("accordion.barn_som_ikke_vises", { returnObjects: true })}
-      />
       {foundPersonOver15 && (
         <Alert variant="info" className="w-[80%]">
           {foresporselTranslate("alert.barn_over_15")}
@@ -61,6 +58,9 @@ export default function BarnContainer({
           {foresporselTranslate("alert.barn_bli_15_i_lopet_av_behandling")}
         </Alert>
       )}
+      <Collapse
+        data={foresporselTranslate("accordion.barn_som_ikke_vises", { returnObjects: true })}
+      />
     </div>
   );
 }
