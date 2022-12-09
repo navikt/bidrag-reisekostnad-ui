@@ -119,6 +119,7 @@ export default function OpprettForesporsel() {
                 </Button>
               </div>
               <Collapse
+                contentClassNames="flex flex-col gap-4"
                 data={foresporselTranslate("accordion.behandling_av_personligopplysning", {
                   returnObjects: true,
                 })}
