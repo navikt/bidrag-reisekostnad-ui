@@ -6,7 +6,7 @@
   },
   "alert": {
     "barn_over_15": "Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke fra den andre forelderen for at NAV kan behandle saken. Da går saken automatisk videre til behandling.",
-    "barn_bli_15_i_lopet_av_behandling": "TEKST FOR BARN SOM KAN BLI 15 ÅR I LØPER AV BEHANDLINGER"
+    "barn_bli_15_i_lopet_av_behandling": "Hvis barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling."
   },
   "accordion": {
     "barn_som_ikke_vises": [
@@ -23,7 +23,7 @@
     ]
   },
   "modal": {
-    "header": "Vil du avbryte forerspørselen?",
-    "content": "Avbryter du nå, skal forerspørselen slettes og du må starte på nytt."
+    "header": "Vil du avbryte forespørselen?",
+    "content": "Hvis du avbryter nå, blir forespørselen slettet."
   }
 }

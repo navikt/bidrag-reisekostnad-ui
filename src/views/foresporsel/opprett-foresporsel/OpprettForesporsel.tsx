@@ -77,7 +77,7 @@ export default function OpprettForesporsel() {
           showWarning
         />
       )}
-      {!success && failed && <Alert variant="error">{translate("error.opprette_failed")}</Alert>}
+      {!success && failed && <Alert variant="error">{translate("errors.tekniskfeil")}</Alert>}
       {!success && (
         <>
           <Heading size="xlarge" level="1">
@@ -131,7 +131,7 @@ export default function OpprettForesporsel() {
                 open={open}
                 header={foresporselTranslate("modal.header")}
                 content={foresporselTranslate("modal.content")}
-                submitText={translate("button.tilbake_til_soknad")}
+                submitText={translate("button.tilbake_til_foresporsel")}
                 onSubmit={() => setOpen(false)}
                 onCancel={() => router.push("/")}
                 onClose={() => setOpen(false)}

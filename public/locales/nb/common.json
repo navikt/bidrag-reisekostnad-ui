@@ -5,7 +5,7 @@
     "til_oversikten": "Til oversikten",
     "trekk_foresporselen": "Trekk forespørselen",
     "send_foresporsel_om_fordeling": "Send forespørsel om fordeling",
-    "tilbake_til_soknad": "Tilbake til søknaden"
+    "tilbake_til_foresporsel": "Tilbake til forespørselen"
   },
   "status": {
     "venter_paa_samtykke": "Venter på samtykke",
@@ -27,12 +27,9 @@
   },
   "errors": {
     "tekniskfeil": "Det er oppstått en teknisk feil. Vennligst forsøk igjen senere når vi har fikset problemet.",
-    "tilbaketrekking_failed": "Det skjedde en feil tilbaketrekking av forespørselen",
-    "samtykke_failed": "Det skjedde en feil ved samtykke av forespørselen",
-    "opprette_failed": "Det skjedde en feil ved registrering av forespørsel",
-    "maa_samtykke": "Du må samtykke før du kan fortsette.",
-    "maa_velge": "Du må velge ett alternativ",
-    "velg_barn": "Du må velge minst ett barn"
+    "maa_samtykke": "Du må krysse av for at du har lest og forstått.",
+    "maa_velge": "Du må velge enten ja eller nei for å kunne gå videre.",
+    "velg_barn": "Du må velge minst ett barn."
   },
   "logo_title": {
     "kvinne": "Logo for kvinne",
