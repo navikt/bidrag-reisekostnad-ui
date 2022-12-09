@@ -18,7 +18,7 @@
     "behandling_av_personligopplysning": [
       {
         "header": "Slik behandler NAV personopplysningene dine",
-        "content": "Vi innhenter og mottar opplysninger om deg for å behandle saken din. Opplysningene vi innhenter kommer enten fra deg eller fra offentlige registre:<br></br><ul className=\"m-0\"><li>Hvilke barn du er registrert som forelder til.</li><li>Hvem den andre forelderen er.</li><li>Inntekten din.</li></ul><br></br>Du har rett til innsyn i saken din. Vil du vite mer om hvordan NAV behandler personopplysninger? Se <a href=\"https://www.nav.no/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten\">nav.no/personvern</a>"
+        "content": "Vi innhenter og mottar opplysninger om deg for å behandle saken din. Opplysningene vi innhenter kommer enten fra deg eller fra offentlige registre:<ul className=\"m-0\"><li>Hvilke barn du er registrert som forelder til.</li><li>Hvem den andre forelderen er.</li><li>Inntekten din.</li></ul>Du har rett til innsyn i saken din. Vil du vite mer om hvordan NAV behandler personopplysninger? Se <a href=\"https://www.nav.no/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten\">nav.no/personvern</a>"
       }
     ]
   },

@@ -8,7 +8,7 @@
     },
     { "header": "Hva hvis jeg ikke er enig om fordeling av reisekostander?", "content": "TODO" }
   ],
-  "description": "Du har mottatt en forespørsel fra den andre forelderen om NAV kan beregne fordelingen av reisekostnader mellom dere. For at NAV skal kunne gjøre denne tjenesten, trengs det et samtykke fra deg. Frist for å gi samtykke er 30 dager fra du mottok forespørselen.<br></br>Hvis du samtykker innen fristen, går saken automatisk videre til behandling. Hvis du velger å ikke samtykke, eller du ikke svarer innen fristen, blir forespørselen kansellert.",
+  "description": "<p>Du har mottatt en forespørsel fra den andre forelderen om NAV kan beregne fordelingen av reisekostnader mellom dere. For at NAV skal kunne gjøre denne tjenesten, trengs det et samtykke fra deg. Frist for å gi samtykke er 30 dager fra du mottok forespørselen.</p><p>Hvis du samtykker innen fristen, går saken automatisk videre til behandling. Hvis du velger å ikke samtykke, eller du ikke svarer innen fristen, blir forespørselen kansellert.</p>",
   "bekreftelse_message": "Jeg samtykker i at NAV beregner fordelingen av reisekostnader for",
   "radio": {
     "legend": "Jeg samtykker i at NAV beregner fordelingen av reisekostnader for",

@@ -41,7 +41,7 @@ export default function Overview() {
       <div className="flex flex-col gap-5">
         <div className="w-full flex flex-col gap-10">
           <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
-          <p>{parse(oversiktTranslate("description"))}</p>
+          <div>{parse(oversiktTranslate("description"))}</div>
           {showedForespørslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
             <Alert variant="info">{translate("alert.ingen_saker")}</Alert>
           )}

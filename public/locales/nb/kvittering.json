@@ -4,7 +4,7 @@
   "accordion": [
     {
       "header": "Hva skjer videre",
-      "content": "<strong>For barn under 15 år</strong><br></br>Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at NAV skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.<br></br>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer som trengs i saken.<br></br>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen. I så tilfelle vil du få beskjed om det.<br></br>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.<br></br><strong>For barn som er 15 år, eller eldre</strong><br></br>Forespørselen fra deg har automatisk gått videre til behandling. En saksbehandler tar kontakt med både deg og den andre forelderen, for avklaringer som trengs i saken.<br></br>"
+      "content": "<strong>For barn under 15 år</strong><p>Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at NAV skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.</p><p>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer som trengs i saken.</p><p>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen. I så tilfelle vil du få beskjed om det.</p><p>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.</p><strong>For barn som er 15 år, eller eldre</strong><p>Forespørselen fra deg har automatisk gått videre til behandling. En saksbehandler tar kontakt med både deg og den andre forelderen, for avklaringer som trengs i saken.</p>"
     },
     { "header": "Hva skjer hvis", "content": "TODO" },
     { "header": "Relaterte ytelser og tjenester fra NAV", "content": "TODO" }
@@ -16,10 +16,10 @@
   "samtykke": {
     "title": "Vi har mottatt svar fra deg",
     "ja": {
-      "description": "Vi har mottatt et samtykke fra deg i forbindelse med fordeling av reisekostnader. Saken har automatisk blitt sendt videre til behandling.<br></br>En saksbehandler tar kontakt med deg, for avklaringer som trengs i saken."
+      "description": "<p>Vi har mottatt et samtykke fra deg i forbindelse med fordeling av reisekostnader. Saken har automatisk blitt sendt videre til behandling.</p><p>En saksbehandler tar kontakt med deg, for avklaringer som trengs i saken.</p>"
     },
     "nei": {
-      "description": "Vi har mottatt svar fra deg i forbindelse med fordeling av reisekostnader. Du samtykker ikke i at NAV skal beregne fordeling av reisekostnader for <br><br>{{barn}}<br><br>Begge foreldrene må være enige i at NAV skal gjøre denne tjenesten. Forespørselen til den andre forelderen blir derfor kansellert. Vi orienterer den andre forelderen om dette."
+      "description": "<p>Vi har mottatt svar fra deg i forbindelse med fordeling av reisekostnader. Du samtykker ikke i at NAV skal beregne fordeling av reisekostnader for</p><p>{{barn}}</p><p>Begge foreldrene må være enige i at NAV skal gjøre denne tjenesten. Forespørselen til den andre forelderen blir derfor kansellert. Vi orienterer den andre forelderen om dette.</p>"
     }
   },
   "foresporsel": {

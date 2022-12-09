@@ -76,9 +76,9 @@ export default class MyDocument extends Document<DecoratorComponents> {
         </Head>
         <body>
           <Scripts />
-          <Header />
+          {/* <Header /> */}
           <Main />
-          <Footer />
+          {/* <Footer /> */}
           <NextScript />
         </body>
       </Html>
