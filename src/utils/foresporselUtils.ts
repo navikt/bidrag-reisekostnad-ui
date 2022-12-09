@@ -1,5 +1,5 @@
 import { ForesporselStatus } from "../enum/foresporsel-status";
-import { IForesporsel, IPerson } from "../types/foresporsel";
+import { IActiveInactiveForesporsel, IForesporsel, IPerson } from "../types/foresporsel";
 import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
 import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./personUtils";
 
@@ -52,4 +52,35 @@ export function findForesporselById(
 export function isAutomaticSubmission(foresporsler: IForesporsel): boolean {
   const { kreverSamtykke, samtykket, journalført } = foresporsler;
   return !kreverSamtykke && samtykket === null && journalført !== null;
+}
+
+function getActiveAndInactiveForesporsel(foresporsler: IForesporsel[]): IActiveInactiveForesporsel {
+  return foresporsler.reduce(
+    (acc: IActiveInactiveForesporsel, cur: IForesporsel) => {
+      if (cur.status === ForesporselStatus.KANSELLERT) {
+        return { ...acc, active: [...acc.active, cur] };
+      } else {
+        return { ...acc, inactive: [...acc.inactive, cur] };
+      }
+    },
+    { inactive: [], active: [] }
+  );
+}
+
+export function removeForesporselWithDuplicatedBarn(foresporsler: IForesporsel[]): IForesporsel[] {
+  const { inactive, active } = getActiveAndInactiveForesporsel(foresporsler);
+
+  const inactiveIdents = inactive.flatMap((i) => i.barn).map((i) => i.ident);
+
+  const result = [...active] as IForesporsel[];
+
+  active.forEach((a, index) => {
+    a.barn.forEach((b) => {
+      if (inactiveIdents.includes(b.ident)) {
+        result.splice(index);
+      }
+    });
+  });
+
+  return result;
 }

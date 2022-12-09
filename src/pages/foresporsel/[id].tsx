@@ -84,7 +84,10 @@ export default function ForesporselId() {
       )}
 
       {!isHovedpart && STATUS_TO_RENDER_CONFIRMATION.includes(foresporsel.status) && (
-        <SamtykkeKvitteringContainer barnInformation={barnInformation} />
+        <SamtykkeKvitteringContainer
+          barnInformation={barnInformation}
+          deaktivertAv={foresporsel.deaktivertAv}
+        />
       )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
