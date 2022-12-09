@@ -12,7 +12,7 @@
     "barn_som_ikke_vises": [
       {
         "header": "Gjelder forespørselen barn som ikke vises her?",
-        "content": "Hvis forespørselen gjelder barn som ikke vises her, kan du ikke bruke dette skjemaet. Da må du enten kontakte oss på telefon 55 55 33 33, eller via tjenesten <a href=\"https://www.nav.no/skriv-til-oss\">Skriv til oss</a>"
+        "content": "Hvis forespørselen gjelder barn som ikke vises her, kan du ikke bruke dette skjemaet. Da må du enten kontakte oss på telefon <a href=\"tel:55553333\">55 55 33 33</a>, eller via tjenesten <a href=\"https://www.nav.no/skriv-til-oss\">Skriv til oss</a>"
       }
     ],
     "behandling_av_personligopplysning": [
