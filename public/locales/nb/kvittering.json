@@ -3,7 +3,7 @@
   "title": "Bekreftelse på innsending",
   "modal": {
     "header": "Vil du trekke forerspørselen tilbake?",
-    "content": "Trekker du forerspørselen nå, skal den slettes. Motparten blir informert om det."
+    "content": "Når du trekker forespørselen, blir den slettet. Vi informerer den andre forelderen om dette."
   },
   "samtykke": {
     "title": "Vi har mottatt svar fra deg",

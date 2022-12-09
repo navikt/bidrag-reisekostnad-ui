@@ -42,6 +42,7 @@ export default function ForesporselId() {
         userInformation.forespørslerSomHovedpart,
         foresporselId
       );
+
       const hovedpart = userInformation.fornavn === foresporselSomHovedpart?.hovedpart.fornavn;
       setIsHovedpart(hovedpart);
 
@@ -55,7 +56,7 @@ export default function ForesporselId() {
         setForesporsel(foresporselSomMotpart);
       }
     }
-  }, [foresporselId, userInformation, isHovedpart]);
+  }, [foresporselId, userInformation]);
 
   if (!userInformation || !foresporselId || !foresporsel) {
     return <Spinner />;

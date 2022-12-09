@@ -60,7 +60,7 @@ export default function KvitteringMedTrekkTilbake({
                 variant="secondary"
                 onClick={() => setOpen((current) => !current)}
               >
-                {translate("button.trekk_tilbake")}
+                {translate("button.trekk_foresporselen")}
               </Button>
             </div>
           </div>
@@ -69,13 +69,13 @@ export default function KvitteringMedTrekkTilbake({
           open={open}
           header={kvitteringTranslate("modal.header")}
           content={kvitteringTranslate("modal.content")}
-          submitText={translate("button.trekk_tilbake")}
+          submitText={translate("button.trekk_foresporselen")}
           onSubmit={() => trekkeForesporsel(foresporselId)}
           onCancel={() => router.push("/")}
           onClose={() => setOpen(false)}
           loading={submitting}
           showError={!success && failed}
-          errorMessage={translate("errors.tilbaketrekking_failed") ?? ""}
+          errorMessage={translate("errors.tekniskfeil") ?? ""}
         />
       </ConfirmationLayout>
     </div>

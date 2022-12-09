@@ -1,9 +1,9 @@
 {
   "button": {
-    "send_inn": "SEND INN",
-    "avbryt": "AVBRYT",
+    "send_inn": "Send inn",
+    "avbryt": "Avbryt",
     "til_oversikten": "Til oversikten",
-    "trekk_tilbake": "Trekk tilbake",
+    "trekk_foresporselen": "Trekk forespørselen",
     "send_foresporsel_om_fordeling": "Send forespørsel om fordeling",
     "tilbake_til_soknad": "Tilbake til søknaden"
   },
@@ -14,7 +14,8 @@
   },
   "alert": {
     "ingen_saker": "Du har ingen saker om fordeling av reisekostnader",
-    "ingen_barn": "Du har ingen tilgjengelig barn"
+    "ingen_barn": "Du har ingen tilgjengelig barn",
+    "funnet_ingen_barn": "Vi har ikke funnet barn som er registrert på deg. Du må derfor kontakte oss på telefon 55 55 33 33, eller benytte tjenesten <a href=\"https://www.nav.no/skriv-til-oss\">Skriv til oss</a>. Der opplyser du om navn og fødselsnummer på hvilket barn det gjelder, og for den andre forelderen."
   },
   "page_meta_content": "Fordeling av reisekostnader",
   "sendt_inn": "Sendt Inn:\n{{date}}",
@@ -24,6 +25,7 @@
     "fordeling_av_reisekostnader_for": "Fordeling av reisekostnader for:"
   },
   "errors": {
+    "tekniskfeil": "Det er oppstått en teknisk feil. Vennligst forsøk igjen senere når vi har fikset problemet.",
     "tilbaketrekking_failed": "Det skjedde en feil tilbaketrekking av forespørselen",
     "samtykke_failed": "Det skjedde en feil ved samtykke av forespørselen",
     "opprette_failed": "Det skjedde en feil ved registrering av forespørsel",

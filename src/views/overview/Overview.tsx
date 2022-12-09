@@ -14,7 +14,7 @@ export default function Overview() {
   const { t: oversiktTranslate } = useTranslation("oversikt");
   const { t: translate } = useTranslation();
 
-  const [showedForespørslerSomMotpart, setShowedForespørslerSomMotpart] = useState<IForesporsel[]>(
+  const [showedForesporslerSomMotpart, setShowedForesporslerSomMotpart] = useState<IForesporsel[]>(
     []
   );
 
@@ -25,7 +25,7 @@ export default function Overview() {
         (foresporsel) => !foresporsel.erAlleOver15
       );
 
-      setShowedForespørslerSomMotpart(foresporslerWithBarnUnder15);
+      setShowedForesporslerSomMotpart(foresporslerWithBarnUnder15);
     }
   }, [userInformation]);
 
@@ -42,7 +42,7 @@ export default function Overview() {
         <div className="w-full flex flex-col gap-10">
           <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
           <div>{parse(oversiktTranslate("description"))}</div>
-          {showedForespørslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
+          {showedForesporslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
             <Alert variant="info">{translate("alert.ingen_saker")}</Alert>
           )}
           <div>
@@ -50,15 +50,15 @@ export default function Overview() {
               <Button type="button">{translate("button.send_foresporsel_om_fordeling")}</Button>
             </Link>
           </div>
-          {showedForespørslerSomMotpart.length > 0 && (
+          {showedForesporslerSomMotpart.length > 0 && (
             <>
               <div className="w-full flex flex-col gap-5">
-                {showedForespørslerSomMotpart && (
+                {showedForesporslerSomMotpart && (
                   <Heading level="2" size="small">
                     {oversiktTranslate("title.motatt_foresporsler")}
                   </Heading>
                 )}
-                {showedForespørslerSomMotpart.map((request, index) => {
+                {showedForesporslerSomMotpart.map((request, index) => {
                   return <OverviewCard key={index} foresporsel={request} />;
                 })}
               </div>

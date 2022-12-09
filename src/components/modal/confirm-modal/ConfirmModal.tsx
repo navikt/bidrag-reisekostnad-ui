@@ -1,5 +1,6 @@
 import { Alert, BodyShort, Button, Heading, Modal } from "@navikt/ds-react";
 import { WarningColored } from "@navikt/ds-icons";
+import { useTranslation } from "next-i18next";
 import { useEffect } from "react";
 
 interface IConfirmModalProps {
@@ -24,11 +25,13 @@ export default function ConfirmModal({
   onSubmit,
   onCancel,
   onClose,
-  cancelText = "Avbryr",
+  cancelText,
   loading = false,
   showError = false,
   errorMessage = "Det skjedde en feil",
 }: IConfirmModalProps) {
+  const { t: translate } = useTranslation();
+
   useEffect(() => {
     Modal.setAppElement("#__next");
   }, []);
@@ -46,7 +49,7 @@ export default function ConfirmModal({
         <Heading spacing level="1" size="medium" id="modal-heading">
           {header}
         </Heading>
-        <BodyShort className="flex gap-4" spacing>
+        <BodyShort className="flex gap-4 items-center" spacing>
           <WarningColored fontSize="35" />
           {content}
         </BodyShort>
@@ -56,7 +59,7 @@ export default function ConfirmModal({
           {submitText}
         </Button>
         <Button variant="tertiary" onClick={onCancel}>
-          {cancelText}
+          {cancelText ?? translate("button.avbryt")}
         </Button>
       </div>
     </Modal>

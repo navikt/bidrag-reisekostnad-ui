@@ -8,10 +8,14 @@ import useSWR from "swr";
 import { generateAndStoreCorrelationIdAsCookie } from "../lib/logging/types";
 import { fetcher } from "../utils/apiUtils";
 import { Alert } from "@navikt/ds-react";
+import { useTranslation } from "next-i18next";
+import parse from "html-react-parser";
 
 export default function Home() {
   const { data } = useSWR<IBrukerinformasjon>("/api/brukerinformasjon", fetcher);
   const { updateUserInformation } = useReisekostnad();
+  const { t: translate } = useTranslation();
+
   const [hasNoBarn, setHasNoBarn] = useState<boolean>(false);
 
   useEffect(generateAndStoreCorrelationIdAsCookie, []);
@@ -31,7 +35,7 @@ export default function Home() {
   if (!data) return <Spinner />;
 
   if (hasNoBarn) {
-    return <Alert variant="info">Kan ikke bruke løsningen fordi du ikke har barn</Alert>;
+    return <Alert variant="info">{parse(translate("alert.funnet_ingen_barn"))}</Alert>;
   }
 
   return <Overview />;
