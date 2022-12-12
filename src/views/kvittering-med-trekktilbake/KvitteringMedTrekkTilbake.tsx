@@ -39,7 +39,7 @@ export default function KvitteringMedTrekkTilbake({
     <>
       <ConfirmationLayout title={kvitteringTranslate("title")}>
         <div className="w-full grid gap-10">
-          <div className="flex justify-between min-[320px]:max-[700px]:flex-col">
+          <div className="flex justify-between max-[700px]:flex-col">
             <div className="flex">
               <p>For: </p>
               <ul className="pl-3">
