@@ -33,7 +33,7 @@ export default function ForesporselKvitteringContainer({
     <ConfirmationLayout title={kvitteringTranslate("foresporsel.title")}>
       <div className="grid gap-8">
         <div className="grid gap-1">
-          <span className="flex items-center gap-2">
+          <span className="flex items-center">
             <div>
               <SuccessStroke color="green" fontSize="60" />
             </div>
