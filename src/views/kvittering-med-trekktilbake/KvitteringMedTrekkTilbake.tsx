@@ -36,19 +36,23 @@ export default function KvitteringMedTrekkTilbake({
   }, [success]);
 
   return (
-    <div className="grid gap-12">
+    <>
       <ConfirmationLayout title={kvitteringTranslate("title")}>
-        <div className="grid gap-12">
-          <div className="w-[40rem] grid grid-cols-[70%_30%]">
-            <div className="flex gap-4">
-              <div>For: </div>
-              <div className="grid">
+        <div className="w-full grid gap-10">
+          <div className="flex justify-between min-[320px]:max-[700px]:flex-col">
+            <div className="flex">
+              <p>For: </p>
+              <ul className="pl-3">
                 {barnInformation.map((information, index) => {
-                  return <b key={index}>{information}</b>;
+                  return (
+                    <li className="list-none" key={index}>
+                      <b>{information}</b>
+                    </li>
+                  );
                 })}
-              </div>
+              </ul>
             </div>
-            <div>{translate("sendt_inn", { date: sentDate ? formatDate(sentDate) : "" })}</div>
+            <p>{translate("sendt_inn", { date: sentDate ? formatDate(sentDate) : "" })}</p>
           </div>
           <div className="grid gap-6">
             <div>
@@ -78,6 +82,6 @@ export default function KvitteringMedTrekkTilbake({
           errorMessage={translate("errors.tekniskfeil") ?? ""}
         />
       </ConfirmationLayout>
-    </div>
+    </>
   );
 }

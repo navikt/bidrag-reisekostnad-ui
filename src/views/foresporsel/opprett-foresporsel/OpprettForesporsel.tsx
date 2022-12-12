@@ -74,7 +74,6 @@ export default function OpprettForesporsel() {
         <ForesporselKvitteringContainer
           barn={availableBarn.filter((barn) => selectedBarn.includes(barn.ident))}
           sentDate={today()}
-          showWarning
         />
       )}
       {!success && failed && <Alert variant="error">{translate("errors.tekniskfeil")}</Alert>}

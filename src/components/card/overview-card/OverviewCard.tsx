@@ -25,21 +25,19 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
             {translate("title.fordeling_av_reisekostnader_for")}
           </LinkPanel.Title>
           <LinkPanel.Description className="text-gray-900">
-            <div className="w-full grid grid-cols-[80%_30%]">
-              <div className="flex gap-2">
-                <ul className="grid gap-2 p-0 m-0">
-                  {barn.map((person, i) => {
-                    return (
-                      <li className="list-none" key={i}>
-                        <strong className="text-medium">
-                          {getBarnInformationText(person, translate("aar"))}
-                        </strong>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className="flex flex-col whitespace-pre-wrap text-medium">
+            <div className="w-full grid grid-cols-2">
+              <ul className="grid gap-2 p-0 m-0">
+                {barn.map((person, i) => {
+                  return (
+                    <li className="list-none" key={i}>
+                      <strong className="text-medium">
+                        {getBarnInformationText(person, translate("aar"))}
+                      </strong>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="grid justify-end whitespace-pre-wrap text-medium">
                 <span>
                   {translate("sendt_inn", { date: opprettet ? formatDate(opprettet) : "" })}
                 </span>
@@ -56,10 +54,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
           <StatusBar status={status} />
           {isAutomaticSubmission(foresporsel) && <BarnOver15Alert barn={barn} />}
         </div>
-        <Next
-          className="navds-link-panel__chevron"
-          aria-label={translate("logo_title.next_icon") as string}
-        />
+        <Next className="navds-link-panel__chevron" />
       </Panel>
     </Link>
   );

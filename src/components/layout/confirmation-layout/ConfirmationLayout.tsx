@@ -11,7 +11,6 @@ interface IConfirmationLayoutProps extends PropsWithChildren {
 
 export default function ConfirmationLayout({ title, children }: IConfirmationLayoutProps) {
   const { t: translate } = useTranslation();
-  const { t: kvitteringTranslate } = useTranslation("kvittering");
 
   return (
     <>
@@ -21,9 +20,7 @@ export default function ConfirmationLayout({ title, children }: IConfirmationLay
           <Heading level="1" size="xlarge">
             {title}
           </Heading>
-          <div className="flex space-x-14">
-            <div>{children}</div>
-          </div>
+          <div className="w-full flex">{children}</div>
         </div>
         <div className="grid gap-2">
           <Link href="/" className="no-underline flex gap-2 items-center hover:underline" passHref>

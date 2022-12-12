@@ -11,13 +11,11 @@ import parse from "html-react-parser";
 interface IForesporselKvitteringContainerProps {
   barn: IPerson[];
   sentDate: string;
-  showWarning?: boolean;
 }
 
 export default function ForesporselKvitteringContainer({
   barn,
   sentDate,
-  showWarning = false,
 }: IForesporselKvitteringContainerProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
   const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
@@ -35,8 +33,10 @@ export default function ForesporselKvitteringContainer({
     <ConfirmationLayout title={kvitteringTranslate("foresporsel.title")}>
       <div className="grid gap-8">
         <div className="grid gap-1">
-          <span className="flex items-center">
-            <SuccessStroke color="green" fontSize="50" />
+          <span className="flex items-center gap-2">
+            <div>
+              <SuccessStroke color="green" fontSize="60" />
+            </div>
             {kvitteringTranslate("foresporsel.description", { date: sentDate })}
           </span>
           {barnOver15 && barnOver15.length > 0 && (
