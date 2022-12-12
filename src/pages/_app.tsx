@@ -15,7 +15,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ReisekostnadProvider>
       <SWRConfig value={{ fetcher }}>
-        <main className="max-w-[680px] mx-auto px-4 py-18">
+        <main className="max-w-[680px] mx-auto px-4 py-18 leading-xlarge">
           <Component {...pageProps} />
         </main>
         <TokenInput />
