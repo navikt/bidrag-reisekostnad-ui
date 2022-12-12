@@ -46,12 +46,12 @@ export function findForesporselById(
   return foresporsler.find((foresporsel) => foresporsel.id === Number(id));
 }
 
-// - kreverSamtykke: false (pga at barnet var under 15 da den ble opprettet)
+// - kreverSamtykke: true (pga at barnet var under 15 da den ble opprettet)
 // - samtykket: null (motpart trenger ikke lenger å samtykke ettersom barnet har fylt 15)
 // - journalført: ikke null (har blitt sendt inn til NAV etter at barnet ble 15 år)
 export function isAutomaticSubmission(foresporsler: IForesporsel): boolean {
   const { kreverSamtykke, samtykket, journalført } = foresporsler;
-  return !kreverSamtykke && samtykket === null && journalført !== null;
+  return kreverSamtykke && samtykket === null && journalført !== null;
 }
 
 function getActiveAndInactiveForesporsel(foresporsler: IForesporsel[]): IActiveInactiveForesporsel {
