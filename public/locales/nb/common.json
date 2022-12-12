@@ -22,6 +22,7 @@
   "sendt_inn": "Sendt Inn:\n{{date}}",
   "samtykkefrist": "Samtykkefrist:\n{{date}}",
   "aar": "år",
+  "loading": "Laster",
   "title": {
     "fordeling_av_reisekostnader_for": "Fordeling av reisekostnader for:"
   },

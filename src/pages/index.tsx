@@ -10,11 +10,13 @@ import { fetcher } from "../utils/apiUtils";
 import { Alert } from "@navikt/ds-react";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
+import { PageMeta } from "../components/page-meta/PageMeta";
 
 export default function Home() {
   const { data } = useSWR<IBrukerinformasjon>("/api/brukerinformasjon", fetcher);
   const { updateUserInformation } = useReisekostnad();
   const { t: translate } = useTranslation();
+  const { t: oversiktTranslate } = useTranslation("oversikt");
 
   const [hasNoBarn, setHasNoBarn] = useState<boolean>(false);
 
@@ -32,10 +34,21 @@ export default function Home() {
     }
   }, [data]);
 
-  if (!data) return <Spinner />;
+  if (!data)
+    return (
+      <>
+        <PageMeta title={translate("loading")} />
+        <Spinner />
+      </>
+    );
 
   if (hasNoBarn) {
-    return <Alert variant="info">{parse(translate("alert.funnet_ingen_barn"))}</Alert>;
+    return (
+      <>
+        <PageMeta title={oversiktTranslate("page_title")} />
+        <Alert variant="info">{parse(translate("alert.funnet_ingen_barn"))}</Alert>
+      </>
+    );
   }
 
   return <Overview />;
