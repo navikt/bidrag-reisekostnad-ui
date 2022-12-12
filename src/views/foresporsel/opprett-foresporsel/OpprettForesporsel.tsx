@@ -10,11 +10,7 @@ import { PageMeta } from "../../../components/page-meta/PageMeta";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
 import { today } from "../../../utils/dateUtils";
-import {
-  getAllBarn,
-  getBarnWithNoActiveForesporsler,
-  isEveryoneOver15YearsOld,
-} from "../../../utils/personUtils";
+import { getAllBarn, getBarnWithNoActiveForesporsler } from "../../../utils/personUtils";
 import Link from "next/link";
 import { Left } from "@navikt/ds-icons";
 import Collapse from "../../../components/collapse/Collapse";
@@ -40,7 +36,7 @@ export default function OpprettForesporsel() {
       const barn = getBarnWithNoActiveForesporsler(userInformation);
       setAllBarn(getAllBarn(userInformation));
       setAvailableBarn(barn);
-      setFoundPersonOver15(isEveryoneOver15YearsOld(barn));
+      setFoundPersonOver15(barn.some((i) => i.erOver15));
       setFoundPersonCouldBe15In30Days(barn.some((i) => i.er15Om30Dager));
     }
   }, [userInformation]);
