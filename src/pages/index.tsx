@@ -34,13 +34,7 @@ export default function Home() {
     }
   }, [data]);
 
-  if (!data)
-    return (
-      <>
-        <PageMeta title={translate("loading")} />
-        <Spinner />
-      </>
-    );
+  if (!data) return <Spinner />;
 
   if (hasNoBarn) {
     return (

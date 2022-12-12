@@ -46,7 +46,7 @@ export default function KvitteringMedTrekkTilbake({
                 {barnInformation.map((information, index) => {
                   return (
                     <li className="list-none" key={index}>
-                      <b>{information}</b>
+                      <strong>{information}</strong>
                     </li>
                   );
                 })}
