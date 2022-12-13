@@ -4,8 +4,7 @@ import StatusBar from "../../../components/status-bar/StatusBar";
 import { ForesporselStatus } from "../../../enum/foresporsel-status";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import { formatDate } from "../../../utils/dateUtils";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useTranslation } from "next-i18next";
 
@@ -25,15 +24,8 @@ export default function KvitteringMedTrekkTilbake({
   const [open, setOpen] = useState<boolean>(false);
 
   const { submitting, success, failed, trekkeForesporsel } = useForesporselApi();
-  const router = useRouter();
   const { t: translate } = useTranslation();
   const { t: kvitteringTranslate } = useTranslation("kvittering");
-
-  useEffect(() => {
-    if (success && !failed) {
-      router.reload();
-    }
-  }, [success]);
 
   return (
     <>

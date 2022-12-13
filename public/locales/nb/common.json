@@ -5,7 +5,9 @@
     "til_oversikten": "Til oversikten",
     "trekk_foresporselen": "Trekk forespørselen",
     "send_foresporsel_om_fordeling": "Send forespørsel om fordeling",
-    "tilbake_til_foresporsel": "Tilbake til forespørselen"
+    "tilbake_til_foresporsel": "Tilbake til forespørselen",
+    "ja": "Ja",
+    "nei": "Nei"
   },
   "status": {
     "venter_paa_samtykke": "Venter på samtykke",
