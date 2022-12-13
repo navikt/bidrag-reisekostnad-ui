@@ -31,7 +31,7 @@ export default function KvitteringMedTrekkTilbake({
 
   useEffect(() => {
     if (success && !failed) {
-      router.push("/");
+      router.reload();
     }
   }, [success]);
 
@@ -75,7 +75,7 @@ export default function KvitteringMedTrekkTilbake({
           content={kvitteringTranslate("modal.content")}
           submitText={translate("button.trekk_foresporselen")}
           onSubmit={() => trekkeForesporsel(foresporselId)}
-          onCancel={() => router.push("/")}
+          onCancel={() => setOpen(false)}
           onClose={() => setOpen(false)}
           loading={submitting}
           showError={!success && failed}
