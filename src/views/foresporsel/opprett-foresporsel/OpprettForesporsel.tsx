@@ -3,7 +3,7 @@ import { useState } from "react";
 import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
-import { Alert, Button, Heading } from "@navikt/ds-react";
+import { Alert, Button, ConfirmationPanel, Heading } from "@navikt/ds-react";
 import useForesporselApi from "../../../hooks/useForesporselApi";
 import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
@@ -24,6 +24,8 @@ export default function OpprettForesporsel() {
   const [foundPersonCouldBe15In30Days, setFoundPersonCouldBe15In30Days] = useState<boolean>(false);
   const [showBarnError, setShowBarnError] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+  const [confirm, setConfirm] = useState<boolean>(false);
+  const [showConfirmError, setShowConfirmError] = useState<boolean>(false);
 
   const { userInformation } = useReisekostnad();
   const { submitting, success, createForesporsel, failed } = useForesporselApi();
@@ -41,6 +43,12 @@ export default function OpprettForesporsel() {
     }
   }, [userInformation]);
 
+  useEffect(() => {
+    if (confirm) {
+      setShowConfirmError(false);
+    }
+  }, [confirm]);
+
   if (!availableBarn) {
     return null;
   }
@@ -54,11 +62,15 @@ export default function OpprettForesporsel() {
   }
 
   async function onSubmit() {
+    if (!confirm) {
+      setShowConfirmError(true);
+    }
+
     const hasSelectedBarn = selectedBarn.length !== 0;
 
     setShowBarnError(!hasSelectedBarn);
 
-    if (hasSelectedBarn) {
+    if (hasSelectedBarn && confirm) {
       createForesporsel(selectedBarn);
     }
   }
@@ -96,7 +108,7 @@ export default function OpprettForesporsel() {
             </>
           )}
           {availableBarn.length > 0 && (
-            <>
+            <div className="grid gap-8">
               <BarnContainer
                 allBarn={availableBarn}
                 foundPersonOver15={foundPersonOver15}
@@ -104,6 +116,24 @@ export default function OpprettForesporsel() {
                 onSelectBarn={onSelectBarn}
                 showError={showBarnError}
               />
+              <Collapse
+                data={foresporselTranslate("accordion.barn_som_ikke_vises", {
+                  returnObjects: true,
+                })}
+              />
+              <Collapse
+                contentClassNames="flex flex-col gap-3"
+                data={foresporselTranslate("accordion.behandling_av_personligopplysning", {
+                  returnObjects: true,
+                })}
+              />
+              <ConfirmationPanel
+                checked={confirm}
+                label={foresporselTranslate("confirm")}
+                onChange={() => setConfirm((x) => !x)}
+                size="small"
+                error={showConfirmError && translate("errors.maa_samtykke")}
+              ></ConfirmationPanel>
               <div className="flex gap-5">
                 <Button onClick={onSubmit} loading={submitting}>
                   {translate("button.send_inn")}
@@ -116,22 +146,17 @@ export default function OpprettForesporsel() {
                   {translate("button.avbryt")}
                 </Button>
               </div>
-              <Collapse
-                contentClassNames="flex flex-col gap-4"
-                data={foresporselTranslate("accordion.behandling_av_personligopplysning", {
-                  returnObjects: true,
-                })}
-              />
               <ConfirmModal
                 open={open}
                 header={foresporselTranslate("modal.header")}
                 content={foresporselTranslate("modal.content")}
-                submitText={translate("button.tilbake_til_foresporsel")}
+                submitText={translate("button.ja")}
+                cancelText={translate("button.nei") as string}
                 onSubmit={() => setOpen(false)}
                 onCancel={() => router.push("/")}
                 onClose={() => setOpen(false)}
               />
-            </>
+            </div>
           )}
         </>
       )}
