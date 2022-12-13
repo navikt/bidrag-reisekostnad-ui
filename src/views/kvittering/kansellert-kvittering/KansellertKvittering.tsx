@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
-import { Close } from "@navikt/ds-icons";
 import { Deaktivator } from "../../../enum/deaktivator";
 
 interface IKansellertKvitteringProps {
@@ -27,24 +26,17 @@ export default function KansellerKvittering({
   return (
     <ConfirmationLayout title={title}>
       <div className="flex flex-col">
-        <div className="flex items-center gap-7">
-          <span>
-            <Close color="red" fontSize="60" />
-          </span>
-          <p>{content1}</p>
-        </div>
-        <div>
-          <ul className="pl-3">
-            {barnInformation.map((information, index) => {
-              return (
-                <li key={index}>
-                  <strong>{information}</strong>
-                </li>
-              );
-            })}
-          </ul>
-          <p>{content2}</p>
-        </div>
+        <p>{content1}</p>
+        <ul className="pl-3">
+          {barnInformation.map((information, index) => {
+            return (
+              <li key={index}>
+                <strong>{information}</strong>
+              </li>
+            );
+          })}
+        </ul>
+        <p>{content2}</p>
       </div>
     </ConfirmationLayout>
   );
