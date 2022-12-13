@@ -152,8 +152,8 @@ export default function OpprettForesporsel() {
                 content={foresporselTranslate("modal.content")}
                 submitText={translate("button.ja")}
                 cancelText={translate("button.nei") as string}
-                onSubmit={() => setOpen(false)}
-                onCancel={() => router.push("/")}
+                onSubmit={() => router.push("/")}
+                onCancel={() => setOpen(false)}
                 onClose={() => setOpen(false)}
               />
             </div>

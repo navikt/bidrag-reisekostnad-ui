@@ -4,16 +4,16 @@ import { useEffect, useState } from "react";
 import { useReisekostnad } from "../context/reisekostnadContext";
 import { IBrukerinformasjon } from "../types/foresporsel";
 import Spinner from "../components/spinner/spinner/spinner";
-import useSWRImmutable from "swr/immutable";
 import { generateAndStoreCorrelationIdAsCookie } from "../lib/logging/types";
 import { fetcher } from "../utils/apiUtils";
 import { Alert } from "@navikt/ds-react";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
 import { PageMeta } from "../components/page-meta/PageMeta";
+import useSWR from "swr";
 
 export default function Home() {
-  const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon", fetcher);
+  const { data } = useSWR<IBrukerinformasjon>("/api/brukerinformasjon", fetcher);
   const { updateUserInformation } = useReisekostnad();
   const { t: translate } = useTranslation();
   const { t: oversiktTranslate } = useTranslation("oversikt");
