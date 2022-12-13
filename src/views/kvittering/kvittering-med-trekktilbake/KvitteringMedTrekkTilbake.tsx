@@ -41,8 +41,8 @@ export default function KvitteringMedTrekkTilbake({
         <div className="w-full grid gap-10">
           <div className="flex justify-between max-[700px]:flex-col">
             <div className="flex">
-              <p>For: </p>
-              <ul className="pl-3">
+              <span>For: </span>
+              <ul className="pl-2 m-0">
                 {barnInformation.map((information, index) => {
                   return (
                     <li className="list-none" key={index}>
@@ -52,7 +52,7 @@ export default function KvitteringMedTrekkTilbake({
                 })}
               </ul>
             </div>
-            <p>{translate("sendt_inn", { date: sentDate ? formatDate(sentDate) : "" })}</p>
+            <span>{translate("sendt", { date: sentDate ? formatDate(sentDate) : "" })}</span>
           </div>
           <div className="grid gap-6">
             <div>

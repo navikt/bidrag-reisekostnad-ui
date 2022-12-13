@@ -38,9 +38,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                 })}
               </ul>
               <div className="grid justify-end whitespace-pre-wrap text-medium">
-                <span>
-                  {translate("sendt_inn", { date: opprettet ? formatDate(opprettet) : "" })}
-                </span>
+                <span>{translate("sendt", { date: opprettet ? formatDate(opprettet) : "" })}</span>
                 {samtykkefrist && (
                   <span>
                     {translate("samtykkefrist", {
