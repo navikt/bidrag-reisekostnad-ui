@@ -1,8 +1,9 @@
-import pino from 'pino';
-import {mapError} from "./types";
+import pino from "pino";
+import { mapError } from "./types";
+import { getLoggerContext } from "./als";
 
 export const backendLogger = (defaultConfig = {}): pino.Logger =>
-   pino({
+  pino({
     ...defaultConfig,
     timestamp: false,
     formatters: {
@@ -10,8 +11,8 @@ export const backendLogger = (defaultConfig = {}): pino.Logger =>
         return { level: label };
       },
       log: (object: any) => {
-        mapError(object)
+        mapError(object);
         return object;
       },
     },
-  })
+  }).child(getLoggerContext());

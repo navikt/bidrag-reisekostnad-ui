@@ -1,18 +1,17 @@
 import pino, { BaseLogger } from "pino";
 import { NextApiRequest, NextApiResponse } from "next";
-import {logger} from "../../../lib/logging/logger";
-import {secureLogger} from "../../../lib/logging/secureLogger";
+import { secureLogger } from "../../../lib/logging/secureLogger";
 
-type LogLevels = Exclude<keyof BaseLogger, 'string' | 'level'>;
+type LogLevels = Exclude<keyof BaseLogger, "string" | "level">;
 
 const levels: Record<LogLevels, LogLevels> = {
-  "error": "error",
-  "debug": "debug",
-  "fatal": "fatal",
-  "info": "info",
-  "trace": "trace",
-  "silent": "silent",
-  "warn": "warn",
+  error: "error",
+  debug: "debug",
+  fatal: "fatal",
+  info: "info",
+  trace: "trace",
+  silent: "silent",
+  warn: "warn",
 } as const;
 
 function isValidLoggingLabel(label: unknown): label is LogLevels {
@@ -20,8 +19,8 @@ function isValidLoggingLabel(label: unknown): label is LogLevels {
 }
 
 const loggingHandler = (req: NextApiRequest, res: NextApiResponse): void => {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method Not Allowed' });
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method Not Allowed" });
     return;
   }
 
@@ -35,15 +34,15 @@ const loggingHandler = (req: NextApiRequest, res: NextApiResponse): void => {
   const messages: [objOrMsg: unknown, msgOrArgs?: string] = req.body.messages;
 
   secureLogger
-  .child({
-    x_timestamp: ts,
-    x_isFrontend: true,
-    x_userAgent: req.headers['user-agent'],
-    correlationId: req.headers['x-correlation-id'] ?? 'not-set',
-  })
-      [label](...messages);
+    .child({
+      x_timestamp: ts,
+      x_isFrontend: true,
+      x_userAgent: req.headers["user-agent"],
+      correlationId: req.headers["x-correlation-id"] ?? "not-set",
+    })
+    [label](...messages);
 
   res.status(200).json({ ok: `ok` });
-}
+};
 
 export default loggingHandler;

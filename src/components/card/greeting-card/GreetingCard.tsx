@@ -1,18 +1,26 @@
 import { Heading } from "@navikt/ds-react";
-import React from "react";
+import { Gender } from "../../../enum/gender";
 import { NavVeilederKvinne } from "../../../svg-icons/NavVeilederKvinne";
 import NavVeilederMann from "../../../svg-icons/NavVeilederMann";
+import { useTranslation } from "next-i18next";
 
 interface IGreetingCardProps {
   name: string;
-  gender: "kvinne" | "mann";
+  gender: Gender;
 }
 export default function GreetingCard({ name, gender }: IGreetingCardProps) {
+  const { t: oversiktTranslate } = useTranslation("oversikt");
+  const { t: translate } = useTranslation();
+
   return (
     <div className="flex flex-col items-center gap-5">
-      {gender === "kvinne" ? <NavVeilederKvinne /> : <NavVeilederMann />}
+      {gender === Gender.KVINNE ? (
+        <NavVeilederKvinne id="kvinne-logo" title={translate("logo_title.kvinne")} />
+      ) : (
+        <NavVeilederMann id="mann-logo" title={translate("logo_title.mann")} />
+      )}
       <Heading level="1" size="large">
-        Hei {name}
+        {oversiktTranslate("greeting")} {name}
       </Heading>
     </div>
   );

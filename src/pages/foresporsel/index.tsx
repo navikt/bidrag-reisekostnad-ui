@@ -1,60 +1,32 @@
-import { BodyShort, ConfirmationPanel, Button } from "@navikt/ds-react";
-import { useState } from "react";
-import Link from "next/link";
-import GreetingCard from "../../components/card/greeting-card/GreetingCard";
-import { MAA_SAMTYKKE } from "../../constants/error";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useEffect } from "react";
+import OpprettForesporsel from "../../views/foresporsel/opprett-foresporsel/OpprettForesporsel";
+import useSWRImmutable from "swr/immutable";
+import { IBrukerinformasjon } from "../../types/foresporsel";
 import { useReisekostnad } from "../../context/reisekostnadContext";
-import { PageMeta } from "../../components/page-meta/PageMeta";
+import Spinner from "../../components/spinner/spinner/spinner";
 
 export default function Foresporsel() {
-  const [isAgree, setIsAgree] = useState<boolean>(false);
-  const [showError, setShowError] = useState<boolean>(false);
-  const { userInformation } = useReisekostnad();
+  const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
+  const { userInformation, updateUserInformation } = useReisekostnad();
 
-  if (!userInformation) {
-    return null;
-  }
-
-  function onClick() {
-    setShowError(!isAgree);
-    if (isAgree) {
-      // TODO sende til velge barn side
+  useEffect(() => {
+    if (data) {
+      updateUserInformation(data);
     }
+  }, [data]);
+
+  if (!userInformation || !data) {
+    return <Spinner />;
   }
 
-  function onConfirm() {
-    setIsAgree((current) => {
-      setShowError(current);
-      return !current;
-    });
-  }
+  return <OpprettForesporsel />;
+}
 
-  return (
-    <>
-      <PageMeta title="Sende forespørsel" />
-      <div className="flex flex-col gap-10 items-center">
-        {/* TODO mangler kjønn */}
-        <GreetingCard name={userInformation?.brukersFornavn} gender={"kvinne"} />
-        <BodyShort>Dine rettigheter og plikter?</BodyShort>
-        <ConfirmationPanel
-          size="small"
-          checked={isAgree}
-          label="Jeg har lest og forstått...."
-          onChange={onConfirm}
-          error={showError && MAA_SAMTYKKE}
-        ></ConfirmationPanel>
-        <div className="w-[15rem] flex justify-between">
-          <Button onClick={onClick}>NESTE</Button>
-          <Link href="/" className="no-underline">
-            <Button type="button" variant="secondary">
-              AVBRYT
-            </Button>
-          </Link>
-        </div>
-        <Link href="https://www.nav.no/soknader/nb/person/familie/foreldrepenger-og-engangsstonad#NAV140507">
-          Les om hvordan NAV behandler personopplysningene dine.
-        </Link>
-      </div>
-    </>
-  );
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "kvittering", "opprettForesporsel"])),
+    },
+  };
 }

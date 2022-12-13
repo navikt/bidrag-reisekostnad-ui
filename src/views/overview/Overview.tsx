@@ -1,54 +1,80 @@
-import { Heading, BodyShort, Button } from "@navikt/ds-react";
+import { Heading, Button, Alert } from "@navikt/ds-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import GreetingCard from "../../components/card/greeting-card/GreetingCard";
 import OverviewCard from "../../components/card/overview-card/OverviewCard";
 import { PageMeta } from "../../components/page-meta/PageMeta";
 import { useReisekostnad } from "../../context/reisekostnadContext";
+import { IForesporsel } from "../../types/foresporsel";
+import { useTranslation } from "next-i18next";
+import parse from "html-react-parser";
 
-export default function Overview({ name }: { name: string }) {
+export default function Overview() {
   const { userInformation } = useReisekostnad();
+  const { t: oversiktTranslate } = useTranslation("oversikt");
+  const { t: translate } = useTranslation();
+
+  const [showedForesporslerSomMotpart, setShowedForesporslerSomMotpart] = useState<IForesporsel[]>(
+    []
+  );
+
+  useEffect(() => {
+    if (userInformation) {
+      const { forespørslerSomMotpart } = userInformation;
+      const foresporslerWithBarnUnder15 = forespørslerSomMotpart.filter(
+        (foresporsel) => !foresporsel.erAlleOver15
+      );
+
+      setShowedForesporslerSomMotpart(foresporslerWithBarnUnder15);
+    }
+  }, [userInformation]);
 
   if (!userInformation) {
     return null;
   }
 
-  const { forespørslerSomMotpart } = userInformation;
+  const { forespørslerSomHovedpart } = userInformation;
 
   return (
     <>
-      <PageMeta title="Oversikt" />
+      <PageMeta title={oversiktTranslate("page_title")} />
       <div className="flex flex-col gap-5">
-        <div className="w-full flex flex-col gap-10 items-center">
-          {/* TODO mangler kjønn */}
-          <GreetingCard name={name} gender={"kvinne"} />
-          {forespørslerSomMotpart.length > 0 && (
+        <div className="w-full flex flex-col gap-10">
+          <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
+          <div>{parse(oversiktTranslate("description"))}</div>
+          {showedForesporslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
+            <Alert variant="info">{translate("alert.ingen_saker")}</Alert>
+          )}
+          <div>
+            <Link href="/foresporsel">
+              <Button type="button">{translate("button.send_foresporsel_om_fordeling")}</Button>
+            </Link>
+          </div>
+          {showedForesporslerSomMotpart.length > 0 && (
             <>
-              <div className="flex flex-col gap-6">
-                {/* TODO: MIDLERTIDIG LØSNING. TEKSTEN ER VELDIG SPESIFIKK MOT EN MOTPART, MEN EN PERSON KAN FÅ FORESØPLER FRA FLERE FORSKJELLIGE MOTPART */}
-                <BodyShort>
-                  {forespørslerSomMotpart[0].hovedpart.fornavn} har sendt en forerspørsel om
-                  fordeling av reisekostnader for Barn 1, dd.mm.yyyy til deg.
-                </BodyShort>
-                <BodyShort>
-                  Det trenges ditt samtykke, slik at NAV kan behandle den videre.
-                </BodyShort>
-              </div>
               <div className="w-full flex flex-col gap-5">
-                {forespørslerSomMotpart && (
+                {showedForesporslerSomMotpart && (
                   <Heading level="2" size="small">
-                    Oversikt
+                    {oversiktTranslate("title.motatt_foresporsler")}
                   </Heading>
                 )}
-                {forespørslerSomMotpart?.map((request, index) => {
+                {showedForesporslerSomMotpart.map((request, index) => {
                   return <OverviewCard key={index} foresporsel={request} />;
                 })}
               </div>
             </>
           )}
+          {forespørslerSomHovedpart.length > 0 && (
+            <div className="w-full flex flex-col gap-5">
+              <Heading level="2" size="small">
+                {oversiktTranslate("title.sendt_inn_foresporsler")}
+              </Heading>
+              {forespørslerSomHovedpart.map((request, index) => {
+                return <OverviewCard key={index} foresporsel={request} />;
+              })}
+            </div>
+          )}
         </div>
-        <Link href="/foresporsel">
-          <Button>Opprett en ny fordeling av reisekostnader</Button>
-        </Link>
       </div>
     </>
   );

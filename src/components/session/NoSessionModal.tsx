@@ -5,12 +5,11 @@ import styles from "./NoSessionModal.module.css";
 import { WarningColored } from "@navikt/ds-icons";
 import useSWR from "swr";
 import { ISessionData } from "../../pages/api/auth/session";
-import { useCountdown } from "../hooks/useCountdown";
-import { fetcher } from "../../utils/apiUtils";
+import { useCountdown } from "../../hooks/useCountdown";
 
 export function NoSessionModal() {
   const router = useRouter();
-  const { data: session, error: isError } = useSWR<ISessionData>("/api/auth/session", fetcher);
+  const { data: session, error: isError } = useSWR<ISessionData>("/api/auth/session");
   const [modalOpen, setModalOpen] = useState(false);
 
   const isLoading = !isError && !session;

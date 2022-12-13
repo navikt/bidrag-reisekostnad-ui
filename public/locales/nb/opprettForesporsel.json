@@ -1,0 +1,29 @@
+{
+  "page_title": "Opprett forespørsel",
+  "title": "Fordeling av reisekostnader",
+  "checkbox": {
+    "legend": "Velg barn forespørselen gjelder for:"
+  },
+  "alert": {
+    "barn_over_15": "Når reisekostnadene gjelder for barn som er 15 år eller eldre, trengs det ikke samtykke fra den andre forelderen for at NAV kan behandle saken. Da går saken automatisk videre til behandling.",
+    "barn_bli_15_i_lopet_av_behandling": "Hvis barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling."
+  },
+  "accordion": {
+    "barn_som_ikke_vises": [
+      {
+        "header": "Gjelder forespørselen barn som ikke vises her?",
+        "content": "Hvis forespørselen gjelder barn som ikke vises her, kan du ikke bruke dette skjemaet. Da må du enten kontakte oss på telefon <a href=\"tel:55553333\">55 55 33 33</a>, eller via tjenesten <a href=\"https://www.nav.no/skriv-til-oss\">Skriv til oss</a>"
+      }
+    ],
+    "behandling_av_personligopplysning": [
+      {
+        "header": "Slik behandler NAV personopplysningene dine",
+        "content": "<span>Vi innhenter og mottar opplysninger om deg for å behandle saken din. Opplysningene vi innhenter kommer enten fra deg eller fra offentlige registre:</span><ul className=\"m-0\"><li>Hvilke barn du er registrert som forelder til.</li><li>Hvem den andre forelderen er.</li><li>Arbeidsforhold.</li><li>Inntekt.</li></ul><span>Du har rett til innsyn i saken din. Vil du vite mer om hvordan NAV behandler personopplysninger? Se <a href=\"https://www.nav.no/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten\">Personvern i Arbeids- og velferdsetaten</a></span>"
+      }
+    ]
+  },
+  "modal": {
+    "header": "Vil du avbryte forespørselen?",
+    "content": "Hvis du avbryter nå, blir forespørselen slettet."
+  }
+}

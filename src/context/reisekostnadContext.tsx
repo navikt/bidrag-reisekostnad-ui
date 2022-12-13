@@ -1,7 +1,7 @@
-import React, { createContext, PropsWithChildren, useState, useContext, useEffect } from "react";
-import { IBrukerinformasjon, IForesporsel, IPerson } from "../types/foresporsel";
-import { calculateAge } from "../utils/dateUtils";
-import { isEveryoneOver15YearsOld, isAgeOver15YearsOld } from "../utils/personUtils";
+import React, { createContext, PropsWithChildren, useState, useContext } from "react";
+import { IBrukerinformasjon } from "../types/foresporsel";
+import { mapToForesporselWithStatusAndPersonsAge } from "../utils/foresporselUtils";
+import { mapToPersonWithAge } from "../utils/personUtils";
 
 interface IReisekostnadContext {
   userInformation: IBrukerinformasjon | undefined;
@@ -14,23 +14,32 @@ function ReisekostnadProvider({ children }: PropsWithChildren) {
   const [userInformation, setUserInformation] = useState<IBrukerinformasjon | undefined>(undefined);
 
   const updateUserInformation = (user: IBrukerinformasjon) => {
-    const foresporslerSomMotpart = user.forespørslerSomMotpart;
+    const {
+      forespørslerSomMotpart,
+      forespørslerSomHovedpart,
+      barnMinstFemtenÅr,
+      motparterMedFellesBarnUnderFemtenÅr,
+    } = user;
 
-    const forespørslerSomMotpartMedAlder = foresporslerSomMotpart.map((foresporsel) => ({
-      ...foresporsel,
-      barn: foresporsel.barn.map((person) => ({
-        ...person,
-        alder: calculateAge(person.fødselsdato),
-        erOver15: isAgeOver15YearsOld(person.fødselsdato),
-      })),
-      erAlleOver15: isEveryoneOver15YearsOld(foresporsel.barn as IPerson[]),
-    })) as unknown as IForesporsel[];
+    const forespørslerSomMotpartMedAlder =
+      mapToForesporselWithStatusAndPersonsAge(forespørslerSomMotpart);
+    const forespørslerSomHovedpartMedAlder =
+      mapToForesporselWithStatusAndPersonsAge(forespørslerSomHovedpart);
+    const barnMinstFemtenÅrMedAlder = mapToPersonWithAge(barnMinstFemtenÅr);
+    const motparterMedFellesBarnUnderFemtenÅrMedAlder = motparterMedFellesBarnUnderFemtenÅr.map(
+      (motpart) => {
+        return { ...motpart, fellesBarnUnder15År: mapToPersonWithAge(motpart.fellesBarnUnder15År) };
+      }
+    );
 
     user = {
       ...user,
       forespørslerSomMotpart: [...forespørslerSomMotpartMedAlder],
+      forespørslerSomHovedpart: [...forespørslerSomHovedpartMedAlder],
+      barnMinstFemtenÅr: [...barnMinstFemtenÅrMedAlder],
+      motparterMedFellesBarnUnderFemtenÅr: motparterMedFellesBarnUnderFemtenÅrMedAlder,
     };
-    console.log(user);
+
     setUserInformation(user);
   };
 

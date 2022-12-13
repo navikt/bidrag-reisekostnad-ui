@@ -1,11 +1,10 @@
-import { Heading, BodyShort, ConfirmationPanel, Button } from "@navikt/ds-react";
+import { Heading, ConfirmationPanel, Button, Alert, RadioGroup, Radio } from "@navikt/ds-react";
 import Link from "next/link";
 import { useState } from "react";
-import { SAMTYKKE_COLLAPSE } from "../../../constants/collapse";
-import { MAA_SAMTYKKE } from "../../../constants/error";
-import { IPerson } from "../../../types/foresporsel";
-import Collapse from "../../../components/collapse/Collapse";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
+import useForesporselApi from "../../../hooks/useForesporselApi";
+import { useTranslation } from "next-i18next";
+import parse from "html-react-parser";
 
 interface IForesporselConfirmationProps {
   isAgree: boolean;
@@ -13,23 +12,23 @@ interface IForesporselConfirmationProps {
 }
 
 interface ISamtykkeProps {
+  foresporselId: number;
   barnInformation: string[];
-  hovedpart: IPerson;
-  onClick: (sendingIn: boolean) => void;
 }
 
-export default function SamtykkeContainer({ barnInformation, hovedpart, onClick }: ISamtykkeProps) {
+export default function SamtykkeContainer({ foresporselId, barnInformation }: ISamtykkeProps) {
   const [haveReadAndUnderstood, setHaveReadAndUnderstood] = useState<IForesporselConfirmationProps>(
     {
       isAgree: false,
       showError: false,
     }
   );
-  const [isAwareThatRequestCannotBeWithdrawn, setIsAwareThatRequestCannotBeWithdrawn] =
-    useState<IForesporselConfirmationProps>({
-      isAgree: false,
-      showError: false,
-    });
+  const [isSamtykke, setIsSamtykke] = useState<boolean>();
+  const [showRadioError, setShowRadioError] = useState<boolean>(false);
+  const { submitting, failed, success, samtykkeForesporsel, trekkeForesporsel } =
+    useForesporselApi();
+  const { t: translate } = useTranslation();
+  const { t: samtykkeTranslate } = useTranslation("samtykke");
 
   function handleReadAndUnderstood() {
     setHaveReadAndUnderstood((current) => {
@@ -40,67 +39,76 @@ export default function SamtykkeContainer({ barnInformation, hovedpart, onClick 
     });
   }
 
-  function handleAwarenessThatRequestCannotBeWithdrawn() {
-    setIsAwareThatRequestCannotBeWithdrawn((current) => {
-      return {
-        isAgree: !current.isAgree,
-        showError: !!current.isAgree,
-      };
-    });
+  async function handleSendIn() {
+    if (isSamtykke === undefined) {
+      setShowRadioError(true);
+    } else {
+      setHaveReadAndUnderstood((current) => {
+        return { ...current, showError: !current.isAgree };
+      });
+
+      if (haveReadAndUnderstood.isAgree) {
+        if (isSamtykke) {
+          await samtykkeForesporsel(foresporselId);
+        } else {
+          await trekkeForesporsel(foresporselId);
+        }
+      }
+    }
   }
 
-  function handleSendIn() {
-    setHaveReadAndUnderstood((current) => {
-      return { ...current, showError: !current.isAgree };
-    });
-    setIsAwareThatRequestCannotBeWithdrawn((current) => {
-      return { ...current, showError: !current.isAgree };
-    });
-
-    if (haveReadAndUnderstood.isAgree && isAwareThatRequestCannotBeWithdrawn.isAgree) {
-      onClick(true);
-    }
+  function handleRadioGroup(value: boolean) {
+    setShowRadioError(false);
+    setIsSamtykke(value);
   }
 
   return (
     <>
-      <PageMeta title="Samtykke" />
+      <PageMeta title={samtykkeTranslate("page_title")} />
       <div className="grid gap-12">
+        {!success && failed && <Alert variant="error">{translate("errors.tekniskfeil")}</Alert>}
         <Heading level="1" size="xlarge">
-          Samtykke
+          {samtykkeTranslate("title")}
         </Heading>
-        <Collapse data={SAMTYKKE_COLLAPSE} />
         <div className="grid gap-7">
-          <BodyShort>
-            Jeg samtykker at NAV skal behandle fordeling av reisekostnader for barn
-          </BodyShort>
-          {barnInformation.map((information, index) => {
-            return (
-              <BodyShort key={index} className="font-bold">
-                {`${information} (med ${hovedpart.fornavn})`}
-              </BodyShort>
-            );
-          })}
+          <div className="leading-relaxed">{parse(samtykkeTranslate("description"))}</div>
+          <RadioGroup
+            legend={
+              <>
+                {samtykkeTranslate("radio.legend")}
+                <ul className="list-none p-0 my-1">
+                  {barnInformation.map((information, index) => {
+                    return (
+                      <li key={index} className="font-bold">
+                        {information}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            }
+            onChange={handleRadioGroup}
+            error={showRadioError && translate("errors.maa_velge")}
+          >
+            <Radio value={true}>{samtykkeTranslate("radio.ja")}</Radio>
+            <Radio value={false}>{samtykkeTranslate("radio.nei")}</Radio>
+          </RadioGroup>
         </div>
         <div className="grid gap-7">
           <ConfirmationPanel
             checked={haveReadAndUnderstood.isAgree}
-            label="Jeg har lest og fortstått hva fordeling av reisekostander innebærer."
+            label={samtykkeTranslate("confirmation_panel.lest_og_forstaatt")}
             onChange={handleReadAndUnderstood}
-            error={haveReadAndUnderstood.showError && MAA_SAMTYKKE}
-          ></ConfirmationPanel>
-          <ConfirmationPanel
-            checked={isAwareThatRequestCannotBeWithdrawn.isAgree}
-            label="Jeg er kjent med at denne bekreftelsen ikke kan trekkes tilbake på et senere tidspunkt."
-            onChange={handleAwarenessThatRequestCannotBeWithdrawn}
-            error={isAwareThatRequestCannotBeWithdrawn.showError && MAA_SAMTYKKE}
+            error={haveReadAndUnderstood.showError && translate("errors.maa_samtykke")}
           ></ConfirmationPanel>
         </div>
         <div className="flex space-x-12">
-          <Button onClick={handleSendIn}>SEND INN</Button>
+          <Button onClick={handleSendIn} loading={submitting}>
+            {translate("button.send_inn")}
+          </Button>
           <Link href="/" className="no-underline">
             <Button type="button" variant="secondary">
-              AVBRYT
+              {translate("button.avbryt")}
             </Button>
           </Link>
         </div>

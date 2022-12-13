@@ -1,30 +1,57 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Overview from "../views/overview/Overview";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useReisekostnad } from "../context/reisekostnadContext";
-import { Loader } from "@navikt/ds-react";
-import useSWRImmutable from "swr/immutable";
-import { logger } from "../lib/logging/logger";
 import { IBrukerinformasjon } from "../types/foresporsel";
+import Spinner from "../components/spinner/spinner/spinner";
+import useSWRImmutable from "swr/immutable";
+import { generateAndStoreCorrelationIdAsCookie } from "../lib/logging/types";
+import { fetcher } from "../utils/apiUtils";
+import { Alert } from "@navikt/ds-react";
+import { useTranslation } from "next-i18next";
+import parse from "html-react-parser";
+import { PageMeta } from "../components/page-meta/PageMeta";
 
 export default function Home() {
-  const { data, error } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
+  const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon", fetcher);
   const { updateUserInformation } = useReisekostnad();
+  const { t: translate } = useTranslation();
+  const { t: oversiktTranslate } = useTranslation("oversikt");
+
+  const [hasNoBarn, setHasNoBarn] = useState<boolean>(false);
+
+  useEffect(generateAndStoreCorrelationIdAsCookie, []);
 
   useEffect(() => {
     if (data) {
-      logger.info("Lastet informasjon om bruker " + data.brukersFornavn);
+      const hasBarn =
+        data.barnMinstFemtenÅr.length === 0 &&
+        data.motparterMedFellesBarnUnderFemtenÅr.flatMap((person) => person.fellesBarnUnder15År)
+          .length === 0;
+
       updateUserInformation(data);
+      setHasNoBarn(hasBarn);
     }
   }, [data]);
 
-  if (error) return <div>Failed to load</div>;
+  if (!data) return <Spinner />;
 
-  if (!data)
+  if (hasNoBarn) {
     return (
-      <div className="w-full flex flex-col items-center">
-        <Loader size="3xlarge" title="venter..." variant="interaction" />
-      </div>
+      <>
+        <PageMeta title={oversiktTranslate("page_title")} />
+        <Alert variant="info">{parse(translate("alert.funnet_ingen_barn"))}</Alert>
+      </>
     );
+  }
 
-  return <Overview name={data.brukersFornavn} />;
+  return <Overview />;
+}
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "oversikt"])),
+    },
+  };
 }

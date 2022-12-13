@@ -1,0 +1,39 @@
+{
+  "button": {
+    "send_inn": "Send inn",
+    "avbryt": "Avbryt",
+    "til_oversikten": "Til oversikten",
+    "trekk_foresporselen": "Trekk forespørselen",
+    "send_foresporsel_om_fordeling": "Send forespørsel om fordeling",
+    "tilbake_til_foresporsel": "Tilbake til forespørselen"
+  },
+  "status": {
+    "venter_paa_samtykke": "Venter på samtykke",
+    "kansellert": "Kansellert",
+    "under_behandling": "Under behandling"
+  },
+  "alert": {
+    "ingen_saker": "Du har ingen saker om fordeling av reisekostnader",
+    "barnet_har_foresporsel": "Du har allerede sendt en forespørsel for dette barnet.",
+    "barna_har_foresporsel": "Du har allerede sendt en forespørsel for disse barna.",
+    "funnet_ingen_barn": "Vi har ikke funnet barn som er registrert på deg. Du må derfor kontakte oss på telefon <a href=\"tel:55553333\">55 55 33 33</a>, eller benytte tjenesten <a href=\"https://www.nav.no/skriv-til-oss\">Skriv til oss</a>. Der opplyser du om navn og fødselsnummer på hvilket barn det gjelder, og for den andre forelderen."
+  },
+  "page_meta_content": "Fordeling av reisekostnader",
+  "sendt_inn": "Sendt Inn:\n{{date}}",
+  "samtykkefrist": "Samtykkefrist:\n{{date}}",
+  "aar": "år",
+  "loading": "Laster",
+  "title": {
+    "fordeling_av_reisekostnader_for": "Fordeling av reisekostnader for:"
+  },
+  "errors": {
+    "tekniskfeil": "Det er oppstått en teknisk feil. Vennligst forsøk igjen senere når vi har fikset problemet.",
+    "maa_samtykke": "Du må krysse av for at du har lest og forstått.",
+    "maa_velge": "Du må velge enten ja eller nei for å kunne gå videre.",
+    "velg_barn": "Du må velge minst ett barn."
+  },
+  "logo_title": {
+    "kvinne": "Logo for kvinne",
+    "mann": "Logo for mann"
+  }
+}

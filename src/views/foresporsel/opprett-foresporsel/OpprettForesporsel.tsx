@@ -1,0 +1,140 @@
+import { useEffect } from "react";
+import { useState } from "react";
+import { IPerson } from "../../../types/foresporsel";
+import { useReisekostnad } from "../../../context/reisekostnadContext";
+import BarnContainer from "./barn-container/BarnContainer";
+import { Alert, Button, Heading } from "@navikt/ds-react";
+import useForesporselApi from "../../../hooks/useForesporselApi";
+import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
+import { PageMeta } from "../../../components/page-meta/PageMeta";
+import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
+import { useRouter } from "next/router";
+import { today } from "../../../utils/dateUtils";
+import { getAllBarn, getBarnWithNoActiveForesporsler } from "../../../utils/personUtils";
+import Link from "next/link";
+import { Left } from "@navikt/ds-icons";
+import Collapse from "../../../components/collapse/Collapse";
+import { useTranslation } from "next-i18next";
+
+export default function OpprettForesporsel() {
+  const [availableBarn, setAvailableBarn] = useState<IPerson[]>();
+  const [allBarn, setAllBarn] = useState<IPerson[]>();
+  const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
+  const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
+  const [foundPersonCouldBe15In30Days, setFoundPersonCouldBe15In30Days] = useState<boolean>(false);
+  const [showBarnError, setShowBarnError] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const { userInformation } = useReisekostnad();
+  const { submitting, success, createForesporsel, failed } = useForesporselApi();
+  const router = useRouter();
+  const { t: translate } = useTranslation();
+  const { t: foresporselTranslate } = useTranslation("opprettForesporsel");
+
+  useEffect(() => {
+    if (userInformation) {
+      const barn = getBarnWithNoActiveForesporsler(userInformation);
+      setAllBarn(getAllBarn(userInformation));
+      setAvailableBarn(barn);
+      setFoundPersonOver15(barn.some((i) => i.erOver15));
+      setFoundPersonCouldBe15In30Days(barn.some((i) => i.er15Om30Dager));
+    }
+  }, [userInformation]);
+
+  if (!availableBarn) {
+    return null;
+  }
+
+  function onSelectBarn(selectedIdents: string[]) {
+    if (showBarnError) {
+      setShowBarnError(false);
+    }
+
+    setSelectedBarn(selectedIdents);
+  }
+
+  async function onSubmit() {
+    const hasSelectedBarn = selectedBarn.length !== 0;
+
+    setShowBarnError(!hasSelectedBarn);
+
+    if (hasSelectedBarn) {
+      createForesporsel(selectedBarn);
+    }
+  }
+
+  return (
+    <div className="grid gap-10">
+      <PageMeta title={foresporselTranslate("page_title")} />
+      {success && (
+        <ForesporselKvitteringContainer
+          barn={availableBarn.filter((barn) => selectedBarn.includes(barn.ident))}
+          sentDate={today()}
+        />
+      )}
+      {!success && failed && <Alert variant="error">{translate("errors.tekniskfeil")}</Alert>}
+      {!success && (
+        <>
+          <Heading size="xlarge" level="1">
+            {foresporselTranslate("title")}
+          </Heading>
+          {availableBarn.length === 0 && (
+            <>
+              {allBarn && allBarn.length > 1 ? (
+                <Alert variant="info">{translate("alert.barna_har_foresporsel")}</Alert>
+              ) : (
+                <Alert variant="info">{translate("alert.barnet_har_foresporsel")}</Alert>
+              )}
+              <Link
+                href="/"
+                className="no-underline flex gap-2 items-center hover:underline"
+                passHref
+              >
+                <Left />
+                {translate("button.til_oversikten")}
+              </Link>
+            </>
+          )}
+          {availableBarn.length > 0 && (
+            <>
+              <BarnContainer
+                allBarn={availableBarn}
+                foundPersonOver15={foundPersonOver15}
+                foundPersonCouldBe15In30Days={foundPersonCouldBe15In30Days}
+                onSelectBarn={onSelectBarn}
+                showError={showBarnError}
+              />
+              <div className="flex gap-5">
+                <Button onClick={onSubmit} loading={submitting}>
+                  {translate("button.send_inn")}
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setOpen((current) => !current)}
+                >
+                  {translate("button.avbryt")}
+                </Button>
+              </div>
+              <Collapse
+                contentClassNames="flex flex-col gap-4"
+                data={foresporselTranslate("accordion.behandling_av_personligopplysning", {
+                  returnObjects: true,
+                })}
+              />
+              <ConfirmModal
+                open={open}
+                header={foresporselTranslate("modal.header")}
+                content={foresporselTranslate("modal.content")}
+                submitText={translate("button.tilbake_til_foresporsel")}
+                onSubmit={() => setOpen(false)}
+                onCancel={() => router.push("/")}
+                onClose={() => setOpen(false)}
+              />
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+}

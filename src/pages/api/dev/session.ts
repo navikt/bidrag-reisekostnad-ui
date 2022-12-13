@@ -1,19 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type {NextApiRequest, NextApiResponse} from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 import environment from "../../../environment";
-import {withSessionApiRoute} from "../../../lib/security/withSessionApiRoute";
+import { withSessionApiRoute } from "../../../lib/security/withSessionApiRoute";
 
+export default withSessionApiRoute(handler);
 
-export default withSessionApiRoute(handler)
-
-async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<string>
-) {
-  const session = req.session
-  res.status(200).json(JSON.stringify({
-    ...session.user,
-    idporten_token: session.token,
-    person_token: await session.getOBOToken(environment.audiences.bidrag_person),
-    reisekostnad_api_token: await session.getOBOToken(environment.audiences.bidrag_reisekostnad_api)}))
+async function handler(req: NextApiRequest, res: NextApiResponse<string>) {
+  const session = req.session;
+  res.status(200).json(
+    JSON.stringify({
+      ...session.user,
+      idporten_token: session.token,
+      person_token: await session.getOBOToken(environment.audiences.bidrag_person),
+      reisekostnad_api_token: await session.getOBOToken(
+        environment.audiences.bidrag_reisekostnad_api
+      ),
+    })
+  );
 }

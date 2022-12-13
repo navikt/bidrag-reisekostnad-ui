@@ -1,50 +1,107 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useState } from "react";
-import SamtykkeConfirmationContainer from "../../views/samtykke/samtykke-confirmation-container/SamtykkeConfirmationContainer";
+import SamtykkeKvitteringContainer from "../../views/samtykke/samtykke-kvittering-container/SamtykkeKvitteringContainer";
 import SamtykkeContainer from "../../views/samtykke/samtykke-container/SamtykkeContainer";
-import { useReisekostnad } from "../../context/reisekostnadContext";
 import { useRouter } from "next/router";
 import { getBarnInformationText } from "../../utils/stringUtils";
-import { IForesporsel } from "../../types/foresporsel";
+import { IBrukerinformasjon, IForesporsel } from "../../types/foresporsel";
+import useSWRImmutable from "swr/immutable";
+import { useReisekostnad } from "../../context/reisekostnadContext";
+import { findForesporselById } from "../../utils/foresporselUtils";
+import { ForesporselStatus } from "../../enum/foresporsel-status";
+import KvitteringMedTrekkTilbake from "../../views/kvittering-med-trekktilbake/KvitteringMedTrekkTilbake";
+import ForesporselKvitteringContainer from "../../views/foresporsel/foresporsel-kvittering-container/ForesporselKvitteringContainer";
+import Spinner from "../../components/spinner/spinner/spinner";
+import { formatDate } from "../../utils/dateUtils";
+import { useTranslation } from "next-i18next";
 
 export default function ForesporselId() {
+  const STATUS_TO_RENDER_CONFIRMATION = [
+    ForesporselStatus.UNDER_BEHANDLING,
+    ForesporselStatus.KANSELLERT,
+  ];
   const router = useRouter();
   const foresporselId = router.query.id as string;
-  const [showConfirmPage, setShowConfirmPage] = useState<boolean>(false);
   const [foresporsel, setForesporsel] = useState<IForesporsel>();
-  const { userInformation } = useReisekostnad();
+
+  const [isHovedpart, setIsHovedpart] = useState<boolean>(false);
+
+  const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
+  const { userInformation, updateUserInformation } = useReisekostnad();
+  const { t: translate } = useTranslation();
+
+  useEffect(() => {
+    if (data) {
+      updateUserInformation(data);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (foresporselId && userInformation) {
-      const foresporselSomMotpart = userInformation.forespørslerSomMotpart.find(
-        (item) => item.idForespørsel === Number(foresporselId)
+      const foresporselSomHovedpart = findForesporselById(
+        userInformation.forespørslerSomHovedpart,
+        foresporselId
       );
 
-      if (foresporselSomMotpart) {
+      const hovedpart = userInformation.fornavn === foresporselSomHovedpart?.hovedpart.fornavn;
+      setIsHovedpart(hovedpart);
+
+      if (hovedpart) {
+        setForesporsel(foresporselSomHovedpart);
+      } else {
+        const foresporselSomMotpart = findForesporselById(
+          userInformation.forespørslerSomMotpart,
+          foresporselId
+        );
         setForesporsel(foresporselSomMotpart);
-        setShowConfirmPage(foresporselSomMotpart.erAlleOver15);
       }
     }
-  }, [foresporselId]);
+  }, [foresporselId, userInformation]);
 
   if (!userInformation || !foresporselId || !foresporsel) {
-    return null;
+    return <Spinner />;
   }
 
   const barnInformation = foresporsel.barn.map((person) => {
-    return getBarnInformationText(person);
+    return getBarnInformationText(person, translate("aar"));
   });
 
   return (
     <>
-      {showConfirmPage ? (
-        <SamtykkeConfirmationContainer barnInformation={barnInformation} />
-      ) : (
-        <SamtykkeContainer
-          onClick={(sendingInn) => setShowConfirmPage(sendingInn)}
+      {isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
+        <KvitteringMedTrekkTilbake
           barnInformation={barnInformation}
-          hovedpart={foresporsel.hovedpart}
+          sentDate={foresporsel.opprettet}
+          status={foresporsel.status}
+          foresporselId={foresporsel.id}
         />
+      )}
+
+      {isHovedpart && STATUS_TO_RENDER_CONFIRMATION.includes(foresporsel.status) && (
+        <ForesporselKvitteringContainer
+          barn={foresporsel.barn}
+          sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
+        />
+      )}
+
+      {!isHovedpart && STATUS_TO_RENDER_CONFIRMATION.includes(foresporsel.status) && (
+        <SamtykkeKvitteringContainer
+          barnInformation={barnInformation}
+          deaktivertAv={foresporsel.deaktivertAv}
+        />
+      )}
+
+      {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
+        <SamtykkeContainer foresporselId={foresporsel.id} barnInformation={barnInformation} />
       )}
     </>
   );
+}
+
+export async function getServerSideProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "kvittering", "samtykke"])),
+    },
+  };
 }
