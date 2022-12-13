@@ -1,3 +1,4 @@
+import { Deaktivator } from "../enum/deaktivator";
 import { ForesporselStatus } from "../enum/foresporsel-status";
 import { Gender } from "../enum/gender";
 
@@ -24,7 +25,7 @@ export interface IForesporsel extends IForesporselUi {
   journalført: string | null;
   deaktivert: string | null;
   samtykkefrist: string | null;
-  deaktivertAv: "HOVEDPART" | "MOTPART" | "SYSTEM" | null;
+  deaktivertAv: Deaktivator | null;
 }
 
 interface IForesporselUi {

@@ -5,7 +5,6 @@ import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import { Alert, Button, ConfirmationPanel, Heading } from "@navikt/ds-react";
 import useForesporselApi from "../../../hooks/useForesporselApi";
-import ForesporselKvitteringContainer from "../foresporsel-kvittering-container/ForesporselKvitteringContainer";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
@@ -15,6 +14,7 @@ import Link from "next/link";
 import { Left } from "@navikt/ds-icons";
 import Collapse from "../../../components/collapse/Collapse";
 import { useTranslation } from "next-i18next";
+import ForesporselKvittering from "../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
 
 export default function OpprettForesporsel() {
   const [availableBarn, setAvailableBarn] = useState<IPerson[]>();
@@ -79,7 +79,7 @@ export default function OpprettForesporsel() {
     <div className="grid gap-10">
       <PageMeta title={foresporselTranslate("page_title")} />
       {success && (
-        <ForesporselKvitteringContainer
+        <ForesporselKvittering
           barn={availableBarn.filter((barn) => selectedBarn.includes(barn.ident))}
           sentDate={today()}
         />

@@ -1,12 +1,12 @@
 import { Button } from "@navikt/ds-react";
-import ConfirmationLayout from "../../components/layout/confirmation-layout/ConfirmationLayout";
-import StatusBar from "../../components/status-bar/StatusBar";
-import { ForesporselStatus } from "../../enum/foresporsel-status";
-import useForesporselApi from "../../hooks/useForesporselApi";
-import { formatDate } from "../../utils/dateUtils";
+import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
+import StatusBar from "../../../components/status-bar/StatusBar";
+import { ForesporselStatus } from "../../../enum/foresporsel-status";
+import useForesporselApi from "../../../hooks/useForesporselApi";
+import { formatDate } from "../../../utils/dateUtils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import ConfirmModal from "../../components/modal/confirm-modal/ConfirmModal";
+import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useTranslation } from "next-i18next";
 
 interface IKvitteringMedTrekkTilbakeProps {
