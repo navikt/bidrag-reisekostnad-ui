@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
+          registry-url: "https://npm.pkg.github.com"
       - name: Clean install of dependencies
         run: npm ci
       - name: Create an optimized production build of the application
@@ -29,7 +30,7 @@ jobs:
         run: docker build --pull --tag ${IMAGE} . && docker push ${IMAGE}
 
   deployAppToProd:
-    name: Deploy application to development
+    name: Deploy application to production
     needs: build
     runs-on: "ubuntu-latest"
     steps:
