@@ -8,15 +8,12 @@ import { getBarnInformationText } from "../../../utils/stringUtils";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
 
-interface IForesporselKvitteringContainerProps {
+interface IForesporselKvitteringProps {
   barn: IPerson[];
   sentDate: string;
 }
 
-export default function ForesporselKvitteringContainer({
-  barn,
-  sentDate,
-}: IForesporselKvitteringContainerProps) {
+export default function ForesporselKvittering({ barn, sentDate }: IForesporselKvitteringProps) {
   const [barnOver15, setBarnOver15] = useState<IPerson[]>();
   const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
   const { t: translate } = useTranslation();

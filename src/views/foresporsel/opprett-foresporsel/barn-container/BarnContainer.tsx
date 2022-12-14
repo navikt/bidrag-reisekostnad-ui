@@ -1,6 +1,5 @@
 import { CheckboxGroup, Checkbox, Alert, Heading } from "@navikt/ds-react";
 import { useState } from "react";
-import Collapse from "../../../../components/collapse/Collapse";
 import { IPerson } from "../../../../types/foresporsel";
 import { getBarnInformationText } from "../../../../utils/stringUtils";
 import { useTranslation } from "next-i18next";
@@ -58,9 +57,6 @@ export default function BarnContainer({
           {foresporselTranslate("alert.barn_bli_15_i_lopet_av_behandling")}
         </Alert>
       )}
-      <Collapse
-        data={foresporselTranslate("accordion.barn_som_ikke_vises", { returnObjects: true })}
-      />
     </div>
   );
 }

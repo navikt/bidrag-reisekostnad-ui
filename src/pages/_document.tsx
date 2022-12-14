@@ -16,10 +16,8 @@ const decoratorProps: DecoratorProps = {
   enforceLogin: false,
   redirectToApp: true,
   level: "Level4",
-  // TODO
   breadcrumbs: [
-    { title: "Familie og barn", url: "https://www.nav.no/familie" },
-    { title: "Fordeling  av reisekostnader", url: "https://www.nav.no/reisekostnad" },
+    { title: "Fordeling  av reisekostnader", url: "https://bidrag-reisekostnad.nav.no/" },
   ],
   language: "nb",
 };

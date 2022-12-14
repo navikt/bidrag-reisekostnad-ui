@@ -1,12 +1,11 @@
 import { Button } from "@navikt/ds-react";
-import ConfirmationLayout from "../../components/layout/confirmation-layout/ConfirmationLayout";
-import StatusBar from "../../components/status-bar/StatusBar";
-import { ForesporselStatus } from "../../enum/foresporsel-status";
-import useForesporselApi from "../../hooks/useForesporselApi";
-import { formatDate } from "../../utils/dateUtils";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import ConfirmModal from "../../components/modal/confirm-modal/ConfirmModal";
+import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
+import StatusBar from "../../../components/status-bar/StatusBar";
+import { ForesporselStatus } from "../../../enum/foresporsel-status";
+import useForesporselApi from "../../../hooks/useForesporselApi";
+import { formatDate } from "../../../utils/dateUtils";
+import { useState } from "react";
+import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useTranslation } from "next-i18next";
 
 interface IKvitteringMedTrekkTilbakeProps {
@@ -25,15 +24,8 @@ export default function KvitteringMedTrekkTilbake({
   const [open, setOpen] = useState<boolean>(false);
 
   const { submitting, success, failed, trekkeForesporsel } = useForesporselApi();
-  const router = useRouter();
   const { t: translate } = useTranslation();
   const { t: kvitteringTranslate } = useTranslation("kvittering");
-
-  useEffect(() => {
-    if (success && !failed) {
-      router.push("/");
-    }
-  }, [success]);
 
   return (
     <>
@@ -41,8 +33,8 @@ export default function KvitteringMedTrekkTilbake({
         <div className="w-full grid gap-10">
           <div className="flex justify-between max-[700px]:flex-col">
             <div className="flex">
-              <p>For: </p>
-              <ul className="pl-3">
+              <span>For: </span>
+              <ul className="pl-2 m-0">
                 {barnInformation.map((information, index) => {
                   return (
                     <li className="list-none" key={index}>
@@ -52,7 +44,7 @@ export default function KvitteringMedTrekkTilbake({
                 })}
               </ul>
             </div>
-            <p>{translate("sendt_inn", { date: sentDate ? formatDate(sentDate) : "" })}</p>
+            <span>{translate("sendt", { date: sentDate ? formatDate(sentDate) : "" })}</span>
           </div>
           <div className="grid gap-6">
             <div>
@@ -75,7 +67,7 @@ export default function KvitteringMedTrekkTilbake({
           content={kvitteringTranslate("modal.content")}
           submitText={translate("button.trekk_foresporselen")}
           onSubmit={() => trekkeForesporsel(foresporselId)}
-          onCancel={() => router.push("/")}
+          onCancel={() => setOpen(false)}
           onClose={() => setOpen(false)}
           loading={submitting}
           showError={!success && failed}

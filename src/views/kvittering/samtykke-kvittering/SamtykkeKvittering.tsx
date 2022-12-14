@@ -2,16 +2,17 @@ import { SuccessStroke } from "@navikt/ds-icons";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
+import { Deaktivator } from "../../../enum/deaktivator";
 
-interface ISamtykkeKvitteringContainerProps {
+interface ISamtykkeKvitteringProps {
   barnInformation: string[];
-  deaktivertAv: "HOVEDPART" | "MOTPART" | "SYSTEM" | null;
+  deaktivertAv: Deaktivator | null;
 }
 
-export default function SamtykkeKvitteringContainer({
+export default function SamtykkeKvittering({
   barnInformation,
   deaktivertAv,
-}: ISamtykkeKvitteringContainerProps) {
+}: ISamtykkeKvitteringProps) {
   const { t: translate } = useTranslation("kvittering");
 
   const content =

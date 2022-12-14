@@ -26,5 +26,17 @@
       "body_1": "<p>Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at NAV skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.</p><p>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer som trengs i saken</p><p>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen. I så tilfelle vil du få beskjed om det.</p><p>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.</p>",
       "body_2": "<p>Forespørselen fra deg har automatisk gått videre til behandling. En saksbehandler tar kontakt med både deg og den andre forelderen, for avklaringer som trengs i saken.</p>"
     }
+  },
+  "kanseller": {
+    "hovedpart": {
+      "title": "Du har trukket / kansellert din forespørsel",
+      "content_1": "Forespørsel om fordeling av reisekostnader er trukket / kansellert for:",
+      "content_2": "Du kan når som helst opprette en ny forespørsel."
+    },
+    "motpart": {
+      "title": "Forespørsel om samtykke er trukket tilbake",
+      "content_1": "Forespørselen om samtykke til behandling av reisekostnader har blitt trukket tilbake fra den andre forelderen for:",
+      "content_2": "Du kan når som helst opprette en forespørsel om fordeling av reisekostnader."
+    }
   }
 }
