@@ -6,6 +6,10 @@ import { withSessionApiRoute } from "../../../lib/security/withSessionApiRoute";
 export default withSessionApiRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse<string>) {
+  if (environment.system.isClusterProduction) {
+    return res.status(404).end();
+  }
+
   const session = req.session;
   res.status(200).json(
     JSON.stringify({
