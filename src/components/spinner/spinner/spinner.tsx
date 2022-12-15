@@ -8,7 +8,7 @@ export default function Spinner() {
   return (
     <div className="w-full flex flex-col items-center">
       <PageMeta title={translate("loading")} />
-      <Loader size="3xlarge" title="venter..." variant="interaction" />
+      <Loader data-testid="spinner-testid" size="3xlarge" title="venter..." variant="interaction" />
     </div>
   );
 }
