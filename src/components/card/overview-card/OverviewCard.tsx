@@ -18,7 +18,12 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
   const { t: translate } = useTranslation();
 
   return (
-    <Link className="no-underline" href={`/foresporsel/${id}`} passHref data-testid="overviewcard">
+    <Link
+      className="no-underline"
+      href={`/foresporsel/${id}`}
+      passHref
+      data-testid={`overviewcard-${id}`}
+    >
       <Panel className="navds-link-panel cursor-pointer" border>
         <div className="w-full navds-link-panel__content text-gray-900">
           <LinkPanel.Title className="text-large text-gray-900">

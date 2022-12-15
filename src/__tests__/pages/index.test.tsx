@@ -9,7 +9,7 @@ import {
   MANN_UTEN_FORESPORSEL,
 } from "../mockdata/brukerinformasjon";
 import { fetchBrukerinformation } from "../utils/api.utils";
-import { getCreateForesporselButton, getOverviewCard, getSpinner } from "../utils/index.utils";
+import { getCreateForesporselButton, getOverviewCardById, getSpinner } from "../utils/index.utils";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { createMockRouter } from "../utils/router.utils";
@@ -17,21 +17,18 @@ import { createMockRouter } from "../utils/router.utils";
 describe("No data", () => {
   it("should render spinner when there is no data", () => {
     render(mockAppContext());
-    const spinner = getSpinner();
 
+    const spinner = getSpinner();
     expect(spinner).toBeInTheDocument();
   });
 });
 
 describe("Person without barn", () => {
-  beforeEach(async () => {
+  it("should render alert when person has no barn", async () => {
     fetchBrukerinformation(KVINNE_UTEN_BARN);
     render(mockAppContext());
 
     await waitForElementToBeRemoved(() => getSpinner());
-  });
-
-  it("should render alert when person has no barn", async () => {
     const alert = await screen.findByTestId("alert.funnet_ingen_barn");
 
     expect(alert).toBeInTheDocument();
@@ -77,19 +74,37 @@ describe("Person with existing foresporsler", () => {
   });
 
   it("should render overviewcard of foresporsel", async () => {
-    const overviewCard = await getOverviewCard();
-    expect(overviewCard.length).toEqual(numberOfForesporsler);
+    const allCard = personMedForesporsler.forespørslerSomHovedpart.map(async (i) => {
+      return await getOverviewCardById(i.id as unknown as string);
+    });
+
+    expect(allCard.length).toEqual(numberOfForesporsler);
   });
 
   it("should redirect to id page when clicked on overviewcard", async () => {
     const EXPECTED_PATH = `/foresporsel/${FORESPORSEL_ID}`;
-    const overviewCard = await getOverviewCard();
 
-    const selectedCard = overviewCard.find((e) => e.href === EXPECTED_PATH);
-    if (selectedCard) {
-      fireEvent.click(selectedCard);
-      expect(router.push).toHaveBeenCalledWith(EXPECTED_PATH);
-    }
+    const overviewCard = await getOverviewCardById(FORESPORSEL_ID);
+    fireEvent.click(overviewCard);
+
+    expect(router.push).toHaveBeenCalledWith(EXPECTED_PATH, EXPECTED_PATH, {
+      locale: undefined,
+      scroll: undefined,
+      shallow: undefined,
+    });
+  });
+
+  it("should redirect to create new foresporsel page", async () => {
+    const EXPECTED_PATH = "/foresporsel";
+
+    const button = await getCreateForesporselButton();
+    fireEvent.click(button);
+
+    expect(router.push).toHaveBeenCalledWith(EXPECTED_PATH, EXPECTED_PATH, {
+      locale: undefined,
+      scroll: undefined,
+      shallow: undefined,
+    });
   });
 });
 
