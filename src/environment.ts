@@ -8,11 +8,9 @@ const system = {
 
 const url = {
   bidragReisekostnad: env.get("BIDRAG_REISEKOSTNAD_API_URL").required().asString(),
-  bidragPerson: env.get("BIDRAG_PERSON_URL").required().asString(),
 };
 
 const audiences = {
-  bidrag_person: env.get("BIDRAG_PERSON_SCOPE").required().asString(),
   bidrag_reisekostnad_api: env.get("BIDRAG_REISEKOSTNAD_API_SCOPE").required().asString(),
 };
 

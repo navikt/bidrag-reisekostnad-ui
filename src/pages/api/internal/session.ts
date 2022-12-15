@@ -11,7 +11,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<string>) {
     JSON.stringify({
       ...session.user,
       idporten_token: session.token,
-      person_token: await session.getOBOToken(environment.audiences.bidrag_person),
       reisekostnad_api_token: await session.getOBOToken(
         environment.audiences.bidrag_reisekostnad_api
       ),
