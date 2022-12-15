@@ -19,3 +19,4 @@ Kjør følgende kommando for å opprette secret på namespace bidrag
 ``
 kubectl create secret generic bidrag-reisekostnad-ui-redis-password --from-literal=REDIS_PASSWORD=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) -n=bidrag
 ``
+
