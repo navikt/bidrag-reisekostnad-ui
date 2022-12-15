@@ -128,6 +128,7 @@ export default function OpprettForesporsel() {
                 })}
               />
               <ConfirmationPanel
+                data-testid="confirmationpanel.opprett.maa.samtykke"
                 checked={confirm}
                 label={foresporselTranslate("confirm")}
                 onChange={() => setConfirm((x) => !x)}
@@ -135,7 +136,7 @@ export default function OpprettForesporsel() {
                 error={showConfirmError && translate("errors.maa_samtykke")}
               ></ConfirmationPanel>
               <div className="flex gap-5">
-                <Button onClick={onSubmit} loading={submitting}>
+                <Button data-testid="button.send_inn" onClick={onSubmit} loading={submitting}>
                   {translate("button.send_inn")}
                 </Button>
                 <Button

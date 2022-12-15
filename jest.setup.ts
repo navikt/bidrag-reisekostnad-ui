@@ -3,6 +3,9 @@ require("next");
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import "whatwg-fetch";
+import { setupServer } from "msw/node";
+import { rest } from "msw";
+import { IBrukerinformasjon } from "./src/types/foresporsel";
 
 jest.mock("uuid", () => {
   return {
@@ -21,3 +24,13 @@ jest.mock("react-i18next", () => ({
     };
   },
 }));
+
+export const server = setupServer(
+  rest.get("/api/brukerinformasjon", async (_req, res, ctx) => {
+    return res(ctx.delay(100), ctx.json<IBrukerinformasjon | undefined>(undefined));
+  })
+);
+
+beforeAll(() => server.listen({ onUnhandledRequest: "bypass" }));
+afterAll(() => server.close());
+beforeEach(() => server.resetHandlers());
