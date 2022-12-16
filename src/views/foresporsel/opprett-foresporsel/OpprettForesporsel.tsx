@@ -67,7 +67,6 @@ export default function OpprettForesporsel() {
     setShowBarnError(!hasSelectedBarn);
 
     if (hasSelectedBarn && confirm) {
-      console.log("first");
       createForesporsel(selectedBarn);
     }
   }

@@ -1,7 +1,13 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitForElementToBeRemoved,
+  waitFor,
+} from "@testing-library/react";
 import Home from "../../pages";
 import {
-  KVINNE_MED_FORESPORSEL,
+  KVINNE_MED_FORESPORSEL_SOM_MOTPART_OG_HOVEDPART,
   KVINNE_UTEN_BARN,
   MANN_UTEN_FORESPORSEL,
 } from "../mock/brukerinformasjon";
@@ -67,9 +73,10 @@ describe("Person without foresporsel", () => {
 });
 
 describe("Person with existing foresporsler", () => {
-  const personMedForesporsler = KVINNE_MED_FORESPORSEL as unknown as IBrukerinformasjon;
+  const personMedForesporsler =
+    KVINNE_MED_FORESPORSEL_SOM_MOTPART_OG_HOVEDPART as unknown as IBrukerinformasjon;
   const numberOfForesporsler = personMedForesporsler.forespørslerSomHovedpart.length;
-  const FORESPORSEL_ID = "1000115";
+  const FORESPORSEL_ID = "1000127";
   const router = createMockRouter({ query: { id: FORESPORSEL_ID } });
 
   beforeEach(async () => {
@@ -100,6 +107,17 @@ describe("Person with existing foresporsler", () => {
       locale: undefined,
       scroll: undefined,
       shallow: undefined,
+    });
+  });
+
+  it("should render both sendt inn and motatt foresporsler", async () => {
+    await waitFor(() => {
+      const sendtInnForesporsel = screen.queryByText("title.sendt_inn_foresporsler");
+      expect(sendtInnForesporsel).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      const motattForesporsel = screen.queryByText("title.motatt_foresporsler");
+      expect(motattForesporsel).toBeInTheDocument();
     });
   });
 
