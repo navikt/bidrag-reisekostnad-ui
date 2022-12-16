@@ -12,3 +12,11 @@ export function fetchBrukerinformation(expectedResponse: unknown) {
     })
   );
 }
+
+export function postForesporsel() {
+  server.use(
+    rest.post("/api/foresporsel/ny", (_req, res, ctx) => {
+      return res(ctx.delay(100), ctx.status(200));
+    })
+  );
+}

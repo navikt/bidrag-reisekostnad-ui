@@ -7,19 +7,24 @@ import { setupServer } from "msw/node";
 import { rest } from "msw";
 import { IBrukerinformasjon } from "./src/types/foresporsel";
 
-jest.mock("uuid", () => {
-  return {
-    v4: () => "localhost-uuid",
-  };
-});
-
 jest.mock("react-i18next", () => ({
   useTranslation: () => {
     return {
-      t: (str: any) => str,
+      t: (str: string) => {
+        if (str.includes("accordion")) {
+          return [
+            {
+              header: "",
+              content: "",
+            },
+          ];
+        } else {
+          return str;
+        }
+      },
       i18n: {
         language: "nb",
-        changeLanguage: jest.fn().mockImplementation((lang: string) => console.log(lang)),
+        changeLanguage: () => new Promise(() => {}),
       },
     };
   },

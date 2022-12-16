@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useState, useContext } from "react";
+import React, { createContext, PropsWithChildren, useState, useContext, useEffect } from "react";
 import { IBrukerinformasjon } from "../types/foresporsel";
 import { mapToForesporselWithStatusAndPersonsAge } from "../utils/foresporselUtils";
 import { mapToPersonWithAge } from "../utils/personUtils";
@@ -7,13 +7,22 @@ interface IReisekostnadContext {
   userInformation: IBrukerinformasjon | undefined;
   updateUserInformation: (user: IBrukerinformasjon) => void;
 }
+interface IProps {
+  initialState?: IBrukerinformasjon | undefined;
+}
 
 export const ReisekostnadContext = createContext<IReisekostnadContext | undefined>(undefined);
 
-function ReisekostnadProvider({ children }: PropsWithChildren) {
+function ReisekostnadProvider({ initialState, children }: PropsWithChildren<IProps>) {
   const [userInformation, setUserInformation] = useState<IBrukerinformasjon | undefined>(undefined);
 
-  const updateUserInformation = (user: IBrukerinformasjon) => {
+  useEffect(() => {
+    if (initialState) {
+      setUserInformation(mapToUiData(initialState));
+    }
+  }, []);
+
+  function mapToUiData(user: IBrukerinformasjon): IBrukerinformasjon {
     const {
       forespørslerSomMotpart,
       forespørslerSomHovedpart,
@@ -32,16 +41,18 @@ function ReisekostnadProvider({ children }: PropsWithChildren) {
       }
     );
 
-    user = {
+    return {
       ...user,
       forespørslerSomMotpart: [...forespørslerSomMotpartMedAlder],
       forespørslerSomHovedpart: [...forespørslerSomHovedpartMedAlder],
       barnMinstFemtenÅr: [...barnMinstFemtenÅrMedAlder],
       motparterMedFellesBarnUnderFemtenÅr: motparterMedFellesBarnUnderFemtenÅrMedAlder,
     };
+  }
 
-    setUserInformation(user);
-  };
+  function updateUserInformation(user: IBrukerinformasjon): void {
+    setUserInformation(mapToUiData(user));
+  }
 
   return (
     <ReisekostnadContext.Provider

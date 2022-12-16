@@ -1,22 +1,23 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import { SWRConfig } from "swr";
-import { ReisekostnadProvider } from "../../context/reisekostnadContext";
 import Home from "../../pages";
-import { fetcher } from "../../utils/apiUtils";
 import {
   KVINNE_MED_FORESPORSEL,
   KVINNE_UTEN_BARN,
   MANN_UTEN_FORESPORSEL,
-} from "../mockdata/brukerinformasjon";
+} from "../mock/brukerinformasjon";
 import { fetchBrukerinformation } from "../utils/api.utils";
 import { getCreateForesporselButton, getOverviewCardById, getSpinner } from "../utils/index.utils";
-import { RouterContext } from "next/dist/shared/lib/router-context";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { createMockRouter } from "../utils/router.utils";
+import { MockContext } from "../mock/MockContext";
 
 describe("No data", () => {
   it("should render spinner when there is no data", () => {
-    render(mockAppContext());
+    render(
+      <MockContext>
+        <Home />
+      </MockContext>
+    );
 
     const spinner = getSpinner();
     expect(spinner).toBeInTheDocument();
@@ -26,7 +27,11 @@ describe("No data", () => {
 describe("Person without barn", () => {
   it("should render alert when person has no barn", async () => {
     fetchBrukerinformation(KVINNE_UTEN_BARN);
-    render(mockAppContext());
+    render(
+      <MockContext>
+        <Home />
+      </MockContext>
+    );
 
     await waitForElementToBeRemoved(() => getSpinner());
     const alert = await screen.findByTestId("alert.funnet_ingen_barn");
@@ -38,7 +43,11 @@ describe("Person without barn", () => {
 describe("Person without foresporsel", () => {
   beforeEach(async () => {
     fetchBrukerinformation(MANN_UTEN_FORESPORSEL);
-    render(mockAppContext());
+    render(
+      <MockContext>
+        <Home />
+      </MockContext>
+    );
 
     await waitForElementToBeRemoved(() => getSpinner());
   });
@@ -66,9 +75,9 @@ describe("Person with existing foresporsler", () => {
   beforeEach(async () => {
     fetchBrukerinformation(personMedForesporsler);
     render(
-      <RouterContext.Provider value={createMockRouter(router)}>
-        {mockAppContext()}
-      </RouterContext.Provider>
+      <MockContext router={router}>
+        <Home />
+      </MockContext>
     );
     await waitForElementToBeRemoved(() => getSpinner());
   });
@@ -107,13 +116,3 @@ describe("Person with existing foresporsler", () => {
     });
   });
 });
-
-function mockAppContext(): JSX.Element {
-  return (
-    <ReisekostnadProvider>
-      <SWRConfig value={{ fetcher, dedupingInterval: 0, provider: () => new Map() }}>
-        <Home />
-      </SWRConfig>
-    </ReisekostnadProvider>
-  );
-}

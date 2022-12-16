@@ -4,7 +4,7 @@ import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import { Alert, Button, ConfirmationPanel, Heading } from "@navikt/ds-react";
-import useForesporselApi from "../../../hooks/useForesporselApi";
+import { useForesporselApi } from "../../../hooks/useForesporselApi";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ import { useTranslation } from "next-i18next";
 import ForesporselKvittering from "../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
 
 export default function OpprettForesporsel() {
-  const [availableBarn, setAvailableBarn] = useState<IPerson[]>();
+  const [availableBarn, setAvailableBarn] = useState<IPerson[]>([]);
   const [allBarn, setAllBarn] = useState<IPerson[]>();
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
   const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
@@ -49,10 +49,6 @@ export default function OpprettForesporsel() {
     }
   }, [confirm]);
 
-  if (!availableBarn) {
-    return null;
-  }
-
   function onSelectBarn(selectedIdents: string[]) {
     if (showBarnError) {
       setShowBarnError(false);
@@ -71,6 +67,7 @@ export default function OpprettForesporsel() {
     setShowBarnError(!hasSelectedBarn);
 
     if (hasSelectedBarn && confirm) {
+      console.log("first");
       createForesporsel(selectedBarn);
     }
   }

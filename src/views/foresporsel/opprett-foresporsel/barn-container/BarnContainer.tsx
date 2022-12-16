@@ -34,7 +34,6 @@ export default function BarnContainer({
         Barn
       </Heading>
       <CheckboxGroup
-        data-testid="checkboxgroup.opprett.barn"
         legend={foresporselTranslate("checkbox.legend")}
         onChange={(val: string[]) => handleChange(val)}
         value={selectedBarn}
@@ -42,7 +41,11 @@ export default function BarnContainer({
       >
         {allBarn.map((barn, i) => {
           return (
-            <Checkbox key={i} value={barn.ident}>
+            <Checkbox
+              key={i}
+              value={barn.ident}
+              data-testid={`checkboxgroup.opprett.barn-${barn.ident}`}
+            >
               {getBarnInformationText(barn, translate("aar"))}
             </Checkbox>
           );
