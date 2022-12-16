@@ -52,6 +52,7 @@ export default function KvitteringMedTrekkTilbake({
             </div>
             <div>
               <Button
+                data-testid="button.trekk_foresporselen"
                 type="button"
                 variant="secondary"
                 onClick={() => setOpen((current) => !current)}
