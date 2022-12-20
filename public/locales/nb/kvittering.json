@@ -26,15 +26,15 @@
     }
   },
   "kanseller": {
-    "hovedpart": {
+    "den_som_kansellert": {
       "title": "Du har trukket / kansellert din forespørsel",
-      "content": "Du kan når som helst opprette en ny forespørsel."
+      "main_content": "Forespørsel om fordeling av reisekostnader er trukket / kansellert for:",
+      "sub_content": "Du kan når som helst opprette en ny forespørsel."
     },
-    "motpart": {
+    "den_andre_parten": {
       "title": "Forespørsel om samtykke er trukket tilbake",
-      "content": "Du kan når som helst opprette en forespørsel om fordeling av reisekostnader."
-    },
-    "for_den_som_kansellert": "Forespørsel om fordeling av reisekostnader er trukket / kansellert for:",
-    "for_den_andre_parten": "Forespørselen om samtykke til behandling av reisekostnader har blitt trukket tilbake fra den andre forelderen for:"
+      "main_content": "Forespørselen om samtykke til behandling av reisekostnader har blitt trukket tilbake fra den andre forelderen for:",
+      "sub_content": "Du kan når som helst opprette en forespørsel om fordeling av reisekostnader."
+    }
   }
 }

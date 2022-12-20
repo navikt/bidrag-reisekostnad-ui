@@ -15,30 +15,50 @@ export default function KansellerKvittering({
   isHovedpart,
 }: IKansellertKvitteringProps) {
   const [title, setTitle] = useState<string>();
-  const [content1, setContent1] = useState<string>();
-  const [content2, setContent2] = useState<string>();
+  const [mainContent, setMainContent] = useState<string>();
+  const [subContent, setSubContent] = useState<string>();
 
   const { t: kvitteringTranslate } = useTranslation("kvittering");
 
   useEffect(() => {
     //trukket tilbake av hovedpart
     if (isHovedpart) {
-      setTitle(kvitteringTranslate("kanseller.motpart.title") as unknown as string);
-      setContent2(kvitteringTranslate("kanseller.motpart.content") as unknown as string);
       if (deaktivertAv === Deaktivator.HOVEDPART) {
-        setContent1(kvitteringTranslate("kanseller.for_den_som_kansellert") as unknown as string);
+        setTitle(kvitteringTranslate("kanseller.den_som_kansellert.title") as unknown as string);
+        setMainContent(
+          kvitteringTranslate("kanseller.den_som_kansellert.main_content") as unknown as string
+        );
+        setSubContent(
+          kvitteringTranslate("kanseller.den_som_kansellert.sub_content") as unknown as string
+        );
       } else {
-        setContent1(kvitteringTranslate("kanseller.for_den_andre_parten") as unknown as string);
+        setTitle(kvitteringTranslate("kanseller.den_andre_parten.title") as unknown as string);
+        setMainContent(
+          kvitteringTranslate("kanseller.den_andre_parten.main_content") as unknown as string
+        );
+        setSubContent(
+          kvitteringTranslate("kanseller.den_andre_parten.sub_content") as unknown as string
+        );
       }
     }
     //ikke samtykke av motpart
     if (!isHovedpart) {
-      setTitle(kvitteringTranslate("kanseller.hovedpart.title") as unknown as string);
-      setContent2(kvitteringTranslate("kanseller.hovedpart.content") as unknown as string);
       if (deaktivertAv === Deaktivator.MOTPART) {
-        setContent1(kvitteringTranslate("kanseller.motpart.title") as unknown as string);
+        setTitle(kvitteringTranslate("kanseller.den_som_kansellert.title") as unknown as string);
+        setMainContent(
+          kvitteringTranslate("kanseller.den_som_kansellert.main_content") as unknown as string
+        );
+        setSubContent(
+          kvitteringTranslate("kanseller.den_som_kansellert.sub_content") as unknown as string
+        );
       } else {
-        setContent1(kvitteringTranslate("kanseller.for_den_andre_parten") as unknown as string);
+        setTitle(kvitteringTranslate("kanseller.den_andre_parten.title") as unknown as string);
+        setMainContent(
+          kvitteringTranslate("kanseller.den_andre_parten.main_content") as unknown as string
+        );
+        setSubContent(
+          kvitteringTranslate("kanseller.den_andre_parten.sub_content") as unknown as string
+        );
       }
     }
   }, []);
@@ -50,7 +70,7 @@ export default function KansellerKvittering({
   return (
     <ConfirmationLayout title={title}>
       <div className="flex flex-col">
-        <p>{content1}</p>
+        <p>{mainContent}</p>
         <ul className="pl-3">
           {barnInformation.map((information, index) => {
             return (
@@ -60,7 +80,7 @@ export default function KansellerKvittering({
             );
           })}
         </ul>
-        <p>{content2}</p>
+        <p>{subContent}</p>
       </div>
     </ConfirmationLayout>
   );
