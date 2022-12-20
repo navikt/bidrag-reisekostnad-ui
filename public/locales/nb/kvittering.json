@@ -7,7 +7,7 @@
   },
   "samtykke": {
     "title": "Vi har mottatt svar fra deg",
-    "description": "<p>Vi har mottatt et samtykke fra deg i forbindelse med fordeling av reisekostnader. Saken har automatisk blitt sendt videre til behandling.</p><p>En saksbehandler tar kontakt med deg, for avklaringer som trengs i saken.</p>"
+    "description": "<p>Vi har mottatt et samtykke fra deg i forbindelse med fordeling av reisekostnader. Saken har automatisk blitt sendt videre til behandling.</p><p>En saksbehandler tar kontakt med deg, for avklaringer og dokumentasjon som trengs i saken.</p>"
   },
   "foresporsel": {
     "title": "Vi har mottatt forespørselen din",
