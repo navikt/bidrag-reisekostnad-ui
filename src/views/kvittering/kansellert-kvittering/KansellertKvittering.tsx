@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 import { Deaktivator } from "../../../enum/deaktivator";
@@ -13,17 +14,38 @@ export default function KansellerKvittering({
   deaktivertAv,
   isHovedpart,
 }: IKansellertKvitteringProps) {
+  const [title, setTitle] = useState<string>();
+  const [content1, setContent1] = useState<string>();
+  const [content2, setContent2] = useState<string>();
+
   const { t: kvitteringTranslate } = useTranslation("kvittering");
-  const ikkeSamtykkeAvMotpart = deaktivertAv === Deaktivator.MOTPART && !isHovedpart;
-  const title = ikkeSamtykkeAvMotpart
-    ? kvitteringTranslate("kanseller.hovedpart.title")
-    : kvitteringTranslate("kanseller.motpart.title");
-  const content1 = ikkeSamtykkeAvMotpart
-    ? kvitteringTranslate("kanseller.hovedpart.content_1")
-    : kvitteringTranslate("kanseller.motpart.content_1");
-  const content2 = ikkeSamtykkeAvMotpart
-    ? kvitteringTranslate("kanseller.hovedpart.content_2")
-    : kvitteringTranslate("kanseller.motpart.content_2");
+
+  useEffect(() => {
+    //trukket tilbake av hovedpart
+    if (isHovedpart) {
+      setTitle(kvitteringTranslate("kanseller.motpart.title") as unknown as string);
+      setContent2(kvitteringTranslate("kanseller.motpart.content") as unknown as string);
+      if (deaktivertAv === Deaktivator.HOVEDPART) {
+        setContent1(kvitteringTranslate("kanseller.for_den_som_kansellert") as unknown as string);
+      } else {
+        setContent1(kvitteringTranslate("kanseller.for_den_andre_parten") as unknown as string);
+      }
+    }
+    //ikke samtykke av motpart
+    if (!isHovedpart) {
+      setTitle(kvitteringTranslate("kanseller.hovedpart.title") as unknown as string);
+      setContent2(kvitteringTranslate("kanseller.hovedpart.content") as unknown as string);
+      if (deaktivertAv === Deaktivator.MOTPART) {
+        setContent1(kvitteringTranslate("kanseller.motpart.title") as unknown as string);
+      } else {
+        setContent1(kvitteringTranslate("kanseller.for_den_andre_parten") as unknown as string);
+      }
+    }
+  }, []);
+
+  if (!title) {
+    return null;
+  }
 
   return (
     <ConfirmationLayout title={title}>

@@ -17,8 +17,6 @@
   "foresporsel": {
     "title": "Vi har mottatt forespørselen din",
     "description": "Du har sendt en forespørsel om fordeling av reisekostnader {{date}}.",
-    "automatisk_til_nav": "Forerspørsel for <strong>{{barnInfo}}</strong> går til NAV automatisk og trenger ikke signering fra motparten",
-    "trenger_samtykke": "Forerspørsel for <strong>{{barnInfo}}</strong> trenger å samtykkes slik at NAV skal behandle den videre",
     "content": {
       "title": "Hva skjer videre?",
       "subtitle_1": "For barn under 15 år",
@@ -30,13 +28,13 @@
   "kanseller": {
     "hovedpart": {
       "title": "Du har trukket / kansellert din forespørsel",
-      "content_1": "Forespørsel om fordeling av reisekostnader er trukket / kansellert for:",
-      "content_2": "Du kan når som helst opprette en ny forespørsel."
+      "content": "Du kan når som helst opprette en ny forespørsel."
     },
     "motpart": {
       "title": "Forespørsel om samtykke er trukket tilbake",
-      "content_1": "Forespørselen om samtykke til behandling av reisekostnader har blitt trukket tilbake fra den andre forelderen for:",
-      "content_2": "Du kan når som helst opprette en forespørsel om fordeling av reisekostnader."
-    }
+      "content": "Du kan når som helst opprette en forespørsel om fordeling av reisekostnader."
+    },
+    "for_den_som_kansellert": "Forespørsel om fordeling av reisekostnader er trukket / kansellert for:",
+    "for_den_andre_parten": "Forespørselen om samtykke til behandling av reisekostnader har blitt trukket tilbake fra den andre forelderen for:"
   }
 }
