@@ -99,10 +99,7 @@ export default function ForesporselId() {
       )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
-        <SamtykkeKvittering
-          barnInformation={barnInformation}
-          deaktivertAv={foresporsel.deaktivertAv}
-        />
+        <SamtykkeKvittering />
       )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
