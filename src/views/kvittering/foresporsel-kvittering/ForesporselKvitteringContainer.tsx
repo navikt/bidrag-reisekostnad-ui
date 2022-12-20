@@ -46,7 +46,7 @@ export default function ForesporselKvittering({ barn, sentDate }: IForesporselKv
           </Heading>
           <strong>{kvitteringTranslate("foresporsel.content.subtitle_1")}</strong>
           <div>{parse(kvitteringTranslate("foresporsel.content.body_1"))}</div>
-          <strong>{kvitteringTranslate("foresporsel.content.subtitle_1")}</strong>
+          <strong>{kvitteringTranslate("foresporsel.content.subtitle_2")}</strong>
           <div>{parse(kvitteringTranslate("foresporsel.content.body_2"))}</div>
         </div>
       </div>
