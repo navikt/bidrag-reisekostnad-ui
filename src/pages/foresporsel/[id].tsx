@@ -94,6 +94,7 @@ export default function ForesporselId() {
         <KansellerKvittering
           barnInformation={barnInformation}
           deaktivertAv={foresporsel.deaktivertAv}
+          isHovedpart={isHovedpart}
         />
       )}
 

@@ -5,21 +5,23 @@ import { Deaktivator } from "../../../enum/deaktivator";
 interface IKansellertKvitteringProps {
   barnInformation: string[];
   deaktivertAv: Deaktivator;
+  isHovedpart: boolean;
 }
 
 export default function KansellerKvittering({
   barnInformation,
   deaktivertAv,
+  isHovedpart,
 }: IKansellertKvitteringProps) {
   const { t: kvitteringTranslate } = useTranslation("kvittering");
-  const deaktivertAvHovedPart = deaktivertAv === Deaktivator.HOVEDPART;
-  const title = deaktivertAvHovedPart
+  const ikkeSamtykkeAvMotpart = deaktivertAv === Deaktivator.MOTPART && !isHovedpart;
+  const title = ikkeSamtykkeAvMotpart
     ? kvitteringTranslate("kanseller.hovedpart.title")
     : kvitteringTranslate("kanseller.motpart.title");
-  const content1 = deaktivertAvHovedPart
+  const content1 = ikkeSamtykkeAvMotpart
     ? kvitteringTranslate("kanseller.hovedpart.content_1")
     : kvitteringTranslate("kanseller.motpart.content_1");
-  const content2 = deaktivertAvHovedPart
+  const content2 = ikkeSamtykkeAvMotpart
     ? kvitteringTranslate("kanseller.hovedpart.content_2")
     : kvitteringTranslate("kanseller.motpart.content_2");
 
