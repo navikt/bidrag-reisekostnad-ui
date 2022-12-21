@@ -1,4 +1,4 @@
-import { IPerson } from "../types/foresporsel";
+import { IPerson } from "../types/person";
 import { formatDate } from "./dateUtils";
 
 export function getBarnInformationText(person: IPerson, year: string): string {

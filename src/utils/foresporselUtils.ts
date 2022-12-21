@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ForesporselStatus, getStatusKey } from "../enum/foresporsel-status";
-import { IForesporsel, IPerson } from "../types/foresporsel";
+import { IForesporsel } from "../types/foresporsel";
+import { IPerson } from "../types/person";
 import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
 import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./personUtils";
 

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import { Alert, Button, ConfirmationPanel, Heading } from "@navikt/ds-react";
@@ -15,6 +14,7 @@ import { Left } from "@navikt/ds-icons";
 import Collapse from "../../../components/collapse/Collapse";
 import { useTranslation } from "next-i18next";
 import ForesporselKvittering from "../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
+import { IPerson } from "../../../types/person";
 
 export default function OpprettForesporsel() {
   const [availableBarn, setAvailableBarn] = useState<IPerson[]>([]);

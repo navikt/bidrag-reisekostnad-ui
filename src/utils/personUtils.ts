@@ -1,5 +1,6 @@
-import { ACTIVE_STATUS, ForesporselStatus } from "../enum/foresporsel-status";
-import { IBrukerinformasjon, IPerson } from "../types/foresporsel";
+import { ForesporselStatus } from "../enum/foresporsel-status";
+import { IBrukerinformasjon } from "../types/foresporsel";
+import { IPerson } from "../types/person";
 import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
 
 export function getPersonOver15YearsOld(person: IPerson[]): IPerson[] {
