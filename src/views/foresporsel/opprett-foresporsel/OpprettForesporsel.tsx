@@ -4,7 +4,7 @@ import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import { Alert, Button, ConfirmationPanel, Heading } from "@navikt/ds-react";
-import useForesporselApi from "../../../hooks/useForesporselApi";
+import { useForesporselApi } from "../../../hooks/useForesporselApi";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ import { useTranslation } from "next-i18next";
 import ForesporselKvittering from "../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
 
 export default function OpprettForesporsel() {
-  const [availableBarn, setAvailableBarn] = useState<IPerson[]>();
+  const [availableBarn, setAvailableBarn] = useState<IPerson[]>([]);
   const [allBarn, setAllBarn] = useState<IPerson[]>();
   const [selectedBarn, setSelectedBarn] = useState<string[]>([]);
   const [foundPersonOver15, setFoundPersonOver15] = useState<boolean>(false);
@@ -48,10 +48,6 @@ export default function OpprettForesporsel() {
       setShowConfirmError(false);
     }
   }, [confirm]);
-
-  if (!availableBarn) {
-    return null;
-  }
 
   function onSelectBarn(selectedIdents: string[]) {
     if (showBarnError) {
@@ -128,6 +124,7 @@ export default function OpprettForesporsel() {
                 })}
               />
               <ConfirmationPanel
+                data-testid="confirmationpanel.opprett.maa.samtykke"
                 checked={confirm}
                 label={foresporselTranslate("confirm")}
                 onChange={() => setConfirm((x) => !x)}
@@ -135,7 +132,7 @@ export default function OpprettForesporsel() {
                 error={showConfirmError && translate("errors.maa_samtykke")}
               ></ConfirmationPanel>
               <div className="flex gap-5">
-                <Button onClick={onSubmit} loading={submitting}>
+                <Button data-testid="button.send_inn" onClick={onSubmit} loading={submitting}>
                   {translate("button.send_inn")}
                 </Button>
                 <Button

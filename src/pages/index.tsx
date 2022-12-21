@@ -20,7 +20,9 @@ export default function Home() {
 
   const [hasNoBarn, setHasNoBarn] = useState<boolean>(false);
 
-  useEffect(generateAndStoreCorrelationIdAsCookie, []);
+  useEffect(() => {
+    generateAndStoreCorrelationIdAsCookie();
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -40,7 +42,9 @@ export default function Home() {
     return (
       <>
         <PageMeta title={oversiktTranslate("page_title")} />
-        <Alert variant="info">{parse(translate("alert.funnet_ingen_barn"))}</Alert>
+        <Alert data-testid="alert.funnet_ingen_barn" variant="info">
+          {parse(translate("alert.funnet_ingen_barn"))}
+        </Alert>
       </>
     );
   }

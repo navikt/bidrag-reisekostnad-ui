@@ -23,7 +23,12 @@ export default function ConfirmationLayout({ title, children }: IConfirmationLay
           <div className="w-full flex">{children}</div>
         </div>
         <div className="grid gap-2">
-          <Link href="/" className="no-underline flex gap-2 items-center hover:underline" passHref>
+          <Link
+            href="/"
+            className="no-underline flex gap-2 items-center hover:underline"
+            passHref
+            data-testid="button.til_oversikten"
+          >
             {translate("button.til_oversikten")}
             <Right />
           </Link>

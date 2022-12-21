@@ -41,7 +41,11 @@ export default function BarnContainer({
       >
         {allBarn.map((barn, i) => {
           return (
-            <Checkbox key={i} value={barn.ident}>
+            <Checkbox
+              key={i}
+              value={barn.ident}
+              data-testid={`checkboxgroup.opprett.barn-${barn.ident}`}
+            >
               {getBarnInformationText(barn, translate("aar"))}
             </Checkbox>
           );

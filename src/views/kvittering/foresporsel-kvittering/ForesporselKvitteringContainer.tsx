@@ -14,16 +14,14 @@ interface IForesporselKvitteringProps {
 }
 
 export default function ForesporselKvittering({ barn, sentDate }: IForesporselKvitteringProps) {
-  const [barnOver15, setBarnOver15] = useState<IPerson[]>();
-  const [barnUnder15, setBarnUnder15] = useState<IPerson[]>();
+  const [selectedBarn, setSelectedBarn] = useState<IPerson[]>();
   const { t: translate } = useTranslation();
   const { t: kvitteringTranslate } = useTranslation("kvittering");
 
   const year = translate("aar");
 
   useEffect(() => {
-    setBarnOver15(barn.filter((person) => person.alder >= 15));
-    setBarnUnder15(barn.filter((person) => person.alder < 15));
+    setSelectedBarn(barn);
   }, []);
 
   return (
@@ -36,36 +34,11 @@ export default function ForesporselKvittering({ barn, sentDate }: IForesporselKv
             </div>
             {kvitteringTranslate("foresporsel.description", { date: sentDate })}
           </span>
-          {barnOver15 && barnOver15.length > 0 && (
-            <ul className="list-none flex flex-col gap-3">
-              {barnOver15?.map((person, i) => {
-                return (
-                  <li key={i}>
-                    {parse(
-                      kvitteringTranslate("foresporsel.automatisk_til_nav", {
-                        barnInfo: getBarnInformationText(person, year),
-                      })
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-          {barnUnder15 && barnUnder15.length > 0 && (
-            <ul className="list-none flex flex-col gap-3">
-              {barnUnder15.map((person, i) => {
-                return (
-                  <li key={i}>
-                    {parse(
-                      kvitteringTranslate("foresporsel.trenger_samtykke", {
-                        barnInfo: getBarnInformationText(person, year),
-                      })
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          <ul className="flex flex-col gap-3">
+            {selectedBarn?.map((person, i) => {
+              return <li key={i}>{getBarnInformationText(person, year)}</li>;
+            })}
+          </ul>
         </div>
         <div>
           <Heading level="2" size="medium" spacing>
@@ -73,7 +46,7 @@ export default function ForesporselKvittering({ barn, sentDate }: IForesporselKv
           </Heading>
           <strong>{kvitteringTranslate("foresporsel.content.subtitle_1")}</strong>
           <div>{parse(kvitteringTranslate("foresporsel.content.body_1"))}</div>
-          <strong>{kvitteringTranslate("foresporsel.content.subtitle_1")}</strong>
+          <strong>{kvitteringTranslate("foresporsel.content.subtitle_2")}</strong>
           <div>{parse(kvitteringTranslate("foresporsel.content.body_2"))}</div>
         </div>
       </div>
