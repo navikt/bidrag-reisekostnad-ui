@@ -6,7 +6,7 @@ import { requestBody } from "../utils/apiUtils";
 import { INyForespørsel } from "../types/payload/foresporselPayload";
 import { useSWRConfig } from "swr";
 
-export default function useForesporselApi() {
+export function useForesporselApi() {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [failed, setFailed] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);

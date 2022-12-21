@@ -43,10 +43,12 @@ export default function Overview() {
           <GreetingCard name={userInformation.fornavn} gender={userInformation.kjønn} />
           <div>{parse(oversiktTranslate("description"))}</div>
           {showedForesporslerSomMotpart.length === 0 && forespørslerSomHovedpart.length == 0 && (
-            <Alert variant="info">{translate("alert.ingen_saker")}</Alert>
+            <Alert data-testid="alert.ingen_saker" variant="info">
+              {translate("alert.ingen_saker")}
+            </Alert>
           )}
           <div>
-            <Link href="/foresporsel">
+            <Link href="/foresporsel" data-testid="button.send_foresporsel_om_fordeling">
               <Button type="button">{translate("button.send_foresporsel_om_fordeling")}</Button>
             </Link>
           </div>

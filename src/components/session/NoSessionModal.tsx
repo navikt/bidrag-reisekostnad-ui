@@ -3,13 +3,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styles from "./NoSessionModal.module.css";
 import { WarningColored } from "@navikt/ds-icons";
-import useSWR from "swr";
-import { ISessionData } from "../../pages/api/auth/session";
 import { useCountdown } from "../../hooks/useCountdown";
+import { useSession } from "../../utils/sessionUtils";
 
 export function NoSessionModal() {
   const router = useRouter();
-  const { data: session, error: isError } = useSWR<ISessionData>("/api/auth/session");
+  const { session, isError } = useSession();
   const [modalOpen, setModalOpen] = useState(false);
 
   const isLoading = !isError && !session;

@@ -15,6 +15,7 @@ import { useTranslation } from "next-i18next";
 import { findForesporselById } from "../../utils/foresporselUtils";
 import ForesporselKvittering from "../../views/kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
 import KansellerKvittering from "../../views/kvittering/kansellert-kvittering/KansellertKvittering";
+import ErrorPage from "next/error";
 
 export default function ForesporselId() {
   const router = useRouter();
@@ -55,8 +56,16 @@ export default function ForesporselId() {
     }
   }, [foresporselId, userInformation]);
 
-  if (!userInformation || !foresporselId || !foresporsel) {
+  if (!userInformation || !foresporselId) {
     return <Spinner />;
+  }
+
+  if (userInformation && foresporselId && !foresporsel) {
+    return <ErrorPage statusCode={404} />;
+  }
+
+  if (!foresporsel) {
+    return null;
   }
 
   const barnInformation = foresporsel.barn.map((person) => {
@@ -85,14 +94,12 @@ export default function ForesporselId() {
         <KansellerKvittering
           barnInformation={barnInformation}
           deaktivertAv={foresporsel.deaktivertAv}
+          isHovedpart={isHovedpart}
         />
       )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
-        <SamtykkeKvittering
-          barnInformation={barnInformation}
-          deaktivertAv={foresporsel.deaktivertAv}
-        />
+        <SamtykkeKvittering />
       )}
 
       {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (

@@ -2,7 +2,7 @@ import { Heading, ConfirmationPanel, Button, Alert, RadioGroup, Radio } from "@n
 import Link from "next/link";
 import { useState } from "react";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
-import useForesporselApi from "../../../hooks/useForesporselApi";
+import { useForesporselApi } from "../../../hooks/useForesporselApi";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
 

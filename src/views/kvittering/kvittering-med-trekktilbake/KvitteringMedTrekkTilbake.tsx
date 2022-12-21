@@ -2,7 +2,7 @@ import { Button } from "@navikt/ds-react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
 import StatusBar from "../../../components/status-bar/StatusBar";
 import { ForesporselStatus } from "../../../enum/foresporsel-status";
-import useForesporselApi from "../../../hooks/useForesporselApi";
+import { useForesporselApi } from "../../../hooks/useForesporselApi";
 import { formatDate } from "../../../utils/dateUtils";
 import { useState } from "react";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
@@ -52,6 +52,7 @@ export default function KvitteringMedTrekkTilbake({
             </div>
             <div>
               <Button
+                data-testid="button.trekk_foresporselen"
                 type="button"
                 variant="secondary"
                 onClick={() => setOpen((current) => !current)}
