@@ -1,3 +1,4 @@
+import { ACTIVE_STATUS, ForesporselStatus } from "../enum/foresporsel-status";
 import { IBrukerinformasjon, IPerson } from "../types/foresporsel";
 import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
 
@@ -45,19 +46,17 @@ export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformas
   const allBarn = [...barnMinstFemtenÅr, ...fellesBarnUnder15Aar];
 
   const barnIForespørslerSomHovedpart = forespørslerSomHovedpart
-    .filter((foresporspel) => foresporspel.deaktivert === null)
+    .filter((foresporspel) => foresporspel.status === ForesporselStatus.KANSELLERT)
     .flatMap((foresporsel) => foresporsel.barn);
   const barnIForespørslerSomMotpart = forespørslerSomMotpart
-    .filter((foresporspel) => foresporspel.deaktivert === null)
+    .filter((foresporspel) => foresporspel.status === ForesporselStatus.KANSELLERT)
     .flatMap((foresporsel) => foresporsel.barn);
-
   const allBarnIdenterIForesporsler = [
     ...barnIForespørslerSomHovedpart,
     ...barnIForespørslerSomMotpart,
   ].map((i) => i.ident);
 
   const result = [] as IPerson[];
-
   allBarn.forEach((barn) => {
     if (!allBarnIdenterIForesporsler.includes(barn.ident)) {
       result.push(barn);

@@ -23,3 +23,9 @@ export function getStatusKey(status: ForesporselStatus): statusKey {
       return "KANSELLERT";
   }
 }
+
+export const ACTIVE_STATUS: ForesporselStatus[] = [
+  ForesporselStatus.UNDER_BEHANDLING,
+  ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG,
+  ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN,
+];
