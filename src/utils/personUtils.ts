@@ -47,10 +47,10 @@ export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformas
   const allBarn = [...barnMinstFemtenÅr, ...fellesBarnUnder15Aar];
 
   const barnIForespørslerSomHovedpart = forespørslerSomHovedpart
-    .filter((foresporspel) => foresporspel.status === ForesporselStatus.KANSELLERT)
+    .filter((foresporspel) => foresporspel.status !== ForesporselStatus.KANSELLERT)
     .flatMap((foresporsel) => foresporsel.barn);
   const barnIForespørslerSomMotpart = forespørslerSomMotpart
-    .filter((foresporspel) => foresporspel.status === ForesporselStatus.KANSELLERT)
+    .filter((foresporspel) => foresporspel.status !== ForesporselStatus.KANSELLERT)
     .flatMap((foresporsel) => foresporsel.barn);
   const allBarnIdenterIForesporsler = [
     ...barnIForespørslerSomHovedpart,
