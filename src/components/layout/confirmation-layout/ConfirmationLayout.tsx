@@ -16,7 +16,7 @@ export default function ConfirmationLayout({ title, children }: IConfirmationLay
     <>
       <PageMeta title={title} />
       <div className="w-full grid gap-10">
-        <div className="flex flex-col gap-14 items-center">
+        <div className="flex flex-col gap-10 items-center">
           <Heading level="1" size="xlarge">
             {title}
           </Heading>

@@ -71,7 +71,7 @@ export default function KansellerKvittering({
     <ConfirmationLayout title={title}>
       <div className="flex flex-col">
         <p>{mainContent}</p>
-        <ul className="pl-3">
+        <ul className="pl-3 m-0">
           {barnInformation.map((information, index) => {
             return (
               <li key={index}>

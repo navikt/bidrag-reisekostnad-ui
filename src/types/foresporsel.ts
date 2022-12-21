@@ -31,6 +31,7 @@ export interface IForesporsel extends IForesporselUi {
 interface IForesporselUi {
   erAlleOver15: boolean;
   status: ForesporselStatus;
+  erHovedpart: boolean;
 }
 
 export interface IPerson extends IPersonAge {
@@ -48,9 +49,4 @@ export interface IPersonAge {
 interface IMotpart {
   motpart: IPerson;
   fellesBarnUnder15År: IPerson[];
-}
-
-export interface IActiveInactiveForesporsel {
-  active: IForesporsel[];
-  inactive: IForesporsel[];
 }

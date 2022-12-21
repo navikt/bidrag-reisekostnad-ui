@@ -22,8 +22,6 @@ export default function ForesporselId() {
   const foresporselId = router.query.id as string;
   const [foresporsel, setForesporsel] = useState<IForesporsel>();
 
-  const [isHovedpart, setIsHovedpart] = useState<boolean>(false);
-
   const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
   const { userInformation, updateUserInformation } = useReisekostnad();
   const { t: translate } = useTranslation();
@@ -36,23 +34,11 @@ export default function ForesporselId() {
 
   useEffect(() => {
     if (foresporselId && userInformation) {
-      const foresporselSomHovedpart = findForesporselById(
-        userInformation.forespørslerSomHovedpart,
+      const foundForesporsel = findForesporselById(
+        [...userInformation.forespørslerSomHovedpart, ...userInformation.forespørslerSomMotpart],
         foresporselId
       );
-
-      const hovedpart = userInformation.fornavn === foresporselSomHovedpart?.hovedpart.fornavn;
-      setIsHovedpart(hovedpart);
-
-      if (hovedpart) {
-        setForesporsel(foresporselSomHovedpart);
-      } else {
-        const foresporselSomMotpart = findForesporselById(
-          userInformation.forespørslerSomMotpart,
-          foresporselId
-        );
-        setForesporsel(foresporselSomMotpart);
-      }
+      setForesporsel(foundForesporsel);
     }
   }, [foresporselId, userInformation]);
 
@@ -71,39 +57,35 @@ export default function ForesporselId() {
   const barnInformation = foresporsel.barn.map((person) => {
     return getBarnInformationText(person, translate("aar"));
   });
+  const { erHovedpart, status, opprettet, id, deaktivertAv, barn } = foresporsel;
 
   return (
     <>
-      {isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
+      {erHovedpart && status === ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN && (
         <KvitteringMedTrekkTilbake
           barnInformation={barnInformation}
-          sentDate={foresporsel.opprettet}
-          status={foresporsel.status}
-          foresporselId={foresporsel.id}
+          sentDate={opprettet}
+          status={status}
+          foresporselId={id}
         />
       )}
 
-      {isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
-        <ForesporselKvittering
-          barn={foresporsel.barn}
-          sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
-        />
+      {erHovedpart && status === ForesporselStatus.UNDER_BEHANDLING && (
+        <ForesporselKvittering barn={barn} sentDate={opprettet ? formatDate(opprettet) : ""} />
       )}
 
-      {foresporsel.status === ForesporselStatus.KANSELLERT && foresporsel.deaktivertAv && (
+      {status === ForesporselStatus.KANSELLERT && deaktivertAv && (
         <KansellerKvittering
           barnInformation={barnInformation}
-          deaktivertAv={foresporsel.deaktivertAv}
-          isHovedpart={isHovedpart}
+          deaktivertAv={deaktivertAv}
+          isHovedpart={erHovedpart}
         />
       )}
 
-      {!isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
-        <SamtykkeKvittering />
-      )}
+      {!erHovedpart && status === ForesporselStatus.UNDER_BEHANDLING && <SamtykkeKvittering />}
 
-      {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
-        <SamtykkeContainer foresporselId={foresporsel.id} barnInformation={barnInformation} />
+      {!erHovedpart && status === ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG && (
+        <SamtykkeContainer foresporselId={id} barnInformation={barnInformation} />
       )}
     </>
   );

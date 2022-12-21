@@ -10,7 +10,8 @@
     "nei": "Nei"
   },
   "status": {
-    "venter_paa_samtykke": "Venter på samtykke",
+    "venter_paa_samtykke_fra_deg": "Venter på samtykke fra deg",
+    "venter_paa_samtykke_fra_den_andre_forelderen": "Venter på samtykke fra den andre forelderen",
     "kansellert": "Kansellert",
     "under_behandling": "Under behandling"
   },

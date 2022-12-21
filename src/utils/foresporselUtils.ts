@@ -1,12 +1,14 @@
-import { ForesporselStatus } from "../enum/foresporsel-status";
-import { IActiveInactiveForesporsel, IForesporsel, IPerson } from "../types/foresporsel";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ForesporselStatus, getStatusKey } from "../enum/foresporsel-status";
+import { IForesporsel, IPerson } from "../types/foresporsel";
 import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
 import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./personUtils";
 
 export function mapToForesporselWithStatusAndPersonsAge(
-  foresporsel: IForesporsel[]
+  foresporsler: IForesporsel[],
+  erHovedpart: boolean
 ): IForesporsel[] {
-  const nyForesporsel = foresporsel.map((foresporsel) => ({
+  const nyForesporsel = foresporsler.map((foresporsel) => ({
     ...foresporsel,
     barn: foresporsel.barn.map((person) => ({
       ...person,
@@ -15,19 +17,22 @@ export function mapToForesporselWithStatusAndPersonsAge(
       er15Om30Dager: is15YearsOldIn30Days(person.fødselsdato),
     })),
     erAlleOver15: isEveryoneOver15YearsOld(foresporsel.barn as IPerson[]),
-    status: getStatus(foresporsel),
+    status: getStatus(foresporsel, erHovedpart),
+    erHovedpart,
   })) as unknown as IForesporsel[];
 
   return sortByStatus(nyForesporsel);
 }
 
-function getStatus(foresporsel: IForesporsel): ForesporselStatus {
+function getStatus(foresporsel: IForesporsel, erHovedpart: boolean): ForesporselStatus {
   const { kreverSamtykke, samtykket, journalført, deaktivert } = foresporsel;
 
   if (journalført !== null) {
     return ForesporselStatus.UNDER_BEHANDLING;
   } else if (kreverSamtykke && samtykket === null && journalført === null && deaktivert === null) {
-    return ForesporselStatus.VENTER_PAA_SAMTYKKE;
+    return erHovedpart
+      ? ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN
+      : ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG;
   } else if (deaktivert !== null) {
     return ForesporselStatus.KANSELLERT;
   }
@@ -35,8 +40,29 @@ function getStatus(foresporsel: IForesporsel): ForesporselStatus {
   return ForesporselStatus.UNDER_BEHANDLING;
 }
 
-function sortByStatus(foresporsler: IForesporsel[]) {
-  return foresporsler.sort((a, b) => b.status.toString().localeCompare(a.status.toString()));
+function sortById(foresporsler?: IForesporsel[]): IForesporsel[] | undefined {
+  return foresporsler ? foresporsler.sort((a, b) => b.id - a.id) : undefined;
+}
+
+function sortByStatus(foresporsler: IForesporsel[]): IForesporsel[] {
+  const groupByStatus = foresporsler.reduce((group, foresporsel) => {
+    const { status } = foresporsel;
+    const key = getStatusKey(status);
+    group[key] = group[key] ?? [];
+    group[key]?.push(foresporsel);
+    return group;
+  }, {} as any);
+
+  const mergeAllStatus = [
+    sortById(groupByStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN),
+    sortById(groupByStatus.VENTER_PAA_SAMTYKKE_FRA_DEG),
+    sortById(groupByStatus.UNDER_BEHANDLING),
+    sortById(groupByStatus.KANSELLERT),
+  ]
+    .flat()
+    .filter((i) => i !== undefined);
+
+  return mergeAllStatus as IForesporsel[];
 }
 
 export function findForesporselById(
@@ -52,35 +78,4 @@ export function findForesporselById(
 export function isAutomaticSubmission(foresporsler: IForesporsel): boolean {
   const { kreverSamtykke, samtykket, journalført } = foresporsler;
   return kreverSamtykke && samtykket === null && journalført !== null;
-}
-
-function getActiveAndInactiveForesporsel(foresporsler: IForesporsel[]): IActiveInactiveForesporsel {
-  return foresporsler.reduce(
-    (acc: IActiveInactiveForesporsel, cur: IForesporsel) => {
-      if (cur.status === ForesporselStatus.KANSELLERT) {
-        return { ...acc, active: [...acc.active, cur] };
-      } else {
-        return { ...acc, inactive: [...acc.inactive, cur] };
-      }
-    },
-    { inactive: [], active: [] }
-  );
-}
-
-export function removeForesporselWithDuplicatedBarn(foresporsler: IForesporsel[]): IForesporsel[] {
-  const { inactive, active } = getActiveAndInactiveForesporsel(foresporsler);
-
-  const inactiveIdents = inactive.flatMap((i) => i.barn).map((i) => i.ident);
-
-  const result = [...active] as IForesporsel[];
-
-  active.forEach((a, index) => {
-    a.barn.forEach((b) => {
-      if (inactiveIdents.includes(b.ident)) {
-        result.splice(index);
-      }
-    });
-  });
-
-  return result;
 }

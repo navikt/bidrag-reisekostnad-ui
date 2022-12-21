@@ -34,7 +34,14 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
             date: formatDate(samtykket),
           })
         );
-      case ForesporselStatus.VENTER_PAA_SAMTYKKE:
+      case ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG:
+        return (
+          samtykkefrist &&
+          translate("samtykkefrist", {
+            date: formatDate(samtykkefrist),
+          })
+        );
+      case ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN:
         return (
           samtykkefrist &&
           translate("samtykkefrist", {
