@@ -8,14 +8,43 @@ import { getBarnInformationText } from "../../../utils/stringUtils";
 import BarnOver15Alert from "../../alert/barn-over-15-alert/BarnOver15Alert";
 import StatusBar from "../../status-bar/StatusBar";
 import { useTranslation } from "next-i18next";
+import { ForesporselStatus } from "../../../enum/foresporsel-status";
 
 interface IOverviewCardProps {
   foresporsel: IForesporsel;
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { id, opprettet, barn, status, samtykkefrist } = foresporsel;
+  const { id, opprettet, barn, status, samtykkefrist, samtykket, deaktivert } = foresporsel;
   const { t: translate } = useTranslation();
+
+  function getDateToBeShowed() {
+    switch (status) {
+      case ForesporselStatus.KANSELLERT:
+        return (
+          deaktivert &&
+          translate("kansellert", {
+            date: formatDate(deaktivert),
+          })
+        );
+      case ForesporselStatus.UNDER_BEHANDLING:
+        return (
+          samtykket &&
+          translate("samtykket", {
+            date: formatDate(samtykket),
+          })
+        );
+      case ForesporselStatus.VENTER_PAA_SAMTYKKE:
+        return (
+          samtykkefrist &&
+          translate("samtykkefrist", {
+            date: formatDate(samtykkefrist),
+          })
+        );
+      default:
+        return "";
+    }
+  }
 
   return (
     <Link className="no-underline" href={`/foresporsel/${id}`} passHref>
@@ -38,14 +67,10 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                 })}
               </ul>
               <div className="grid justify-end whitespace-pre-wrap text-medium">
-                <span>{translate("sendt", { date: opprettet ? formatDate(opprettet) : "" })}</span>
-                {samtykkefrist && (
-                  <span>
-                    {translate("samtykkefrist", {
-                      date: formatDate(samtykkefrist),
-                    })}
-                  </span>
-                )}
+                <span>
+                  {translate("opprettet", { date: opprettet ? formatDate(opprettet) : "" })}
+                </span>
+                <span>{getDateToBeShowed()}</span>
               </div>
             </div>
           </LinkPanel.Description>

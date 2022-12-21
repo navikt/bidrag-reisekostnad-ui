@@ -44,7 +44,7 @@ export default function KvitteringMedTrekkTilbake({
                 })}
               </ul>
             </div>
-            <span>{translate("sendt", { date: sentDate ? formatDate(sentDate) : "" })}</span>
+            <span>{translate("opprettet", { date: sentDate ? formatDate(sentDate) : "" })}</span>
           </div>
           <div className="grid gap-6">
             <div>
