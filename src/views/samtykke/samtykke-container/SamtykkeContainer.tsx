@@ -76,7 +76,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
             legend={
               <>
                 {samtykkeTranslate("radio.legend")}
-                <ul className="list-none p-0 my-1">
+                <ul className="flex flex-col gap-1">
                   {barnInformation.map((information, index) => {
                     return (
                       <li key={index} className="font-bold">
