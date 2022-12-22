@@ -67,7 +67,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
           </LinkPanel.Title>
           <LinkPanel.Description className="text-gray-900">
             <div className="w-full grid grid-cols-2">
-              <ul className="grid gap-2 p-0 m-0">
+              <ul className="flex flex-col gap-2 p-0 m-0">
                 {barn.map((person, i) => {
                   return (
                     <li className="list-none" key={i}>
