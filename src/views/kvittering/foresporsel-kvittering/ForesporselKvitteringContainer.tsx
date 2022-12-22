@@ -3,7 +3,7 @@ import { Heading } from "@navikt/ds-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
-import { getBarnInformationText } from "../../../utils/stringUtils";
+import { getBarnInformationText } from "../../../utils/string.utils";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
 import { IPerson } from "../../../types/person";

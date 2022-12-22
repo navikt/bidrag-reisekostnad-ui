@@ -2,8 +2,8 @@
 import { ForesporselStatus, getStatusKey } from "../enum/foresporsel-status";
 import { IForesporsel } from "../types/foresporsel";
 import { IPerson } from "../types/person";
-import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
-import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./personUtils";
+import { calculateAge, is15YearsOldIn30Days } from "./date.utils";
+import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./person.utils";
 
 export function mapToForesporselWithStatusAndPersonsAge(
   foresporsler: IForesporsel[],

@@ -1,7 +1,7 @@
 import { ForesporselStatus } from "../enum/foresporsel-status";
-import { IBrukerinformasjon } from "../types/foresporsel";
+import { IBrukerinformasjon, IForesporsel } from "../types/foresporsel";
 import { IPerson } from "../types/person";
-import { calculateAge, is15YearsOldIn30Days } from "./dateUtils";
+import { calculateAge, is15YearsOldIn30Days } from "./date.utils";
 
 export function getPersonOver15YearsOld(person: IPerson[]): IPerson[] {
   return person.filter((i) => i.alder >= 15);
@@ -33,33 +33,27 @@ export function getAllBarn(userInformation: IBrukerinformasjon): IPerson[] {
 
   return [...barnMinstFemtenÅr, ...fellesBarnUnder15Aar];
 }
+
+function getBarnInActiveForesporsel(foresporsler: IForesporsel[]): IPerson[] {
+  return foresporsler
+    .filter((foresporspel) => foresporspel.status !== ForesporselStatus.KANSELLERT)
+    .flatMap((foresporsel) => foresporsel.barn);
+}
+
 export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformasjon): IPerson[] {
-  const {
-    barnMinstFemtenÅr,
-    motparterMedFellesBarnUnderFemtenÅr,
-    forespørslerSomHovedpart,
-    forespørslerSomMotpart,
-  } = userInformation;
+  const { forespørslerSomHovedpart, forespørslerSomMotpart } = userInformation;
+  const allBarn = getAllBarn(userInformation);
+  const barnInActiveForespørslerSomHovedpart = getBarnInActiveForesporsel(forespørslerSomHovedpart);
+  const barnInActiveForespørslerSomMotpart = getBarnInActiveForesporsel(forespørslerSomMotpart);
 
-  const fellesBarnUnder15Aar = motparterMedFellesBarnUnderFemtenÅr.flatMap(
-    (barn) => barn.fellesBarnUnder15År
-  );
-  const allBarn = [...barnMinstFemtenÅr, ...fellesBarnUnder15Aar];
-
-  const barnIForespørslerSomHovedpart = forespørslerSomHovedpart
-    .filter((foresporspel) => foresporspel.status !== ForesporselStatus.KANSELLERT)
-    .flatMap((foresporsel) => foresporsel.barn);
-  const barnIForespørslerSomMotpart = forespørslerSomMotpart
-    .filter((foresporspel) => foresporspel.status !== ForesporselStatus.KANSELLERT)
-    .flatMap((foresporsel) => foresporsel.barn);
-  const allBarnIdenterIForesporsler = [
-    ...barnIForespørslerSomHovedpart,
-    ...barnIForespørslerSomMotpart,
+  const allBarnInActiveForesporselIdenter = [
+    ...barnInActiveForespørslerSomHovedpart,
+    ...barnInActiveForespørslerSomMotpart,
   ].map((i) => i.ident);
 
   const result = [] as IPerson[];
   allBarn.forEach((barn) => {
-    if (!allBarnIdenterIForesporsler.includes(barn.ident)) {
+    if (!allBarnInActiveForesporselIdenter.includes(barn.ident)) {
       result.push(barn);
     }
   });

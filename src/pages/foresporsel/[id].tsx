@@ -3,20 +3,21 @@ import { useEffect, useState } from "react";
 import SamtykkeKvittering from "../../views/kvittering/samtykke-kvittering/SamtykkeKvittering";
 import SamtykkeContainer from "../../views/samtykke/samtykke-container/SamtykkeContainer";
 import { useRouter } from "next/router";
-import { getBarnInformationText } from "../../utils/stringUtils";
+import { getBarnInformationText } from "../../utils/string.utils";
 import { IBrukerinformasjon, IForesporsel } from "../../types/foresporsel";
 import useSWRImmutable from "swr/immutable";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 import { ForesporselStatus } from "../../enum/foresporsel-status";
 import KvitteringMedTrekkTilbake from "../../views/kvittering/kvittering-med-trekktilbake/KvitteringMedTrekkTilbake";
 import Spinner from "../../components/spinner/spinner/spinner";
-import { formatDate } from "../../utils/dateUtils";
+import { formatDate } from "../../utils/date.utils";
 import { useTranslation } from "next-i18next";
-import { findForesporselById } from "../../utils/foresporselUtils";
+import { findForesporselById } from "../../utils/foresporsel.utils";
 import ForesporselKvittering from "../../views/kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
 import ErrorPage from "next/error";
 import { Deaktivator } from "../../enum/deaktivator";
 import TrekkTilbakeKvittering from "../../views/kvittering/trekk-tilbake-kvittering/TrekkTilbakeKvittering";
+import { GetStaticPropsContext } from "next";
 
 export default function ForesporselId() {
   const router = useRouter();
@@ -101,10 +102,10 @@ export default function ForesporselId() {
   );
 }
 
-export async function getServerSideProps({ locale }: any) {
+export async function getServerSideProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "kvittering", "samtykke"])),
+      ...(await serverSideTranslations(locale ?? "nb", ["common", "kvittering", "samtykke"])),
     },
   };
 }

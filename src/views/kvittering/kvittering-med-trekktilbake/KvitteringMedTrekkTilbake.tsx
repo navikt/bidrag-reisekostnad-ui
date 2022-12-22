@@ -3,7 +3,7 @@ import ConfirmationLayout from "../../../components/layout/confirmation-layout/C
 import StatusBar from "../../../components/status-bar/StatusBar";
 import { ForesporselStatus } from "../../../enum/foresporsel-status";
 import { useForesporselApi } from "../../../hooks/useForesporselApi";
-import { formatDate } from "../../../utils/dateUtils";
+import { formatDate } from "../../../utils/date.utils";
 import { useState } from "react";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useTranslation } from "next-i18next";

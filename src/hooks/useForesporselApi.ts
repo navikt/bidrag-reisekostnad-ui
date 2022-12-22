@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ApiOperation } from "../enum/api";
 import { HTTPStatus } from "../enum/HttpStatus";
 
-import { requestBody } from "../utils/apiUtils";
+import { requestBody } from "../utils/api.utils";
 import { INyForespørsel } from "../types/payload/foresporselPayload";
 import { useSWRConfig } from "swr";
 

@@ -4,7 +4,7 @@ import "../styles/globals.css";
 import TokenInput from "../components/TokenInput";
 import { NoSessionModal } from "../components/session/NoSessionModal";
 import { SWRConfig } from "swr";
-import { fetcher } from "../utils/apiUtils";
+import { fetcher } from "../utils/api.utils";
 import { appWithTranslation } from "next-i18next";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "true") {

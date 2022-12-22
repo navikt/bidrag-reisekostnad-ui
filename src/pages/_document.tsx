@@ -32,7 +32,6 @@ export default class MyDocument extends Document<DecoratorComponents> {
       ...decoratorProps,
       language: language,
     }).catch((err) => {
-      console.error(err);
       const empty = () => <></>;
       return {
         Footer: empty,

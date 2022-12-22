@@ -5,12 +5,13 @@ import { useReisekostnad } from "../context/reisekostnadContext";
 import { IBrukerinformasjon } from "../types/foresporsel";
 import Spinner from "../components/spinner/spinner/spinner";
 import { generateAndStoreCorrelationIdAsCookie } from "../lib/logging/types";
-import { fetcher } from "../utils/apiUtils";
+import { fetcher } from "../utils/api.utils";
 import { Alert } from "@navikt/ds-react";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
 import { PageMeta } from "../components/page-meta/PageMeta";
 import useSWR from "swr";
+import { GetStaticPropsContext } from "next";
 
 export default function Home() {
   const { data } = useSWR<IBrukerinformasjon>("/api/brukerinformasjon", fetcher);
@@ -52,10 +53,10 @@ export default function Home() {
   return <Overview />;
 }
 
-export async function getStaticProps({ locale }: any) {
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "oversikt"])),
+      ...(await serverSideTranslations(locale ?? "nb", ["common", "oversikt"])),
     },
   };
 }

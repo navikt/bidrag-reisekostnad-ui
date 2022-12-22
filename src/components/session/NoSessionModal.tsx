@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./NoSessionModal.module.css";
 import { WarningColored } from "@navikt/ds-icons";
 import { useCountdown } from "../../hooks/useCountdown";
-import { useSession } from "../../utils/sessionUtils";
+import { useSession } from "../../utils/session.utils";
 
 export function NoSessionModal() {
   const router = useRouter();

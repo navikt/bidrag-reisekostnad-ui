@@ -1,7 +1,7 @@
 import React, { createContext, PropsWithChildren, useState, useContext, useEffect } from "react";
 import { IBrukerinformasjon } from "../types/foresporsel";
-import { mapToForesporselWithStatusAndPersonsAge } from "../utils/foresporselUtils";
-import { mapToPersonWithAge } from "../utils/personUtils";
+import { mapToForesporselWithStatusAndPersonsAge } from "../utils/foresporsel.utils";
+import { mapToPersonWithAge } from "../utils/person.utils";
 
 interface IReisekostnadContext {
   userInformation: IBrukerinformasjon | undefined;

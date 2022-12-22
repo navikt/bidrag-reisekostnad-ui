@@ -1,6 +1,6 @@
 import { screen, fireEvent, render, waitFor } from "@testing-library/react";
 import { IBrukerinformasjon } from "../../types/foresporsel";
-import { getAllBarn } from "../../utils/personUtils";
+import { getAllBarn } from "../../utils/person.utils";
 import OpprettForesporsel from "../../views/foresporsel/opprett-foresporsel/OpprettForesporsel";
 import { MANN_MED_ETT_BARN_OG_FORESPORSEL, MANN_UTEN_FORESPORSEL } from "../mock/brukerinformasjon";
 import { MockContext } from "../mock/MockContext";
