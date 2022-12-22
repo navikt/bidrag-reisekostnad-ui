@@ -13,10 +13,16 @@ export default function StatusBar({ status }: IStatusBar) {
     <>
       {(() => {
         switch (status) {
-          case ForesporselStatus.VENTER_PAA_SAMTYKKE:
+          case ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG:
             return (
               <Tag variant="warning" size="small" className="mt-3">
-                {translate("status.venter_paa_samtykke")}
+                {translate("status.venter_paa_samtykke_fra_deg")}
+              </Tag>
+            );
+          case ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN:
+            return (
+              <Tag variant="warning" size="small" className="mt-3">
+                {translate("status.venter_paa_samtykke_fra_den_andre_forelderen")}
               </Tag>
             );
           case ForesporselStatus.KANSELLERT:

@@ -1,9 +1,9 @@
 import { Alert } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
-import { IPerson } from "../../../types/foresporsel";
-import { getPersonOver15YearsOld } from "../../../utils/personUtils";
-import { getBarnInformationText } from "../../../utils/stringUtils";
+import { getPersonOver15YearsOld } from "../../../utils/person.utils";
+import { getBarnInformationText } from "../../../utils/string.utils";
 import { useTranslation } from "next-i18next";
+import { IPerson } from "../../../types/person";
 
 interface IBarnOver15AlertProps {
   barn: IPerson[];

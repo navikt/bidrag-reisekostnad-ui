@@ -3,10 +3,10 @@ import { Heading } from "@navikt/ds-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import ConfirmationLayout from "../../../components/layout/confirmation-layout/ConfirmationLayout";
-import { IPerson } from "../../../types/foresporsel";
-import { getBarnInformationText } from "../../../utils/stringUtils";
+import { getBarnInformationText } from "../../../utils/string.utils";
 import { useTranslation } from "next-i18next";
 import parse from "html-react-parser";
+import { IPerson } from "../../../types/person";
 
 interface IForesporselKvitteringProps {
   barn: IPerson[];
@@ -36,7 +36,11 @@ export default function ForesporselKvittering({ barn, sentDate }: IForesporselKv
           </span>
           <ul className="flex flex-col gap-3">
             {selectedBarn?.map((person, i) => {
-              return <li key={i}>{getBarnInformationText(person, year)}</li>;
+              return (
+                <li key={i} className="font-bold">
+                  {getBarnInformationText(person, year)}
+                </li>
+              );
             })}
           </ul>
         </div>

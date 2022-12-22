@@ -2,20 +2,56 @@ import { Next } from "@navikt/ds-icons";
 import { LinkPanel, Panel } from "@navikt/ds-react";
 import Link from "next/link";
 import { IForesporsel } from "../../../types/foresporsel";
-import { formatDate } from "../../../utils/dateUtils";
-import { isAutomaticSubmission } from "../../../utils/foresporselUtils";
-import { getBarnInformationText } from "../../../utils/stringUtils";
+import { formatDate } from "../../../utils/date.utils";
+import { isAutomaticSubmission } from "../../../utils/foresporsel.utils";
+import { getBarnInformationText } from "../../../utils/string.utils";
 import BarnOver15Alert from "../../alert/barn-over-15-alert/BarnOver15Alert";
 import StatusBar from "../../status-bar/StatusBar";
 import { useTranslation } from "next-i18next";
+import { ForesporselStatus } from "../../../enum/foresporsel-status";
 
 interface IOverviewCardProps {
   foresporsel: IForesporsel;
 }
 
 export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
-  const { id, opprettet, barn, status, samtykkefrist } = foresporsel;
+  const { id, opprettet, barn, status, samtykkefrist, samtykket, deaktivert } = foresporsel;
   const { t: translate } = useTranslation();
+
+  function getDateToBeShowed() {
+    switch (status) {
+      case ForesporselStatus.KANSELLERT:
+        return (
+          deaktivert &&
+          translate("kansellert", {
+            date: formatDate(deaktivert),
+          })
+        );
+      case ForesporselStatus.UNDER_BEHANDLING:
+        return (
+          samtykket &&
+          translate("samtykket", {
+            date: formatDate(samtykket),
+          })
+        );
+      case ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG:
+        return (
+          samtykkefrist &&
+          translate("samtykkefrist", {
+            date: formatDate(samtykkefrist),
+          })
+        );
+      case ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN:
+        return (
+          samtykkefrist &&
+          translate("samtykkefrist", {
+            date: formatDate(samtykkefrist),
+          })
+        );
+      default:
+        return "";
+    }
+  }
 
   return (
     <Link
@@ -31,7 +67,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
           </LinkPanel.Title>
           <LinkPanel.Description className="text-gray-900">
             <div className="w-full grid grid-cols-2">
-              <ul className="grid gap-2 p-0 m-0">
+              <ul className="flex flex-col gap-2 p-0 m-0">
                 {barn.map((person, i) => {
                   return (
                     <li className="list-none" key={i}>
@@ -43,14 +79,10 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
                 })}
               </ul>
               <div className="grid justify-end whitespace-pre-wrap text-medium">
-                <span>{translate("sendt", { date: opprettet ? formatDate(opprettet) : "" })}</span>
-                {samtykkefrist && (
-                  <span>
-                    {translate("samtykkefrist", {
-                      date: formatDate(samtykkefrist),
-                    })}
-                  </span>
-                )}
+                <span>
+                  {translate("opprettet", { date: opprettet ? formatDate(opprettet) : "" })}
+                </span>
+                <span>{getDateToBeShowed()}</span>
               </div>
             </div>
           </LinkPanel.Description>

@@ -4,7 +4,7 @@ import { PropsWithChildren } from "react";
 import { SWRConfig } from "swr";
 import { ReisekostnadProvider } from "../../context/reisekostnadContext";
 import { IBrukerinformasjon } from "../../types/foresporsel";
-import { fetcher } from "../../utils/apiUtils";
+import { fetcher } from "../../utils/api.utils";
 import { mockRouter } from "../utils/router.utils";
 
 interface IMockContextProps {

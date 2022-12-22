@@ -9,7 +9,7 @@ import {
 
 const decoratorProps: DecoratorProps = {
   // @ts-ignore
-  env: process.env.DEKORATOR_ENV ?? "dev",
+  env: process.env.DEKORATOR_ENV ?? "prod",
   chatbot: false,
   simple: false,
   context: "privatperson",
@@ -32,6 +32,7 @@ export default class MyDocument extends Document<DecoratorComponents> {
       ...decoratorProps,
       language: language,
     }).catch((err) => {
+      // eslint-disable-next-line no-console
       console.error(err);
       const empty = () => <></>;
       return {

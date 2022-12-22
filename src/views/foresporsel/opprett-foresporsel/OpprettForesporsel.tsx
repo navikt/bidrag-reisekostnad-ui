@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { IPerson } from "../../../types/foresporsel";
 import { useReisekostnad } from "../../../context/reisekostnadContext";
 import BarnContainer from "./barn-container/BarnContainer";
 import { Alert, Button, ConfirmationPanel, Heading } from "@navikt/ds-react";
@@ -8,13 +7,14 @@ import { useForesporselApi } from "../../../hooks/useForesporselApi";
 import { PageMeta } from "../../../components/page-meta/PageMeta";
 import ConfirmModal from "../../../components/modal/confirm-modal/ConfirmModal";
 import { useRouter } from "next/router";
-import { today } from "../../../utils/dateUtils";
-import { getAllBarn, getBarnWithNoActiveForesporsler } from "../../../utils/personUtils";
+import { today } from "../../../utils/date.utils";
+import { getAllBarn, getBarnWithNoActiveForesporsler } from "../../../utils/person.utils";
 import Link from "next/link";
 import { Left } from "@navikt/ds-icons";
 import Collapse from "../../../components/collapse/Collapse";
 import { useTranslation } from "next-i18next";
 import ForesporselKvittering from "../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
+import { IPerson } from "../../../types/person";
 
 export default function OpprettForesporsel() {
   const [availableBarn, setAvailableBarn] = useState<IPerson[]>([]);

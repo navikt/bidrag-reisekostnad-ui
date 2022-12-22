@@ -1,6 +1,7 @@
 import { Deaktivator } from "../enum/deaktivator";
 import { ForesporselStatus } from "../enum/foresporsel-status";
 import { Gender } from "../enum/gender";
+import { IMotpart, IPerson } from "./person";
 
 export interface IBrukerinformasjon {
   fornavn: string;
@@ -31,26 +32,5 @@ export interface IForesporsel extends IForesporselUi {
 interface IForesporselUi {
   erAlleOver15: boolean;
   status: ForesporselStatus;
-}
-
-export interface IPerson extends IPersonAge {
-  ident: string;
-  fornavn: string;
-  fødselsdato: string;
-}
-
-export interface IPersonAge {
-  alder: number;
-  erOver15: boolean;
-  er15Om30Dager: boolean;
-}
-
-interface IMotpart {
-  motpart: IPerson;
-  fellesBarnUnder15År: IPerson[];
-}
-
-export interface IActiveInactiveForesporsel {
-  active: IForesporsel[];
-  inactive: IForesporsel[];
+  erHovedpart: boolean;
 }

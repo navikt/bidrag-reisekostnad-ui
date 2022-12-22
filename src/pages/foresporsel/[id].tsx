@@ -3,26 +3,26 @@ import { useEffect, useState } from "react";
 import SamtykkeKvittering from "../../views/kvittering/samtykke-kvittering/SamtykkeKvittering";
 import SamtykkeContainer from "../../views/samtykke/samtykke-container/SamtykkeContainer";
 import { useRouter } from "next/router";
-import { getBarnInformationText } from "../../utils/stringUtils";
+import { getBarnInformationText } from "../../utils/string.utils";
 import { IBrukerinformasjon, IForesporsel } from "../../types/foresporsel";
 import useSWRImmutable from "swr/immutable";
 import { useReisekostnad } from "../../context/reisekostnadContext";
 import { ForesporselStatus } from "../../enum/foresporsel-status";
 import KvitteringMedTrekkTilbake from "../../views/kvittering/kvittering-med-trekktilbake/KvitteringMedTrekkTilbake";
 import Spinner from "../../components/spinner/spinner/spinner";
-import { formatDate } from "../../utils/dateUtils";
+import { formatDate } from "../../utils/date.utils";
 import { useTranslation } from "next-i18next";
-import { findForesporselById } from "../../utils/foresporselUtils";
+import { findForesporselById } from "../../utils/foresporsel.utils";
 import ForesporselKvittering from "../../views/kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
-import KansellerKvittering from "../../views/kvittering/kansellert-kvittering/KansellertKvittering";
 import ErrorPage from "next/error";
+import { Deaktivator } from "../../enum/deaktivator";
+import TrekkTilbakeKvittering from "../../views/kvittering/trekk-tilbake-kvittering/TrekkTilbakeKvittering";
+import { GetStaticPropsContext } from "next";
 
 export default function ForesporselId() {
   const router = useRouter();
   const foresporselId = router.query.id as string;
   const [foresporsel, setForesporsel] = useState<IForesporsel>();
-
-  const [isHovedpart, setIsHovedpart] = useState<boolean>(false);
 
   const { data } = useSWRImmutable<IBrukerinformasjon>("/api/brukerinformasjon");
   const { userInformation, updateUserInformation } = useReisekostnad();
@@ -36,23 +36,11 @@ export default function ForesporselId() {
 
   useEffect(() => {
     if (foresporselId && userInformation) {
-      const foresporselSomHovedpart = findForesporselById(
-        userInformation.forespørslerSomHovedpart,
+      const foundForesporsel = findForesporselById(
+        [...userInformation.forespørslerSomHovedpart, ...userInformation.forespørslerSomMotpart],
         foresporselId
       );
-
-      const hovedpart = userInformation.fornavn === foresporselSomHovedpart?.hovedpart.fornavn;
-      setIsHovedpart(hovedpart);
-
-      if (hovedpart) {
-        setForesporsel(foresporselSomHovedpart);
-      } else {
-        const foresporselSomMotpart = findForesporselById(
-          userInformation.forespørslerSomMotpart,
-          foresporselId
-        );
-        setForesporsel(foresporselSomMotpart);
-      }
+      setForesporsel(foundForesporsel);
     }
   }, [foresporselId, userInformation]);
 
@@ -71,48 +59,53 @@ export default function ForesporselId() {
   const barnInformation = foresporsel.barn.map((person) => {
     return getBarnInformationText(person, translate("aar"));
   });
+  const { erHovedpart, status, opprettet, id, deaktivertAv, barn, samtykket } = foresporsel;
 
   return (
     <>
-      {isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
+      {/* Kvittering med mulighet til å trekke tilbake forespørselen. Kun for hovedpart */}
+      {erHovedpart && status === ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN && (
         <KvitteringMedTrekkTilbake
           barnInformation={barnInformation}
-          sentDate={foresporsel.opprettet}
-          status={foresporsel.status}
-          foresporselId={foresporsel.id}
+          sentDate={opprettet}
+          status={status}
+          foresporselId={id}
         />
       )}
 
-      {isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
-        <ForesporselKvittering
-          barn={foresporsel.barn}
-          sentDate={foresporsel.opprettet ? formatDate(foresporsel.opprettet) : ""}
-        />
+      {/* En side for å samtykke forespørselen. Kun for motpart */}
+      {!erHovedpart && status === ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG && (
+        <SamtykkeContainer foresporselId={id} barnInformation={barnInformation} />
       )}
 
-      {foresporsel.status === ForesporselStatus.KANSELLERT && foresporsel.deaktivertAv && (
-        <KansellerKvittering
+      {/* Kvittering når en forespørsel har blitt opprettet */}
+      {erHovedpart && status === ForesporselStatus.UNDER_BEHANDLING && samtykket === null && (
+        <ForesporselKvittering barn={barn} sentDate={opprettet ? formatDate(opprettet) : ""} />
+      )}
+
+      {/* Kvittering når hovedpart trukket tilbake forespørselen */}
+      {status === ForesporselStatus.KANSELLERT &&
+        deaktivertAv &&
+        deaktivertAv === Deaktivator.HOVEDPART && (
+          <TrekkTilbakeKvittering barnInformation={barnInformation} erHovedpart={erHovedpart} />
+        )}
+
+      {/*Kvittering på en samtykket og ikke-samtykket forespørsel */}
+      {(samtykket !== null || (deaktivertAv && deaktivertAv === Deaktivator.MOTPART)) && (
+        <SamtykkeKvittering
+          status={status}
           barnInformation={barnInformation}
-          deaktivertAv={foresporsel.deaktivertAv}
-          isHovedpart={isHovedpart}
+          erHovedpart={erHovedpart}
         />
-      )}
-
-      {!isHovedpart && foresporsel.status === ForesporselStatus.UNDER_BEHANDLING && (
-        <SamtykkeKvittering />
-      )}
-
-      {!isHovedpart && foresporsel.status === ForesporselStatus.VENTER_PAA_SAMTYKKE && (
-        <SamtykkeContainer foresporselId={foresporsel.id} barnInformation={barnInformation} />
       )}
     </>
   );
 }
 
-export async function getServerSideProps({ locale }: any) {
+export async function getServerSideProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "kvittering", "samtykke"])),
+      ...(await serverSideTranslations(locale ?? "nb", ["common", "kvittering", "samtykke"])),
     },
   };
 }
