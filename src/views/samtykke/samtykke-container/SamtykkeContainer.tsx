@@ -79,8 +79,8 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
                 <ul className="list-none p-0 my-1">
                   {barnInformation.map((information, index) => {
                     return (
-                      <li key={index}>
-                        <strong>{information}</strong>
+                      <li key={index} className="font-bold">
+                        {information}
                       </li>
                     );
                   })}
