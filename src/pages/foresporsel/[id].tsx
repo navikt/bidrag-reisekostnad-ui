@@ -14,8 +14,9 @@ import { formatDate } from "../../utils/dateUtils";
 import { useTranslation } from "next-i18next";
 import { findForesporselById } from "../../utils/foresporselUtils";
 import ForesporselKvittering from "../../views/kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
-import KansellerKvittering from "../../views/kvittering/kansellert-kvittering/KansellertKvittering";
 import ErrorPage from "next/error";
+import { Deaktivator } from "../../enum/deaktivator";
+import TrekkTilbakeKvittering from "../../views/kvittering/trekk-tilbake-kvittering/TrekkTilbakeKvittering";
 
 export default function ForesporselId() {
   const router = useRouter();
@@ -57,10 +58,11 @@ export default function ForesporselId() {
   const barnInformation = foresporsel.barn.map((person) => {
     return getBarnInformationText(person, translate("aar"));
   });
-  const { erHovedpart, status, opprettet, id, deaktivertAv, barn } = foresporsel;
+  const { erHovedpart, status, opprettet, id, deaktivertAv, barn, samtykket } = foresporsel;
 
   return (
     <>
+      {/* Kvittering med mulighet til å trekke tilbake forespørselen. Kun for hovedpart */}
       {erHovedpart && status === ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEN_ANDRE_FORELDEREN && (
         <KvitteringMedTrekkTilbake
           barnInformation={barnInformation}
@@ -70,22 +72,30 @@ export default function ForesporselId() {
         />
       )}
 
-      {erHovedpart && status === ForesporselStatus.UNDER_BEHANDLING && (
+      {/* En side for å samtykke forespørselen. Kun for motpart */}
+      {!erHovedpart && status === ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG && (
+        <SamtykkeContainer foresporselId={id} barnInformation={barnInformation} />
+      )}
+
+      {/* Kvittering når en forespørsel har blitt opprettet */}
+      {erHovedpart && status === ForesporselStatus.UNDER_BEHANDLING && samtykket === null && (
         <ForesporselKvittering barn={barn} sentDate={opprettet ? formatDate(opprettet) : ""} />
       )}
 
-      {status === ForesporselStatus.KANSELLERT && deaktivertAv && (
-        <KansellerKvittering
+      {/* Kvittering når hovedpart trukket tilbake forespørselen */}
+      {status === ForesporselStatus.KANSELLERT &&
+        deaktivertAv &&
+        deaktivertAv === Deaktivator.HOVEDPART && (
+          <TrekkTilbakeKvittering barnInformation={barnInformation} erHovedpart={erHovedpart} />
+        )}
+
+      {/*Kvittering på en samtykket og ikke-samtykket forespørsel */}
+      {(samtykket !== null || (deaktivertAv && deaktivertAv === Deaktivator.MOTPART)) && (
+        <SamtykkeKvittering
+          status={status}
           barnInformation={barnInformation}
-          deaktivertAv={deaktivertAv}
-          isHovedpart={erHovedpart}
+          erHovedpart={erHovedpart}
         />
-      )}
-
-      {!erHovedpart && status === ForesporselStatus.UNDER_BEHANDLING && <SamtykkeKvittering />}
-
-      {!erHovedpart && status === ForesporselStatus.VENTER_PAA_SAMTYKKE_FRA_DEG && (
-        <SamtykkeContainer foresporselId={id} barnInformation={barnInformation} />
       )}
     </>
   );
