@@ -9,7 +9,7 @@ import {
 
 const decoratorProps: DecoratorProps = {
   // @ts-ignore
-  env: process.env.DEKORATOR_ENV ?? "dev",
+  env: process.env.DEKORATOR_ENV ?? "prod",
   chatbot: false,
   simple: false,
   context: "privatperson",
