@@ -15,6 +15,7 @@ import Collapse from "../../../components/collapse/Collapse";
 import { useTranslation } from "next-i18next";
 import ForesporselKvittering from "../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
 import { IPerson } from "../../../types/person";
+import parse from "html-react-parser";
 
 export default function OpprettForesporsel() {
   const [availableBarn, setAvailableBarn] = useState<IPerson[]>([]);
@@ -126,7 +127,7 @@ export default function OpprettForesporsel() {
               <ConfirmationPanel
                 data-testid="confirmationpanel.opprett.maa.samtykke"
                 checked={confirm}
-                label={foresporselTranslate("confirm")}
+                label={parse(foresporselTranslate("confirm"))}
                 onChange={() => setConfirm((x) => !x)}
                 size="small"
                 error={showConfirmError && translate("errors.maa_samtykke")}

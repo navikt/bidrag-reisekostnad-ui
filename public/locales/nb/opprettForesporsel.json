@@ -1,7 +1,7 @@
 {
   "page_title": "Opprett forespørsel",
   "title": "Fordeling av reisekostnader",
-  "confirm": "Jeg har lest og forstått.",
+  "confirm": "Jeg bekrefter at jeg har lest og forstått informasjonssiden <a href=\"https://www.nav.no/fordele-reisekostnader\">om fordeling av reisekostnader på nav.no</a>",
   "checkbox": {
     "legend": "Velg barn forespørselen gjelder for:"
   },
