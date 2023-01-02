@@ -6,6 +6,8 @@ on:
 env:
   IMAGE: "ghcr.io/${{ github.repository }}:${{ github.sha }}"
   NPM_TOKEN: ${{ secrets.READER_TOKEN }}
+  DEKORATOR_ENV: prod
+
 jobs:
   build:
     name: build
