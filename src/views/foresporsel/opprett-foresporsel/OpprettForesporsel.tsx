@@ -90,9 +90,13 @@ export default function OpprettForesporsel() {
           {availableBarn.length === 0 && (
             <>
               {allBarn && allBarn.length > 1 ? (
-                <Alert variant="info">{translate("alert.barna_har_foresporsel")}</Alert>
+                <Alert className="whitespace-pre-wrap" variant="info">
+                  {parse(translate("alert.barna_har_foresporsel"))}
+                </Alert>
               ) : (
-                <Alert variant="info">{translate("alert.barnet_har_foresporsel")}</Alert>
+                <Alert className="whitespace-pre-wrap" variant="info">
+                  {parse(translate("alert.barnet_har_foresporsel"))}
+                </Alert>
               )}
               <Link
                 href="/"
