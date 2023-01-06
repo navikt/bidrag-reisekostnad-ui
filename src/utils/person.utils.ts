@@ -58,5 +58,5 @@ export function getBarnWithNoActiveForesporsler(userInformation: IBrukerinformas
     }
   });
 
-  return result;
+  return result.sort((a, b) => a.alder - b.alder);
 }
