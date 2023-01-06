@@ -8,6 +8,6 @@
     "nei": "Nei, jeg samtykker ikke"
   },
   "confirmation_panel": {
-    "lest_og_forstaatt": "Jeg bekrefter at jeg har lest og forstått informasjonssiden om fordeling av reisekostnader på nav.no"
+    "lest_og_forstaatt": "Jeg bekrefter at jeg har lest og forstått informasjonssiden <a href=\"https://www.nav.no/fordele-reisekostnader\">om fordeling av reisekostnader på nav.no</a>"
   }
 }
