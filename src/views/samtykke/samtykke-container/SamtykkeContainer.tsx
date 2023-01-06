@@ -76,7 +76,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
             legend={
               <>
                 {samtykkeTranslate("radio.legend")}
-                <ul className="flex flex-col gap-1">
+                <ul className="flex flex-col gap-1 list-none pl-0">
                   {barnInformation.map((information, index) => {
                     return (
                       <li key={index} className="font-bold">
@@ -97,7 +97,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
         <div className="grid gap-7">
           <ConfirmationPanel
             checked={haveReadAndUnderstood.isAgree}
-            label={samtykkeTranslate("confirmation_panel.lest_og_forstaatt")}
+            label={parse(samtykkeTranslate("confirmation_panel.lest_og_forstaatt"))}
             onChange={handleReadAndUnderstood}
             error={haveReadAndUnderstood.showError && translate("errors.maa_samtykke")}
           ></ConfirmationPanel>
