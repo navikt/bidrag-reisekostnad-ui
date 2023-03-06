@@ -38,6 +38,7 @@ spec:
         - host: {{external.decorator}}
       rules:
         - application: bidrag-reisekostnad-ui-redis
+        - application: bidrag-reisekostnad-api
   resources:
     limits:
       cpu: 1000m
