@@ -2,6 +2,7 @@
 import { ApiError } from "@navikt/bidrag-ui-common";
 import { ISession } from "../lib/security/session";
 import { getCorrelationIdFromContext } from "../lib/logging/als";
+import { logger } from "../lib/logging/logger";
 
 type FetchMethods = "GET" | "POST" | "PUT";
 
@@ -68,6 +69,7 @@ export class DefaultConsumer {
       ...config?.headers,
     };
     const fullUrl = this.baseUrl + url;
+    console.log(fullUrl);
     return fetch(fullUrl, {
       body: bodyString,
       method,
@@ -88,6 +90,7 @@ export class DefaultConsumer {
         } as IApiResponse<T>;
       })
       .catch(async (err: any) => {
+        logger.error(err);
         const correlationId =
           err?.headers?.get("x-correlation-id") || getCorrelationIdFromContext();
         const responseBody = typeof err.text === "function" ? await err?.text() : err.message;

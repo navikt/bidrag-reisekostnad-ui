@@ -1,8 +1,8 @@
 ingresses:
-  - "https://bidrag-reisekostnad.nav.no"
+  - https://bidrag-reisekostnad.nav.no
 env:
-  BIDRAG_REISEKOSTNAD_API_URL: "https://bidrag-reisekostnad-api.intern.nav.no"
-  BIDRAG_REISEKOSTNAD_API_SCOPE: "prod-gcp:bidrag:bidrag-reisekostnad-api"
+  BIDRAG_REISEKOSTNAD_API_URL: http://bidrag-reisekostnad-api
+  BIDRAG_REISEKOSTNAD_API_SCOPE: prod-gcp:bidrag:bidrag-reisekostnad-api
   DEKORATOR_ENV: prod
   REDIS_HOST: bidrag-reisekostnad-ui-redis.bidrag.svc.cluster.local
   REDIS_PORT: 6379
