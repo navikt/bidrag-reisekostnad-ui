@@ -1,7 +1,7 @@
 ingresses:
   - https://bidrag-reisekostnad.ekstern.dev.nav.no
 env:
-  BIDRAG_REISEKOSTNAD_API_URL: https://bidrag-reisekostnad-api.bidrag.svc.cluster.local
+  BIDRAG_REISEKOSTNAD_API_URL: http://bidrag-reisekostnad-api
   BIDRAG_REISEKOSTNAD_API_SCOPE: dev-gcp:bidrag:bidrag-reisekostnad-api
   DEKORATOR_ENV: dev
   REDIS_HOST: bidrag-reisekostnad-ui-redis.bidrag.svc.cluster.local
