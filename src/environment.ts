@@ -17,8 +17,8 @@ const audiences = {
 
 const redis = {
   enabled: env.get("ENABLE_REDIS").required(false).default("true").asBool(),
-  host: env.get("REDIS_HOST").required().asString(),
-  port: env.get("REDIS_PORT").required().asPortNumber(),
+  url: env.get("REDIS_URI_REISEKOSTNAD").required().asString(),
+  username: env.get("REDIS_USERNAME_REISEKOSTNAD").required().asPortNumber(),
   password: env.get("REDIS_PASSWORD_REISEKOSTNAD").required(false).asString(),
 };
 

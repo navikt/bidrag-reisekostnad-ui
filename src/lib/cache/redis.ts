@@ -7,8 +7,9 @@ export const createRedisInstance: () => TCache = () => {
   logger.info("Creating redis instance");
   try {
     const options: RedisOptions = {
-      host: environment.redis.host,
-      port: environment.redis.port,
+      url: environment.redis.url,
+      username: environment.redis.username,
+      password: environment.redis.password,
       showFriendlyErrorStack: true,
       enableAutoPipelining: true,
       maxRetriesPerRequest: 0,

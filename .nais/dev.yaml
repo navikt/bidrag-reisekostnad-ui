@@ -4,8 +4,6 @@ env:
   BIDRAG_REISEKOSTNAD_API_URL: http://bidrag-reisekostnad-api
   BIDRAG_REISEKOSTNAD_API_SCOPE: dev-gcp:bidrag:bidrag-reisekostnad-api
   DEKORATOR_ENV: dev
-  REDIS_HOST: bidrag-reisekostnad-ui-redis.bidrag.svc.cluster.local
-  REDIS_PORT: 6379
 replicas:
   count: 1
 external:
