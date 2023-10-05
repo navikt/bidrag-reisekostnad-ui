@@ -9,7 +9,7 @@ export const createRedisInstance: () => TCache = () => {
     const redisUrl = new URL(environment.redis.url as string);
     const options: RedisOptions = {
       host: redisUrl.host,
-      port: redisUrl.port,
+      port: parseInt(redisUrl.port,10),
       username: environment.redis.username,
       password: environment.redis.password,
       showFriendlyErrorStack: true,
