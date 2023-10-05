@@ -6,8 +6,10 @@ import { logger } from "../logging/logger";
 export const createRedisInstance: () => TCache = () => {
   logger.info("Creating redis instance");
   try {
+    var redisUrl = new URL(environment.redis.url as string)
     const options: RedisOptions = {
-      url: environment.redis.url,
+      host: redisUrl.host,
+      port: redisUrl.port,
       username: environment.redis.username,
       password: environment.redis.password,
       showFriendlyErrorStack: true,
