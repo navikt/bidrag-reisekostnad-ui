@@ -1,7 +1,7 @@
 apiVersion: aiven.io/v1alpha1
 kind: Redis
 metadata:
-  name: bidrag-reisekostnad-ui-redis
+  name: redis-bidrag-reisekostnad
   namespace: bidrag
   labels:
     app: bidrag-reisekostnad-ui
