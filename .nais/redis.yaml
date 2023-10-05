@@ -1,32 +1,11 @@
-apiVersion: "nais.io/v1alpha1"
-kind: "Application"
+apiVersion: aiven.io/v1alpha1
+kind: Redis
 metadata:
   name: bidrag-reisekostnad-ui-redis
   namespace: bidrag
-  annotations:
-    "nais.io/run-as-group": "0"
-    "nais.io/read-only-file-system": "false"
   labels:
+    app: bidrag-reisekostnad-ui
     team: bidrag
 spec:
-  image: bitnami/redis:7.0.5
-  port: 6379
-  replicas:
-    max: 1
-    min: 1
-  resources:
-    limits:
-      cpu: 100m
-      memory: 256Mi
-    requests:
-      cpu: 100m
-      memory: 256Mi
-  service:
-    port: 6379
-    protocol: redis
-  accessPolicy: # for GCP
-    inbound:
-      rules:
-        - application: bidrag-reisekostnad-ui
-  envFrom:
-    - secret: bidrag-reisekostnad-ui-redis-password
+  plan: startup-4
+  project: nav-dev
