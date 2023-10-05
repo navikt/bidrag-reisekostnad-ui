@@ -7,6 +7,12 @@ export const createRedisInstance: () => TCache = () => {
   logger.info("Creating redis instance");
   try {
     const redisUrl = new URL(environment.redis.url as string);
+
+    logger.info("redis host: ", redisUrl.host);
+    logger.info("redis port: ", redisUrl.port);
+    logger.info("redis username: ", environment.redis.username);
+    logger.info("redis password: ", environment.redis.password);
+
     const options: RedisOptions = {
       host: redisUrl.host,
       port: parseInt(redisUrl.port,10),
