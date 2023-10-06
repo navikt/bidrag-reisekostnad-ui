@@ -1,6 +1,10 @@
 # Bidrag Reisekostnad UI
 
-
+### Installer avhengigheter
+Kjør følgende kommando for å installere nødvendige avhengigheter. Krever node >= 18
+```bash
+npm install
+```
 ## Lokal kjøring med innlogget bruker
 Følgende må gjøres for å kjøre applikasjonen lokalt med innlogget bruker
 * Endre kubectl cluster til dev-gcp ``kubectl config use-context dev-gcp``
