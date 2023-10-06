@@ -7,8 +7,8 @@ export const createRedisInstance: () => TCache = () => {
   logger.info("Creating redis instance");
   try {
     const options: RedisOptions = {
-      host: environment.redis.host,
-      port: environment.redis.port,
+      username: environment.redis.username,
+      password: environment.redis.password,
       showFriendlyErrorStack: true,
       enableAutoPipelining: true,
       maxRetriesPerRequest: 0,
@@ -21,11 +21,7 @@ export const createRedisInstance: () => TCache = () => {
       },
     };
 
-    if (environment.redis.password) {
-      options.password = environment.redis.password;
-    }
-
-    const redis = new Redis(options);
+    const redis = new Redis(environment.redis.url, options);
 
     redis.on("error", (error: unknown) => {
       logger.warn("[Redis] Error connecting", error);
