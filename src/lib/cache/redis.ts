@@ -8,8 +8,6 @@ export const createRedisInstance: () => TCache = () => {
   try {
     const redisUrl = new URL(environment.redis.url as string);
     const options: RedisOptions = {
-      host: redisUrl.hostname,
-      port: parseInt(redisUrl.port,10),
       username: environment.redis.username,
       password: environment.redis.password,
       showFriendlyErrorStack: true,
@@ -24,7 +22,7 @@ export const createRedisInstance: () => TCache = () => {
       },
     };
 
-    const redis = new Redis(options);
+    const redis = new Redis(environment.redis.url, options);
 
     redis.on("error", (error: unknown) => {
       logger.warn("[Redis] Error connecting", error);
