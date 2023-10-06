@@ -30,6 +30,9 @@ spec:
       autoLogin: true
       autoLoginIgnorePaths:
         - "/_next/static/*/*"
+  redis:
+    - instance: reisekostnad
+      access: readwrite
   tokenx:
     enabled: true
   accessPolicy:
