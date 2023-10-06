@@ -24,10 +24,6 @@ export const createRedisInstance: () => TCache = () => {
       },
     };
 
-    if (environment.redis.password) {
-      options.password = environment.redis.password;
-    }
-
     const redis = new Redis(options);
 
     redis.on("error", (error: unknown) => {
