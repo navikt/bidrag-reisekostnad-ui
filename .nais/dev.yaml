@@ -7,4 +7,4 @@ env:
 replicas:
   count: 1
 external:
-  decorator: dev.dekoratoren.nav.no
+  decorator: dekoratoren.ekstern.dev.nav.no
