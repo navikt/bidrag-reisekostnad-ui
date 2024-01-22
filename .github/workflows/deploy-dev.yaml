@@ -30,6 +30,7 @@ jobs:
       - name: Create an optimized production build of the application
         run: npm run build
       - uses: nais/docker-build-push@v0
+        if: ${{ github.actor != 'dependabot[bot]' }}
         id: docker-push
         with:
           team: bidrag
