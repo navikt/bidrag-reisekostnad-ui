@@ -13,17 +13,17 @@
       },
       "den_andre_parten": {
         "title": "Den andre forelderen har samtykket forespørsel",
-        "description": "<p>Den andre forelderen har samtykket i at NAV fordeler reisekostnader.</p>"
+        "description": "<p>Den andre forelderen har samtykket i at Nav fordeler reisekostnader.</p>"
       }
     },
     "nei": {
       "den_som_samtykket": {
         "title": "Vi har mottatt svar fra deg",
-        "description": "<p>Vi har mottatt svar fra deg om at du ikke samtykker til at NAV fordeler reisekostnader for</p><p>{{barn}}</p><p>Begge foreldrene må være enige i at NAV skal gjøre denne tjenesten. Forespørselen er derfor kansellert. Vi orienterer den andre forelderen om dette.</p>"
+        "description": "<p>Vi har mottatt svar fra deg om at du ikke samtykker til at Nav fordeler reisekostnader for</p><p>{{barn}}</p><p>Begge foreldrene må være enige i at Nav skal gjøre denne tjenesten. Forespørselen er derfor kansellert. Vi orienterer den andre forelderen om dette.</p>"
       },
       "den_andre_parten": {
         "title": "Forespørselen din er kansellert",
-        "description": "<p>Den andre forelderen har ikke samtykket i at NAV fordeler reisekostnader for</p><p>{{barn}}</p><p>Begge foreldrene må være enige i at NAV skal gjøre denne tjenesten. Forespørselen er derfor kansellert.</p>"
+        "description": "<p>Den andre forelderen har ikke samtykket i at Nav fordeler reisekostnader for</p><p>{{barn}}</p><p>Begge foreldrene må være enige i at Nav skal gjøre denne tjenesten. Forespørselen er derfor kansellert.</p>"
       }
     }
   },
@@ -34,7 +34,7 @@
       "title": "Hva skjer videre?",
       "subtitle_1": "For barn under 15 år",
       "subtitle_2": "For barn som er 15 år, eller eldre",
-      "body_1": "<p className=\"m-0\">Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at NAV skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.</å><p>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer og dokumentasjon som trengs i saken.</p><p>Hvis den andre forelderen ikke samtykker, må NAV avvise forespørselen. I så tilfelle vil du få beskjed om det.</p><p>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.</p>",
+      "body_1": "<p className=\"m-0\">Vi har nå sendt en henvendelse til den andre forelderen for å innhente et samtykke til at Nav skal fordele reisekostnader. Frist for å samtykke er 30 dager fra i dag.</å><p>Når den andre forelderen samtykker innen fristen, går saken automatisk videre til behandling. En saksbehandler tar så kontakt med deg, for avklaringer og dokumentasjon som trengs i saken.</p><p>Hvis den andre forelderen ikke samtykker, må Nav avvise forespørselen. I så tilfelle vil du få beskjed om det.</p><p>Om barnet fyller 15 år før fristen for samtykke er gått ut, går saken automatisk videre til behandling.</p>",
       "body_2": "<p className=\"m-0\">Forespørselen fra deg har automatisk gått videre til behandling. En saksbehandler tar kontakt med både deg og den andre forelderen, for avklaringer og dokumentasjon som trengs i saken.</p>"
     }
   },
