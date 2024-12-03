@@ -1,9 +1,9 @@
 {
   "page_title": "Samtykke",
   "title": "Forespørsel om samtykke",
-  "description": "<p>Du har mottatt en forespørsel fra den andre forelderen om NAV kan fordele reisekostnader mellom dere. For at NAV skal kunne gjøre denne tjenesten, trengs det et samtykke fra deg. Frist for å gi samtykke er 30 dager fra du mottok forespørselen.</p><p>Hvis du samtykker innen fristen, går saken automatisk videre til behandling. Hvis du velger å ikke samtykke, eller du ikke svarer innen fristen, blir forespørselen kansellert.</p>",
+  "description": "<p>Du har mottatt en forespørsel fra den andre forelderen om Nav kan fordele reisekostnader mellom dere. For at Nav skal kunne gjøre denne tjenesten, trengs det et samtykke fra deg. Frist for å gi samtykke er 30 dager fra du mottok forespørselen.</p><p>Hvis du samtykker innen fristen, går saken automatisk videre til behandling. Hvis du velger å ikke samtykke, eller du ikke svarer innen fristen, blir forespørselen kansellert.</p>",
   "radio": {
-    "legend": "Jeg samtykker i at NAV fordeler reisekostnader for",
+    "legend": "Jeg samtykker i at Nav fordeler reisekostnader for",
     "ja": "Ja",
     "nei": "Nei, jeg samtykker ikke"
   },
