@@ -1,17 +1,46 @@
-# Bidrag Reisekostnad UI
+# Bidrag Reisekostnad
 
-### Installer avhengigheter
-Kjør følgende kommando for å installere nødvendige avhengigheter. Krever node >= 18
+## bidrag-reisekostnad-ui
+UI for å [fordele reisekostnader ved samvær med barn](https://www.nav.no/fordele-reisekostnader).
+
+## Oppsett av lokalt utviklingsmiljø
+
+Installer nødvendige pakker (krever node >= 18):
 ```bash
 npm install
 ```
-## Lokal kjøring med innlogget bruker
-Følgende må gjøres for å kjøre applikasjonen lokalt med innlogget bruker
-* Endre kubectl cluster til dev-gcp ``kubectl config use-context dev-gcp``
-* Kjør kommandoen som ligger i filen [loadtokenx.sh](loadtokenx.sh). Dette vil eksportere TOKENX variabler til terminalen
-* Start dev-server med kommandoen ``npm run dev``
-* Pek nettleser til ``http://localhost:3000``
-* Logg inn og hent token fra endepunkt ``https://bidrag-reisekostnad.ekstern.dev.nav.no/api/dev/token`` og lim inn tokenet nederst på siden i ``http://localhost:3000``
 
-Da har du fått startet opp lokalt med innlogget bruker
+Still inn kubectl cluster til dev-gcp:
+```bash
+kubectl config use-context dev-gcp
+```
 
+Eksporter TOKENX variabler til terminalen slik at appen kan autentisere i 
+dev-gcp. Kjør kommandoen i [loadtokenx.sh](loadtokenx.sh) filen.
+
+
+Start applikasjonen:
+```bash
+npm run dev
+```
+
+Start nettleser:
+```bash
+http://localhost:3000
+```
+
+Logg inn med syntetisk testbruker og kopier tokenet fra endepunkt 
+```https://bidrag-reisekostnad.ekstern.dev.nav.no/api/dev/token```.
+Lim inn deretter tokenet nederst på ``http://localhost:3000`` siden.
+
+Syntetisk testbruker kan hentes fra Tenor, men hentes enklest fra:
+* [Dolly](https://dolly.ekstern.dev.nav.no/)
+
+Enkleste testscenariet er å velge testbruker som er foresatt til barn under 
+  15 år.
+
+## Testmiljø
+
+Testmiljøer er tilgjengelige eksternt. Miljøet nærmest likt produksjon finnes
+på https://bidrag-reisekostnad.ekstern.dev.nav.no/. For å logge inn trenger man en
+testbruker fra [Tenor - Skatteetatens testdata](https://www.skatteetaten.no/skjema/testdata/).
