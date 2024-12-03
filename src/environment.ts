@@ -17,8 +17,8 @@ const audiences = {
 
 const redis = {
   enabled: env.get("ENABLE_REDIS").required(false).default("true").asBool(),
-  url: env.get("REDIS_URI_REISEKOSTNAD").required().asString(),
-  username: env.get("REDIS_USERNAME_REISEKOSTNAD").required().asString(),
+  url: env.get("REDIS_URI_REISEKOSTNAD").required(false).asString(),
+  username: env.get("REDIS_USERNAME_REISEKOSTNAD").required(false).asString(),
   password: env.get("REDIS_PASSWORD_REISEKOSTNAD").required(false).asString(),
 };
 

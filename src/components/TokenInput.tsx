@@ -46,8 +46,8 @@ export default function TokenInput(): ReactElement | null {
       <div>
         Running in dev mode. Security is disabled, provide id token manually. You can get id token
         by visiting{" "}
-        <a href="https://bidrag-reisekostnad.dev.nav.no/api/dev/session">
-          https://bidrag-reisekostnad.dev.nav.no/api/dev/session
+        <a href="https://bidrag-reisekostnad.ekstern.dev.nav.no/api/dev/token">
+          https://bidrag-reisekostnad.ekstern.dev.nav.no/api/dev/token
         </a>{" "}
       </div>
       <Button

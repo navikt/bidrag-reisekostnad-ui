@@ -1,1 +1,1 @@
-  export $(kubectl exec --tty deployment/bidrag-reisekostnad-ui printenv | grep TOKEN_X)
+export $(kubectl exec -n bidrag deployment/bidrag-reisekostnad-ui -- printenv | grep TOKEN_X)
