@@ -1,0 +1,34 @@
+version: 2
+updates:
+  # Basic set up for package managers.
+  # Maintain GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`.
+    # Don't need to specify `/.github/workflows`, just use `directory: "/"`.
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      # Check for GitHub Actions updates on Thursdays.
+      day: "thursday"
+      time: "08:30"
+      timezone: "Europe/Oslo"
+    commit-message:
+      prefix: "[github-actions] "
+  # Maintain npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "08:45"
+      timezone: "Europe/Oslo"
+    commit-message:
+      prefix: "[npm] "
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "thursday"
+      time: "06:00"
+      timezone: "Europe/Oslo"
+    commit-message:
+      prefix: "[docker] "
