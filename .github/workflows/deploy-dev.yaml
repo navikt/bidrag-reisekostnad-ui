@@ -25,7 +25,7 @@ jobs:
       - name: Clean install of dependencies
         run: "npm ci"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+          NPM_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Create an optimized production build of the application
         run: npm run build
       - uses: nais/docker-build-push@v0
