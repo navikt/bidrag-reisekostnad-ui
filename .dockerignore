@@ -1,4 +1,9 @@
+# Prevent local files and folders listed bellow to be copied over
+# to the container.
 .git
 .gitignore
 .idea
+# Ignore generated credentials from google-github-actions/auth in
+# use through nais/login@v0 through nais/docker-build-push@v0 action.
+gha-creds-*.json
 public/mockServiceWorker.js
