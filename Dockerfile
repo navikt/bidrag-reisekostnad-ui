@@ -1,7 +1,7 @@
 
 
 FROM node:lts-slim
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 LABEL maintainer="Team Bidrag"
 
