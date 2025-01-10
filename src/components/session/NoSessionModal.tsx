@@ -1,15 +1,15 @@
-import { Button, Heading, Modal } from "@navikt/ds-react";
+import { BodyShort, Button, Heading, Modal } from "@navikt/ds-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styles from "./NoSessionModal.module.css";
-import { WarningColored } from "@navikt/ds-icons";
+import { ExclamationmarkTriangleFillIcon } from "@navikt/aksel-icons";
 import { useCountdown } from "../../hooks/useCountdown";
 import { useSession } from "../../utils/session.utils";
 
 export function NoSessionModal() {
   const router = useRouter();
   const { session, isError } = useSession();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const isLoading = !isError && !session;
 
@@ -17,10 +17,11 @@ export function NoSessionModal() {
   const hasExpired = useCountdown(session?.expiresIn ?? 1000);
 
   useEffect(() => {
+    /* TODO: Check if needed.
     if (Modal.setAppElement) {
       Modal.setAppElement("#__next");
     }
-
+    */
     if (isProduction) {
       if (isLoading) return;
 
@@ -35,22 +36,22 @@ export function NoSessionModal() {
   return (
     <Modal
       className="modal-container modal-container--error"
-      onClose={() => {
-        return;
-      }}
+      onClose={() => setModalOpen(false)}
       open={modalOpen}
-      closeButton={false}
-      shouldCloseOnOverlayClick={false}
+      header={{
+        heading: "Du er i ferd med å logge ut",
+        size: "small",
+        closeButton: false,
+      }}
     >
-      <Modal.Content>
-        <div className={styles.iconContainer}>
-          <WarningColored className={styles.icon} />
+      <Modal.Body className="grid gap-5">
+        <div className="flex gap-4 items-center">
+          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" color="#C77300" />
+          <div>
+            <BodyShort>Sesjonen din har utløpt og du må logge inn på nytt for å fortsette.</BodyShort>
+            <BodyShort>Merk at du vil miste dine ulagrede endringer etter innlogging.</BodyShort>
+          </div>
         </div>
-        <Heading size={"medium"} spacing>
-          Du er i ferd med å logge ut
-        </Heading>
-        <p>Sesjonen din har utløpt og du må logge inn på nytt for å fortsette.</p>
-        <p>Merk at du vil miste dine ulagrede endringer etter innlogging.</p>
         <div className={styles.actionButtonsContainer}>
           <Button variant="primary" onClick={login}>
             Logg inn på nytt
@@ -59,7 +60,8 @@ export function NoSessionModal() {
             Gå til forsiden
           </Button>
         </div>
-      </Modal.Content>
+      </Modal.Body>
+
     </Modal>
   );
 }

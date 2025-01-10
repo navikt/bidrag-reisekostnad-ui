@@ -1,4 +1,4 @@
-import { SuccessStroke } from "@navikt/ds-icons";
+import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { Heading } from "@navikt/ds-react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -30,7 +30,7 @@ export default function ForesporselKvittering({ barn, sentDate }: IForesporselKv
         <div className="grid gap-1">
           <span className="flex items-center">
             <div>
-              <SuccessStroke color="green" fontSize="60" />
+              <CheckmarkIcon title="a11y-title" color="green" fontSize="60px" />
             </div>
             {kvitteringTranslate("foresporsel.description", { date: sentDate })}
           </span>

@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { today } from "../../../utils/date.utils";
 import { getAllBarn, getBarnWithNoActiveForesporsler } from "../../../utils/person.utils";
 import Link from "next/link";
-import { Left } from "@navikt/ds-icons";
+import { ArrowLeftIcon } from "@navikt/aksel-icons";
 import Collapse from "../../../components/collapse/Collapse";
 import { useTranslation } from "next-i18next";
 import ForesporselKvittering from "../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer";
@@ -103,7 +103,7 @@ export default function OpprettForesporsel() {
                 className="no-underline flex gap-2 items-center hover:underline"
                 passHref
               >
-                <Left />
+                <ArrowLeftIcon title="a11y-title" fontSize="1.5rem" />
                 {translate("button.til_oversikten")}
               </Link>
             </>

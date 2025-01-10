@@ -2,7 +2,7 @@ import React from "react";
 import { ReactElement } from "react";
 import { useState } from "react";
 import { Button } from "@navikt/ds-react";
-import { Close } from "@navikt/ds-icons";
+import { XMarkIcon } from "@navikt/aksel-icons";
 
 export default function TokenInput(): ReactElement | null {
   const [idToken, setIdToken] = useState<string>();
@@ -55,7 +55,7 @@ export default function TokenInput(): ReactElement | null {
         size={"xsmall"}
         style={{ alignSelf: "flex-end" }}
         variant={"tertiary"}
-        icon={<Close />}
+        icon={<XMarkIcon title="a11y-title" fontSize="1.5rem" />}
         onClick={() => setIsOpen(false)}
       />
     </div>
