@@ -1,4 +1,4 @@
-import { Next } from "@navikt/ds-icons";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { LinkPanel, Panel } from "@navikt/ds-react";
 import Link from "next/link";
 import { IForesporsel } from "../../../types/foresporsel";
@@ -89,7 +89,7 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
           <StatusBar status={status} />
           {isAutomaticSubmission(foresporsel) && <BarnOver15Alert barn={barn} />}
         </div>
-        <Next className="navds-link-panel__chevron" aria-hidden="true" />
+        <ChevronRightIcon title="a11y-title" fontSize="1.5rem" />
       </Panel>
     </Link>
   );

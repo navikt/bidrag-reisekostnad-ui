@@ -1,5 +1,5 @@
 import { Alert, BodyShort, Button, Heading, Modal } from "@navikt/ds-react";
-import { WarningColored } from "@navikt/ds-icons";
+import { ExclamationmarkTriangleFillIcon } from "@navikt/aksel-icons";
 import { useTranslation } from "next-i18next";
 import { useEffect } from "react";
 
@@ -32,28 +32,29 @@ export default function ConfirmModal({
 }: IConfirmModalProps) {
   const { t: translate } = useTranslation();
 
+  /* TODO: Is this needed? Old API?
   useEffect(() => {
     Modal.setAppElement("#__next");
   }, []);
+   */
 
   return (
     <Modal
       className="p-5"
       open={open}
       onClose={onClose}
-      closeButton={false}
       aria-labelledby="modal-heading"
     >
-      <Modal.Content className="grid gap-5">
+      <Modal.Body className="grid gap-5">
         {showError && <Alert variant="error">{errorMessage}</Alert>}
         <Heading spacing level="1" size="medium" id="modal-heading">
           {header}
         </Heading>
         <BodyShort className="flex gap-4 items-center" spacing>
-          <WarningColored fontSize="35" />
+          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" />
           {content}
         </BodyShort>
-      </Modal.Content>
+      </Modal.Body>
       <div className="flex gap-4">
         <Button variant="secondary" onClick={onSubmit} loading={loading}>
           {submitText}

@@ -2,7 +2,7 @@ import { Heading } from "@navikt/ds-react";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
 import { PageMeta } from "../../page-meta/PageMeta";
-import { Right } from "@navikt/ds-icons";
+import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { useTranslation } from "next-i18next";
 
 interface IConfirmationLayoutProps extends PropsWithChildren {
@@ -30,7 +30,7 @@ export default function ConfirmationLayout({ title, children }: IConfirmationLay
             data-testid="button.til_oversikten"
           >
             {translate("button.til_oversikten")}
-            <Right />
+            <ArrowRightIcon title="a11y-title" fontSize="1.5rem" />
           </Link>
         </div>
       </div>
