@@ -51,7 +51,7 @@ export default function ConfirmModal({
           {header}
         </Heading>
         <BodyShort className="flex gap-4 items-center" spacing>
-          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" />
+          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" color="#C77300"/>
           {content}
         </BodyShort>
       </Modal.Body>

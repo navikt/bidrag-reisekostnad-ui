@@ -1,4 +1,4 @@
-import { Button, Heading, Modal } from "@navikt/ds-react";
+import { BodyShort, Button, Heading, Modal } from "@navikt/ds-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styles from "./NoSessionModal.module.css";
@@ -44,12 +44,14 @@ export function NoSessionModal() {
         closeButton: false,
       }}
     >
-      <Modal.Body>
-        <div className={styles.iconContainer}>
-          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="1.5rem" className={styles.icon}  />
+      <Modal.Body className="grid gap-5">
+        <div className="flex gap-4 items-center">
+          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" color="#C77300" />
+          <div>
+            <BodyShort>Sesjonen din har utløpt og du må logge inn på nytt for å fortsette.</BodyShort>
+            <BodyShort>Merk at du vil miste dine ulagrede endringer etter innlogging.</BodyShort>
+          </div>
         </div>
-        <p>Sesjonen din har utløpt og du må logge inn på nytt for å fortsette.</p>
-        <p>Merk at du vil miste dine ulagrede endringer etter innlogging.</p>
         <div className={styles.actionButtonsContainer}>
           <Button variant="primary" onClick={login}>
             Logg inn på nytt
