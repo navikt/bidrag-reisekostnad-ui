@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { BRUKER_INFORMASJON_1 } from "./src/__mocks__/testdata/brukerinformasjon";
+
 require("next");
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import "whatwg-fetch";
 import { setupServer } from "msw/node";
-import { rest } from "msw";
+import { http, HttpResponse, delay } from "msw";
 import { IBrukerinformasjon } from "./src/types/foresporsel";
 
 jest.mock("react-i18next", () => ({
@@ -31,9 +33,10 @@ jest.mock("react-i18next", () => ({
 }));
 
 export const server = setupServer(
-  rest.get("/api/brukerinformasjon", async (_req, res, ctx) => {
-    return res(ctx.delay(100), ctx.json<IBrukerinformasjon | undefined>(undefined));
-  })
+  http.get("/api/brukerinformasjon", async () => {
+    await delay(100);
+    return HttpResponse.json<IBrukerinformasjon | undefined>(undefined);
+  }),
 );
 
 beforeAll(() => server.listen({ onUnhandledRequest: "bypass" }));
