@@ -1,4 +1,4 @@
-const nextJest = require("next/jest");
+import nextJest from "next/jest";
 
 const createJestConfig = nextJest({
   dir: "./",
@@ -9,6 +9,9 @@ const customJestConfig = {
   moduleDirectories: ["node_modules", "<rootDir>/"],
   testEnvironment: "jest-environment-jsdom",
   transformIgnorePatterns: ["/node_modules/(?!(nav-.+)/)", "^.+\\.(css|sass|scss)$"],
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
 };
 
 module.exports = createJestConfig(customJestConfig);
