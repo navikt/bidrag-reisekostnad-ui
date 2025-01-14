@@ -1,8 +1,11 @@
+import { Gender } from "../../enum/gender";
+import { IBrukerinformasjon } from "../../types/foresporsel";
+
 export const BRUKERENS_FORNAVN = "Nils";
 
-export const BRUKER_INFORMASJON_1 = {
+export const BRUKER_INFORMASJON_1:IBrukerinformasjon = {
   fornavn: "Gråtass",
-  kjønn: "Kvinne",
+  kjønn: Gender.KVINNE,
   harDiskresjon: true,
   kanSøkeOmFordelingAvReisekostnader: true,
   harSkjulteFamilieenheterMedDiskresjon: true,
