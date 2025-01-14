@@ -1,22 +1,37 @@
-import { rest } from "msw";
+import { http, HttpResponse, delay } from "msw";
 
 export const opprettNyForesporselHandlers = [
-  rest.post("/api/foresporsel/ny", (_req, res, ctx) => {
-    // @ts-ignore
-    return res(ctx.delay(100), ctx.set("Content-Type", "application/json"), ctx.status(200));
+  http.post("/api/foresporsel/ny", async () => {
+    await delay(100);
+    return new HttpResponse(null, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      status: 200,
+    });
   }),
 ];
 
 export const trekkeForesporselHandlers = [
-  rest.put("/api/foresporsel/trekke", (_req, res, ctx) => {
-    // @ts-ignore
-    return res(ctx.delay(100), ctx.set("Content-Type", "application/json"), ctx.status(201));
+  http.put("/api/foresporsel/trekke", async () => {
+    await delay(100);
+    return new HttpResponse(null, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      status: 201,
+    });
   }),
 ];
 
 export const samtykkeForesporselHandlers = [
-  rest.put("/api/foresporsel/samtykke", (_req, res, ctx) => {
-    // @ts-ignore
-    return res(ctx.delay(100), ctx.set("Content-Type", "application/json"), ctx.status(201));
+  http.put("/api/foresporsel/samtykke", async () => {
+    await delay(100);
+    return new HttpResponse(null, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      status: 201,
+    });
   }),
 ];
