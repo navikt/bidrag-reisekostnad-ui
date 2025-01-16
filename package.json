@@ -11,8 +11,8 @@
     "lint:fix": "next lint -- --fix",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "prepare": "husky install",
-    "test:ci": "jest --ci",
-    "test": "jest --watch --transformIgnorePatterns \"node_modules/(?!bidrag-reisekostnad-ui)/\" -- ./src/__tests__/pages/*.test.{js,ts,tsx}"
+    "test:ci": "vitest",
+    "test": "vitest"
   },
   "prettier": {
     "printWidth": 100
