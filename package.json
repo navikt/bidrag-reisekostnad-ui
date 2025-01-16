@@ -12,7 +12,7 @@
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "prepare": "husky install",
     "test:ci": "vitest",
-    "test": "vitest",
+    "test": "vitest --config vitest.config.ts",
     "coverage": "vitest run --coverage"
   },
   "prettier": {
