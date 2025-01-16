@@ -61,7 +61,6 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^13.4.0",
     "@types/lodash.memoize": "^4.1.7",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
