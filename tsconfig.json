@@ -13,8 +13,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "types": ["@vitest/browser/matchers"]
   },
-  "include": ["next-env.d.ts", "src", "**/*.ts", "**/*.tsx", "jest.config.ss"],
+  "include": ["next-env.d.ts", "src", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
