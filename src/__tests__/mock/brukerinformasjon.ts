@@ -281,7 +281,7 @@ export const KVINNE_MED_FORESPORSEL_SOM_MOTPART_OG_HOVEDPART = {
           ident: "B33ZBAwenZPKeYFX6+oN8g==",
           fornavn: "PRESENTABEL",
           kortnavn: "PRESENTABEL PERSON",
-          fødselsdato: "2008-01-26",
+          fødselsdato: "2023-01-26",
         },
       ],
       hovedpart: {
