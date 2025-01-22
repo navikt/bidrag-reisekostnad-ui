@@ -16,6 +16,7 @@ import { getCreateForesporselButton, getOverviewCardById, getSpinner } from "../
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { createMockRouter } from "../utils/router.utils";
 import { MockContext } from "../mock/MockContext";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 
 describe("No data", () => {
   it("should render spinner when there is no data", () => {
@@ -60,15 +61,10 @@ describe("Person without foresporsel", () => {
 
   it("should render alert", async () => {
     const alert = await screen.findByTestId("alert.ingen_saker");
-
-    expect(alert).toBeInTheDocument();
-  });
-
-  it("should render button for creating foresporsel", async () => {
     const button = await getCreateForesporselButton();
-
     expect(button).toBeInTheDocument();
     expect((button as HTMLAnchorElement).href).toContain("/foresporsel");
+    expect(alert).toBeInTheDocument();
   });
 });
 
@@ -105,20 +101,16 @@ describe("Person with existing foresporsler", () => {
 
     expect(router.push).toHaveBeenCalledWith(EXPECTED_PATH, EXPECTED_PATH, {
       locale: undefined,
-      scroll: undefined,
+      scroll: true,
       shallow: undefined,
     });
   });
 
   it("should render both sendt inn and motatt foresporsler", async () => {
-    await waitFor(() => {
-      const sendtInnForesporsel = screen.queryByText("title.sendt_inn_foresporsler");
+      const sendtInnForesporsel = await screen.findByText("title.sendt_inn_foresporsler");
       expect(sendtInnForesporsel).toBeInTheDocument();
-    });
-    await waitFor(() => {
-      const motattForesporsel = screen.queryByText("title.motatt_foresporsler");
+      const motattForesporsel = await screen.findByText("title.motatt_foresporsler");
       expect(motattForesporsel).toBeInTheDocument();
-    });
   });
 
   it("should redirect to create new foresporsel page", async () => {
@@ -129,7 +121,7 @@ describe("Person with existing foresporsler", () => {
 
     expect(router.push).toHaveBeenCalledWith(EXPECTED_PATH, EXPECTED_PATH, {
       locale: undefined,
-      scroll: undefined,
+      scroll: true,
       shallow: undefined,
     });
   });
