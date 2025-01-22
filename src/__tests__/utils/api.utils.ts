@@ -1,22 +1,26 @@
-import { rest } from "msw";
-import { server } from "../../../jest.setup";
+import { http, HttpResponse, delay } from "msw";
+import { server } from "../../__mocks__/server";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 
-export function fetchBrukerinformation(expectedResponse: unknown) {
+export function fetchBrukerinformation(brukerinformasjon:IBrukerinformasjon) {
   server.use(
-    rest.get("/api/brukerinformasjon", (_req, res, ctx) => {
-      return res(
-        ctx.delay(100),
-        ctx.json<IBrukerinformasjon>(expectedResponse as IBrukerinformasjon)
-      );
-    })
+    http.get("/api/brukerinformasjon", async () => {
+      await delay(100);
+      return HttpResponse.json<IBrukerinformasjon>(brukerinformasjon);
+    }),
   );
 }
 
 export function postForesporsel() {
   server.use(
-    rest.post("/api/foresporsel/ny", (_req, res, ctx) => {
-      return res(ctx.delay(100), ctx.status(200));
-    })
+    http.post("/api/foresporsel/ny", async () => {
+      await delay(100);
+      return new HttpResponse(null, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        status: 200,
+      });
+    }),
   );
 }

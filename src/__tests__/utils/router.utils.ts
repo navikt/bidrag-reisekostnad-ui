@@ -1,4 +1,5 @@
 import { NextRouter } from "next/router";
+import { vi } from 'vitest';
 
 export function createMockRouter(router: Partial<NextRouter>): NextRouter {
   return { ...mockRouter, ...router };
@@ -10,17 +11,17 @@ export const mockRouter: NextRouter = {
   route: "/",
   query: {},
   asPath: "/",
-  back: jest.fn(),
-  beforePopState: jest.fn(),
-  prefetch: jest.fn(),
-  forward: jest.fn(),
-  push: jest.fn(),
-  reload: jest.fn(),
-  replace: jest.fn(),
+  back: vi.fn(),
+  beforePopState: vi.fn(),
+  prefetch: vi.fn(),
+  forward: vi.fn(),
+  push: vi.fn(),
+  reload: vi.fn(),
+  replace: vi.fn(),
   events: {
-    on: jest.fn(),
-    off: jest.fn(),
-    emit: jest.fn(),
+    on: vi.fn(),
+    off: vi.fn(),
+    emit: vi.fn(),
   },
   isFallback: false,
   isLocaleDomain: false,
