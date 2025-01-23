@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
-    name: build
+    name: Install, test and build application
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
