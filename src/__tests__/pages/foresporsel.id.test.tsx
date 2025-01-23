@@ -29,7 +29,7 @@ describe("Kansellert foresporsel gjort av hovedpart", () => {
     );
     await waitForElementToBeRemoved(() => getSpinner());
 
-    const title = await screen.queryByText("trukket_tilbake.den_som_trukket.title");
+    const title = await screen.findByText("trukket_tilbake.den_som_trukket.title");
     expect(title).toBeInTheDocument();
   });
 });
