@@ -15,14 +15,11 @@ import { createMockRouter } from "../utils/router.utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 
-const createForesporselFn = (identer: string[]) => identer
 const createForesporselMock = {
-  createForesporsel: createForesporselFn
+  createForesporsel: (identer: string[]) => identer
 }
-vi.spyOn(createForesporselMock, "createForesporsel")
-
-const useForesporselApi = vi.fn()
-useForesporselApi("../../hooks/useForesporselApi", () => ({
+const spy = vi.spyOn(createForesporselMock, "createForesporsel")
+vi.mock("../../hooks/useForesporselApi", () => ({
   useForesporselApi: vi.fn(() => createForesporselMock),
 }))
 
@@ -128,8 +125,8 @@ describe("Person with barn", () => {
     const sendInnButton = getSendInnButton();
     fireEvent.click(sendInnButton);
 
-    expect(createForesporselFn).toBeCalledTimes(1);
-    expect(createForesporselFn).toHaveBeenCalledWith(allBarn.map((i) => i.ident));
+    expect(spy).toBeCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(allBarn.map((i) => i.ident));
   });
 });
 
