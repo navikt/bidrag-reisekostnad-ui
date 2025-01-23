@@ -2,7 +2,7 @@ import { http, HttpResponse, delay } from "msw";
 import { server } from "../../__mocks__/server";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 
-export function fetchBrukerinformation(brukerinformasjon:IBrukerinformasjon) {
+export function fetchBrukerinformasjon(brukerinformasjon:IBrukerinformasjon) {
   server.use(
     http.get("/api/brukerinformasjon", async () => {
       await delay(100);

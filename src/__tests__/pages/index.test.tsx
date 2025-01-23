@@ -11,7 +11,7 @@ import {
   KVINNE_UTEN_BARN,
   MANN_UTEN_FORESPORSEL,
 } from "../mock/brukerinformasjon";
-import { fetchBrukerinformation } from "../utils/api.utils";
+import { fetchBrukerinformasjon } from "../utils/api.utils";
 import { getCreateForesporselButton, getOverviewCardById, getSpinner } from "../utils/index.utils";
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { createMockRouter } from "../utils/router.utils";
@@ -33,7 +33,7 @@ describe("No data", () => {
 
 describe("Person without barn", () => {
   it("should render alert when person has no barn", async () => {
-    fetchBrukerinformation(KVINNE_UTEN_BARN);
+    fetchBrukerinformasjon(KVINNE_UTEN_BARN);
     render(
       <MockContext>
         <Home />
@@ -49,7 +49,7 @@ describe("Person without barn", () => {
 
 describe("Person without foresporsel", () => {
   beforeEach(async () => {
-    fetchBrukerinformation(MANN_UTEN_FORESPORSEL);
+    fetchBrukerinformasjon(MANN_UTEN_FORESPORSEL);
     render(
       <MockContext>
         <Home />
@@ -76,7 +76,7 @@ describe("Person with existing foresporsler", () => {
   const router = createMockRouter({ query: { id: FORESPORSEL_ID } });
 
   beforeEach(async () => {
-    fetchBrukerinformation(personMedForesporsler);
+    fetchBrukerinformasjon(personMedForesporsler);
     render(
       <MockContext router={router}>
         <Home />

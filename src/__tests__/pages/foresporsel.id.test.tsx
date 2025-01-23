@@ -7,7 +7,7 @@ import {
   KVINNE_MED_FORESPORSEL_SOM_MOTPART_OG_HOVEDPART,
 } from "../mock/brukerinformasjon";
 import { MockContext } from "../mock/MockContext";
-import { fetchBrukerinformation } from "../utils/api.utils";
+import { fetchBrukerinformasjon } from "../utils/api.utils";
 import { getSpinner } from "../utils/index.utils";
 import { createMockRouter } from "../utils/router.utils";
 
@@ -19,7 +19,7 @@ describe("Kansellert foresporsel gjort av hovedpart", () => {
     const foresporsel = personMedForesporsler.forespørslerSomHovedpart[0];
     const FORESPORSEL_ID = foresporsel.id as unknown as string;
     const router = createMockRouter({ query: { id: FORESPORSEL_ID } });
-    fetchBrukerinformation(personMedForesporsler);
+    fetchBrukerinformasjon(personMedForesporsler);
 
     render(
       <MockContext router={router}>
@@ -44,7 +44,7 @@ describe("Personen er hovedpart: Vente paa samtykke foresporsel", () => {
   const router = createMockRouter({ query: { id: foresporsel.id as unknown as string } });
 
   beforeEach(async () => {
-    fetchBrukerinformation(personMedForesporsler);
+    fetchBrukerinformasjon(personMedForesporsler);
     render(
       <MockContext router={router}>
         <ForesporselId />
