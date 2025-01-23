@@ -1,6 +1,8 @@
+import { Gender } from "../../enum/gender";
+
 export const KVINNE_UTEN_BARN = {
   fornavn: "ENTUSIASTISK",
-  kjønn: "KVINNE",
+  kjønn: Gender.KVINNE,
   harDiskresjon: false,
   kanSøkeOmFordelingAvReisekostnader: true,
   harSkjulteFamilieenheterMedDiskresjon: false,
@@ -12,7 +14,7 @@ export const KVINNE_UTEN_BARN = {
 
 export const MANN_UTEN_FORESPORSEL = {
   fornavn: "FYLDIG",
-  kjønn: "MANN",
+  kjønn: Gender.MANN,
   harDiskresjon: false,
   kanSøkeOmFordelingAvReisekostnader: true,
   harSkjulteFamilieenheterMedDiskresjon: false,
@@ -54,7 +56,7 @@ export const MANN_UTEN_FORESPORSEL = {
 
 export const MANN_MED_ETT_BARN_OG_FORESPORSEL = {
   fornavn: "FYLDIG",
-  kjønn: "MANN",
+  kjønn: Gender.MANN,
   harDiskresjon: false,
   kanSøkeOmFordelingAvReisekostnader: true,
   harSkjulteFamilieenheterMedDiskresjon: false,
@@ -104,7 +106,7 @@ export const MANN_MED_ETT_BARN_OG_FORESPORSEL = {
 
 export const KVINNE_MED_FORESPORSEL = {
   fornavn: "STOR",
-  kjønn: "KVINNE",
+  kjønn: Gender.KVINNE,
   harDiskresjon: false,
   kanSøkeOmFordelingAvReisekostnader: true,
   harSkjulteFamilieenheterMedDiskresjon: false,
@@ -236,7 +238,7 @@ export const KVINNE_MED_FORESPORSEL = {
 
 export const KVINNE_MED_FORESPORSEL_SOM_MOTPART_OG_HOVEDPART = {
   fornavn: "STOR",
-  kjønn: "KVINNE",
+  kjønn: Gender.KVINNE,
   harDiskresjon: false,
   kanSøkeOmFordelingAvReisekostnader: true,
   harSkjulteFamilieenheterMedDiskresjon: false,
@@ -281,7 +283,7 @@ export const KVINNE_MED_FORESPORSEL_SOM_MOTPART_OG_HOVEDPART = {
           ident: "B33ZBAwenZPKeYFX6+oN8g==",
           fornavn: "PRESENTABEL",
           kortnavn: "PRESENTABEL PERSON",
-          fødselsdato: "2008-01-26",
+          fødselsdato: "2023-01-26",
         },
       ],
       hovedpart: {

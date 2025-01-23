@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
-    name: build
+    name: Install, test and build application
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +26,8 @@ jobs:
         run: "npm ci"
         env:
           NPM_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Run tests
+        run: npm run test
       - name: Create an optimized production build of the application
         run: npm run build
       - uses: nais/docker-build-push@v0
