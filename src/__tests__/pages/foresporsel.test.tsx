@@ -12,14 +12,19 @@ import {
   getSendInnButton,
 } from "../utils/index.utils";
 import { createMockRouter } from "../utils/router.utils";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const createForesporselFn = jest.fn();
 
-jest.mock("../../hooks/useForesporselApi", () => ({
-  useForesporselApi: jest.fn(() => ({
-    createForesporsel: createForesporselFn,
-  })),
-}));
+const createForesporselFn = (identer: string[]) => identer
+const createForesporselMock = {
+  createForesporsel: createForesporselFn
+}
+vi.spyOn(createForesporselMock, "createForesporsel")
+
+const useForesporselApi = vi.fn()
+useForesporselApi("../../hooks/useForesporselApi", () => ({
+  useForesporselApi: vi.fn(() => createForesporselMock),
+}))
 
 describe("Person with barn", () => {
   const personMedForesporsler = MANN_UTEN_FORESPORSEL as unknown as IBrukerinformasjon;

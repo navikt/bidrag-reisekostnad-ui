@@ -3,7 +3,6 @@ import {
   render,
   screen,
   waitForElementToBeRemoved,
-  waitFor,
 } from "@testing-library/react";
 import Home from "../../pages";
 import {
@@ -16,7 +15,7 @@ import { getCreateForesporselButton, getOverviewCardById, getSpinner } from "../
 import { IBrukerinformasjon } from "../../types/foresporsel";
 import { createMockRouter } from "../utils/router.utils";
 import { MockContext } from "../mock/MockContext";
-import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 
 describe("No data", () => {
   it("should render spinner when there is no data", () => {

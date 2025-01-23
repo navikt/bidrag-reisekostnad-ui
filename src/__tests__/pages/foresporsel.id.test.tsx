@@ -1,4 +1,4 @@
-import { screen, render, waitFor } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import { waitForElementToBeRemoved } from "@testing-library/react";
 import ForesporselId from "../../pages/foresporsel/[id]";
 import { IBrukerinformasjon } from "../../types/foresporsel";
@@ -10,6 +10,7 @@ import { MockContext } from "../mock/MockContext";
 import { fetchBrukerinformasjon } from "../utils/api.utils";
 import { getSpinner } from "../utils/index.utils";
 import { createMockRouter } from "../utils/router.utils";
+import { beforeEach, describe, expect, it } from "vitest";
 
 describe("Kansellert foresporsel gjort av hovedpart", () => {
   it("should render kvittering for kansellert foresporsel", async () => {
@@ -28,10 +29,8 @@ describe("Kansellert foresporsel gjort av hovedpart", () => {
     );
     await waitForElementToBeRemoved(() => getSpinner());
 
-    await waitFor(() => {
-      const title = screen.queryByText("trukket_tilbake.den_som_trukket.title");
-      expect(title).toBeInTheDocument();
-    });
+    const title = await screen.queryByText("trukket_tilbake.den_som_trukket.title");
+    expect(title).toBeInTheDocument();
   });
 });
 
@@ -47,16 +46,14 @@ describe("Personen er hovedpart: Vente paa samtykke foresporsel", () => {
     fetchBrukerinformasjon(personMedForesporsler);
     render(
       <MockContext router={router}>
-        <ForesporselId />
+        <ForesporselId/>
       </MockContext>
     );
     await waitForElementToBeRemoved(() => getSpinner());
   });
 
   it("should render kvittering with trekke tilbake button", async () => {
-    await waitFor(() => {
-      const trekkTilbakeButton = screen.queryByText("button.trekk_foresporselen");
-      expect(trekkTilbakeButton).toBeInTheDocument();
-    });
+    const trekkTilbakeButton = await screen.findByTestId("button.trekk_foresporselen");
+    expect(trekkTilbakeButton).toBeInTheDocument();
   });
 });

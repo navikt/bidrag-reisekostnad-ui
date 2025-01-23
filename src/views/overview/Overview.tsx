@@ -27,9 +27,6 @@ export default function Overview() {
 
       setShowedForesporslerSomMotpart(foresporslerWithBarnUnder15);
     }
-    return () => {
-      setShowedForesporslerSomMotpart([])
-    }
   }, [userInformation]);
 
   if (!userInformation) {
