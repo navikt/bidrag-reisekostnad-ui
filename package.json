@@ -71,7 +71,7 @@
     "@typescript-eslint/eslint-plugin": "^5.34.0",
     "@typescript-eslint/parser": "^5.34.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "eslint": "8.28.0",
