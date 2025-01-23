@@ -40,7 +40,7 @@ describe("Person without barn", () => {
     );
 
     await waitForElementToBeRemoved(() => getSpinner());
-    const alert = await screen.findByTestId("alert.funnetingen_barn");
+    const alert = await screen.findByTestId("alert.funnet_ingen_barn");
 
     expect(alert).toBeInTheDocument();
   });
