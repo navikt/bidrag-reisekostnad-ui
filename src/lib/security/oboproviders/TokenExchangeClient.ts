@@ -35,7 +35,7 @@ export default class TokenExchangeClient {
         client_id: this._config.clientId,
         token_endpoint_auth_method: "private_key_jwt",
       },
-      { keys: [jwk] }
+      { keys: [jwk] },
     );
   }
 
@@ -63,7 +63,7 @@ export default class TokenExchangeClient {
     try {
       const tokenset = await this.getClient().grant(
         this.grantBody(audience, subject_token),
-        this.additionalClaims()
+        this.additionalClaims(),
       );
       return tokenset.access_token ?? null;
     } catch (e) {

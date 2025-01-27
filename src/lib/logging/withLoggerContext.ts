@@ -18,7 +18,7 @@ export function withLoggerContext(handler: NextApiHandler): NextApiHandler {
         await initLoggerWithContext();
         await initSecureLoggerWithContext();
         resolve(handler(req, res));
-      })
+      }),
     );
   };
 }

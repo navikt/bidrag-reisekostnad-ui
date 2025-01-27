@@ -57,7 +57,7 @@ export class DefaultConsumer {
     url: string,
     method: FetchMethods,
     body?: string | object,
-    config?: IFetchConfig
+    config?: IFetchConfig,
   ): Promise<IApiResponse<T>> {
     const idToken = await this.session.getOBOToken(this.audience);
     const bodyString = typeof body == "string" ? body : JSON.stringify(body);

@@ -38,7 +38,7 @@ export default function ForesporselId() {
     if (foresporselId && userInformation) {
       const foundForesporsel = findForesporselById(
         [...userInformation.forespørslerSomHovedpart, ...userInformation.forespørslerSomMotpart],
-        foresporselId
+        foresporselId,
       );
       setForesporsel(foundForesporsel);
     }

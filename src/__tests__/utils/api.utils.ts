@@ -7,7 +7,7 @@ export function fetchBrukerinformasjon(brukerinformasjon: IBrukerinformasjon) {
     http.get("/api/brukerinformasjon", async () => {
       await delay(100);
       return HttpResponse.json<IBrukerinformasjon>(brukerinformasjon);
-    })
+    }),
   );
 }
 
@@ -21,6 +21,6 @@ export function postForesporsel() {
         },
         status: 200,
       });
-    })
+    }),
   );
 }

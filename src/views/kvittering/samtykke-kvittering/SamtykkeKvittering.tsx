@@ -35,14 +35,14 @@ export default function SamtykkeKvittering({
         setDescription(
           translate("samtykke.nei.den_andre_parten.description", {
             barn: barnInformation,
-          }) as string
+          }) as string,
         );
       } else {
         setTitle(translate("samtykke.nei.den_som_samtykket.title") as string);
         setDescription(
           translate("samtykke.nei.den_som_samtykket.description", {
             barn: barnInformation,
-          }) as string
+          }) as string,
         );
       }
     }

@@ -32,7 +32,7 @@ describe("Person with barn", () => {
     render(
       <MockContext router={router} reisekostnadProviderInitialState={personMedForesporsler}>
         <OpprettForesporsel />
-      </MockContext>
+      </MockContext>,
     );
   });
 
@@ -135,7 +135,7 @@ describe("Person with barn in existing foresporsel", () => {
     render(
       <MockContext reisekostnadProviderInitialState={personMedForesporsler}>
         <OpprettForesporsel />
-      </MockContext>
+      </MockContext>,
     );
 
     await waitFor(() => {
@@ -151,7 +151,7 @@ describe("Person with barn over 15 years old", () => {
     render(
       <MockContext reisekostnadProviderInitialState={personMedForesporsler}>
         <OpprettForesporsel />
-      </MockContext>
+      </MockContext>,
     );
 
     await waitFor(() => {

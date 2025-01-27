@@ -21,18 +21,18 @@ export default function TrekkTilbakeKvittering({
     if (erHovedpart) {
       setTitle(kvitteringTranslate("trukket_tilbake.den_som_trukket.title") as unknown as string);
       setMainContent(
-        kvitteringTranslate("trukket_tilbake.den_som_trukket.main_content") as unknown as string
+        kvitteringTranslate("trukket_tilbake.den_som_trukket.main_content") as unknown as string,
       );
       setSubContent(
-        kvitteringTranslate("trukket_tilbake.den_som_trukket.sub_content") as unknown as string
+        kvitteringTranslate("trukket_tilbake.den_som_trukket.sub_content") as unknown as string,
       );
     } else {
       setTitle(kvitteringTranslate("trukket_tilbake.den_andre_parten.title") as unknown as string);
       setMainContent(
-        kvitteringTranslate("trukket_tilbake.den_andre_parten.main_content") as unknown as string
+        kvitteringTranslate("trukket_tilbake.den_andre_parten.main_content") as unknown as string,
       );
       setSubContent(
-        kvitteringTranslate("trukket_tilbake.den_andre_parten.sub_content") as unknown as string
+        kvitteringTranslate("trukket_tilbake.den_andre_parten.sub_content") as unknown as string,
       );
     }
   }, [erHovedpart]);

@@ -32,17 +32,17 @@ function ReisekostnadProvider({ initialState, children }: PropsWithChildren<IPro
 
     const forespørslerSomMotpartMedAlder = mapToForesporselWithStatusAndPersonsAge(
       forespørslerSomMotpart,
-      false
+      false,
     );
     const forespørslerSomHovedpartMedAlder = mapToForesporselWithStatusAndPersonsAge(
       forespørslerSomHovedpart,
-      true
+      true,
     );
     const barnMinstFemtenÅrMedAlder = mapToPersonWithAge(barnMinstFemtenÅr);
     const motparterMedFellesBarnUnderFemtenÅrMedAlder = motparterMedFellesBarnUnderFemtenÅr.map(
       (motpart) => {
         return { ...motpart, fellesBarnUnder15År: mapToPersonWithAge(motpart.fellesBarnUnder15År) };
-      }
+      },
     );
 
     return {

@@ -5,7 +5,12 @@ import { Loader } from "@navikt/ds-react";
 describe("Loader test", () => {
   test("should render loader", async () => {
     render(
-      <Loader data-testid="spinner-testid" size="3xlarge" title="venter..." variant="interaction" />
+      <Loader
+        data-testid="spinner-testid"
+        size="3xlarge"
+        title="venter..."
+        variant="interaction"
+      />,
     );
 
     const loader = await screen.getByTestId("spinner-testid");

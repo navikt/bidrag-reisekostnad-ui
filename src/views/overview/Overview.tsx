@@ -15,14 +15,14 @@ export default function Overview() {
   const { t: translate } = useTranslation();
 
   const [showedForesporslerSomMotpart, setShowedForesporslerSomMotpart] = useState<IForesporsel[]>(
-    []
+    [],
   );
 
   useEffect(() => {
     if (userInformation) {
       const { forespørslerSomMotpart } = userInformation;
       const foresporslerWithBarnUnder15 = forespørslerSomMotpart.filter(
-        (foresporsel) => !foresporsel.erAlleOver15
+        (foresporsel) => !foresporsel.erAlleOver15,
       );
 
       setShowedForesporslerSomMotpart(foresporslerWithBarnUnder15);

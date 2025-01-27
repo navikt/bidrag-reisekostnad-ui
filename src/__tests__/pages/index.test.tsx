@@ -17,7 +17,7 @@ describe("No data", () => {
     render(
       <MockContext>
         <Home />
-      </MockContext>
+      </MockContext>,
     );
 
     const spinner = getSpinner();
@@ -31,7 +31,7 @@ describe("Person without barn", () => {
     render(
       <MockContext>
         <Home />
-      </MockContext>
+      </MockContext>,
     );
 
     await waitForElementToBeRemoved(() => getSpinner());
@@ -47,7 +47,7 @@ describe("Person without foresporsel", () => {
     render(
       <MockContext>
         <Home />
-      </MockContext>
+      </MockContext>,
     );
 
     await waitForElementToBeRemoved(() => getSpinner());
@@ -74,7 +74,7 @@ describe("Person with existing foresporsler", () => {
     render(
       <MockContext router={router}>
         <Home />
-      </MockContext>
+      </MockContext>,
     );
     await waitForElementToBeRemoved(() => getSpinner());
   });

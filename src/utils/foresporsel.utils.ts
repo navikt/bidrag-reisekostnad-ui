@@ -7,7 +7,7 @@ import { isAgeOver15YearsOld, isEveryoneOver15YearsOld } from "./person.utils";
 
 export function mapToForesporselWithStatusAndPersonsAge(
   foresporsler: IForesporsel[],
-  erHovedpart: boolean
+  erHovedpart: boolean,
 ): IForesporsel[] {
   const nyForesporsel = foresporsler.map((foresporsel) => ({
     ...foresporsel,
@@ -68,7 +68,7 @@ function sortByStatus(foresporsler: IForesporsel[]): IForesporsel[] {
 
 export function findForesporselById(
   foresporsler: IForesporsel[],
-  id: string
+  id: string,
 ): IForesporsel | undefined {
   return foresporsler.find((foresporsel) => foresporsel.id === Number(id));
 }

@@ -19,7 +19,7 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
         },
       },
     },
-    pino.multistream(getStreams())
+    pino.multistream(getStreams()),
   ).child(getLoggerContext());
 
 function getStreams() {

@@ -15,7 +15,7 @@ export interface ICacheOptions {
 
 export async function withOboTokenCache(
   oboProvider: OboProvider,
-  { expireOffsetInSeconds }: ICacheOptions = {}
+  { expireOffsetInSeconds }: ICacheOptions = {},
 ): Promise<OboProvider> {
   return async (token: string, audience: string) => {
     const key = `${token}-${audience}`;

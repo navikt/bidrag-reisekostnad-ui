@@ -21,7 +21,7 @@ export default function SamtykkeContainer({ foresporselId, barnInformation }: IS
     {
       isAgree: false,
       showError: false,
-    }
+    },
   );
   const [isSamtykke, setIsSamtykke] = useState<boolean>();
   const [showRadioError, setShowRadioError] = useState<boolean>(false);

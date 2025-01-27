@@ -11,6 +11,6 @@ export function withSessionApiRoute(handler: NextApiHandler): NextApiHandler {
       if (!session) return res.status(401).end();
       Object.defineProperty(req, "session", getPropertyDescriptorForReqSession(session));
       return handler(req, res);
-    })
+    }),
   );
 }

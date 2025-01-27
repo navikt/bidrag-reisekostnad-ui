@@ -25,7 +25,7 @@ describe("Kansellert foresporsel gjort av hovedpart", () => {
     render(
       <MockContext router={router}>
         <ForesporselId />
-      </MockContext>
+      </MockContext>,
     );
     await waitForElementToBeRemoved(() => getSpinner());
 
@@ -38,7 +38,7 @@ describe("Personen er hovedpart: Vente paa samtykke foresporsel", () => {
   const personMedForesporsler = KVINNE_MED_FORESPORSEL as unknown as IBrukerinformasjon;
   // foresporsel har status Vent paa samtykke
   const foresporsel = personMedForesporsler.forespørslerSomHovedpart.filter(
-    (i) => i.deaktivertAv === null
+    (i) => i.deaktivertAv === null,
   )[0];
   const router = createMockRouter({ query: { id: foresporsel.id as unknown as string } });
 
@@ -47,7 +47,7 @@ describe("Personen er hovedpart: Vente paa samtykke foresporsel", () => {
     render(
       <MockContext router={router}>
         <ForesporselId />
-      </MockContext>
+      </MockContext>,
     );
     await waitForElementToBeRemoved(() => getSpinner());
   });

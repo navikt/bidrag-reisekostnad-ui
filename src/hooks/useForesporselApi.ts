@@ -37,7 +37,7 @@ export function useForesporselApi() {
 
       const result = await fetch(
         "/api/foresporsel/ny",
-        requestBody(ApiOperation.POST, { identerBarn: [...identer] } as INyForespørsel)
+        requestBody(ApiOperation.POST, { identerBarn: [...identer] } as INyForespørsel),
       );
 
       await updateStatesAfterCall(result, HTTPStatus.CREATED);
@@ -52,7 +52,7 @@ export function useForesporselApi() {
 
       const result = await fetch(
         "/api/foresporsel/trekke",
-        requestBody(ApiOperation.PUT, foresporselId)
+        requestBody(ApiOperation.PUT, foresporselId),
       );
 
       await updateStatesAfterCall(result, HTTPStatus.OK);
@@ -67,7 +67,7 @@ export function useForesporselApi() {
 
       const result = await fetch(
         "/api/foresporsel/samtykke",
-        requestBody(ApiOperation.PUT, foresporselId)
+        requestBody(ApiOperation.PUT, foresporselId),
       );
 
       await updateStatesAfterCall(result, HTTPStatus.OK);

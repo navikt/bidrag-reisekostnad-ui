@@ -28,7 +28,7 @@ async function verifyToken(token: string | Uint8Array): Promise<JWTVerifyResult>
   const authLevel = (verifyResult.payload["acr"] as string)?.toLowerCase();
   if (authLevel != "idporten-loa-high" && authLevel != "level4")
     throw new errors.JWTClaimValidationFailed(
-      `authentication level is "${authLevel} but expected level4"`
+      `authentication level is "${authLevel} but expected level4"`,
     );
   return verifyResult;
 }

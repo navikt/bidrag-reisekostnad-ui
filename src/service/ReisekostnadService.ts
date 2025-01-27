@@ -11,7 +11,7 @@ export default class ReisekostnadService extends DefaultConsumer {
     super(
       environment.audiences.bidrag_reisekostnad_api,
       environment.url.bidragReisekostnad,
-      session
+      session,
     );
   }
 
