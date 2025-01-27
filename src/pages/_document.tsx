@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from "react";
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import {
     Components as DecoratorComponents,
