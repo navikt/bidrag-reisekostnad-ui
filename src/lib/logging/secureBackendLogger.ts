@@ -1,30 +1,30 @@
-import pino from "pino";
-import fs from "fs";
-import { mapError } from "./types";
-import { getLoggerContext } from "./als";
+import pino from 'pino';
+import fs from 'fs';
+import { mapError } from './types';
+import { getLoggerContext } from './als';
 
 export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
-  pino(
-    {
-      ...defaultConfig,
-      timestamp: false,
-      formatters: {
-        level: (label) => {
-          return { level: label };
+    pino(
+        {
+            ...defaultConfig,
+            timestamp: false,
+            formatters: {
+                level: (label) => {
+                    return { level: label };
+                },
+                log: (object: any) => {
+                    mapError(object);
+                    object.isSecure = true;
+                    return object;
+                },
+            },
         },
-        log: (object: any) => {
-          mapError(object);
-          object.isSecure = true;
-          return object;
-        },
-      },
-    },
-    pino.multistream(getStreams())
-  ).child(getLoggerContext());
+        pino.multistream(getStreams())
+    ).child(getLoggerContext());
 
 function getStreams() {
-  if (process.env.NEXT_PUBLIC_IS_PRODUCTION == "true") {
-    return [{ stream: fs.createWriteStream("/secure-logs/secure.log") }];
-  }
-  return [{ stream: process.stdout }];
+    if (process.env.NEXT_PUBLIC_IS_PRODUCTION == 'true') {
+        return [{ stream: fs.createWriteStream('/secure-logs/secure.log') }];
+    }
+    return [{ stream: process.stdout }];
 }

@@ -1,16 +1,16 @@
 export interface IPerson extends IPersonAge {
-  ident: string;
-  fornavn: string;
-  fødselsdato: string;
+    ident: string;
+    fornavn: string;
+    fødselsdato: string;
 }
 
 export interface IPersonAge {
-  alder: number;
-  erOver15: boolean;
-  er15Om30Dager: boolean;
+    alder: number;
+    erOver15: boolean;
+    er15Om30Dager: boolean;
 }
 
 export interface IMotpart {
-  motpart: IPerson;
-  fellesBarnUnder15År: IPerson[];
+    motpart: IPerson;
+    fellesBarnUnder15År: IPerson[];
 }

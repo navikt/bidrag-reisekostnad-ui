@@ -1,14 +1,14 @@
-import { createRedisInstance } from "./redis";
-import { getLocalCache } from "./localcache";
-import { TCache } from "./types";
-import environment from "../../environment";
+import { createRedisInstance } from './redis';
+import { getLocalCache } from './localcache';
+import { TCache } from './types';
+import environment from '../../environment';
 
 async function getCache() {
-  if (environment.redis.enabled) {
-    return createRedisInstance();
-  }
+    if (environment.redis.enabled) {
+        return createRedisInstance();
+    }
 
-  return getLocalCache();
+    return getLocalCache();
 }
 
 const cache: TCache = await getCache();

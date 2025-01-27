@@ -1,3 +1,3 @@
 export interface INyForespørsel {
-  identerBarn: string[];
+    identerBarn: string[];
 }
