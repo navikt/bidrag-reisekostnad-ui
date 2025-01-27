@@ -1,0 +1,5 @@
+# Ignore yaml files
+**/.nais
+
+# Ignore public folder
+**/public
