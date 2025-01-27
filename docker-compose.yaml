@@ -1,15 +1,15 @@
-version: "3.8"
+version: '3.8'
 services:
-  redis:
-    image: docker.io/bitnami/redis:7.0.5
-    environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
-      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-    ports:
-      - "6379:6379"
-    volumes:
-      - "redis_data:/bitnami/redis/data"
+    redis:
+        image: docker.io/bitnami/redis:7.0.5
+        environment:
+            # ALLOW_EMPTY_PASSWORD is recommended only for development.
+            - ALLOW_EMPTY_PASSWORD=yes
+            - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+        ports:
+            - '6379:6379'
+        volumes:
+            - 'redis_data:/bitnami/redis/data'
 #  mock-oauth2-server:
 #    image: ghcr.io/navikt/mock-oauth2-server:0.5.1
 #    ports:
@@ -47,5 +47,5 @@ services:
 #      JWT_HEADER: Authorization
 
 volumes:
-  redis_data:
-    driver: local
+    redis_data:
+        driver: local

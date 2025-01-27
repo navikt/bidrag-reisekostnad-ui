@@ -1,8 +1,8 @@
-const supportedLocales = ["nb"];
+const supportedLocales = ['nb'];
 
 module.exports = {
-  i18n: {
-    defaultLocale: "nb",
-    locales: supportedLocales,
-  },
+    i18n: {
+        defaultLocale: 'nb',
+        locales: supportedLocales,
+    },
 };

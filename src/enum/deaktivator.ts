@@ -1,5 +1,5 @@
 export enum Deaktivator {
-  HOVEDPART = "HOVEDPART",
-  MOTPART = "MOTPART",
-  SYSTEM = "SYSTEM",
+    HOVEDPART = 'HOVEDPART',
+    MOTPART = 'MOTPART',
+    SYSTEM = 'SYSTEM',
 }

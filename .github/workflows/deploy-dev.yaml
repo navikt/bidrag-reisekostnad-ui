@@ -1,55 +1,55 @@
-name: "Build and deploy dev"
+name: 'Build and deploy dev'
 on:
-  push:
-    branches:
-      - "**"
-      - "!main"
+    push:
+        branches:
+            - '**'
+            - '!main'
 env:
-  GITHUB_USERNAME: x-access-token
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  DEKORATOR_ENV: dev
+    GITHUB_USERNAME: x-access-token
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    DEKORATOR_ENV: dev
 
 jobs:
-  build:
-    permissions:
-      contents: "read"
-      id-token: "write"
-    name: Install, test and build application
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          registry-url: "https://npm.pkg.github.com"
-      - name: Clean install of dependencies
-        run: "npm ci"
-        env:
-          NPM_TOKEN: ${{ secrets.READER_TOKEN }}
-      - name: Run tests
-        run: npm run test
-      - name: Create an optimized production build of the application
-        run: npm run build
-      - uses: nais/docker-build-push@v0
-        if: ${{ github.actor != 'dependabot[bot]' }}
-        id: docker-push
-        with:
-          team: bidrag
-          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
-          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
-    outputs:
-      image: ${{ steps.docker-push.outputs.image }}
-  deployAppToDev:
-    name: "Deploy application to development"
-    needs: build
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Deploy to DEV
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          RESOURCE: .nais/nais.yaml
-          VARS: .nais/dev.yaml
-          IMAGE: ${{ needs.build.outputs.image }}
+    build:
+        permissions:
+            contents: 'read'
+            id-token: 'write'
+        name: Install, test and build application
+        runs-on: 'ubuntu-latest'
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: '18'
+                  registry-url: 'https://npm.pkg.github.com'
+            - name: Clean install of dependencies
+              run: 'npm ci'
+              env:
+                  NPM_TOKEN: ${{ secrets.READER_TOKEN }}
+            - name: Run tests
+              run: npm run test
+            - name: Create an optimized production build of the application
+              run: npm run build
+            - uses: nais/docker-build-push@v0
+              if: ${{ github.actor != 'dependabot[bot]' }}
+              id: docker-push
+              with:
+                  team: bidrag
+                  identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+                  project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+        outputs:
+            image: ${{ steps.docker-push.outputs.image }}
+    deployAppToDev:
+        name: 'Deploy application to development'
+        needs: build
+        runs-on: 'ubuntu-latest'
+        steps:
+            - uses: actions/checkout@v4
+            - name: Deploy to DEV
+              uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: dev-gcp
+                  RESOURCE: .nais/nais.yaml
+                  VARS: .nais/dev.yaml
+                  IMAGE: ${{ needs.build.outputs.image }}
