@@ -46,7 +46,7 @@ describe("Personen er hovedpart: Vente paa samtykke foresporsel", () => {
     fetchBrukerinformasjon(personMedForesporsler);
     render(
       <MockContext router={router}>
-        <ForesporselId/>
+        <ForesporselId />
       </MockContext>
     );
     await waitForElementToBeRemoved(() => getSpinner());

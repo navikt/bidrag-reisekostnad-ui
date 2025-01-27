@@ -21,14 +21,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "prettier",
-    "jsx-a11y",
-    "jest-dom",
-    "testing-library"
-  ],
+  "plugins": ["react", "@typescript-eslint", "prettier", "jsx-a11y", "jest-dom", "testing-library"],
   "rules": {
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-ts-comment": "off",

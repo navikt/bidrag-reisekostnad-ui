@@ -14,14 +14,13 @@ import {
 import { createMockRouter } from "../utils/router.utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-
 const createForesporselMock = {
-  createForesporsel: (identer: string[]) => identer
-}
-const spy = vi.spyOn(createForesporselMock, "createForesporsel")
+  createForesporsel: (identer: string[]) => identer,
+};
+const spy = vi.spyOn(createForesporselMock, "createForesporsel");
 vi.mock("../../hooks/useForesporselApi", () => ({
   useForesporselApi: vi.fn(() => createForesporselMock),
-}))
+}));
 
 describe("Person with barn", () => {
   const personMedForesporsler = MANN_UTEN_FORESPORSEL as unknown as IBrukerinformasjon;

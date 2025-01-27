@@ -1,10 +1,10 @@
-import '@testing-library/jest-dom/vitest';
+import "@testing-library/jest-dom/vitest";
 
-import { beforeAll, afterEach, afterAll, vi } from 'vitest'
+import { beforeAll, afterEach, afterAll, vi } from "vitest";
 import { server } from "./src/__mocks__/server";
 
 // Start the server before all tests
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 
 // Clean up after the tests are finished
 afterAll(() => server.close());

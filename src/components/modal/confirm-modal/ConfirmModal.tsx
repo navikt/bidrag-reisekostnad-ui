@@ -39,19 +39,14 @@ export default function ConfirmModal({
    */
 
   return (
-    <Modal
-      className="p-5"
-      open={open}
-      onClose={onClose}
-      aria-labelledby="modal-heading"
-    >
+    <Modal className="p-5" open={open} onClose={onClose} aria-labelledby="modal-heading">
       <Modal.Body className="grid gap-5">
         {showError && <Alert variant="error">{errorMessage}</Alert>}
         <Heading spacing level="1" size="medium" id="modal-heading">
           {header}
         </Heading>
         <BodyShort className="flex gap-4 items-center" spacing>
-          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" color="#C77300"/>
+          <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" color="#C77300" />
           {content}
         </BodyShort>
       </Modal.Body>

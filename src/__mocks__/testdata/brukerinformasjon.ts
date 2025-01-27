@@ -3,7 +3,7 @@ import { IBrukerinformasjon } from "../../types/foresporsel";
 
 export const BRUKERENS_FORNAVN = "Nils";
 
-export const BRUKER_INFORMASJON_1:IBrukerinformasjon = {
+export const BRUKER_INFORMASJON_1: IBrukerinformasjon = {
   fornavn: "Gråtass",
   kjønn: Gender.KVINNE,
   harDiskresjon: true,

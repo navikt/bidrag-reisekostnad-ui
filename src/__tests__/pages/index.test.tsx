@@ -1,9 +1,4 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import Home from "../../pages";
 import {
   KVINNE_MED_FORESPORSEL_SOM_MOTPART_OG_HOVEDPART,
@@ -106,10 +101,10 @@ describe("Person with existing foresporsler", () => {
   });
 
   it("should render both sendt inn and motatt foresporsler", async () => {
-      const sendtInnForesporsel = await screen.findByText("title.sendt_inn_foresporsler");
-      expect(sendtInnForesporsel).toBeInTheDocument();
-      const motattForesporsel = await screen.findByText("title.motatt_foresporsler");
-      expect(motattForesporsel).toBeInTheDocument();
+    const sendtInnForesporsel = await screen.findByText("title.sendt_inn_foresporsler");
+    expect(sendtInnForesporsel).toBeInTheDocument();
+    const motattForesporsel = await screen.findByText("title.motatt_foresporsler");
+    expect(motattForesporsel).toBeInTheDocument();
   });
 
   it("should redirect to create new foresporsel page", async () => {

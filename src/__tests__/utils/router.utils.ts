@@ -1,5 +1,5 @@
 import { NextRouter } from "next/router";
-import { vi } from 'vitest';
+import { vi } from "vitest";
 
 export function createMockRouter(router: Partial<NextRouter>): NextRouter {
   return { ...mockRouter, ...router };

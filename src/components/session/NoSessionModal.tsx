@@ -48,7 +48,9 @@ export function NoSessionModal() {
         <div className="flex gap-4 items-center">
           <ExclamationmarkTriangleFillIcon title="a11y-title" fontSize="35px" color="#C77300" />
           <div>
-            <BodyShort>Sesjonen din har utløpt og du må logge inn på nytt for å fortsette.</BodyShort>
+            <BodyShort>
+              Sesjonen din har utløpt og du må logge inn på nytt for å fortsette.
+            </BodyShort>
             <BodyShort>Merk at du vil miste dine ulagrede endringer etter innlogging.</BodyShort>
           </div>
         </div>
@@ -61,7 +63,6 @@ export function NoSessionModal() {
           </Button>
         </div>
       </Modal.Body>
-
     </Modal>
   );
 }
