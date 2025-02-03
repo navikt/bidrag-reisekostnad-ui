@@ -28,6 +28,8 @@ jobs:
                   NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Run tests
               run: npm run test
+            - name: Remove dev dependencies
+              run: npm prune --production
             - name: Create an optimized production build of the application
               run: npm run build
             - uses: nais/docker-build-push@v0
