@@ -14,8 +14,6 @@ COPY package*.json ./
 # Install app dependencies
 # RUN npm install --production=false --frozen-lockfile
 
-# Prevent copying dev dependencies to the image
-CMD ["npm", "prune --production"]
 # Copy the app's source code / all except what is listed in .dockerignore
 # after copying over files that define our app dependencies and install
 # them. Use COPY as it takes advantage of the Docker cache, unless the
