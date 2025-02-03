@@ -1,7 +1,7 @@
 import React from 'react';
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import {
-    DecoratorComponents,
+    DecoratorComponentsReact,
     DecoratorFetchProps,
     DecoratorLocale,
     fetchDecoratorReact,
@@ -14,7 +14,6 @@ const decoratorProps: DecoratorFetchProps = {
         chatbot: false,
         simple: false,
         context: 'privatperson',
-        enforceLogin: false,
         redirectToApp: true,
         level: 'Level4',
         breadcrumbs: [
@@ -33,7 +32,7 @@ const decoratorProps: DecoratorFetchProps = {
     },
 };
 
-class MyDocument extends Document<{ decorator: DecoratorComponents }> {
+class MyDocument extends Document<{ decorator: DecoratorComponentsReact }> {
     static async getInitialProps(ctx: DocumentContext) {
         /*const originalRenderPage = ctx.renderPage;
         // Run the React rendering logic synchronously
@@ -51,7 +50,14 @@ class MyDocument extends Document<{ decorator: DecoratorComponents }> {
         //const { locale } = ctx;
         //const language = locale === undefined ? 'en' : (locale as DecoratorLocale);
 
-        const decorator: DecoratorComponents = await fetchDecoratorReact({
+        const decorator:
+            | DecoratorComponentsReact
+            | {
+                  Header: () => JSX.Element;
+                  Scripts: () => JSX.Element;
+                  Footer: () => JSX.Element;
+                  Styles: () => JSX.Element;
+              } = await fetchDecoratorReact({
             ...decoratorProps,
             //            ...{ language: language },
         }).catch((err) => {
