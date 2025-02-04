@@ -30,6 +30,8 @@ jobs:
               run: npm run test
             - name: Create an optimized production build of the application
               run: npm run build
+            - name: Remove dev dependencies
+              run: npm prune --production
             - uses: nais/docker-build-push@v0
               id: docker-push
               with:
