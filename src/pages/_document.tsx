@@ -56,7 +56,7 @@ class MyDocument extends Document<{ decorator: DecoratorComponentsReact }> {
                   Header: () => JSX.Element;
                   Scripts: () => JSX.Element;
                   Footer: () => JSX.Element;
-                  Styles: () => JSX.Element;
+                  HeadAssets: () => JSX.Element;
               } = await fetchDecoratorReact({
             ...decoratorProps,
             //            ...{ language: language },
@@ -67,7 +67,7 @@ class MyDocument extends Document<{ decorator: DecoratorComponentsReact }> {
                 Footer: empty,
                 Header: empty,
                 Scripts: empty,
-                Styles: empty,
+                HeadAssets: empty,
             };
         });
 
