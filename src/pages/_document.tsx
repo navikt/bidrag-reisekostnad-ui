@@ -61,7 +61,7 @@ class MyDocument extends Document<{ decorator: DecoratorComponentsReact }> {
             ...decoratorProps,
             //            ...{ language: language },
         }).catch((err) => {
-            // eslint-disable-next-line no-console
+            console.error(err);
             const empty = () => <></>;
             return {
                 Footer: empty,
