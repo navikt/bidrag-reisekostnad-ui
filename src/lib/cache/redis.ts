@@ -12,6 +12,7 @@ export const createRedisInstance: () => TCache = () => {
             showFriendlyErrorStack: true,
             enableAutoPipelining: true,
             maxRetriesPerRequest: 0,
+            enableReadyCheck: false,
             retryStrategy: (times: number) => {
                 if (times > 3) {
                     throw new Error(`[Redis] Could not connect after ${times} attempts`);

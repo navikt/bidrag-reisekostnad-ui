@@ -37,11 +37,13 @@ spec:
     enabled: true
   accessPolicy:
     outbound:
-      external:
-        - host: {{external.decorator}}
       rules:
         - application: bidrag-reisekostnad-ui-redis
+          namespace: bidrag
         - application: bidrag-reisekostnad-api
+          namespace: bidrag
+        - application: nav-dekoratoren
+          namespace: personbruker
   resources:
     limits:
       cpu: 1000m

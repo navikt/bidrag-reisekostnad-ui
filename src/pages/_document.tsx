@@ -1,86 +1,99 @@
 import React from 'react';
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import {
-    Components as DecoratorComponents,
+    DecoratorComponentsReact,
+    DecoratorFetchProps,
+    DecoratorLocale,
     fetchDecoratorReact,
-    Locale,
-    Props as DecoratorProps,
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 
-const decoratorProps: DecoratorProps = {
+const decoratorProps: DecoratorFetchProps = {
     // @ts-ignore
     env: process.env.DEKORATOR_ENV ?? 'prod',
-    chatbot: false,
-    simple: false,
-    context: 'privatperson',
-    enforceLogin: false,
-    redirectToApp: true,
-    level: 'Level4',
-    breadcrumbs: [
-        { title: 'Fordeling  av reisekostnader', url: 'https://bidrag-reisekostnad.nav.no/' },
-    ],
-    language: 'nb',
+    params: {
+        chatbot: false,
+        simple: false,
+        context: 'privatperson',
+        redirectToApp: true,
+        level: 'Level4',
+        breadcrumbs: [
+            { title: 'Familie og barn', url: 'https://www.nav.no/familie' },
+            {
+                title: 'Bor ikke sammen med barnet mitt',
+                url: 'https://www.nav.no/bor-ikke-med-barnet-mitt',
+            },
+            {
+                title: 'Fordele reisekostnader ved samvær',
+                url: 'https://www.nav.no/fordele-reisekostnader',
+            },
+            { title: 'Fordeling  av reisekostnader', url: 'https://bidrag-reisekostnad.nav.no/' },
+        ],
+        language: 'nb',
+    },
 };
 
-export default class MyDocument extends Document<DecoratorComponents> {
+class MyDocument extends Document<{ decorator: DecoratorComponentsReact }> {
     static async getInitialProps(ctx: DocumentContext) {
-        const { locale } = ctx;
-        const initialProps = await Document.getInitialProps(ctx);
-        const language = locale === undefined ? 'nb' : (locale as Locale);
+        /*const originalRenderPage = ctx.renderPage;
+        // Run the React rendering logic synchronously
+        ctx.renderPage = () =>
+            originalRenderPage({
+                // Useful for wrapping the whole react tree
+                enhanceApp: (App) => App,
+                // Useful for wrapping in a per-page basis
+                enhanceComponent: (Component) => Component,
+            });
 
-        const Dekorator: DecoratorComponents = await fetchDecoratorReact({
+        // Run the parent `getInitialProps`, it now includes the custom `renderPage`*/
+        const initialProps = await Document.getInitialProps(ctx);
+
+        //const { locale } = ctx;
+        //const language = locale === undefined ? 'en' : (locale as DecoratorLocale);
+
+        const decorator:
+            | DecoratorComponentsReact
+            | {
+                  Header: () => JSX.Element;
+                  Scripts: () => JSX.Element;
+                  Footer: () => JSX.Element;
+                  HeadAssets: () => JSX.Element;
+              } = await fetchDecoratorReact({
             ...decoratorProps,
-            language: language,
+            //            ...{ language: language },
         }).catch((err) => {
-            // eslint-disable-next-line no-console
             console.error(err);
             const empty = () => <></>;
             return {
                 Footer: empty,
                 Header: empty,
                 Scripts: empty,
-                Styles: empty,
+                HeadAssets: empty,
             };
         });
 
         return {
             ...initialProps,
-            ...Dekorator,
-            locale: language,
+            decorator,
+            //           locale: language,
         };
     }
 
     render(): JSX.Element {
-        const { Styles, Scripts, Header, Footer, locale } = this.props;
+        const Decorator = this.props.decorator;
         return (
-            <Html lang={locale}>
+            <Html lang={'nb'}>
                 <Head>
-                    <link
-                        rel="icon"
-                        type="image/png"
-                        sizes="32x32"
-                        href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-32x32.png`}
-                    />
-                    <link
-                        rel="icon"
-                        type="image/png"
-                        sizes="16x16"
-                        href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-16x16.png`}
-                    />
-                    <link
-                        rel="shortcut icon"
-                        href={`${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon.ico`}
-                    />
-                    <Styles />
+                    <Decorator.HeadAssets />
                 </Head>
                 <body>
-                    <Scripts />
-                    <Header />
+                    <Decorator.Header />
                     <Main />
-                    <Footer />
+                    <Decorator.Footer />
+                    <Decorator.Scripts />
                     <NextScript />
                 </body>
             </Html>
         );
     }
 }
+export default MyDocument;

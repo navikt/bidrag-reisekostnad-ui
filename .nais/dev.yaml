@@ -6,5 +6,3 @@ env:
   DEKORATOR_ENV: dev
 replicas:
   count: 1
-external:
-  decorator: dekoratoren.ekstern.dev.nav.no
