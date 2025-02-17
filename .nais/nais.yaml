@@ -38,7 +38,7 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: bidrag-reisekostnad-ui-redis
+        - application: valkey-bidrag-reisekostnad
           namespace: bidrag
         - application: bidrag-reisekostnad-api
           namespace: bidrag
