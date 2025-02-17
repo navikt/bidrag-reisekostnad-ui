@@ -6,6 +6,8 @@ import {
     fetchDecoratorReact,
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 
+import type { JSX } from "react";
+
 const decoratorProps: DecoratorFetchProps = {
     // @ts-ignore
     env: process.env.DEKORATOR_ENV ?? 'prod',
