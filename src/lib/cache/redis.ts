@@ -9,7 +9,7 @@ export const createRedisInstance: () => TCache = () => {
         const options: RedisOptions = {
             username: environment.valkey.username,
             password: environment.valkey.password,
-            port: parseInt(environment.valkey.port),
+            port: environment.valkey.port,
             showFriendlyErrorStack: true,
             enableAutoPipelining: true,
             maxRetriesPerRequest: 0,
