@@ -23,10 +23,11 @@ export const createRedisInstance: () => TCache = () => {
             },
         };
 
+        logger.info('Connecting to redis', options);
         const redis = new Redis(environment.valkey.url, options);
 
         redis.on('error', (error: unknown) => {
-            logger.warn('[Valkey] Error connecting', error);
+            logger.warn('[Valkey] Error connecting' + error, error);
         });
 
         redis.on('ready', () => {
