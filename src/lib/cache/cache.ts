@@ -4,7 +4,7 @@ import { TCache } from './types';
 import environment from '../../environment';
 
 async function getCache() {
-    if (environment.redis.enabled) {
+    if (environment.valkey.enabled) {
         return createRedisInstance();
     }
 

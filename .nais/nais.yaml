@@ -33,6 +33,9 @@ spec:
   redis:
     - instance: reisekostnad
       access: readwrite
+  valkey:
+    - instance: reisekostnad
+      access: readwrite
   tokenx:
     enabled: true
   accessPolicy:

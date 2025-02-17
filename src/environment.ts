@@ -15,11 +15,11 @@ const audiences = {
     bidrag_reisekostnad_api: env.get('BIDRAG_REISEKOSTNAD_API_SCOPE').required().asString(),
 };
 
-const redis = {
-    enabled: env.get('ENABLE_REDIS').required(false).default('true').asBool(),
-    url: env.get('REDIS_URI_REISEKOSTNAD').required(false).asString(),
-    username: env.get('REDIS_USERNAME_REISEKOSTNAD').required(false).asString(),
-    password: env.get('REDIS_PASSWORD_REISEKOSTNAD').required(false).asString(),
+const valkey = {
+    enabled: env.get('ENABLE_VALKEY').required(false).default('true').asBool(),
+    url: env.get('VALKEY_URI_REISEKOSTNAD').required(false).asString(),
+    username: env.get('VALKEY_USERNAME_REISEKOSTNAD').required(false).asString(),
+    password: env.get('VALKEY_PASSWORD_REISEKOSTNAD').required(false).asString(),
 };
 
-export default { url, system, audiences, redis };
+export default { url, system, audiences, valkey };
