@@ -26,7 +26,6 @@ export const createRedisInstance: () => TCache = () => {
             },
         };
 
-        logger.info('Connecting to redis ' + JSON.stringify(options));
         const redis = new Redis(options);
 
         redis.on('error', (error: unknown) => {
