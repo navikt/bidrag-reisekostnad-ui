@@ -9,6 +9,7 @@ export const createRedisInstance: () => TCache = () => {
         const options: RedisOptions = {
             username: environment.valkey.username,
             password: environment.valkey.password,
+            host: environment.valkey.host,
             port: environment.valkey.port,
             showFriendlyErrorStack: true,
             enableAutoPipelining: true,
@@ -24,7 +25,7 @@ export const createRedisInstance: () => TCache = () => {
         };
 
         logger.info('Connecting to redis', options);
-        const redis = new Redis(environment.valkey.url, options);
+        const redis = new Redis(options);
 
         redis.on('error', (error: unknown) => {
             logger.warn('[Valkey] Error connecting' + error, error);

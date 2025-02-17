@@ -19,6 +19,7 @@ const valkey = {
     enabled: env.get('ENABLE_VALKEY').required(false).default('true').asBool(),
     port: env.get('VALKEY_PORT_REISEKOSTNAD').required(false).asPortNumber(),
     url: env.get('VALKEY_URI_REISEKOSTNAD').required(false).asString(),
+    host: env.get('VALKEY_HOST_REISEKOSTNAD').required(false).asString(),
     username: env.get('VALKEY_USERNAME_REISEKOSTNAD').required(false).asString(),
     password: env.get('VALKEY_PASSWORD_REISEKOSTNAD').required(false).asString(),
 };
