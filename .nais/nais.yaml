@@ -30,9 +30,6 @@ spec:
       autoLogin: true
       autoLoginIgnorePaths:
         - "/_next/static/*/*"
-  redis:
-    - instance: reisekostnad
-      access: readwrite
   valkey:
     - instance: reisekostnad
       access: readwrite
