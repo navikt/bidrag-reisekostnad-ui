@@ -1,4 +1,3 @@
-import React from 'react';
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import {
     DecoratorComponentsReact,

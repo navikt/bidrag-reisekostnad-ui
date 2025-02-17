@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { ReactElement } from 'react';
 import { useState } from 'react';
 import { Button } from '@navikt/ds-react';

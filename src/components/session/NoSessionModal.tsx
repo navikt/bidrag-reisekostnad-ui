@@ -1,6 +1,6 @@
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './NoSessionModal.module.css';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { useCountdown } from '../../hooks/useCountdown';
