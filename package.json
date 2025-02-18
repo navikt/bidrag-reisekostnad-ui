@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@navikt/aksel-icons": "^7.12.2",
-        "@navikt/bidrag-ui-common": "1.10.15",
+        "@navikt/bidrag-ui-common": "1.11.0",
         "@navikt/ds-css": "^7.12.2",
         "@navikt/ds-react": "^7.12.2",
         "@navikt/ds-tailwind": "^7.12.2",
