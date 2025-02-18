@@ -1,11 +1,11 @@
-import { createRedisInstance } from './redis';
 import { getLocalCache } from './localcache';
 import { TCache } from './types';
 import environment from '../../environment';
+import {createValkeyInstance} from "./valkey";
 
 async function getCache() {
     if (environment.valkey.enabled) {
-        return createRedisInstance();
+        return createValkeyInstance();
     }
 
     return getLocalCache();

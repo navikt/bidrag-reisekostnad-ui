@@ -3,8 +3,8 @@ import { TCache } from './types';
 import environment from '../../environment';
 import { logger } from '../logging/logger';
 
-export const createRedisInstance: () => TCache = () => {
-    logger.info('Creating redis instance');
+export const createValkeyInstance: () => TCache = () => {
+    logger.info('Creating valkey instance');
     try {
         const options: RedisOptions = {
             username: environment.valkey.username,

@@ -38,8 +38,6 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: valkey-bidrag-reisekostnad
-          namespace: bidrag
         - application: bidrag-reisekostnad-api
           namespace: bidrag
         - application: nav-dekoratoren
@@ -64,5 +62,3 @@ spec:
       value: /tmp
   secureLogs:
     enabled: true
-  envFrom:
-    - secret: bidrag-reisekostnad-ui-redis-password
