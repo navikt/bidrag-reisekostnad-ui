@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { ReactElement } from 'react';
 import { useState } from 'react';
 import { Button } from '@navikt/ds-react';
 import { XMarkIcon } from '@navikt/aksel-icons';
 
-export default function TokenInput(): ReactElement | null {
+export default function TokenInput(): ReactElement<any> | null {
     const [idToken, setIdToken] = useState<string>();
     const [isOpen, setIsOpen] = useState<boolean>(true);
 

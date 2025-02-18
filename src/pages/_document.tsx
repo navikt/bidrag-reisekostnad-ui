@@ -1,4 +1,3 @@
-import React from 'react';
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import {
     DecoratorComponentsReact,
@@ -6,6 +5,8 @@ import {
     DecoratorLocale,
     fetchDecoratorReact,
 } from '@navikt/nav-dekoratoren-moduler/ssr';
+
+import type { JSX } from "react";
 
 const decoratorProps: DecoratorFetchProps = {
     // @ts-ignore
