@@ -64,14 +64,14 @@ function ReisekostnadProvider({ initialState, children }: PropsWithChildren<IPro
     }
 
     return (
-        <ReisekostnadContext.Provider
+        <ReisekostnadContext
             value={{
                 userInformation,
                 updateUserInformation,
             }}
         >
             {children}
-        </ReisekostnadContext.Provider>
+        </ReisekostnadContext>
     );
 }
 
