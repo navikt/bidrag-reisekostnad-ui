@@ -19,13 +19,13 @@ export function MockContext({
 }: PropsWithChildren<IMockContextProps>) {
     return (
         <div id="__next">
-            <RouterContext value={router ?? mockRouter}>
+            <RouterContext.Provider value={router ?? mockRouter}>
                 <ReisekostnadProvider initialState={reisekostnadProviderInitialState}>
                     <SWRConfig value={{ fetcher, dedupingInterval: 0, provider: () => new Map() }}>
                         {children}
                     </SWRConfig>
                 </ReisekostnadProvider>
-            </RouterContext>
+            </RouterContext.Provider>
         </div>
     );
 }
