@@ -30,7 +30,7 @@ spec:
       autoLogin: true
       autoLoginIgnorePaths:
         - "/_next/static/*/*"
-  redis:
+  valkey:
     - instance: reisekostnad
       access: readwrite
   tokenx:
@@ -38,8 +38,6 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: bidrag-reisekostnad-ui-redis
-          namespace: bidrag
         - application: bidrag-reisekostnad-api
           namespace: bidrag
         - application: nav-dekoratoren
@@ -64,5 +62,3 @@ spec:
       value: /tmp
   secureLogs:
     enabled: true
-  envFrom:
-    - secret: bidrag-reisekostnad-ui-redis-password

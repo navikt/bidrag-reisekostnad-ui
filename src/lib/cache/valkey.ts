@@ -1,35 +1,39 @@
-import Redis, { RedisOptions } from 'ioredis';
+import Redis, { RedisOptions } from 'iovalkey';
 import { TCache } from './types';
 import environment from '../../environment';
 import { logger } from '../logging/logger';
 
-export const createRedisInstance: () => TCache = () => {
-    logger.info('Creating redis instance');
+export const createValkeyInstance: () => TCache = () => {
+    logger.info('Creating valkey instance');
     try {
         const options: RedisOptions = {
-            username: environment.redis.username,
-            password: environment.redis.password,
+            username: environment.valkey.username,
+            password: environment.valkey.password,
+            tls: {
+                host: environment.valkey.host,
+                port: environment.valkey.port,
+            },
             showFriendlyErrorStack: true,
             enableAutoPipelining: true,
-            maxRetriesPerRequest: 0,
+            maxRetriesPerRequest: 3,
             enableReadyCheck: false,
             retryStrategy: (times: number) => {
                 if (times > 3) {
-                    throw new Error(`[Redis] Could not connect after ${times} attempts`);
+                    throw new Error(`[Valkey] Could not connect after ${times} attempts`);
                 }
 
                 return Math.min(times * 200, 1000);
             },
         };
 
-        const redis = new Redis(environment.redis.url, options);
+        const redis = new Redis(options);
 
         redis.on('error', (error: unknown) => {
-            logger.warn('[Redis] Error connecting', error);
+            logger.warn('[Valkey] Error connecting' + error, error);
         });
 
         redis.on('ready', () => {
-            logger.info('Redis cache initialized');
+            logger.info('Valkey cache initialized');
         });
 
         return {
@@ -39,6 +43,6 @@ export const createRedisInstance: () => TCache = () => {
             isReady: () => redis.status == 'ready',
         };
     } catch (e) {
-        throw new Error(`[Redis] Could not create a Redis instance`);
+        throw new Error(`[Valkey] Could not create a Valkey instance`);
     }
 };
