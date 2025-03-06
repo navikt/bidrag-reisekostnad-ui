@@ -1,7 +1,7 @@
 import { getLocalCache } from './localcache';
 import { TCache } from './types';
 import environment from '../../environment';
-import {createValkeyInstance} from "./valkey";
+import { createValkeyInstance } from './valkey';
 
 async function getCache() {
     if (environment.valkey.enabled) {

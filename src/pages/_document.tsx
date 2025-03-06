@@ -6,7 +6,7 @@ import {
     fetchDecoratorReact,
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 
-import type { JSX } from "react";
+import type { JSX } from 'react';
 
 const decoratorProps: DecoratorFetchProps = {
     // @ts-ignore
