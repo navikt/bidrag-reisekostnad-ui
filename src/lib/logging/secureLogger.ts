@@ -8,7 +8,7 @@ export async function initSecureLoggerWithContext() {
     secureLogger = (await getLogger())();
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line
 async function getLogger(): Promise<(defaultConfig?: {}) => pino.Logger> {
     if (typeof window !== 'undefined') {
         const logger = await import('./secureFrontendLogger');
