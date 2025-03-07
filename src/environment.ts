@@ -23,5 +23,5 @@ const valkey = {
     username: env.get('VALKEY_USERNAME_REISEKOSTNAD').required(false).asString(),
     password: env.get('VALKEY_PASSWORD_REISEKOSTNAD').required(false).asString(),
 };
-
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default { url, system, audiences, valkey };
