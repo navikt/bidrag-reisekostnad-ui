@@ -5,7 +5,7 @@ const nextConfig = {
     reactStrictMode: true,
 };
 
-module.exports = (phase) => {
+module.exports = () => {
     return {
         webpack: (config) => {
             // this will override the experiments
