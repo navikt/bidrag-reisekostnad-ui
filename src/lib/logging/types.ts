@@ -36,7 +36,7 @@ export function errorifyMessages(logEvent: pino.LogEvent): pino.LogEvent {
     return logEvent;
 }
 
-export function mapError(object: any) {
+export function mapError(object: unknown) {
     if (object.err) {
         // backendlogger has an Error-instance, frontendlogger has already serialized it
         const err = object.err instanceof Error ? pino.stdSerializers.err(object.err) : object.err;
