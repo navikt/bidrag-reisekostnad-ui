@@ -8,7 +8,7 @@ import { fetcher } from '../utils/api.utils';
 import { appWithTranslation } from 'next-i18next';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'true') {
-    require('../__mocks__');
+    /* empty */
 }
 
 function App({ Component, pageProps }: AppProps) {
