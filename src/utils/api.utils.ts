@@ -12,7 +12,7 @@ export const fetcher = (url: string) =>
         return res.json();
     });
 
-export function requestBody(type: ApiOperation, body: any): RequestInit {
+export function requestBody(type: ApiOperation, body: never): RequestInit {
     return {
         method: type,
         body: JSON.stringify(body),
