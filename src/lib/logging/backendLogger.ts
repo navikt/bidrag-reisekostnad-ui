@@ -10,7 +10,7 @@ export const backendLogger = (defaultConfig = {}): pino.Logger =>
             level: (label) => {
                 return { level: label };
             },
-            log: (object: any) => {
+            log: (object: Record<string, unknown>) => {
                 mapError(object);
                 return object;
             },

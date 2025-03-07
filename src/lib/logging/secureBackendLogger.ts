@@ -12,7 +12,7 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
                 level: (label) => {
                     return { level: label };
                 },
-                log: (object: any) => {
+                log: (object: Record<string, unknown>) => {
                     mapError(object);
                     object.isSecure = true;
                     return object;
