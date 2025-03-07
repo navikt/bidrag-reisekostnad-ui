@@ -2,7 +2,7 @@ import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/do
 import {
     DecoratorComponentsReact,
     DecoratorFetchProps,
-    DecoratorLocale,
+    // TODO: DecoratorLocale,
     fetchDecoratorReact,
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 
