@@ -1,7 +1,6 @@
 import { Alert, BodyShort, Button, Heading, Modal } from '@navikt/ds-react';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { useTranslation } from 'next-i18next';
-import { useEffect } from 'react';
 
 interface IConfirmModalProps {
     open: boolean;

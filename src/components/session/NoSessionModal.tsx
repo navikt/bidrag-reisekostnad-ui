@@ -1,4 +1,4 @@
-import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react';
+import { BodyShort, Button, Modal } from '@navikt/ds-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from './NoSessionModal.module.css';
