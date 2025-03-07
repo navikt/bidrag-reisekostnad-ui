@@ -27,6 +27,7 @@ async function parseResponseBody(response: Response) {
             body,
         };
     } catch (e) {
+        logger.error(e);
         return {
             json: false,
             body: responseText,
