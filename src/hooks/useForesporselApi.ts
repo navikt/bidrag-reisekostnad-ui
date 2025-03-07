@@ -41,6 +41,7 @@ export function useForesporselApi() {
             );
 
             await updateStatesAfterCall(result, HTTPStatus.CREATED);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error: unknown) {
             setFailed(true);
         }
@@ -56,6 +57,7 @@ export function useForesporselApi() {
             );
 
             await updateStatesAfterCall(result, HTTPStatus.OK);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error: unknown) {
             setFailed(true);
         }
@@ -71,6 +73,7 @@ export function useForesporselApi() {
             );
 
             await updateStatesAfterCall(result, HTTPStatus.OK);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error: unknown) {
             setFailed(true);
         }
