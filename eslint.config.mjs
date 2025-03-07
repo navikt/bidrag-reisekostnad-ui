@@ -62,7 +62,6 @@ export default [
         rules: {
             '@typescript-eslint/ban-ts-ignore': 'off',
             '@typescript-eslint/ban-ts-comment': 'off',
-
             '@typescript-eslint/naming-convention': [
                 'warn',
                 {
@@ -75,13 +74,20 @@ export default [
                     },
                 },
             ],
-
             'react-hooks/exhaustive-deps': 'off',
             'react/prop-types': 'off',
             'react/jsx-uses-react': 'off',
             'react/react-in-jsx-scope': 'off',
-            'no-console': 'warn',
             'prettier/prettier': 'warn',
+            'no-console': 'off',
+            'no-restricted-syntax': [
+                'error',
+                {
+                    selector:
+                        "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+                    message: 'Unexpected property on console object was called',
+                },
+            ],
         },
     },
 ];
