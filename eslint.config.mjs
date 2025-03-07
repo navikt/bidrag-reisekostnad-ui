@@ -49,7 +49,7 @@ export default [
             },
 
             parser: tsParser,
-            ecmaVersion: 12,
+            ecmaVersion: 'latest',
             sourceType: 'module',
 
             parserOptions: {
