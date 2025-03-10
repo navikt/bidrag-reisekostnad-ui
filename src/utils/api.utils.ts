@@ -12,7 +12,7 @@ export const fetcher = (url: string) =>
         return res.json();
     });
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export function requestBody(type: ApiOperation, body: any): RequestInit {
     return {
         method: type,

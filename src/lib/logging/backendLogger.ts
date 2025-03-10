@@ -10,7 +10,7 @@ export const backendLogger = (defaultConfig = {}): pino.Logger =>
             level: (label) => {
                 return { level: label };
             },
-            /* eslint-disable @typescript-eslint/no-explicit-any */
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
             log: (object: any) => {
                 mapError(object);
                 return object;
