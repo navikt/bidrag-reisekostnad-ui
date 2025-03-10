@@ -36,6 +36,7 @@ export function errorifyMessages(logEvent: pino.LogEvent): pino.LogEvent {
     return logEvent;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function mapError(object: any) {
     if (object.err) {
         // backendlogger has an Error-instance, frontendlogger has already serialized it

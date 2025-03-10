@@ -43,6 +43,7 @@ export const createValkeyInstance: () => TCache = () => {
             isReady: () => redis.status == 'ready',
         };
     } catch (e) {
+        logger.error(e);
         throw new Error(`[Valkey] Could not create a Valkey instance`);
     }
 };
