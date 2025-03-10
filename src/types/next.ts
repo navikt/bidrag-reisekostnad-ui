@@ -26,7 +26,7 @@ export default function getPropertyDescriptorForReqSession(session: ISession): P
 }
 
 declare module 'http' {
-    interface IIncomingMessage {
+    interface IncomingMessage {
         session: ISession;
     }
 }
