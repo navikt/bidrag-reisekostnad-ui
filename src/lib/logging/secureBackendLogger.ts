@@ -12,7 +12,8 @@ export const secureBackendLogger = (defaultConfig = {}): pino.Logger =>
                 level: (label) => {
                     return { level: label };
                 },
-                log: (object: Record<string, unknown>) => {
+                /* eslint-disable @typescript-eslint/no-explicit-any */
+                log: (object: any) => {
                     mapError(object);
                     object.isSecure = true;
                     return object;

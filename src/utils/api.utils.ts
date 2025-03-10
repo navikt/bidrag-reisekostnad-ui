@@ -12,7 +12,8 @@ export const fetcher = (url: string) =>
         return res.json();
     });
 
-export function requestBody(type: ApiOperation, body: never): RequestInit {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function requestBody(type: ApiOperation, body: any): RequestInit {
     return {
         method: type,
         body: JSON.stringify(body),
