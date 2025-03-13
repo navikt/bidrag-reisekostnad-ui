@@ -23,6 +23,7 @@ updates:
           timezone: 'Europe/Oslo'
       commit-message:
           prefix: '[npm] '
+      open-pull-requests-limit: 15
     - package-ecosystem: 'docker'
       directory: '/'
       schedule:
