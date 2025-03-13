@@ -16,6 +16,7 @@ import { useTranslation } from 'next-i18next';
 import ForesporselKvittering from '../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer';
 import { IPerson } from '../../../types/person';
 import parse from 'html-react-parser';
+import { ICollapseData } from '../../../components/collapse/Collapse';
 
 export default function OpprettForesporsel() {
     const [availableBarn, setAvailableBarn] = useState<IPerson[]>([]);
@@ -119,18 +120,22 @@ export default function OpprettForesporsel() {
                                 showError={showBarnError}
                             />
                             <Collapse
-                                data={foresporselTranslate('accordion.barn_som_ikke_vises', {
-                                    returnObjects: true,
-                                })}
+                                data={
+                                    foresporselTranslate('accordion.barn_som_ikke_vises', {
+                                        returnObjects: true,
+                                    }) as ICollapseData[]
+                                }
                             />
                             <Collapse
                                 contentClassNames="flex flex-col gap-3"
-                                data={foresporselTranslate(
-                                    'accordion.behandling_av_personligopplysning',
-                                    {
-                                        returnObjects: true,
-                                    }
-                                )}
+                                data={
+                                    foresporselTranslate(
+                                        'accordion.behandling_av_personligopplysning',
+                                        {
+                                            returnObjects: true,
+                                        }
+                                    ) as ICollapseData[]
+                                }
                             />
                             <ConfirmationPanel
                                 data-testid="confirmationpanel.opprett.maa.samtykke"
