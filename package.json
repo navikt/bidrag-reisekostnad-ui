@@ -57,7 +57,7 @@
     "devDependencies": {
         "@eslint/compat": "^1.2.7",
         "@eslint/eslintrc": "^3.3.0",
-        "@eslint/js": "^9.22.0",
+        "@eslint/js": "^9.23.0",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.2.0",
         "@types/lodash.memoize": "^4.1.9",
