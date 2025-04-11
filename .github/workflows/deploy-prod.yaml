@@ -25,7 +25,7 @@ jobs:
             - name: Clean install of dependencies
               run: 'npm ci'
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Run tests
               run: npm run test
             - name: Create an optimized production build of the application
