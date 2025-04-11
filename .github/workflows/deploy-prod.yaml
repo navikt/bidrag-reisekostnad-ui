@@ -12,20 +12,24 @@ env:
 jobs:
     build:
         permissions:
-            contents: 'read'
-            id-token: 'write'
+            contents: read
+            id-token: write # for nais/login
             actions: read
         name: Install, test and build application
         runs-on: 'ubuntu-latest'
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v3
+            - name: Checkout repository # under $GITHUB_WORKSPACE
+              uses: actions/checkout@v4
+            - name: Setup node environment
+              # The setup-node action creates an .npmrc file on the runner.
+              uses: actions/setup-node@v3
               with:
                   node-version: '18'
                   registry-url: 'https://npm.pkg.github.com'
             - name: Clean install of dependencies
-              run: 'npm ci'
+              run: npm ci
               env:
+                  # Store the secret in the NPM_TOKEN environment variable.
                   NPM_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Run tests
               run: npm run test
@@ -33,7 +37,8 @@ jobs:
               run: npm run build
             - name: Remove dev dependencies
               run: npm prune --production
-            - uses: nais/docker-build-push@v0
+            - name: Push docker image to GAR and sign image
+              uses: nais/docker-build-push@v0
               id: docker-push
               with:
                   team: bidrag
