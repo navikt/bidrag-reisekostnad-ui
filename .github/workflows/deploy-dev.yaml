@@ -10,13 +10,13 @@ env:
     DEKORATOR_ENV: dev
 
 jobs:
-    build:
+    build-and-push:
+        name: Install, test, build application and push Docker image
+        runs-on: 'ubuntu-latest'
         permissions:
             contents: read
             id-token: write # for nais/login
             actions: read
-        name: Install, test and build application
-        runs-on: 'ubuntu-latest'
         steps:
             - name: Checkout repository # under $GITHUB_WORKSPACE
               uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
             image: ${{ steps.docker-push.outputs.image }}
     deployAppToDev:
         name: 'Deploy application to development'
-        needs: build
+        needs: build-and-push
         runs-on: 'ubuntu-latest'
         steps:
             - uses: actions/checkout@v4
