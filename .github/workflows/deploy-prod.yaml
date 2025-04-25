@@ -16,7 +16,7 @@ jobs:
         permissions:
             contents: read # required for actions/checkout
             id-token: write # required for nais/login
-            actions: read
+            actions: none # should be read according to naisdoc
         steps:
             - name: Checkout repository # under $GITHUB_WORKSPACE
               uses: actions/checkout@v4
