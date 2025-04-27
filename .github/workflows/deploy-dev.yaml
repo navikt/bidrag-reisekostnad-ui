@@ -57,6 +57,7 @@ jobs:
             id-token: write # required for nais/login
             actions: read
         steps:
+            - uses: actions/checkout@v4
             - name: Deploy to DEV
               uses: nais/deploy/actions/deploy@v2
               env:
