@@ -5,8 +5,6 @@ on:
             - '**'
             - '!main'
 env:
-    GITHUB_USERNAME: x-access-token
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     DEKORATOR_ENV: dev
 
 jobs:
