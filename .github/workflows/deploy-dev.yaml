@@ -5,26 +5,31 @@ on:
             - '**'
             - '!main'
 env:
-    GITHUB_USERNAME: x-access-token
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     DEKORATOR_ENV: dev
 
 jobs:
-    build:
-        permissions:
-            contents: 'read'
-            id-token: 'write'
-        name: Install, test and build application
+    build-and-push:
+        name: Install, test, build application and push Docker image
         runs-on: 'ubuntu-latest'
+        permissions:
+            # Permits an action to list the commits.
+            contents: read # required for actions/checkout
+            # Requesting the JWT.
+            id-token: write # required for nais/login through nais/docker-build-push
+            actions: none # should be read according to naisdoc
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v3
+            - name: Checkout repository # under $GITHUB_WORKSPACE
+              uses: actions/checkout@v4
+            - name: Setup node environment
+              # The setup-node action creates an .npmrc file on the runner.
+              uses: actions/setup-node@v3
               with:
-                  node-version: '18'
+                  node-version: '20'
                   registry-url: 'https://npm.pkg.github.com'
             - name: Clean install of dependencies
-              run: 'npm ci'
+              run: npm ci
               env:
+                  # Store the secret in the NODE_NPM environment variable.
                   NPM_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Run tests
               run: npm run test
@@ -32,7 +37,8 @@ jobs:
               run: npm run build
             - name: Remove dev dependencies
               run: npm prune --production
-            - uses: nais/docker-build-push@v0
+            - name: Push docker image to GAR and sign image
+              uses: nais/docker-build-push@v0
               if: ${{ github.actor != 'dependabot[bot]' }}
               id: docker-push
               with:
@@ -41,15 +47,19 @@ jobs:
             image: ${{ steps.docker-push.outputs.image }}
     deployAppToDev:
         name: 'Deploy application to development'
-        needs: build
+        needs: build-and-push
         runs-on: 'ubuntu-latest'
+        permissions:
+            contents: read
+            # Requesting the JWT.
+            id-token: write # required for nais/login
+            actions: none # should be read according to naisdoc
         steps:
             - uses: actions/checkout@v4
             - name: Deploy to DEV
-              uses: nais/deploy/actions/deploy@v1
+              uses: nais/deploy/actions/deploy@v2
               env:
-                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: dev-gcp
                   RESOURCE: .nais/nais.yaml
                   VARS: .nais/dev.yaml
-                  IMAGE: ${{ needs.build.outputs.image }}
+                  IMAGE: ${{ needs.build-and-push.outputs.image }}
