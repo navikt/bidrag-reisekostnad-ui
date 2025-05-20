@@ -33,8 +33,6 @@ updates:
           all-minor-updates:
               update-types:
                   - 'minor'
-          all-patch-updates:
-              update-types:
                   - 'patch'
       open-pull-requests-limit: 15
       registries:
