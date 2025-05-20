@@ -29,7 +29,14 @@ updates:
           timezone: 'Europe/Oslo'
       commit-message:
           prefix: '[npm] '
+      groups:
+          all-minor-updates:
+              update-types:
+                  - 'minor'
+                  - 'patch'
       open-pull-requests-limit: 15
+      registries:
+          - npm-github
     - package-ecosystem: 'docker'
       directory: '/'
       schedule:
