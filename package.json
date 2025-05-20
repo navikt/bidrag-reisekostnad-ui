@@ -27,12 +27,12 @@
         "os": false
     },
     "dependencies": {
-        "@navikt/aksel-icons": "^7.12.2",
-        "@navikt/bidrag-ui-common": "1.11.0",
-        "@navikt/ds-css": "^7.12.2",
-        "@navikt/ds-react": "^7.12.2",
-        "@navikt/ds-tailwind": "^7.12.2",
-        "@navikt/nav-dekoratoren-moduler": "^3.2.0",
+        "@navikt/aksel-icons": "^7.22.0",
+        "@navikt/bidrag-ui-common": "1.13.2",
+        "@navikt/ds-css": "^7.22.0",
+        "@navikt/ds-react": "^7.22.0",
+        "@navikt/ds-tailwind": "^7.22.0",
+        "@navikt/nav-dekoratoren-moduler": "^3.2.3",
         "@tanstack/react-query": "^5.76.1",
         "dayjs": "^1.11.13",
         "env-var": "^7.5.0",
