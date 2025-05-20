@@ -9,6 +9,9 @@ env:
 
 jobs:
     build-and-push:
+        # This jobs name is used as "Status checks that are required"
+        # when automerging to production. See repository settings on
+        # GitHub: Settings, Branches, Branch protection rules for main.
         name: Install, test, build application and push Docker image
         runs-on: 'ubuntu-latest'
         permissions:
