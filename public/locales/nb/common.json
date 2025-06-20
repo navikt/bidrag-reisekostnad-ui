@@ -17,9 +17,9 @@
   },
   "alert": {
     "ingen_saker": "Du har ingen saker om fordeling av reisekostnader",
-    "barnet_har_foresporsel": "<strong>Det er allerede sendt forespørsel for barnet som er tilgjengelig for denne tjenesten.</strong>\nHvis forespørselen gjelder andre barn, må du kontakte oss via <a href=\"https://www.nav.no/kontaktoss\">Kontakt oss</a>.",
-    "barna_har_foresporsel": "<strong>Det er allerede sendt forespørsler for barna som er tilgjengelig for denne tjenesten.</strong>\nHvis forespørselen gjelder andre barn, må du kontakte oss via <a href=\"https://www.nav.no/kontaktoss\">Kontakt oss</a>.",
-    "funnet_ingen_barn": "Vi har ikke funnet barn som er registrert på deg. Du må derfor kontakte oss via <a href=\"https://www.nav.no/kontaktoss\">Kontakt oss</a>. Der opplyser du om navn og fødselsnummer på hvilket barn det gjelder, og for den andre forelderen."
+    "barnet_har_foresporsel": "<strong>Det er allerede sendt forespørsel for barnet som er tilgjengelig for denne tjenesten.</strong>\nHvis forespørselen gjelder andre barn, må du kontakte oss via <a href=\"https://www.nav.no/kontaktoss\" className=\"navds-link\">Kontakt oss</a>.",
+    "barna_har_foresporsel": "<strong>Det er allerede sendt forespørsler for barna som er tilgjengelig for denne tjenesten.</strong>\nHvis forespørselen gjelder andre barn, må du kontakte oss via <a href=\"https://www.nav.no/kontaktoss\" className=\"navds-link\">Kontakt oss</a>.",
+    "funnet_ingen_barn": "Vi har ikke funnet barn som er registrert på deg. Du må derfor kontakte oss via <a href=\"https://www.nav.no/kontaktoss\" className=\"navds-link\">Kontakt oss</a>. Der opplyser du om navn og fødselsnummer på hvilket barn det gjelder, og for den andre forelderen."
   },
   "page_meta_content": "Fordeling av reisekostnader",
   "opprettet": "Opprettet:\n{{date}}",
