@@ -12,13 +12,13 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
 }
 
 html,
@@ -44,5 +44,5 @@ p {
 }
 
 .navds-link {
-  color: rgba(0, 103, 197, 1);
+    color: rgba(0, 103, 197, 1);
 }
