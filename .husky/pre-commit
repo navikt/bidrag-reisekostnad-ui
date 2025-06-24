@@ -1,4 +1,5 @@
-npm test
+npm run lint
 
+npm test
 echo "Skipping Git Hooks:"
 echo "https://typicode.github.io/husky/how-to.html"
