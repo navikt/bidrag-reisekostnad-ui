@@ -10,7 +10,7 @@
         "lint": "next lint",
         "lint:fix": "next lint -- --fix",
         "type-check": "tsc --project tsconfig.json --pretty --noEmit",
-        "prepare": "husky install",
+        "prepare": "husky",
         "test:ci": "vitest --config vitest.config.mts",
         "test": "vitest --config vitest.config.mts",
         "coverage": "vitest run --coverage"
