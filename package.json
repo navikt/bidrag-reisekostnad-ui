@@ -10,7 +10,7 @@
         "lint": "next lint",
         "lint:fix": "next lint -- --fix",
         "type-check": "tsc --project tsconfig.json --pretty --noEmit",
-        "prepare": "husky install",
+        "prepare": "husky",
         "test:ci": "vitest --config vitest.config.mts",
         "test": "vitest --config vitest.config.mts",
         "coverage": "vitest run --coverage"
@@ -80,7 +80,7 @@
         "eslint-plugin-react-hooks": "^5.2.0",
         "eslint-plugin-testing-library": "^7.5.3",
         "globals": "^16.2.0",
-        "husky": "^8.0.1",
+        "husky": "^9.1.7",
         "lint-staged": "^13.0.3",
         "pino-pretty": "^13.0.0",
         "postcss": "^8.5.6",
