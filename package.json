@@ -34,7 +34,7 @@
         "@navikt/ds-tailwind": "^7.25.1",
         "@navikt/nav-dekoratoren-moduler": "^3.4.0",
         "@tailwindcss/postcss": "^4.1.11",
-        "@tanstack/react-query": "^5.81.5",
+        "@tanstack/react-query": "^5.82.0",
         "dayjs": "^1.11.13",
         "env-var": "^7.5.0",
         "html-react-parser": "^5.2.5",
