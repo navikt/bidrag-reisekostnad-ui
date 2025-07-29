@@ -1,6 +1,4 @@
-
-
-FROM node:lts-slim
+FROM node:21-alpine3.19
 ENV NODE_ENV=production
 
 LABEL maintainer="Team Bidrag"
