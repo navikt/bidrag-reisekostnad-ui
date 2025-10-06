@@ -1,19 +1,24 @@
-import pino from 'pino';
+import pino, { type Logger, type LoggerOptions } from 'pino';
 import { mapError } from './types';
 import { getLoggerContext } from './als';
 
-export const backendLogger = (defaultConfig = {}): pino.Logger =>
-    pino({
-        ...defaultConfig,
+export const backendLogger = (defaultConfig?: LoggerOptions): Logger => {
+    const baseOptions = {
         timestamp: false,
         formatters: {
-            level: (label) => {
-                return { level: label };
-            },
-            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-            log: (object: any) => {
-                mapError(object);
+            level: (label: string) => ({ level: label }),
+            log: (object: Record<string, unknown>) => {
+                mapError(object as unknown);
                 return object;
             },
         },
-    }).child(getLoggerContext());
+    } satisfies LoggerOptions;
+
+    const options: LoggerOptions = {
+        ...baseOptions,
+        ...defaultConfig,
+    };
+
+    const ctx = getLoggerContext() as Record<string, unknown>;
+    return pino(options).child(ctx);
+};

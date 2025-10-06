@@ -1,22 +1,6 @@
-import pino, { BaseLogger } from 'pino';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { secureLogger } from '../../../lib/logging/secureLogger';
-
-type LogLevels = Exclude<keyof BaseLogger, 'string' | 'level'>;
-
-const levels: Record<LogLevels, LogLevels> = {
-    error: 'error',
-    debug: 'debug',
-    fatal: 'fatal',
-    info: 'info',
-    trace: 'trace',
-    silent: 'silent',
-    warn: 'warn',
-} as const;
-
-function isValidLoggingLabel(label: unknown): label is LogLevels {
-    return typeof label === 'string' && label in levels;
-}
+import { isLogEvent, toLevelLabel } from '../../../lib/logging/utils';
 
 const loggingHandler = (req: NextApiRequest, res: NextApiResponse): void => {
     if (req.method !== 'POST') {
@@ -24,23 +8,27 @@ const loggingHandler = (req: NextApiRequest, res: NextApiResponse): void => {
         return;
     }
 
-    const { level, ts }: pino.LogEvent = req.body;
-    const label: unknown = level.label;
-    if (!isValidLoggingLabel(label)) {
-        res.status(400).json({ error: `Invalid label ${label}` });
+    if (!isLogEvent(req.body)) {
+        res.status(400).json({ error: 'Invalid payload' });
         return;
     }
 
-    const messages: [objOrMsg: unknown, msgOrArgs?: string] = req.body.messages;
+    const { level, ts, messages } = req.body;
+    const label = toLevelLabel(level);
 
-    secureLogger
-        .child({
-            x_timestamp: ts,
-            x_isFrontend: true,
-            x_userAgent: req.headers['user-agent'],
-            correlationId: req.headers['x-correlation-id'] ?? 'not-set',
-        })
-        [label](...messages);
+    if (!label) {
+        res.status(400).json({ error: `Invalid level ${String(level)}` });
+        return;
+    }
+
+    const child = secureLogger.child({
+        x_timestamp: ts,
+        x_isFrontend: true,
+        x_userAgent: req.headers['user-agent'],
+        correlationId: (req.headers['x-correlation-id'] as string) ?? 'not-set',
+    } as Record<string, unknown>);
+
+    (child[label] as (...args: unknown[]) => void)(...(messages as unknown[]));
 
     res.status(200).json({ ok: `ok` });
 };

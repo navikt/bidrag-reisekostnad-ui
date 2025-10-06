@@ -73,6 +73,10 @@ export default defineConfig([
                         regex: '^I[A-Z]',
                         match: true,
                     },
+                    filter: {
+                        regex: '^(IncomingMessage)$',
+                        match: false,
+                    },
                 },
             ],
             'react-hooks/exhaustive-deps': 'off',

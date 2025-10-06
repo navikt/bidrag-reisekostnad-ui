@@ -67,7 +67,11 @@ export default class TokenExchangeClient {
             );
             return tokenset.access_token ?? null;
         } catch (e) {
-            if (e instanceof OPError) logger.warn(e.message, e.response?.body || '');
+            if (e instanceof OPError) {
+                logger.error('Token error message:' + e.name + e.message + e.response?.body || '');
+            } else {
+                logger.error('Token error unknown:' + e);
+            }
             throw e;
         }
     }

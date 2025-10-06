@@ -1,27 +1,34 @@
-import pino from 'pino';
-import { getCorrelationId } from './types';
-import { errorifyMessages } from './types';
+import pino, { type Logger, type LoggerOptions, type LogEvent } from 'pino';
+import { getCorrelationId, errorifyMessages } from './types';
 
-export const frontendLogger = (): pino.Logger =>
-    pino({
+export const frontendLogger = (defaultConfig?: LoggerOptions): Logger => {
+    const correlationId = getCorrelationId();
+
+    const options = {
         browser: {
+            asObject: true,
             transmit: {
-                send: async (_, logEvent) => {
+                send: async (_level: number | string, logEvent: LogEvent) => {
                     try {
-                        // If your app uses a basePath, you'll need to add it to the path here
-                        await fetch(`/api/log`, {
+                        // Normaliser meldinger/feil før sending
+                        const normalized = errorifyMessages(logEvent);
+                        await fetch('/api/log', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',
-                                'x-correlation-id': getCorrelationId(),
+                                'x-correlation-id': String(correlationId),
                             },
-                            body: JSON.stringify(errorifyMessages(logEvent)),
+                            body: JSON.stringify(normalized),
+                            keepalive: true,
                         });
                     } catch (e) {
-                        console.warn(e);
-                        console.warn('Unable to log to backend', logEvent);
+                        console.warn('Unable to log to backend', e, logEvent);
                     }
                 },
             },
         },
-    });
+        ...defaultConfig,
+    } satisfies LoggerOptions;
+
+    return pino(options).child({ correlationId });
+};
