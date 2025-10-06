@@ -4,7 +4,15 @@ import { logger } from '../../../lib/logging/logger';
 
 type LogLevels = Exclude<keyof BaseLogger, 'string' | 'level'>;
 
-const levels: Record<LogLevels, LogLevels> = {
+const levels: {
+    error: 'error';
+    debug: 'debug';
+    fatal: 'fatal';
+    info: 'info';
+    trace: 'trace';
+    silent: 'silent';
+    warn: 'warn';
+} = {
     error: 'error',
     debug: 'debug',
     fatal: 'fatal',
