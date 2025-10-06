@@ -1,20 +1,21 @@
 // This logger is isomorphic, and can be imported from anywhere in the app
 
-import pino from 'pino';
+import type { Logger, LoggerOptions } from 'pino';
 
-export let logger = (await getLogger())();
+type LoggerFactory = (defaultConfig?: LoggerOptions) => Logger;
 
-export async function initLoggerWithContext() {
-    logger = (await getLogger())();
+export let logger: Logger = (await getLogger())();
+
+export async function initLoggerWithContext(defaultConfig?: LoggerOptions): Promise<void> {
+    const makeLogger = await getLogger();
+    logger = makeLogger(defaultConfig);
 }
 
-// eslint-disable-next-line
-async function getLogger(): Promise<(defaultConfig?: {}) => pino.Logger> {
+async function getLogger(): Promise<LoggerFactory> {
     if (typeof window !== 'undefined') {
-        const logger = await import('./frontendLogger');
-        return logger.frontendLogger;
+        const newLogger = await import('./frontendLogger');
+        return newLogger.frontendLogger as LoggerFactory;
     }
-
-    const logger = await import('./backendLogger');
-    return logger.backendLogger;
+    const newLogger = await import('./backendLogger');
+    return newLogger.backendLogger as LoggerFactory;
 }
