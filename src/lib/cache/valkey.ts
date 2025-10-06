@@ -29,7 +29,11 @@ export const createValkeyInstance: () => TCache = () => {
         const redis = new Redis(options);
 
         redis.on('error', (error: unknown) => {
-            logger.warn('[Valkey] Error connecting' + error, error);
+            if (error instanceof Error) {
+                logger.error('[Valkey] Redis error message:' + error.name + error.message);
+            } else {
+                logger.error('[Valkey] Redis error unknown:' + error);
+            }
         });
 
         redis.on('ready', () => {
