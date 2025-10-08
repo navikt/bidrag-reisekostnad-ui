@@ -1,5 +1,6 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import prettier from 'eslint-plugin-prettier';
 import jsxA11Y from 'eslint-plugin-jsx-a11y';
@@ -36,6 +37,7 @@ export default defineConfig([
     {
         plugins: {
             react: fixupPluginRules(react),
+            'react-hooks': fixupPluginRules(reactHooks),
             '@typescript-eslint': fixupPluginRules(typescriptEslint),
             prettier: fixupPluginRules(prettier),
             'jsx-a11y': fixupPluginRules(jsxA11Y),
