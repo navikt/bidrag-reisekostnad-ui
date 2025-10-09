@@ -27,6 +27,8 @@ updates:
           interval: 'daily'
           time: '08:45'
           timezone: 'Europe/Oslo'
+      cooldown:
+          default-days: 3
       commit-message:
           prefix: '[npm] '
       groups:
