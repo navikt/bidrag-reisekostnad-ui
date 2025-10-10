@@ -1,4 +1,4 @@
-FROM node:23-alpine3.19
+FROM node:24-alpine
 ENV NODE_ENV=production
 
 LABEL maintainer="Team Bidrag"
