@@ -1,48 +1,49 @@
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+
+// Plugin/Config imports
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import tseslint from 'typescript-eslint';
 import prettier from 'eslint-plugin-prettier';
-import jsxA11Y from 'eslint-plugin-jsx-a11y';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import jestDom from 'eslint-plugin-jest-dom';
 import testingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
-import tsParser from '@typescript-eslint/parser';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
-import { defineConfig } from 'eslint/config';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
     baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all,
 });
 
-export default defineConfig([
-    ...fixupConfigRules(
-        compat.extends(
-            'eslint:recommended',
-            'next/core-web-vitals',
-            'plugin:jsx-a11y/recommended',
-            'plugin:react/recommended',
-            'plugin:react-hooks/recommended',
-            'plugin:@typescript-eslint/recommended',
-            'plugin:prettier/recommended'
-        )
-    ),
+/** @type {import('eslint').Linter.FlatConfig[]} */
+const eslintConfig = [
+    //...nextTypescript, // Assign the array to a variable
+    // Standard ESLint recommended rules
+    // TypeScript configuration
+    js.configs.recommended,
+    ...tseslint.configs.recommended,
+    // Use the FlatCompat for Next.js configs
+    ...compat.extends('next/core-web-vitals'),
+    ...compat.extends('next/typescript'),
+    ...compat.extends('plugin:jsx-a11y/recommended'),
+    ...compat.extends('plugin:react/recommended'),
+    ...compat.extends('plugin:react-hooks/recommended'), // Main configuration object for project-specific rules and settings
+    ...compat.extends('plugin:prettier/recommended'), // Add global ignores here
     {
+        files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+
         plugins: {
-            react: fixupPluginRules(react),
-            'react-hooks': fixupPluginRules(reactHooks),
-            '@typescript-eslint': fixupPluginRules(typescriptEslint),
-            prettier: fixupPluginRules(prettier),
-            'jsx-a11y': fixupPluginRules(jsxA11Y),
+            react: react,
+            'react-hooks': reactHooks,
+            '@typescript-eslint': tseslint.plugin,
+            'jsx-a11y': jsxA11y,
             'jest-dom': jestDom,
             'testing-library': testingLibrary,
+            prettier: prettier,
         },
 
         languageOptions: {
@@ -50,11 +51,9 @@ export default defineConfig([
                 ...globals.browser,
                 ...globals.node,
             },
-
-            parser: tsParser,
+            parser: tseslint.parser,
             ecmaVersion: 'latest',
             sourceType: 'module',
-
             parserOptions: {
                 ecmaFeatures: {
                     jsx: true,
@@ -63,14 +62,15 @@ export default defineConfig([
         },
 
         rules: {
+            // Your custom rule overrides
             '@typescript-eslint/ban-ts-ignore': 'off',
             '@typescript-eslint/ban-ts-comment': 'off',
+            '@typescript-eslint/triple-slash-reference': 'off',
             '@typescript-eslint/naming-convention': [
                 'warn',
                 {
                     selector: 'interface',
                     format: ['PascalCase'],
-
                     custom: {
                         regex: '^I[A-Z]',
                         match: true,
@@ -97,4 +97,10 @@ export default defineConfig([
             ],
         },
     },
-]);
+    {
+        ignores: ['.next/', 'node_modules/', '**/.*'],
+    },
+];
+
+// Export the variable as the module default
+export default eslintConfig;
