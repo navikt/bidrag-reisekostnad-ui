@@ -12,7 +12,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
-import { defineConfig } from 'eslint/config';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,10 +21,13 @@ const compat = new FlatCompat({
     allConfig: js.configs.all,
 });
 
-export default defineConfig([
+/** @type {import('eslint').Linter.FlatConfig[]} */ // Optional: for type safety
+export default [
     ...fixupConfigRules(
         compat.extends(
             'eslint:recommended',
+            // 'next/core-web-vitals' is now deprecated and should be updated
+            // to use the new @next/eslint-plugin-next direct imports
             'next/core-web-vitals',
             'plugin:jsx-a11y/recommended',
             'plugin:react/recommended',
@@ -97,4 +99,4 @@ export default defineConfig([
             ],
         },
     },
-]);
+];
