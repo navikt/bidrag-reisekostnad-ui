@@ -18,6 +18,8 @@ updates:
           day: 'thursday'
           time: '08:30'
           timezone: 'Europe/Oslo'
+      cooldown:
+        default-days: 7
       commit-message:
           prefix: '[github-actions] '
     # Maintain npm dependencies
@@ -28,7 +30,7 @@ updates:
           time: '08:45'
           timezone: 'Europe/Oslo'
       cooldown:
-          default-days: 3
+          default-days: 7
       commit-message:
           prefix: '[npm] '
       groups:
@@ -46,5 +48,7 @@ updates:
           day: 'thursday'
           time: '06:00'
           timezone: 'Europe/Oslo'
+      cooldown:
+        default-days: 7
       commit-message:
           prefix: '[docker] '
