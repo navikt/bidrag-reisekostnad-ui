@@ -34,7 +34,7 @@
         "@navikt/ds-tailwind": "^7.34.0",
         "@navikt/nav-dekoratoren-moduler": "^3.6.0",
         "@tailwindcss/postcss": "^4.1.17",
-        "@tanstack/react-query": "^5.90.10",
+        "@tanstack/react-query": "^5.90.11",
         "dayjs": "^1.11.19",
         "env-var": "^7.5.0",
         "html-react-parser": "^5.2.10",
@@ -87,7 +87,7 @@
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.48.0",
         "vite": "^7.2.4",
-        "vitest": "^4.0.13"
+        "vitest": "^4.0.14"
     },
     "msw": {
         "workerDirectory": "public"
