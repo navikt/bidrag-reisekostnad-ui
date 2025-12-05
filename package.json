@@ -29,7 +29,7 @@
     "dependencies": {
         "@navikt/aksel-icons": "^7.34.0",
         "@navikt/bidrag-ui-common": "1.11.0",
-        "@navikt/ds-css": "^7.34.0",
+        "@navikt/ds-css": "^7.35.0",
         "@navikt/ds-react": "^7.34.0",
         "@navikt/ds-tailwind": "^7.34.0",
         "@navikt/nav-dekoratoren-moduler": "^3.6.0",
