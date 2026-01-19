@@ -8,11 +8,7 @@ const nextConfig = {
 
 module.exports = () => {
     return {
-        webpack: (config) => {
-            // this will override the experiments
-            config.experiments = { ...config.experiments, ...{ topLevelAwait: true } };
-            // this will just update topLevelAwait property of config.experiments
-            // config.experiments.topLevelAwait = true
+        turbopack: (config) => {
             return config;
         },
         i18n,
