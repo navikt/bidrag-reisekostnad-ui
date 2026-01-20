@@ -1,7 +1,7 @@
-/** @type {import('next').NextConfig} */
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const { i18n } = require('./next-i18next.config');
+import i18nInt from './next-i18next.config.js';
+const { i18n } = i18nInt;
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
     // Exclude packages from bundling, i.e. exclude bundling libraries
@@ -11,4 +11,4 @@ const nextConfig = {
     i18n,
 };
 
-module.exports = nextConfig;
+export default nextConfig;
