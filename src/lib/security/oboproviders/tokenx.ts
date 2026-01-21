@@ -1,5 +1,5 @@
 import env from 'env-var';
-import { JWK } from 'jose/dist/types/types';
+import { JWK } from 'jose';
 import TokenExchangeClient, { ITokenIssuer } from './TokenExchangeClient';
 import memoize from 'lodash.memoize';
 

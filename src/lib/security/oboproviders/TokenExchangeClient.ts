@@ -1,5 +1,5 @@
 import { Client as OpenIdClient, errors, GrantBody, GrantExtras, Issuer } from 'openid-client';
-import { JWK } from 'jose/dist/types/types';
+import { JWK } from 'jose';
 import OPError = errors.OPError;
 import { logger } from '../../logging/logger';
 
