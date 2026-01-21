@@ -6,7 +6,7 @@ import {
     jwtVerify,
     JWTVerifyResult,
 } from 'jose';
-import { GetKeyFunction } from 'jose/dist/types/types';
+import { GetKeyFunction } from 'jose';
 import { IdPortenProvider } from './AuthProvider';
 import { getToken } from './wonderwall';
 
