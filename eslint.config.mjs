@@ -16,7 +16,7 @@ import prettierPlugin from 'eslint-plugin-prettier/recommended';
 export default tseslint.config(
     {
         // Global ignores must be in their own object
-        ignores: ['.next/', 'node_modules/', '**/.*', 'next-env.d.ts'],
+        ignores: ['.next/', 'node_modules/', 'next-env.d.ts', '.prettierrc.js'],
     },
     js.configs.recommended,
     ...tseslint.configs.recommended,
