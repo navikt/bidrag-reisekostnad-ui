@@ -1,91 +1,100 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
-
-// Plugin/Config imports
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
-import prettier from 'eslint-plugin-prettier';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import jestDom from 'eslint-plugin-jest-dom';
-import testingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
+// The eslint-plugin-react-hooks is not yet fully updated for Flat Config and
+// does not provide a flatConfigs object. Must use the fixupPluginRules.
+import { fixupPluginRules } from '@eslint/compat';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-});
+// Native Flat Config Plugins
+import nextPlugin from '@next/eslint-plugin-next';
+import reactPlugin from 'eslint-plugin-react';
+import hooksPlugin from 'eslint-plugin-react-hooks';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import prettierPlugin from 'eslint-plugin-prettier/recommended';
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
-const eslintConfig = [
-    //...nextTypescript, // Assign the array to a variable
-    // Standard ESLint recommended rules
-    // TypeScript configuration
+export default tseslint.config(
+    {
+        // Global ignores must be in their own object
+        ignores: ['.next/', 'node_modules/', '**/.*', 'next-env.d.ts'],
+    },
     js.configs.recommended,
     ...tseslint.configs.recommended,
-    // Use the FlatCompat for Next.js configs
-    ...compat.extends('next/core-web-vitals'),
-    ...compat.extends('next/typescript'),
-    ...compat.extends('plugin:jsx-a11y/recommended'),
-    ...compat.extends('plugin:react/recommended'),
-    ...compat.extends('plugin:react-hooks/recommended'), // Main configuration object for project-specific rules and settings
-    ...compat.extends('plugin:prettier/recommended'), // Add global ignores here
+
+    // GLOBAL SETTINGS (React version warning)
     {
-        files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
-
-        plugins: {
-            react: react,
-            'react-hooks': reactHooks,
-            '@typescript-eslint': tseslint.plugin,
-            'jsx-a11y': jsxA11y,
-            'jest-dom': jestDom,
-            'testing-library': testingLibrary,
-            prettier: prettier,
+        settings: {
+            react: {
+                version: 'detect',
+            },
         },
+    },
 
+    // NATIVE NEXT.JS SETUP (Replaces compat.extends)
+    {
+        plugins: {
+            '@next/next': nextPlugin,
+        },
+        rules: {
+            ...nextPlugin.configs.recommended.rules,
+            ...nextPlugin.configs['core-web-vitals'].rules,
+        },
+    },
+
+    // NATIVE REACT SETUP
+    reactPlugin.configs.flat.recommended,
+    reactPlugin.configs.flat['jsx-runtime'],
+
+    // NATIVE A11Y & PRETTIER
+    jsxA11y.flatConfigs.recommended,
+    prettierPlugin,
+
+    {
+        // Handling CommonJS files
+        files: ['*.config.js', '*.config.mjs'],
+        languageOptions: {
+            globals: {
+                ...globals.node,
+            },
+        },
+    },
+    {
+        files: ['**/*.ts', '**/*.tsx'],
+        plugins: {
+            // Hooks plugin needs the fixup wrapper for ESLint 9/10
+            'react-hooks': fixupPluginRules(hooksPlugin),
+        },
         languageOptions: {
             globals: {
                 ...globals.browser,
                 ...globals.node,
             },
-            parser: tseslint.parser,
-            ecmaVersion: 'latest',
-            sourceType: 'module',
             parserOptions: {
-                ecmaFeatures: {
-                    jsx: true,
-                },
+                ecmaFeatures: { jsx: true },
             },
         },
-
         rules: {
-            // Your custom rule overrides
-            '@typescript-eslint/ban-ts-ignore': 'off',
-            '@typescript-eslint/ban-ts-comment': 'off',
-            '@typescript-eslint/triple-slash-reference': 'off',
+            ...hooksPlugin.configs.recommended.rules,
+            // Your custom overrides
+            'react-hooks/exhaustive-deps': 'off',
+            'prettier/prettier': 'warn',
             '@typescript-eslint/naming-convention': [
                 'warn',
                 {
                     selector: 'interface',
                     format: ['PascalCase'],
-                    custom: {
-                        regex: '^I[A-Z]',
-                        match: true,
-                    },
+                    custom: { regex: '^I[A-Z]', match: true },
                     filter: {
                         regex: '^(IncomingMessage)$',
                         match: false,
                     },
                 },
             ],
-            'react-hooks/exhaustive-deps': 'off',
+            '@typescript-eslint/ban-ts-ignore': 'off',
+            '@typescript-eslint/ban-ts-comment': 'off',
+            '@typescript-eslint/triple-slash-reference': 'off',
             'react/prop-types': 'off',
             'react/jsx-uses-react': 'off',
             'react/react-in-jsx-scope': 'off',
-            'prettier/prettier': 'warn',
             'no-console': 'off',
             'no-restricted-syntax': [
                 'error',
@@ -96,11 +105,5 @@ const eslintConfig = [
                 },
             ],
         },
-    },
-    {
-        ignores: ['.next/', 'node_modules/', '**/.*'],
-    },
-];
-
-// Export the variable as the module default
-export default eslintConfig;
+    }
+);
