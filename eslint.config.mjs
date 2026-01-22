@@ -4,6 +4,7 @@ import globals from 'globals';
 // The eslint-plugin-react-hooks is not yet fully updated for Flat Config and
 // does not provide a flatConfigs object. Must use the fixupPluginRules.
 import { fixupPluginRules } from '@eslint/compat';
+import importPlugin from 'eslint-plugin-import';
 
 // Native Flat Config Plugins
 import nextPlugin from '@next/eslint-plugin-next';
@@ -58,10 +59,15 @@ export default tseslint.config(
         },
     },
     {
+        // Plugins in TypeScript context.
+        // Better for performance than applying them globally.
         files: ['**/*.ts', '**/*.tsx'],
+        // Using fixupPluginRules for ESLint 9/10 compatibility since those
+        // plugins er not fully updated for the Flat Config system yet.
         plugins: {
             // Hooks plugin needs the fixup wrapper for ESLint 9/10
             'react-hooks': fixupPluginRules(hooksPlugin),
+            import: fixupPluginRules(importPlugin),
         },
         languageOptions: {
             globals: {
@@ -75,6 +81,7 @@ export default tseslint.config(
         rules: {
             ...hooksPlugin.configs.recommended.rules,
             // Your custom overrides
+            'import/no-anonymous-default-export': 'warn',
             'react-hooks/exhaustive-deps': 'off',
             'prettier/prettier': 'warn',
             '@typescript-eslint/naming-convention': [
