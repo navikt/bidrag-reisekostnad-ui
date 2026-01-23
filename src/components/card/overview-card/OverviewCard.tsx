@@ -61,24 +61,24 @@ export default function OverviewCard({ foresporsel }: IOverviewCardProps) {
             data-testid={`overviewcard-${id}`}
         >
             <Panel className="navds-link-panel cursor-pointer" border>
-                <div className="w-full navds-link-panel__content text-gray-900">
-                    <LinkPanel.Title className="text-large text-gray-900">
+                <div className="w-full navds-link-panel__content text-ax-neutral-1000">
+                    <LinkPanel.Title className="text-ax-large text-ax-neutral-1000">
                         {translate('title.fordeling_av_reisekostnader_for')}
                     </LinkPanel.Title>
-                    <LinkPanel.Description className="text-gray-900">
+                    <LinkPanel.Description className="text-ax-neutral-1000">
                         <div className="w-full grid grid-cols-2">
                             <ul className="flex flex-col gap-2 p-0 m-0">
                                 {barn.map((person, i) => {
                                     return (
                                         <li className="list-none" key={i}>
-                                            <strong className="text-medium">
+                                            <strong className="text-ax-medium">
                                                 {getBarnInformationText(person, translate('aar'))}
                                             </strong>
                                         </li>
                                     );
                                 })}
                             </ul>
-                            <div className="grid justify-end whitespace-pre-wrap text-medium">
+                            <div className="grid justify-end whitespace-pre-wrap text-ax-medium">
                                 <span>
                                     {translate('opprettet', {
                                         date: opprettet ? formatDate(opprettet) : '',
