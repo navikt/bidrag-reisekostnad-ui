@@ -37,7 +37,7 @@ export default function ForesporselKvittering({ barn, sentDate }: IForesporselKv
                     <ul className="flex flex-col gap-3">
                         {selectedBarn?.map((person, i) => {
                             return (
-                                <li key={i} className="font-bold">
+                                <li key={i} className="font-ax-bold">
                                     {getBarnInformationText(person, year)}
                                 </li>
                             );

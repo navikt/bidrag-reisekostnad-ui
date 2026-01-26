@@ -26,7 +26,7 @@ export default function BarnOver15Alert({ barn }: IBarnOver15AlertProps) {
     }
 
     return (
-        <Alert variant="info" className="mt-5 text-gray-900">
+        <Alert variant="info" className="mt-5 text-ax-neutral-1000">
             {barnOver15.map((person, i) => {
                 return <b key={i}>{getBarnInformationText(person, translate('aar'))}</b>;
             })}

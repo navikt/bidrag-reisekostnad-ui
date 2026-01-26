@@ -127,7 +127,6 @@ export default function OpprettForesporsel() {
                                 }
                             />
                             <Collapse
-                                contentClassNames="flex flex-col gap-3"
                                 data={
                                     foresporselTranslate(
                                         'accordion.behandling_av_personligopplysning',

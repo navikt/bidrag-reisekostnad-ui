@@ -1,10 +1,10 @@
 name: 'Build and deploy dev'
 on:
-  workflow_dispatch:
-  push:
-      branches:
-          - '**'
-          - '!main'
+    workflow_dispatch:
+    push:
+        branches:
+            - '**'
+            - '!main'
 env:
     DEKORATOR_ENV: dev
 
