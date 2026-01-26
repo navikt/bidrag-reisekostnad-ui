@@ -11,16 +11,14 @@ interface ICollapseProps {
     contentClassNames?: string;
 }
 
-export default function Collapse({ data, contentClassNames }: ICollapseProps) {
+export default function Collapse({ data }: ICollapseProps) {
     return (
-        <Accordion className="w-full flex flex-col gap-5">
+        <Accordion>
             {data.map((item, index) => {
                 return (
                     <Accordion.Item key={index}>
                         <Accordion.Header>{item.header}</Accordion.Header>
-                        <Accordion.Content className={contentClassNames}>
-                            {parse(item.content)}
-                        </Accordion.Content>
+                        <Accordion.Content>{parse(item.content)}</Accordion.Content>
                     </Accordion.Item>
                 );
             })}
