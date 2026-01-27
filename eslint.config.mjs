@@ -80,6 +80,7 @@ export default tseslint.config(
             // Custom overrides
             'import/no-anonymous-default-export': 'warn',
             'react-hooks/exhaustive-deps': 'off',
+            'react-hooks/set-state-in-effect': 'warn', // or 'off'
             'prettier/prettier': 'warn',
             '@typescript-eslint/naming-convention': [
                 'warn',

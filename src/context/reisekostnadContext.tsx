@@ -18,12 +18,6 @@ function ReisekostnadProvider({ initialState, children }: PropsWithChildren<IPro
         undefined
     );
 
-    useEffect(() => {
-        if (initialState) {
-            setUserInformation(mapToUiData(initialState));
-        }
-    }, []);
-
     function mapToUiData(user: IBrukerinformasjon): IBrukerinformasjon {
         const {
             forespørslerSomMotpart,
@@ -58,6 +52,15 @@ function ReisekostnadProvider({ initialState, children }: PropsWithChildren<IPro
             motparterMedFellesBarnUnderFemtenÅr: motparterMedFellesBarnUnderFemtenÅrMedAlder,
         };
     }
+
+    // TODO: Since eslint-plugin-react-hooks V7
+    // Error: Cannot access variable before it is declared
+    // So moved the function mapToUiData above useEffect
+    useEffect(() => {
+        if (initialState) {
+            setUserInformation(mapToUiData(initialState));
+        }
+    }, []);
 
     function updateUserInformation(user: IBrukerinformasjon): void {
         setUserInformation(mapToUiData(user));
