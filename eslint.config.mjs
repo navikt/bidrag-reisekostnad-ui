@@ -43,7 +43,7 @@ export default tseslint.config(
     // NATIVE REACT SETUP
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat['jsx-runtime'],
-    hooksPlugin.configs.recommended,
+    hooksPlugin.configs.flat.recommended,
 
     // NATIVE A11Y & PRETTIER
     jsxA11y.flatConfigs.recommended,
@@ -80,6 +80,7 @@ export default tseslint.config(
             // Custom overrides
             'import/no-anonymous-default-export': 'warn',
             'react-hooks/exhaustive-deps': 'off',
+            'react-hooks/set-state-in-effect': 'warn', // or 'off'
             'prettier/prettier': 'warn',
             '@typescript-eslint/naming-convention': [
                 'warn',
