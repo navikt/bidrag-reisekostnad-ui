@@ -43,7 +43,7 @@ export default tseslint.config(
     // NATIVE REACT SETUP
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat['jsx-runtime'],
-    hooksPlugin.configs.recommended,
+    hooksPlugin.configs.flat.recommended,
 
     // NATIVE A11Y & PRETTIER
     jsxA11y.flatConfigs.recommended,
