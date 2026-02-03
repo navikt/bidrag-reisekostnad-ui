@@ -37,9 +37,7 @@ Logg inn med syntetisk testbruker og kopier tokenet fra endepunkt
 `https://bidrag-reisekostnad.ekstern.dev.nav.no/api/dev/token`.
 Lim inn deretter tokenet nederst på `http://localhost:3000` siden.
 
-Syntetisk testbruker kan hentes fra Tenor, men hentes enklest fra:
-
-- [Dolly](https://dolly.ekstern.dev.nav.no/)
+Syntetisk testbruker kan hentes fra [Dolly](https://dolly.ekstern.dev.nav.no/).
 
 Enkleste testscenariet er å velge testbruker som er foresatt til barn under
 15 år.
@@ -47,5 +45,5 @@ Enkleste testscenariet er å velge testbruker som er foresatt til barn under
 ## Testmiljø
 
 Testmiljøer er tilgjengelige eksternt. Miljøet nærmest likt produksjon finnes
-på https://bidrag-reisekostnad.ekstern.dev.nav.no/. For å logge inn trenger man en
-testbruker fra [Tenor - Skatteetatens testdata](https://www.skatteetaten.no/skjema/testdata/).
+på https://bidrag-reisekostnad.ekstern.dev.nav.no/. For å logge inn trenger man
+en testbruker fra [Dolly](https://dolly.ekstern.dev.nav.no/).
