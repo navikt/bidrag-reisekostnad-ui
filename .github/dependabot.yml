@@ -38,6 +38,8 @@ updates:
           all-patch-updates:
               update-types:
                   - 'patch'
+      # Ensures that package.json is updated along with the lockfile
+      versioning-strategy: increase
       open-pull-requests-limit: 15
       registries:
           - npm-github
