@@ -34,6 +34,18 @@ updates:
       commit-message:
           prefix: '[npm] '
       groups:
+          nav-designsystem:
+              patterns:
+                  - '@navikt/aksel*'
+                  - '@navikt/ds*'
+          react:
+              patterns:
+                  - 'react'
+                  - 'react-dom'
+          tailwind-packages:
+              patterns:
+                  - 'tailwindcss'
+                  - '@tailwindcss/*'
           # Name of group that also appears in the PR subject
           all-patch-updates:
               update-types:
