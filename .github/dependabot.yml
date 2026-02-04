@@ -38,14 +38,20 @@ updates:
               patterns:
                   - '@navikt/aksel*'
                   - '@navikt/ds*'
+              update-types:
+                  - 'patch'
           react:
               patterns:
                   - 'react'
                   - 'react-dom'
+              update-types:
+                  - 'patch'
           tailwind-packages:
               patterns:
                   - 'tailwindcss'
                   - '@tailwindcss/*'
+              update-types:
+                  - 'patch'
           # Name of group that also appears in the PR subject
           all-patch-updates:
               update-types:
