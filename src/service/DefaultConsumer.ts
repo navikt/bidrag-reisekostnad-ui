@@ -1,11 +1,54 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApiError } from '@navikt/bidrag-ui-common';
 import { ISession } from '../lib/security/session';
 import { getCorrelationIdFromContext } from '../lib/logging/als';
 import { logger } from '../lib/logging/logger';
 
 type FetchMethods = 'GET' | 'POST' | 'PUT';
+export class CustomError extends Error {
+    public correlationId: string | null;
+    status = 500;
 
+    constructor(
+        name: string,
+        correlationId: string | null,
+        message: string,
+        stack?: string,
+        cause?: unknown | undefined
+    ) {
+        super();
+        this.name = name;
+        this.message = message;
+        this.cause = cause;
+
+        // Maintains proper stack trace for where our error was thrown (only available on V8)
+        // @ts-ignore
+        if (Error.captureStackTrace) {
+            // @ts-ignore
+            Error.captureStackTrace(this);
+        }
+        this.stack = this.stack + "\r\n\r\n" + stack;
+        this.correlationId = correlationId;
+    }
+}
+export class ApiError extends CustomError {
+    declare public status: number;
+    // @ts-ignore
+    public data: any;
+    public ok = false;
+    public error?: Error;
+
+    constructor(
+        message: string,
+        stack: string,
+        correlationId?: string,
+        status?: number,
+        error?: Error
+    ) {
+        super("ApiException", correlationId ?? null, message, stack, error?.cause);
+        this.status = status ?? 500;
+        this.error = error;
+    }
+}
 export interface IFetchConfig {
     params?: object;
     headers?: HeadersInit;
