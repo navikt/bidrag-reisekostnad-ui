@@ -4,7 +4,10 @@ registries:
         type: npm-registry
         url: https://npm.pkg.github.com
         token: ${{ secrets.READER_TOKEN }}
-        replaces-base: true
+        # Don't replace the default npm registry, but add the GitHub Package
+        # Registry as an additional registry in order to search for @navikt
+        # scoped packages, i.e. to search in both npm registries.
+        replaces-base: false
 updates:
     # Basic set up for package managers.
     # Maintain GitHub Actions dependencies
