@@ -1,7 +1,24 @@
-import { SessionStorage } from '@navikt/bidrag-ui-common';
 import { v4 as uuidV4 } from 'uuid';
 import pino from 'pino';
-
+export class SessionStorage {
+    static reset() {
+        window.sessionStorage.clear();
+    }
+    static get(key: string) {
+        return window.sessionStorage.getItem(key);
+    }
+    static getOrDefault(key: string, defaultValue: string) {
+        const value = window.sessionStorage.getItem(key);
+        if (!value) {
+            this.set(key, defaultValue);
+            return defaultValue;
+        }
+        return value;
+    }
+    static set(key: string, value: string) {
+        window.sessionStorage.setItem(key, value);
+    }
+}
 export const CORRELATION_ID_STORAGE_NAME = 'correlationId';
 export const CORRELATION_ID_COOKIE_NAME = CORRELATION_ID_STORAGE_NAME;
 
