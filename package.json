@@ -30,7 +30,7 @@
         "@navikt/aksel-icons": "^8.5.2",
         "@navikt/ds-css": "^8.8.0",
         "@navikt/ds-react": "^8.8.0",
-        "@navikt/ds-tailwind": "^8.7.0",
+        "@navikt/ds-tailwind": "^8.8.0",
         "@navikt/nav-dekoratoren-moduler": "^3.6.3",
         "@tailwindcss/postcss": "^4.2.2",
         "@tanstack/react-query": "^5.95.2",
