@@ -59,5 +59,3 @@ spec:
   {{/each}}
     - name: NPM_CONFIG_CACHE
       value: /tmp
-  secureLogs:
-    enabled: true
