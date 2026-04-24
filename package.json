@@ -51,7 +51,7 @@
         "react-dom": "^19.2.5",
         "react-i18next": "^16.6.6",
         "swr": "^2.4.1",
-        "uuid": "^13.0.0"
+        "uuid": "^14.0.0"
     },
     "devDependencies": {
         "@eslint/compat": "^2.0.5",
