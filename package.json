@@ -32,8 +32,8 @@
         "@navikt/ds-react": "^8.9.1",
         "@navikt/ds-tailwind": "^8.9.1",
         "@navikt/nav-dekoratoren-moduler": "^3.7.1",
-        "@tailwindcss/postcss": "^4.2.2",
-        "@tanstack/react-query": "^5.99.0",
+        "@tailwindcss/postcss": "^4.2.4",
+        "@tanstack/react-query": "^5.99.2",
         "dayjs": "^1.11.20",
         "env-var": "^7.5.0",
         "html-react-parser": "^6.0.1",
@@ -41,7 +41,7 @@
         "iovalkey": "^0.3.3",
         "jose": "^4.15.5",
         "lodash.memoize": "^4.1.2",
-        "msw": "^2.13.4",
+        "msw": "^2.13.5",
         "next": "^16.2.4",
         "next-i18next": "^15.4.3",
         "node-cache": "^5.1.2",
@@ -75,7 +75,7 @@
         "eslint-plugin-jsx-a11y": "^6.10.2",
         "eslint-plugin-prettier": "^5.5.4",
         "eslint-plugin-react": "^7.37.5",
-        "eslint-plugin-react-hooks": "^7.1.0",
+        "eslint-plugin-react-hooks": "^7.1.1",
         "eslint-plugin-testing-library": "^7.16.2",
         "globals": "^17.5.0",
         "husky": "^9.1.7",
@@ -87,8 +87,8 @@
         "tailwindcss": "^4.2.1",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.58.2",
-        "vite": "^8.0.8",
-        "vitest": "^4.1.4"
+        "vite": "^8.0.10",
+        "vitest": "^4.1.5"
     },
     "msw": {
         "workerDirectory": "public"
