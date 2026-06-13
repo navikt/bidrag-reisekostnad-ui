@@ -8,7 +8,7 @@
  */
 
 const PACKAGE_VERSION = '2.13.4'
-const INTEGRITY_CHECKSUM = '4db4a41e972cec1b64cc569c66952d82'
+const INTEGRITY_CHECKSUM = '7eb87dc30c446679c6d169c663a9d1de'
 const IS_MOCKED_RESPONSE = Symbol('isMockedResponse')
 const activeClientIds = new Set()
 
