@@ -10,7 +10,7 @@ registries:
         replaces-base: false
 updates:
     # Basic set up for package managers.
-    # Maintain GitHub Actions dependencies
+    # Maintain GitHub Actions dependencies.
     - package-ecosystem: 'github-actions'
       # Workflow files stored in the default location of `.github/workflows`.
       # Don't need to specify `/.github/workflows`, just use `directory: "/"`.
