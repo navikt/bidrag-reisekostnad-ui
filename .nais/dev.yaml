@@ -1,5 +1,4 @@
 ingresses:
-  - https://bidrag-reisekostnad.ekstern.dev.nav.no
   - https://bidrag-reisekostnad.intern.dev.nav.no
 env:
   BIDRAG_REISEKOSTNAD_API_URL: http://bidrag-reisekostnad-api
