@@ -44,6 +44,6 @@ Enkleste testscenariet er å velge testbruker som er foresatt til barn under
 
 ## Testmiljø
 
-Testmiljøer er tilgjengelig kun internt. Miljøet nærmest likt produksjon finnes
+Testmiljøet er tilgjengelig kun internt. Miljøet nærmest likt produksjon finnes
 på https://bidrag-reisekostnad.intern.dev.nav.no/. For å logge inn trenger man
 en testbruker fra [Dolly](https://dolly.ekstern.dev.nav.no/).
