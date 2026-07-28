@@ -22,10 +22,10 @@ jobs:
             actions: none # should be read according to naisdoc
         steps:
             - name: Checkout repository # under $GITHUB_WORKSPACE
-              uses: actions/checkout@v6
+              uses: actions/checkout@v7
             - name: Setup node environment
               # The setup-node action creates an .npmrc file on the runner.
-              uses: actions/setup-node@v6.4.0
+              uses: actions/setup-node@v7.0.0
               with:
                   node-version: '25'
                   # registry-url: 'https://npm.pkg.github.com'
