@@ -1,4 +1,4 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import { useEffect, useState } from 'react';
 import SamtykkeKvittering from '../../views/kvittering/samtykke-kvittering/SamtykkeKvittering';
 import SamtykkeContainer from '../../views/samtykke/samtykke-container/SamtykkeContainer';
@@ -11,7 +11,7 @@ import { ForesporselStatus } from '../../enum/foresporsel-status';
 import KvitteringMedTrekkTilbake from '../../views/kvittering/kvittering-med-trekktilbake/KvitteringMedTrekkTilbake';
 import Spinner from '../../components/spinner/spinner/spinner';
 import { formatDate } from '../../utils/date.utils';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { findForesporselById } from '../../utils/foresporsel.utils';
 import ForesporselKvittering from '../../views/kvittering/foresporsel-kvittering/ForesporselKvitteringContainer';
 import ErrorPage from 'next/error';
