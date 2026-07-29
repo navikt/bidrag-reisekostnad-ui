@@ -1,6 +1,6 @@
 import { CheckmarkIcon } from '@navikt/aksel-icons';
 import ConfirmationLayout from '../../../components/layout/confirmation-layout/ConfirmationLayout';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import parse from 'html-react-parser';
 import { ForesporselStatus } from '../../../enum/foresporsel-status';
 import { useEffect, useState } from 'react';

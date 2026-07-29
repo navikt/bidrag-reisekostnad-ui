@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 import { PageMeta } from '../../page-meta/PageMeta';
 import { ArrowRightIcon } from '@navikt/aksel-icons';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 
 interface IConfirmationLayoutProps extends PropsWithChildren {
     title: string;

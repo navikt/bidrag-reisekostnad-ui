@@ -12,7 +12,7 @@ import { getAllBarn, getBarnWithNoActiveForesporsler } from '../../../utils/pers
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import Collapse from '../../../components/collapse/Collapse';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import ForesporselKvittering from '../../kvittering/foresporsel-kvittering/ForesporselKvitteringContainer';
 import { IPerson } from '../../../types/person';
 import parse from 'html-react-parser';

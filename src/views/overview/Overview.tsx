@@ -6,7 +6,7 @@ import OverviewCard from '../../components/card/overview-card/OverviewCard';
 import { PageMeta } from '../../components/page-meta/PageMeta';
 import { useReisekostnad } from '../../context/reisekostnadContext';
 import { IForesporsel } from '../../types/foresporsel';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import parse from 'html-react-parser';
 
 export default function Overview() {
