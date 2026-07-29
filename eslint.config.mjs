@@ -24,18 +24,6 @@ export default tseslint.config(
     {
         settings: {
             react: {
-                version: 'detect',
-            },
-        },
-    },
-
-    // NATIVE NEXT.JS SETUP (Replaces compat.extends)
-    {
-        plugins: {
-            '@next/next': nextPlugin,
-        },
-        settings: {
-            react: {
                 // The eslint-plugin-react, enabled through eslint-config-next,
                 // runs detectReactVersion() in the background to scan root
                 // folders and read dependencies dynamically. During that
@@ -44,6 +32,13 @@ export default tseslint.config(
                 // The eslint-plugin-react plugin is not yet supporting ESLint v10.
                 version: '19.2.8',
             },
+        },
+    },
+
+    // NATIVE NEXT.JS SETUP (Replaces compat.extends)
+    {
+        plugins: {
+            '@next/next': nextPlugin,
         },
         rules: {
             ...nextPlugin.configs.recommended.rules,
