@@ -13,7 +13,7 @@ afterAll(() => server.close());
 // (i.e. for testing one-time error scenarios)
 afterEach(() => server.resetHandlers());
 
-vi.mock('next-i18next', () => ({
+vi.mock('next-i18next/pages', () => ({
     useTranslation: () => {
         return {
             t: (str: string) => {

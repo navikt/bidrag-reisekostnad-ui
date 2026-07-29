@@ -1,6 +1,6 @@
 import { Tag } from '@navikt/ds-react';
 import { ForesporselStatus } from '../../enum/foresporsel-status';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 
 interface IStatusBar {
     status: ForesporselStatus;

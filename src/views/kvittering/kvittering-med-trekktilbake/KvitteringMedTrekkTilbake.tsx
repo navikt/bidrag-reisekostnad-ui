@@ -6,7 +6,7 @@ import { useForesporselApi } from '../../../hooks/useForesporselApi';
 import { formatDate } from '../../../utils/date.utils';
 import { useState } from 'react';
 import ConfirmModal from '../../../components/modal/confirm-modal/ConfirmModal';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 
 interface IKvitteringMedTrekkTilbakeProps {
     foresporselId: number;

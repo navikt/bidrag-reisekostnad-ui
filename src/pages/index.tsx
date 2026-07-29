@@ -1,4 +1,4 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import Overview from '../views/overview/Overview';
 import { useEffect, useState } from 'react';
 import { useReisekostnad } from '../context/reisekostnadContext';
@@ -7,7 +7,7 @@ import Spinner from '../components/spinner/spinner/spinner';
 import { generateAndStoreCorrelationIdAsCookie } from '../lib/logging/types';
 import { fetcher } from '../utils/api.utils';
 import { Alert } from '@navikt/ds-react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import parse from 'html-react-parser';
 import { PageMeta } from '../components/page-meta/PageMeta';
 import useSWR from 'swr';

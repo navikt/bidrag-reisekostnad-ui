@@ -1,7 +1,7 @@
 import { CheckboxGroup, Checkbox, Alert, Heading } from '@navikt/ds-react';
 import { useState } from 'react';
 import { getBarnInformationText } from '../../../../utils/string.utils';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { IPerson } from '../../../../types/person';
 
 interface IBarnContainerProps {
