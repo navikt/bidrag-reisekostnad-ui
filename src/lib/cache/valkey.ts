@@ -48,6 +48,6 @@ export const createValkeyInstance: () => TCache = () => {
         };
     } catch (e) {
         logger.error(e);
-        throw new Error(`[Valkey] Could not create a Valkey instance`);
+        throw new Error(`[Valkey] Could not create a Valkey instance`, { cause: e });
     }
 };
