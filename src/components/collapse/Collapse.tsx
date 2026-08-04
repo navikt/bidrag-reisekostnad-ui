@@ -8,16 +8,16 @@ export interface ICollapseData {
 
 interface ICollapseProps {
     data: ICollapseData[];
-    contentClassNames?: string;
+    contentClassName?: string;
 }
 
-export default function Collapse({ data, contentClassNames }: ICollapseProps) {
+export default function Collapse({ data, contentClassName }: ICollapseProps) {
     return (
         <Accordion>
             {data.map((item, index) => (
                 <Accordion.Item key={index}>
                     <Accordion.Header>{item.header}</Accordion.Header>
-                    <Accordion.Content className={contentClassNames}>
+                    <Accordion.Content className={contentClassName}>
                         {parse(item.content)}
                     </Accordion.Content>
                 </Accordion.Item>
