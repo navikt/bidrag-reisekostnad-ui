@@ -43,7 +43,6 @@ jobs:
               run: npm prune --production
             - name: Push docker image to GAR and sign image
               uses: nais/docker-build-push@v0
-              if: ${{ github.actor != 'dependabot[bot]' }}
               id: docker-push
               with:
                   team: bidrag
