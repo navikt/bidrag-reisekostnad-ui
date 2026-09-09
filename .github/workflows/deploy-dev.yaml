@@ -52,6 +52,7 @@ jobs:
     deployAppToDev:
         name: 'Deploy application to development'
         needs: build-and-push
+        if: ${{ github.actor != 'dependabot[bot]' }}
         runs-on: 'ubuntu-latest'
         permissions:
             contents: read
