@@ -24,7 +24,13 @@ export default tseslint.config(
     {
         settings: {
             react: {
-                version: 'detect',
+                // The eslint-plugin-react, enabled through eslint-config-next,
+                // runs detectReactVersion() in the background to scan root
+                // folders and read dependencies dynamically. During that
+                // lookup, the plugin's auto-detection calls a legacy core
+                // helper function in ESLint v9 which was removed in ESlint v10.
+                // The eslint-plugin-react plugin is not yet supporting ESLint v10.
+                version: '19.2.8',
             },
         },
     },

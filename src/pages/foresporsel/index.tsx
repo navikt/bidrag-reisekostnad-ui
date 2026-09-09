@@ -1,4 +1,4 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import { useEffect } from 'react';
 import OpprettForesporsel from '../../views/foresporsel/opprett-foresporsel/OpprettForesporsel';
 import useSWRImmutable from 'swr/immutable';

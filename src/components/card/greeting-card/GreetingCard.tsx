@@ -2,7 +2,7 @@ import { Heading } from '@navikt/ds-react';
 import { Gender } from '../../../enum/gender';
 import { NavVeilederKvinne } from '../../../svg-icons/NavVeilederKvinne';
 import NavVeilederMann from '../../../svg-icons/NavVeilederMann';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 
 interface IGreetingCardProps {
     name: string;

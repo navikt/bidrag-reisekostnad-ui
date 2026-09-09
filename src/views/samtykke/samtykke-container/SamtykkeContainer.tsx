@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { PageMeta } from '../../../components/page-meta/PageMeta';
 import { useForesporselApi } from '../../../hooks/useForesporselApi';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import parse from 'html-react-parser';
 
 interface IForesporselConfirmationProps {
