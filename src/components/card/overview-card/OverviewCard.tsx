@@ -7,7 +7,7 @@ import { isAutomaticSubmission } from '../../../utils/foresporsel.utils';
 import { getBarnInformationText } from '../../../utils/string.utils';
 import BarnOver15Alert from '../../alert/barn-over-15-alert/BarnOver15Alert';
 import StatusBar from '../../status-bar/StatusBar';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { ForesporselStatus } from '../../../enum/foresporsel-status';
 
 interface IOverviewCardProps {

@@ -2,7 +2,7 @@ import { Alert } from '@navikt/ds-react';
 import { useEffect, useState } from 'react';
 import { getPersonOver15YearsOld } from '../../../utils/person.utils';
 import { getBarnInformationText } from '../../../utils/string.utils';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { IPerson } from '../../../types/person';
 
 interface IBarnOver15AlertProps {
