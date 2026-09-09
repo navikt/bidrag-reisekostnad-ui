@@ -1,9 +1,7 @@
-import { Gender } from '../../enum/gender';
-import { IBrukerinformasjon } from '../../types/foresporsel';
+import { Gender } from '@/enum/gender';
+import { IBrukerinformasjon } from '@/types/foresporsel';
 
-export const BRUKERENS_FORNAVN = 'Nils';
-
-export const BRUKER_INFORMASJON_1: IBrukerinformasjon = {
+export const BRUKER_INFORMASJON_1 = {
     fornavn: 'Gråtass',
     kjønn: Gender.KVINNE,
     harDiskresjon: true,
@@ -106,4 +104,4 @@ export const BRUKER_INFORMASJON_1: IBrukerinformasjon = {
             fødselsdato: '2007-11-21',
         },
     ],
-};
+} as unknown as IBrukerinformasjon;

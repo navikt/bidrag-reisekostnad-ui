@@ -23,12 +23,18 @@ async function verifyToken(token: string | Uint8Array): Promise<JWTVerifyResult>
         issuer: process.env.IDPORTEN_ISSUER,
     });
     if (verifyResult.payload['client_id'] != process.env.IDPORTEN_CLIENT_ID)
-        throw new errors.JWTClaimValidationFailed(`unexpected "client_id" claim value`);
+        throw new errors.JWTClaimValidationFailed(
+            `unexpected "client_id" claim value`,
+            verifyResult.payload,
+            'client_id'
+        );
 
     const authLevel = (verifyResult.payload['acr'] as string)?.toLowerCase();
     if (authLevel != 'idporten-loa-high' && authLevel != 'level4')
         throw new errors.JWTClaimValidationFailed(
-            `authentication level is "${authLevel} but expected level4"`
+            `authentication level is "${authLevel} but expected level4"`,
+            verifyResult.payload,
+            'acr'
         );
     return verifyResult;
 }
