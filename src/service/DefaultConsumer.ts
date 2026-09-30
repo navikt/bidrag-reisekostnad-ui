@@ -26,7 +26,7 @@ export class CustomError extends Error {
             // @ts-ignore
             Error.captureStackTrace(this);
         }
-        this.stack = this.stack + "\r\n\r\n" + stack;
+        this.stack = this.stack + '\r\n\r\n' + stack;
         this.correlationId = correlationId;
     }
 }
@@ -44,7 +44,7 @@ export class ApiError extends CustomError {
         status?: number,
         error?: Error
     ) {
-        super("ApiException", correlationId ?? null, message, stack, error?.cause);
+        super('ApiException', correlationId ?? null, message, stack, error?.cause);
         this.status = status ?? 500;
         this.error = error;
     }
