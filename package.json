@@ -6,9 +6,9 @@
         "node": ">=22.22.1"
     },
     "scripts": {
-        "dev": "next dev --webpack | pino-pretty",
+        "dev": "next dev | pino-pretty",
         "dev:mock": "cross-env NEXT_PUBLIC_API_MOCKING=true npm run dev",
-        "build": "next build --webpack",
+        "build": "next build",
         "start": "next start",
         "lint": "eslint .",
         "lint:fix": "eslint -- --fix .",
