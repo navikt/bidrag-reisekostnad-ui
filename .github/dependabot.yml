@@ -19,7 +19,7 @@ updates:
           interval: 'weekly'
           # Check for GitHub Actions updates on Thursdays.
           day: 'thursday'
-          time: '08:30'
+          time: '06:30'
           timezone: 'Europe/Oslo'
       cooldown:
           default-days: 7
