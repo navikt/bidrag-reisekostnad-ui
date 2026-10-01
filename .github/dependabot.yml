@@ -19,7 +19,7 @@ updates:
           interval: 'weekly'
           # Check for GitHub Actions updates on Thursdays.
           day: 'thursday'
-          time: '08:30'
+          time: '06:30'
           timezone: 'Europe/Oslo'
       cooldown:
           default-days: 7
@@ -30,7 +30,7 @@ updates:
       directory: '/'
       schedule:
           interval: 'daily'
-          time: '08:45'
+          time: '06:30'
           timezone: 'Europe/Oslo'
       cooldown:
           default-days: 7
@@ -47,7 +47,10 @@ updates:
               patterns:
                   - 'react'
                   - 'react-dom'
+                  - '@types/react'
+                  - '@types/react-dom'
               update-types:
+                  - 'minor'
                   - 'patch'
           tailwind-packages:
               patterns:
