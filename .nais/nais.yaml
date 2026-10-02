@@ -48,6 +48,14 @@ spec:
     requests:
       cpu: 50m
       memory: 206Mi
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
+    logging:
+      destinations:
+        - id: loki
+        - id: elastic
   ingresses:
   {{#each ingresses as |url|}}
      - {{url}}
