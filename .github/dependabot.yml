@@ -37,13 +37,14 @@ updates:
       commit-message:
           prefix: '[npm] '
       groups:
-          nav-designsystem:
+          nav-designsystem-packages:
               patterns:
                   - '@navikt/aksel*'
                   - '@navikt/ds*'
               update-types:
+                  - 'minor'
                   - 'patch'
-          react:
+          react-packages:
               patterns:
                   - 'react'
                   - 'react-dom'
@@ -57,9 +58,10 @@ updates:
                   - 'tailwindcss'
                   - '@tailwindcss/*'
               update-types:
+                  - 'minor'
                   - 'patch'
           # Name of group that also appears in the PR subject
-          all-patch-updates:
+          non-grouped-patch-updates:
               update-types:
                   - 'patch'
       # Ensures that package.json is updated along with the lockfile
