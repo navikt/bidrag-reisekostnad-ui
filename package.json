@@ -93,9 +93,6 @@
         "vite": "^8.3.1",
         "vitest": "^5.0.2"
     },
-    "overrides": {
-        "postcss": "$postcss"
-    },
     "msw": {
         "workerDirectory": "public"
     }
