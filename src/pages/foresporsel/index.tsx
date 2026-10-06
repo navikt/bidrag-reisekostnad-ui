@@ -5,7 +5,7 @@ import useSWRImmutable from 'swr/immutable';
 import { IBrukerinformasjon } from '../../types/foresporsel';
 import { useReisekostnad } from '../../context/reisekostnadContext';
 import Spinner from '../../components/spinner/spinner/spinner';
-import { GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 
 export default function Foresporsel() {
     const { data } = useSWRImmutable<IBrukerinformasjon>('/api/brukerinformasjon');
@@ -24,7 +24,7 @@ export default function Foresporsel() {
     return <OpprettForesporsel />;
 }
 
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
+export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
     return {
         props: {
             ...(await serverSideTranslations(locale ?? 'nb', [

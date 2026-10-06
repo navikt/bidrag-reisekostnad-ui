@@ -1,4 +1,4 @@
-import type { AppProps } from 'next/app';
+import NextApp, { type AppContext, type AppProps } from 'next/app';
 import { ReisekostnadProvider } from '../context/reisekostnadContext';
 import '../styles/globals.css';
 import TokenInput from '../components/TokenInput';
@@ -24,5 +24,7 @@ function App({ Component, pageProps }: AppProps) {
         </ReisekostnadProvider>
     );
 }
+
+App.getInitialProps = async (appContext: AppContext) => NextApp.getInitialProps(appContext);
 
 export default appWithTranslation(App);

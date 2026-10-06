@@ -17,7 +17,7 @@ import ForesporselKvittering from '../../views/kvittering/foresporsel-kvittering
 import ErrorPage from 'next/error';
 import { Deaktivator } from '../../enum/deaktivator';
 import TrekkTilbakeKvittering from '../../views/kvittering/trekk-tilbake-kvittering/TrekkTilbakeKvittering';
-import { GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 
 export default function ForesporselId() {
     const router = useRouter();
@@ -112,7 +112,7 @@ export default function ForesporselId() {
     );
 }
 
-export async function getServerSideProps({ locale }: GetStaticPropsContext) {
+export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
     return {
         props: {
             ...(await serverSideTranslations(locale ?? 'nb', ['common', 'kvittering', 'samtykke'])),
