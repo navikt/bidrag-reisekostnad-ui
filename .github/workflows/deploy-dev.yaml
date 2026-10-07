@@ -39,9 +39,10 @@ jobs:
               run: npm run test
             - name: Create an optimized production build of the application
               run: npm run build
-            - name: Remove dev dependencies
+            - name: Remove dev dependencies from production build
               run: npm prune --production
-            - name: Push docker image to GAR and sign image
+            - name: Push docker image to GAR and sign image unless the commit is from dependabot
+              if: ${{ github.actor != 'dependabot[bot]' }}
               uses: nais/docker-build-push@v0
               id: docker-push
               with:
@@ -49,7 +50,8 @@ jobs:
         outputs:
             image: ${{ steps.docker-push.outputs.image }}
     deployAppToDev:
-        name: 'Deploy application to development'
+        name: 'Deploy application to development unless the commit is from dependabot'
+        if: ${{ github.actor != 'dependabot[bot]' }}
         needs: build-and-push
         runs-on: 'ubuntu-latest'
         permissions:
