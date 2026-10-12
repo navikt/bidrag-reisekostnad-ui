@@ -1,4 +1,5 @@
-import { http, HttpResponse, delay } from 'msw';
+import { http, HttpResponse } from 'msw/http';
+import { delay } from 'msw/utils/delay';
 import { server } from '../../__mocks__/server';
 import { IBrukerinformasjon } from '../../types/foresporsel';
 
