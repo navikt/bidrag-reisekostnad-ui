@@ -42,6 +42,8 @@ spec:
           namespace: bidrag
         - application: nav-dekoratoren
           namespace: personbruker
+        - application: logging
+          namespace: nais-system
   resources:
     limits:
       memory: 1024Mi
