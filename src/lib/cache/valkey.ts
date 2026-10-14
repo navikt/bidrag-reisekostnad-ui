@@ -37,7 +37,7 @@ export const createValkeyInstance: () => TCache = () => {
         });
 
         redis.on('ready', () => {
-            logger.info('Valkey cache initialized');
+            logger.debug('Valkey cache initialized');
         });
 
         return {
