@@ -5,21 +5,25 @@ import { errorifyMessages } from './types';
 export const secureFrontendLogger = (): pino.Logger =>
     pino({
         browser: {
+            write: () => {},
             transmit: {
                 send: async (_, logEvent) => {
                     try {
                         // If your app uses a basePath, you'll need to add it to the path here
-                        await fetch(`/api/log/secure`, {
+                        const response = await fetch(`/api/log/secure`, {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',
                                 'x-correlation-id': getCorrelationId(),
                             },
                             body: JSON.stringify(errorifyMessages(logEvent)),
+                            keepalive: true,
                         });
-                    } catch (e) {
-                        console.warn(e);
-                        console.warn('Unable to log to backend', logEvent);
+                        if (!response.ok) {
+                            throw new Error('Secure logging request failed');
+                        }
+                    } catch {
+                        console.warn('Unable to send sensitive log to backend');
                     }
                 },
             },

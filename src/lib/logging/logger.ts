@@ -4,12 +4,7 @@ import type { Logger, LoggerOptions } from 'pino';
 
 type LoggerFactory = (defaultConfig?: LoggerOptions) => Logger;
 
-export let logger: Logger = (await getLogger())();
-
-export async function initLoggerWithContext(defaultConfig?: LoggerOptions): Promise<void> {
-    const makeLogger = await getLogger();
-    logger = makeLogger(defaultConfig);
-}
+export const logger: Logger = (await getLogger())();
 
 async function getLogger(): Promise<LoggerFactory> {
     if (typeof window !== 'undefined') {
