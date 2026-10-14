@@ -19,8 +19,7 @@ function Error({ statusCode }: { statusCode: number }) {
                             </Heading>
                             <VStack>
                                 <BodyShort>
-                                    En teknisk feil på våre servere gjør at siden er utilgjengelig.
-                                    Dette skyldes ikke noe du gjorde.
+                                    Noe har gått galt som gjør at siden ikke er tilgjengelig.
                                 </BodyShort>
                                 <VStack>
                                     <BodyShort>Du kan prøve å</BodyShort>
@@ -60,8 +59,7 @@ function Error({ statusCode }: { statusCode: number }) {
                             Something went wrong
                         </Heading>
                         <BodyShort spacing>
-                            This was caused by a technical fault on our servers. Please refresh this
-                            page or try again in a few minutes.
+                            Something has gone wrong to make the page unavailable.
                         </BodyShort>
                         <BodyShort>
                             If the problem persists you can try{' '}
