@@ -5,6 +5,7 @@ import { getLoggerContext } from './als';
 export const backendLogger = (defaultConfig?: LoggerOptions): Logger => {
     const baseOptions = {
         timestamp: false,
+        mixin: getLoggerContext,
         formatters: {
             level: (label: string) => ({ level: label }),
             log: (object: Record<string, unknown>) => {
@@ -19,6 +20,5 @@ export const backendLogger = (defaultConfig?: LoggerOptions): Logger => {
         ...defaultConfig,
     };
 
-    const ctx = getLoggerContext() as Record<string, unknown>;
-    return pino(options).child(ctx);
+    return pino(options);
 };

@@ -28,7 +28,7 @@ export default class ReisekostnadService extends DefaultConsumer {
     }
 
     async opprettNyForesporsel(nyForeporsel: INyForespørsel): Promise<IApiResponse<unknown>> {
-        logger.info('Lage en ny forepørsel for ' + nyForeporsel);
+        logger.info('Lager en ny forepørsel');
         return await this.post<void>('/api/v1/reisekostnad/forespoersel/ny', nyForeporsel);
     }
 

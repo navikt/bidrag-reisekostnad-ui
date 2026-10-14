@@ -42,12 +42,22 @@ spec:
           namespace: bidrag
         - application: nav-dekoratoren
           namespace: personbruker
+        - application: logging
+          namespace: nais-system
   resources:
     limits:
       memory: 1024Mi
     requests:
       cpu: 50m
       memory: 206Mi
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
+    logging:
+      destinations:
+        - id: loki
+        - id: elastic
   ingresses:
   {{#each ingresses as |url|}}
      - {{url}}
