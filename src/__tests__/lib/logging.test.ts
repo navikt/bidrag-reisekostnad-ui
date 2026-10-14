@@ -123,8 +123,9 @@ describe('sensitive backend logging', () => {
         expect(teamLogsDestination.write).not.toHaveBeenCalled();
     });
 
-    it('uses stdout outside NAIS without trying to open the legacy secure-log file', () => {
-        vi.stubEnv('NAIS_CLUSTER_NAME', '');
+    it('uses stdout in local development when pod metadata is unavailable', () => {
+        vi.stubEnv('NAIS_CLUSTER_NAME', 'dev-gcp');
+        vi.stubEnv('NAIS_POD_NAME', '');
         const stdout = vi.spyOn(process.stdout, 'write').mockReturnValue(true);
 
         secureBackendLogger().info('local log');

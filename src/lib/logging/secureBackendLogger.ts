@@ -10,7 +10,7 @@ export const secureBackendLogger = (defaultConfig?: LoggerOptions): pino.Logger 
             timestamp: false,
             messageKey: 'message',
             mixin: getLoggerContext,
-            base: process.env.NAIS_CLUSTER_NAME
+            base: process.env.NAIS_POD_NAME
                 ? {
                       google_cloud_project: requiredMetadata('GOOGLE_CLOUD_PROJECT'),
                       nais_namespace_name: requiredMetadata('NAIS_NAMESPACE'),
@@ -30,7 +30,7 @@ export const secureBackendLogger = (defaultConfig?: LoggerOptions): pino.Logger 
                 },
             },
         },
-        process.env.NAIS_CLUSTER_NAME ? teamLogsDestination : process.stdout
+        process.env.NAIS_POD_NAME ? teamLogsDestination : process.stdout
     );
 
 function requiredMetadata(name: string): string {
