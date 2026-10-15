@@ -62,6 +62,8 @@ updates:
                   - 'patch'
           # Name of group that also appears in the PR subject
           non-grouped-patch-updates:
+              patterns:
+                  - '*'
               update-types:
                   - 'patch'
       # Ensures that package.json is updated along with the lockfile
