@@ -1,4 +1,6 @@
 FROM node:24.22.1-alpine
+RUN npm install --global npm@12.2.1
+
 ENV NODE_ENV=production
 
 LABEL maintainer="Team Bidrag"
