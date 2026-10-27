@@ -1,4 +1,4 @@
-FROM node:24.22.1-alpine
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:26-slim
 RUN npm install --global npm@12.2.1
 
 ENV NODE_ENV=production
