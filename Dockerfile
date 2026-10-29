@@ -1,5 +1,5 @@
-FROM node:24.22.1-alpine
-RUN npm install --global npm@12.2.1
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:26-full
+RUN ["npm", "install", "--global", "npm@12.2.1"]
 
 ENV NODE_ENV=production
 
