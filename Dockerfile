@@ -1,4 +1,4 @@
-FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:26-full
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim
 
 ENV NODE_ENV=production
 
@@ -26,4 +26,4 @@ COPY . .
 EXPOSE 8080
 
 # Run the application packaged in the image
-CMD ["npm", "start"]
+CMD ["./node_modules/next/dist/bin/next", "start"]
