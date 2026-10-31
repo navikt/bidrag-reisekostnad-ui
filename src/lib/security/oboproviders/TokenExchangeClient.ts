@@ -35,7 +35,7 @@ export default class TokenExchangeClient {
                 client_id: this._config.clientId,
                 token_endpoint_auth_method: 'private_key_jwt',
             },
-            { keys: [jwk] }
+            { keys: [{ ...jwk }] }
         );
     }
 
