@@ -133,8 +133,9 @@ export class DefaultConsumer {
                     data: responseParsed.body,
                 } as IApiResponse<T>;
             })
-            .catch((err: unknown) => {
+            .catch(async (err: unknown) => {
                 const response = err instanceof Response ? err : undefined;
+                await response?.body?.cancel().catch(() => undefined);
                 const correlationId =
                     response?.headers.get('x-correlation-id') || getCorrelationIdFromContext();
                 const errorMessage =
