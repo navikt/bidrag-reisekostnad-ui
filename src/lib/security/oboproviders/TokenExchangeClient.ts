@@ -35,7 +35,7 @@ export default class TokenExchangeClient {
                 client_id: this._config.clientId,
                 token_endpoint_auth_method: 'private_key_jwt',
             },
-            { keys: [jwk] }
+            { keys: [{ ...jwk }] }
         );
     }
 
@@ -67,12 +67,12 @@ export default class TokenExchangeClient {
             );
             return tokenset.access_token ?? null;
         } catch (e) {
-            if (e instanceof OPError) {
-                logger.error('Token error message:' + e.name + e.message + e.response?.body || '');
-            } else {
-                logger.error('Token error unknown:' + e);
-            }
-            throw e;
+            const error = new Error('Token exchange failed');
+            logger.error(
+                { httpStatus: e instanceof OPError ? e.response?.statusCode : undefined },
+                error.message
+            );
+            throw error;
         }
     }
 }
