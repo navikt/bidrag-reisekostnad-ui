@@ -69,8 +69,8 @@ async function parseResponseBody(response: Response) {
             json: true,
             body,
         };
-    } catch (e) {
-        logger.error(e);
+    } catch {
+        logger.error('Backend response is not valid JSON');
         return {
             json: false,
             body: responseText,
@@ -133,16 +133,16 @@ export class DefaultConsumer {
                     data: responseParsed.body,
                 } as IApiResponse<T>;
             })
-            .catch(async (err: any) => {
-                logger.error(err);
+            .catch((err: unknown) => {
+                const response = err instanceof Response ? err : undefined;
                 const correlationId =
-                    err?.headers?.get('x-correlation-id') || getCorrelationIdFromContext();
-                const responseBody =
-                    typeof err.text === 'function' ? await err?.text() : err.message;
+                    response?.headers.get('x-correlation-id') || getCorrelationIdFromContext();
                 const errorMessage =
                     `Det skjedde feil ved kall mot ${fullUrl} med http-metode ${method}. ` +
-                    `Fikk respons fra endepunkt med feilmelding=${err.statusText} og feilkode=${err.status}`;
-                throw new ApiError(errorMessage, responseBody, correlationId, err.status);
+                    `Fikk respons fra endepunkt med feilkode=${response?.status ?? 500}`;
+                const error = new ApiError(errorMessage, '', correlationId, response?.status);
+                logger.error(error);
+                throw error;
             });
     }
 }
