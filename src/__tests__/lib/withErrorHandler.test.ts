@@ -24,7 +24,7 @@ async function serializeError(error: Error) {
 
     await handler({ url: '/api/auth' } as NextApiRequest, { status } as unknown as NextApiResponse);
 
-    return JSON.parse(send.mock.calls[0][0] as string);
+    return JSON.parse(send.mock.results[0].value as string);
 }
 
 describe('withErrorHandler authentication error responses', () => {
