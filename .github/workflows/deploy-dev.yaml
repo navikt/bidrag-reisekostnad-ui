@@ -28,10 +28,10 @@ jobs:
               # The setup-node action creates an .npmrc file on the runner.
               uses: actions/setup-node@v7.1.0
               with:
-                  node-version: '24.22.1'
+                # The node version is specified in package.json under "engines.node".
+                # The setup-node action will read the version from there.
+                node-version-file: 'package.json'
                   # registry-url: 'https://npm.pkg.github.com'
-            - name: Update npm
-              run: npm install --global npm@12.2.1
             - name: Clean install of dependencies
               run: npm ci
               env:
