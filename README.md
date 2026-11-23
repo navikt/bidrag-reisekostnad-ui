@@ -6,7 +6,8 @@ UI for å [fordele reisekostnader ved samvær med barn](https://www.nav.no/forde
 
 ## Oppsett av lokalt utviklingsmiljø
 
-Installer nødvendige pakker (krever Node.js 24, minst 24.22.1, se `engines.node` i `package.json`):
+Installer nødvendige pakker (krever Node.js 26, minst 26.13.1, se 
+`engines.node` i `package.json`):
 
 ```bash
 npm install
