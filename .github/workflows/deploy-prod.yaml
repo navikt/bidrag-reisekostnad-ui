@@ -43,7 +43,7 @@ jobs:
             - name: Remove dev dependencies
               run: npm prune --production
             - name: Push docker image to GAR and sign image
-              uses: nais/docker-build-push@v0
+              uses: nais/docker-build-push@6394144a53cad0332745f24a8302f5efaf81719a # v1.0.0
               id: docker-push
               with:
                   team: bidrag
