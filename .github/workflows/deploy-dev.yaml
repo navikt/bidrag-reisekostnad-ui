@@ -30,9 +30,8 @@ jobs:
               with:
                   # The node version is specified in package.json under "engines.node".
                   # The setup-node action will read the version from there.
-                  node-version-file:
-                      'package.json'
-                      # registry-url: 'https://npm.pkg.github.com'
+                  node-version-file: 'package.json'
+                  # registry-url: 'https://npm.pkg.github.com'
             - name: Clean install of dependencies
               run: npm ci
               env:
