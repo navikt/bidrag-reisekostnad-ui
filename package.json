@@ -35,7 +35,7 @@
         "html-react-parser": "^6.1.10",
         "i18next": "^27.2.2",
         "iovalkey": "^0.4.0",
-        "jose": "^6.2.17",
+        "jose": "^6.2.18",
         "lodash.memoize": "^4.1.2",
         "msw": "^3.0.7",
         "next": "^16.4.6",
